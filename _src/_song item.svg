@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="600"
+   height="86"
+   viewBox="0 0 600.00005 85.999999"
+   id="svg6683"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="_song item.svg"
+   inkscape:export-filename="C:\Apps\StepMania-dev\StepMania 5.1-master\stepmania-5_1_0\Themes\fiftyOne\Graphics\MusicWheel highlight.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs6685">
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient5988"
+       id="linearGradient5060"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.99597525,0,0,0.76476321,-705.93497,736.72423)"
+       x1="711"
+       y1="356.5"
+       x2="1309"
+       y2="356.5" />
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient5988">
+      <stop
+         style="stop-color:#992f4d;stop-opacity:1"
+         offset="0"
+         id="stop5990" />
+      <stop
+         style="stop-color:#e06a63;stop-opacity:0.83720928"
+         offset="1"
+         id="stop5992" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4328"
+       id="linearGradient6111"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.21553129,0,0,0.81617784,-1058.551,-239.40448)"
+       x1="95.174263"
+       y1="382.78967"
+       x2="366.48792"
+       y2="382.78967" />
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient4328">
+      <stop
+         style="stop-color:#fbbfb6;stop-opacity:0"
+         offset="0"
+         id="stop4330" />
+      <stop
+         id="stop4336"
+         offset="0.5"
+         style="stop-color:#fddfda;stop-opacity:0.52325583" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:0"
+         offset="1"
+         id="stop4332" />
+    </linearGradient>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter8153"
+       x="-0.0033318689"
+       width="1.0066637"
+       y="-0.03011914"
+       height="1.0602382">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.83019066"
+         id="feGaussianBlur8155" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="7.919596"
+     inkscape:cx="51.567524"
+     inkscape:cy="39.12806"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="1680"
+     inkscape:window-height="987"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata6688">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Item"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-966.36232)"
+     style="display:none">
+    <rect
+       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:url(#linearGradient5060);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.9531619;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.76162792;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+       id="rect5986-6"
+       width="595.5932"
+       height="65.886292"
+       x="2.2034504"
+       y="976.41919"
+       rx="4.979876"
+       ry="4.979876" />
+    <rect
+       y="71.81649"
+       x="-1038.038"
+       height="2.4069588"
+       width="58.476585"
+       id="rect4326-7-6"
+       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:url(#linearGradient6111);fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:4.54799986;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+       transform="matrix(0,-1,1,0,0,0)" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Highlight"
+     style="display:inline">
+    <rect
+       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#fee5ca;stroke-width:1.85647202;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;filter:url(#filter8153);color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+       id="rect5986-6-0"
+       width="598"
+       height="66.152542"
+       x="711.21783"
+       y="313.42374"
+       rx="5"
+       ry="5"
+       transform="matrix(0.99597525,0,0,0.99597525,-706.15191,-302.10543)" />
+  </g>
+</svg>
