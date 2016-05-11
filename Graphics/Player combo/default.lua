@@ -17,11 +17,11 @@ local t = Def.ActorFrame {
 		Name="Number";
 		OnCommand = THEME:GetMetric("Combo", "NumberOnCommand");
 	};
-	LoadFont("Common Normal") .. {
+	LoadFont("_roboto condensed Bold italic 24px") .. {
 		Name="Label";
 		OnCommand = THEME:GetMetric("Combo", "LabelOnCommand");
 	};
-	
+
 	InitCommand = function(self)
 		self:draworder(newfield_draw_order.over_field)
 		c = self:GetChildren();
@@ -68,10 +68,10 @@ local t = Def.ActorFrame {
 
 		param.Zoom = scale( iCombo, 0, NumberMaxZoomAt, NumberMinZoom, NumberMaxZoom );
 		param.Zoom = clamp( param.Zoom, NumberMinZoom, NumberMaxZoom );
-		
+
 		param.LabelZoom = scale( iCombo, 0, NumberMaxZoomAt, LabelMinZoom, LabelMaxZoom );
 		param.LabelZoom = clamp( param.LabelZoom, LabelMinZoom, LabelMaxZoom );
-		
+
 		c.Number:visible(true);
 		c.Label:visible(true);
 		c.Number:settext( string.format("%i", iCombo) );
