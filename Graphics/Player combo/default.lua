@@ -80,20 +80,20 @@ local t = Def.ActorFrame {
 			c.Number:diffuse(color("#00aeef"));
 			c.Number:glowshift();
 		elseif param.FullComboW2 then
-			c.Number:diffuse(color("#fff568"));
+			c.Number:diffuse(color("#F3D58D"));
 			c.Number:glowshift();
 		elseif param.FullComboW3 then
-			c.Number:diffuse(color("#a4ff00"));
+			c.Number:diffuse(color("#94D658"));
 			c.Number:stopeffect();
 		elseif param.Combo then
-			c.Number:diffuse(Color("White"));
+			c.Number:diffuse(color("#FBE9DD"));
 -- 			c.Number:diffuse(PlayerColor(player));
 			c.Number:stopeffect();
-			(cmd(diffuse,Color("White");diffusebottomedge,color("0.5,0.5,0.5,1")))(c.Label);
+			(cmd(diffuse,color("#F5CB92");diffusebottomedge,color("#EFA97A")))(c.Label);
 		else
 			c.Number:diffuse(color("#ff0000"));
 			c.Number:stopeffect();
-			(cmd(diffuse,Color("Red");diffusebottomedge,color("0.5,0,0,1")))(c.Label);
+			(cmd(diffuse,color("#ED6565");diffusebottomedge,color("#F98787")))(c.Label);
 		end
 		-- Pulse
 		Pulse( c.Number, param );

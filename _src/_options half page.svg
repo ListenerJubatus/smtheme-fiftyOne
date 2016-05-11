@@ -25,6 +25,10 @@
        effect="spiro"
        id="path-effect5841"
        is_visible="true" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect5841-4"
+       is_visible="true" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -35,7 +39,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="1.86"
      inkscape:cx="66.06156"
-     inkscape:cy="189.4175"
+     inkscape:cy="447.48202"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -74,6 +78,13 @@
        id="path5839"
        inkscape:path-effect="#path-effect5841"
        inkscape:original-d="m 18.951612,915.97512 337.096778,0"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#503a33;stroke-width:1.79999995;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.39880952"
+       d="m 18.951612,512.96437 337.096778,0"
+       id="path5839-4"
+       inkscape:path-effect="#path-effect5841-4"
+       inkscape:original-d="m 18.951612,512.96437 337.096778,0"
        inkscape:connector-curvature="0" />
   </g>
 </svg>
