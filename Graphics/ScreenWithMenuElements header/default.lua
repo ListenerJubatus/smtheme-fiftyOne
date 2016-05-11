@@ -18,7 +18,7 @@ t[#t+1] = Def.ActorFrame {
 	};
 
 -- Text
-t[#t+1] = LoadFont("_open sans semibold 48px") .. {
+t[#t+1] = LoadFont("Common Header") .. {
 	Name="HeaderShadow";
 	Text=Screen.String("HeaderText");
 	InitCommand=cmd(zoom,0.8;x,-SCREEN_CENTER_X+110;y,40;horizalign,left;diffuse,color("#fcb62c"););
