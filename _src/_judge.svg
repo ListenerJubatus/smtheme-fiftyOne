@@ -582,8 +582,8 @@
        xlink:href="#linearGradient4638"
        id="linearGradient4698"
        gradientUnits="userSpaceOnUse"
-       x1="312.47693"
-       y1="18.770582"
+       x1="308.47693"
+       y1="30.770582"
        x2="304.47693"
        y2="97.389381" />
     <linearGradient
@@ -1015,6 +1015,198 @@
          result="composite2"
          id="feComposite5224-0" />
     </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Drop Shadow"
+       id="filter6199">
+      <feFlood
+         flood-opacity="0.835294"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         id="feFlood6201" />
+      <feComposite
+         in="SourceGraphic"
+         in2="flood"
+         operator="in"
+         result="composite1"
+         id="feComposite6203" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="1.2"
+         result="blur"
+         id="feGaussianBlur6205" />
+      <feOffset
+         dx="0.2"
+         dy="2.9"
+         result="offset"
+         id="feOffset6207" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite6209" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Drop Shadow"
+       id="filter6211">
+      <feFlood
+         flood-opacity="0.835294"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         id="feFlood6213" />
+      <feComposite
+         in="SourceGraphic"
+         in2="flood"
+         operator="in"
+         result="composite1"
+         id="feComposite6215" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="1.2"
+         result="blur"
+         id="feGaussianBlur6217" />
+      <feOffset
+         dx="0.2"
+         dy="2.9"
+         result="offset"
+         id="feOffset6219" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite6221" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Drop Shadow"
+       id="filter6223">
+      <feFlood
+         flood-opacity="0.835294"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         id="feFlood6225" />
+      <feComposite
+         in="SourceGraphic"
+         in2="flood"
+         operator="in"
+         result="composite1"
+         id="feComposite6227" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="1.2"
+         result="blur"
+         id="feGaussianBlur6229" />
+      <feOffset
+         dx="0.2"
+         dy="2.9"
+         result="offset"
+         id="feOffset6231" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite6233" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Drop Shadow"
+       id="filter6235">
+      <feFlood
+         flood-opacity="0.835294"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         id="feFlood6237" />
+      <feComposite
+         in="SourceGraphic"
+         in2="flood"
+         operator="in"
+         result="composite1"
+         id="feComposite6239" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="1.2"
+         result="blur"
+         id="feGaussianBlur6241" />
+      <feOffset
+         dx="0.2"
+         dy="2.9"
+         result="offset"
+         id="feOffset6243" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite6245" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Drop Shadow"
+       id="filter6247">
+      <feFlood
+         flood-opacity="0.835294"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         id="feFlood6249" />
+      <feComposite
+         in="SourceGraphic"
+         in2="flood"
+         operator="in"
+         result="composite1"
+         id="feComposite6251" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="1.2"
+         result="blur"
+         id="feGaussianBlur6253" />
+      <feOffset
+         dx="0.2"
+         dy="2.9"
+         result="offset"
+         id="feOffset6255" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite6257" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Drop Shadow"
+       id="filter6259">
+      <feFlood
+         flood-opacity="0.835294"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         id="feFlood6261" />
+      <feComposite
+         in="SourceGraphic"
+         in2="flood"
+         operator="in"
+         result="composite1"
+         id="feComposite6263" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="1.2"
+         result="blur"
+         id="feGaussianBlur6265" />
+      <feOffset
+         dx="0.2"
+         dy="2.9"
+         result="offset"
+         id="feOffset6267" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite6269" />
+    </filter>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -1024,10 +1216,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="200.59775"
-     inkscape:cy="262.30587"
+     inkscape:cx="328.21653"
+     inkscape:cy="202.32315"
      inkscape:document-units="px"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="layer1"
      showgrid="false"
      units="px"
      inkscape:window-width="1680"
@@ -1105,7 +1297,7 @@
     <flowRoot
        xml:space="preserve"
        id="flowRoot4139"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:125%;font-family:'Eligible Sans';-inkscape-font-specification:'Eligible Sans';letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient4164);fill-opacity:1;stroke:#136397;stroke-width:1.70000005;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:2.9000001;stroke-dasharray:none;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:125%;font-family:'Eligible Sans';-inkscape-font-specification:'Eligible Sans';letter-spacing:0.06px;word-spacing:0px;fill:url(#linearGradient4164);fill-opacity:1;stroke:#136397;stroke-width:1.70000005;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:2.9000001;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter6259)"
        transform="translate(-43.776382,568.18421)"><flowRegion
          id="flowRegion4141"
          style="fill:url(#linearGradient4170);fill-opacity:1"><rect
@@ -1114,12 +1306,16 @@
            height="85"
            x="68"
            y="17"
-           style="fill:url(#linearGradient4168);fill-opacity:1;stroke:#136397;stroke-width:1.70000005;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:2.9000001;stroke-dasharray:none;stroke-opacity:1" /></flowRegion><flowPara
+           style="letter-spacing:0.06px;fill:url(#linearGradient4168);fill-opacity:1;stroke:#136397;stroke-width:1.70000005;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:2.9000001;stroke-dasharray:none;stroke-opacity:1" /></flowRegion><flowPara
          id="flowPara4145"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:60px;font-family:Overpass;-inkscape-font-specification:'Overpass Bold';text-align:center;letter-spacing:-0.94999999px;text-anchor:middle;fill:url(#linearGradient4172);fill-opacity:1;stroke:#136397;stroke-width:1.70000005;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:2.9000001;stroke-dasharray:none;stroke-opacity:1">FLAWLESS!!</flowPara></flowRoot>    <flowRoot
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:60px;font-family:Overpass;-inkscape-font-specification:'Overpass Bold';text-align:center;letter-spacing:0px;text-anchor:middle;fill:url(#linearGradient4172);fill-opacity:1;stroke:#136397;stroke-width:1.70000005;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:2.9000001;stroke-dasharray:none;stroke-opacity:1">F<flowSpan
+   style="letter-spacing:2px"
+   id="flowSpan6279">L</flowSpan><flowSpan
+   id="flowSpan6323"
+   style="letter-spacing:-0.89999998px">AW</flowSpan>LESS!!</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot4139-2"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:125%;font-family:'Eligible Sans';-inkscape-font-specification:'Eligible Sans';letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient4590);fill-opacity:1;stroke:#835f1e;stroke-width:1.70000005;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:2.9000001;stroke-dasharray:none;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:125%;font-family:'Eligible Sans';-inkscape-font-specification:'Eligible Sans';letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient4590);fill-opacity:1;stroke:#835f1e;stroke-width:1.70000005;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:2.9000001;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter6247)"
        transform="translate(-43.776382,648.18411)"><flowRegion
          id="flowRegion4141-9"
          style="fill:url(#linearGradient4590);fill-opacity:1"><rect
@@ -1133,7 +1329,7 @@
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:60px;font-family:Overpass;-inkscape-font-specification:'Overpass Bold';text-align:center;letter-spacing:-0.94999999px;text-anchor:middle;fill:url(#linearGradient4590);fill-opacity:1;stroke:#835f1e;stroke-width:1.70000005;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:2.9000001;stroke-dasharray:none;stroke-opacity:1">PERFECT!</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot4139-28"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:125%;font-family:'Eligible Sans';-inkscape-font-specification:'Eligible Sans';letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient4600);fill-opacity:1;stroke:#28551e;stroke-width:1.70000005;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:2.9000001;stroke-dasharray:none;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:125%;font-family:'Eligible Sans';-inkscape-font-specification:'Eligible Sans';letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient4600);fill-opacity:1;stroke:#28551e;stroke-width:1.70000005;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:2.9000001;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter6235)"
        transform="translate(-43.776382,728.18421)"><flowRegion
          id="flowRegion4141-5"
          style="fill:url(#linearGradient4600);fill-opacity:1"><rect
@@ -1147,7 +1343,7 @@
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:60px;font-family:Overpass;-inkscape-font-specification:'Overpass Bold';text-align:center;letter-spacing:-0.94999999px;text-anchor:middle;fill:url(#linearGradient4600);fill-opacity:1;stroke:#28551e;stroke-width:1.70000005;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:2.9000001;stroke-dasharray:none;stroke-opacity:1">GREAT</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot4139-2-8"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:125%;font-family:'Eligible Sans';-inkscape-font-specification:'Eligible Sans';letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient4626);fill-opacity:1;stroke:#245474;stroke-width:1.70000005;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:2.9000001;stroke-dasharray:none;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:125%;font-family:'Eligible Sans';-inkscape-font-specification:'Eligible Sans';letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient4626);fill-opacity:1;stroke:#245474;stroke-width:1.70000005;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:2.9000001;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter6223)"
        transform="translate(-43.776382,808.18411)"><flowRegion
          id="flowRegion4141-9-8"
          style="fill:url(#linearGradient4626);fill-opacity:1"><rect
@@ -1161,7 +1357,7 @@
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:60px;font-family:Overpass;-inkscape-font-specification:'Overpass Bold';text-align:center;letter-spacing:-0.94999999px;text-anchor:middle;fill:url(#linearGradient4626);fill-opacity:1;stroke:#245474;stroke-width:1.70000005;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:2.9000001;stroke-dasharray:none;stroke-opacity:1">GOOD</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot4139-28-1"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:125%;font-family:'Eligible Sans';-inkscape-font-specification:'Eligible Sans';letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient4219);fill-opacity:1;stroke:#331a41;stroke-width:1.70000005;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:2.9000001;stroke-dasharray:none;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:125%;font-family:'Eligible Sans';-inkscape-font-specification:'Eligible Sans';letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient4219);fill-opacity:1;stroke:#331a41;stroke-width:1.70000005;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:2.9000001;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter6211)"
        transform="translate(-43.776382,888.18421)"><flowRegion
          id="flowRegion4141-5-2"
          style="fill:url(#linearGradient4219);fill-opacity:1"><rect
@@ -1175,7 +1371,7 @@
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:60px;font-family:Overpass;-inkscape-font-specification:'Overpass Bold';text-align:center;letter-spacing:-0.94999999px;text-anchor:middle;fill:url(#linearGradient4219);fill-opacity:1;stroke:#331a41;stroke-width:1.70000005;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:2.9000001;stroke-dasharray:none;stroke-opacity:1">BAD</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot4139-2-8-0"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:125%;font-family:'Eligible Sans';-inkscape-font-specification:'Eligible Sans';letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient4227);fill-opacity:1;stroke:#740f0f;stroke-width:1.70000005;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:2.9000001;stroke-dasharray:none;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:125%;font-family:'Eligible Sans';-inkscape-font-specification:'Eligible Sans';letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient4227);fill-opacity:1;stroke:#740f0f;stroke-width:1.70000005;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:2.9000001;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter6199)"
        transform="translate(-43.776382,968.18411)"><flowRegion
          id="flowRegion4141-9-8-7"
          style="fill:url(#linearGradient4227);fill-opacity:1"><rect
@@ -1190,7 +1386,8 @@
   <g
      inkscape:groupmode="layer"
      id="layer3"
-     inkscape:label="Layer 3">
+     inkscape:label="Layer 3"
+     style="display:inline">
     <flowRoot
        xml:space="preserve"
        id="flowRoot4139-4"
