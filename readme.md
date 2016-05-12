@@ -12,7 +12,7 @@ fiftyOne is still a major WIP, and it has only scratched the surface. Feel free 
 
 Source code
 -----------
-Inkscape SVG source code is available for the majority of graphics created.
+Inkscape SVG source code is available for the majority of graphics created in the _src folder. Some of the original mockups are also included for reference, although they are meant primarily for reference purposes due to changes in the theme's style since these mockups (such as the removal of rounded corners and increased use of chamfered edges and diamond motifs).
 
 The main fonts are the current version of Roboto and Noto Sans <https://www.google.com/design/spec/resources/roboto-noto-fonts.html>, and Open Sans (although, preferably, Noto Sans should eventually be used in any location Open Sans is currently used). Certain accents make use of the font Overpass. <http://overpassfont.org/>
 
