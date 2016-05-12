@@ -130,7 +130,7 @@ t[#t+1] = Def.ActorFrame {
               self:settext("GENRE")
               end;
     };
-    LoadFont("Common Condensed") .. {
+    LoadFont("GenreDisplay genre") .. {
           InitCommand=cmd(horizalign,left;zoom,1.0;y,SCREEN_CENTER_Y+12;maxwidth,180;diffuse,color("#512232");visible,not GAMESTATE:IsCourseMode(););
           CurrentSongChangedMessageCommand=cmd(playcommand,"Set");
           CurrentCourseChangedMessageCommand=cmd(playcommand,"Set");
@@ -144,6 +144,23 @@ t[#t+1] = Def.ActorFrame {
                end
           end;
     };
+};
+
+-- BPMDisplay
+t[#t+1] = Def.ActorFrame {
+    InitCommand=cmd(draworder,126);
+    OnCommand=cmd(diffusealpha,0;smooth,0.3;diffusealpha,1;);
+    OffCommand=cmd(smooth,0.3;diffusealpha,0;);
+    -- Genre
+    LoadFont("Common Condensed") .. {
+          InitCommand=cmd(horizalign,right;x,SCREEN_CENTER_X-47;zoom,0.6;uppercase,true;y,SCREEN_CENTER_Y-9;diffuse,color("#512232");horizalign,left;visible,not GAMESTATE:IsCourseMode(););
+          OnCommand=cmd(playcommand,"Set");
+          ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set");
+          SetCommand=function(self)
+              self:settext("SPEED")
+              end;
+    };
+    StandardDecorationFromFileOptional("BPMDisplay","BPMDisplay");
 };
 
 t[#t+1] = StandardDecorationFromFileOptional("DifficultyList","DifficultyList");
