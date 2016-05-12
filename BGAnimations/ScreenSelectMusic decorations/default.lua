@@ -160,6 +160,14 @@ t[#t+1] = Def.ActorFrame {
               self:settext("SPEED")
               end;
     };
+    LoadFont("Common Normal") .. {
+          InitCommand=cmd(horizalign,right;x,SCREEN_CENTER_X-8;y,SCREEN_CENTER_Y+13;diffuse,color("#512232");horizalign,right;visible,not GAMESTATE:IsCourseMode(););
+          OnCommand=cmd(playcommand,"Set");
+          ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set");
+          SetCommand=function(self)
+              self:settext("BPM")
+              end;
+    };
     StandardDecorationFromFileOptional("BPMDisplay","BPMDisplay");
 };
 
