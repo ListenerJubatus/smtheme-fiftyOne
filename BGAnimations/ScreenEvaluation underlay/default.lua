@@ -1,4 +1,6 @@
 local t = Def.ActorFrame {};
+local p1grade = STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetGrade()
+local p2grade = STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetGrade()
 
 -- Evaluation levels
 t[#t+1] = Def.ActorFrame {
@@ -93,7 +95,7 @@ t[#t+1] = Def.ActorFrame {
     Def.ActorFrame {
   		OnCommand=cmd(diffusealpha,0;sleep,0.1;smooth,0.2;diffusealpha,1;);
   		LoadFont("_overpass 36px") .. {
-  			InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.8;horizalign,right;);
+  			InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_1));zoom,0.75;diffusealpha,1.0;horizalign,right;);
         OnCommand=cmd(playcommand,"Set");
         SetCommand=function(self)
           self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetTapNoteScores("TapNoteScore_W1"))
@@ -104,7 +106,7 @@ t[#t+1] = Def.ActorFrame {
 		InitCommand=cmd(addy,40;);
 		OnCommand=cmd(diffusealpha,0;sleep,0.2;smooth,0.2;diffusealpha,1;);
     LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.8;horizalign,right;);
+      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_1));zoom,0.75;diffusealpha,1.0;horizalign,right;);
       OnCommand=cmd(playcommand,"Set");
       SetCommand=function(self)
         self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetTapNoteScores("TapNoteScore_W2"))
@@ -115,7 +117,7 @@ t[#t+1] = Def.ActorFrame {
 		InitCommand=cmd(addy,40*2;);
 		OnCommand=cmd(diffusealpha,0;sleep,0.3;smooth,0.2;diffusealpha,1;);
     LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.8;horizalign,right;);
+      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_1));;zoom,0.75;diffusealpha,1.0;horizalign,right;);
       OnCommand=cmd(playcommand,"Set");
       SetCommand=function(self)
         self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetTapNoteScores("TapNoteScore_W3"))
@@ -126,7 +128,7 @@ t[#t+1] = Def.ActorFrame {
 		InitCommand=cmd(addy,40*3;);
 		OnCommand=cmd(diffusealpha,0;sleep,0.4;smooth,0.2;diffusealpha,1;);
     LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.8;horizalign,right;);
+      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_1));;zoom,0.75;diffusealpha,1.0;horizalign,right;);
       OnCommand=cmd(playcommand,"Set");
       SetCommand=function(self)
         self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetTapNoteScores("TapNoteScore_W4"))
@@ -137,7 +139,7 @@ t[#t+1] = Def.ActorFrame {
 		InitCommand=cmd(addy,40*4;);
 		OnCommand=cmd(diffusealpha,0;sleep,0.5;smooth,0.2;diffusealpha,1;);
     LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.8;horizalign,right;);
+      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_1));;zoom,0.75;diffusealpha,1.0;horizalign,right;);
       OnCommand=cmd(playcommand,"Set");
       SetCommand=function(self)
         self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetTapNoteScores("TapNoteScore_W5"))
@@ -148,7 +150,7 @@ t[#t+1] = Def.ActorFrame {
 		InitCommand=cmd(addy,40*5;);
 		OnCommand=cmd(diffusealpha,0;sleep,0.6;smooth,0.2;diffusealpha,1;);
     LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.8;horizalign,right;);
+      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_1));zoom,0.75;diffusealpha,1.0;horizalign,right;);
       OnCommand=cmd(playcommand,"Set");
       SetCommand=function(self)
         self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetTapNoteScores("TapNoteScore_Miss"))
@@ -159,7 +161,7 @@ t[#t+1] = Def.ActorFrame {
 		InitCommand=cmd(addy,40*6;);
 		OnCommand=cmd(diffusealpha,0;sleep,0.7;smooth,0.2;diffusealpha,1;);
     LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.8;horizalign,right;);
+      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_1));zoom,0.75;diffusealpha,1.0;horizalign,right;);
       OnCommand=cmd(playcommand,"Set");
       SetCommand=function(self)
         self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetHoldNoteScores("HoldNoteScore_Held"))
@@ -170,13 +172,32 @@ t[#t+1] = Def.ActorFrame {
 		InitCommand=cmd(addy,40*7;);
 		OnCommand=cmd(diffusealpha,0;sleep,0.8;smooth,0.2;diffusealpha,1;);
     LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.8;horizalign,right;);
+      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_1));zoom,0.75;diffusealpha,1.0;horizalign,right;);
       OnCommand=cmd(playcommand,"Set");
       SetCommand=function(self)
         self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):MaxCombo())
       end;
     };
 	};
+  Def.ActorFrame {
+    InitCommand=cmd(addy,40*8+4;);
+    OnCommand=cmd(diffusealpha,0;sleep,0.8;smooth,0.2;diffusealpha,1;);
+    LoadFont("_overpass 36px") .. {
+      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_1));zoom,1;diffusealpha,1;horizalign,right;);
+      OnCommand=cmd(playcommand,"Set");
+      SetCommand=function(self)
+        self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetScore())
+      end;
+    };
+    LoadFont("_overpass 36px") .. {
+      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_1));zoom,0.75;diffusealpha,1;horizalign,right;addy,24);
+      OnCommand=cmd(playcommand,"Set");
+      SetCommand=function(self)
+        local p1percent = STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetPercentDancePoints()
+        self:settext(FormatPercentScore(p1percent))
+      end;
+    };
+  };
 };
 
 -- P2 Values
@@ -186,7 +207,7 @@ t[#t+1] = Def.ActorFrame {
     Def.ActorFrame {
   		OnCommand=cmd(diffusealpha,0;sleep,0.1;smooth,0.2;diffusealpha,1;);
   		LoadFont("_overpass 36px") .. {
-  			InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.8;horizalign,left;);
+  			InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_2));zoom,0.75;diffusealpha,1.0;horizalign,left;);
         OnCommand=cmd(playcommand,"Set");
         SetCommand=function(self)
           self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetTapNoteScores("TapNoteScore_W1"))
@@ -197,7 +218,7 @@ t[#t+1] = Def.ActorFrame {
 		InitCommand=cmd(addy,40;);
 		OnCommand=cmd(diffusealpha,0;sleep,0.2;smooth,0.2;diffusealpha,1;);
     LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.8;horizalign,left;);
+      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_2));zoom,0.75;diffusealpha,1.0;horizalign,left;);
       OnCommand=cmd(playcommand,"Set");
       SetCommand=function(self)
         self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetTapNoteScores("TapNoteScore_W2"))
@@ -208,7 +229,7 @@ t[#t+1] = Def.ActorFrame {
 		InitCommand=cmd(addy,40*2;);
 		OnCommand=cmd(diffusealpha,0;sleep,0.3;smooth,0.2;diffusealpha,1;);
     LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.8;horizalign,left;);
+      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_2));zoom,0.75;diffusealpha,1.0;horizalign,left;);
       OnCommand=cmd(playcommand,"Set");
       SetCommand=function(self)
         self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetTapNoteScores("TapNoteScore_W3"))
@@ -219,7 +240,7 @@ t[#t+1] = Def.ActorFrame {
 		InitCommand=cmd(addy,40*3;);
 		OnCommand=cmd(diffusealpha,0;sleep,0.4;smooth,0.2;diffusealpha,1;);
     LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.8;horizalign,left;);
+      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_2));zoom,0.75;diffusealpha,1.0;horizalign,left;);
       OnCommand=cmd(playcommand,"Set");
       SetCommand=function(self)
         self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetTapNoteScores("TapNoteScore_W4"))
@@ -230,7 +251,7 @@ t[#t+1] = Def.ActorFrame {
 		InitCommand=cmd(addy,40*4;);
 		OnCommand=cmd(diffusealpha,0;sleep,0.5;smooth,0.2;diffusealpha,1;);
     LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.8;horizalign,left;);
+      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_2));zoom,0.75;diffusealpha,1.0;horizalign,left;);
       OnCommand=cmd(playcommand,"Set");
       SetCommand=function(self)
         self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetTapNoteScores("TapNoteScore_W5"))
@@ -241,7 +262,7 @@ t[#t+1] = Def.ActorFrame {
 		InitCommand=cmd(addy,40*5;);
 		OnCommand=cmd(diffusealpha,0;sleep,0.6;smooth,0.2;diffusealpha,1;);
     LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.8;horizalign,left;);
+      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_2));zoom,0.75;diffusealpha,1.0;horizalign,left;);
       OnCommand=cmd(playcommand,"Set");
       SetCommand=function(self)
         self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetTapNoteScores("TapNoteScore_Miss"))
@@ -252,7 +273,7 @@ t[#t+1] = Def.ActorFrame {
 		InitCommand=cmd(addy,40*6;);
 		OnCommand=cmd(diffusealpha,0;sleep,0.7;smooth,0.2;diffusealpha,1;);
     LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.8;horizalign,left;);
+      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_2));zoom,0.75;diffusealpha,1.0;horizalign,left;);
       OnCommand=cmd(playcommand,"Set");
       SetCommand=function(self)
         self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetHoldNoteScores("HoldNoteScore_Held"))
@@ -263,7 +284,7 @@ t[#t+1] = Def.ActorFrame {
 		InitCommand=cmd(addy,40*7;);
 		OnCommand=cmd(diffusealpha,0;sleep,0.8;smooth,0.2;diffusealpha,1;);
     LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.8;horizalign,left;);
+      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_2));zoom,0.75;diffusealpha,1.0;horizalign,left;);
       OnCommand=cmd(playcommand,"Set");
       SetCommand=function(self)
         self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):MaxCombo())
@@ -271,5 +292,77 @@ t[#t+1] = Def.ActorFrame {
     };
 	};
 };
+
+if GAMESTATE:IsHumanPlayer(PLAYER_1) == true then
+
+t[#t+1] = Def.ActorFrame {
+  InitCommand=cmd(zoom,1;diffusealpha,1;horizalign,left;x,SCREEN_CENTER_X-320;y,SCREEN_CENTER_Y-170);
+  OffCommand=cmd(decelerate,0.4;diffusealpha,0;);
+  Def.Quad {
+          InitCommand=cmd(zoomto,220,130;diffuse,color("#fce1a1"););
+          OnCommand=cmd(diffusealpha,0;sleep,0.6;decelerate,0.4;diffusealpha,0.4;)
+  };
+  LoadActor(THEME:GetPathG("GradeDisplay", "Grade " .. p1grade)) .. {
+      InitCommand=cmd(zoom,0.8;addy,-16;);
+      OnCommand=function(self)
+        if STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetStageAward() then
+          self:addy(0);
+        else
+          self:addy(16);
+        end;
+        self:diffusealpha(0):zoom(0.5):sleep(0.63):decelerate(0.4):zoom(0.8):diffusealpha(1);
+      end;
+  };
+  LoadFont("_roboto condensed Bold italic 24px") .. {
+    InitCommand=cmd(diffuse,color("#826216");zoom,1.0;addy,40;maxwidth,200;uppercase,true;);
+    OnCommand=cmd(playcommand,"Set");
+    SetCommand=function(self)
+      if STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetStageAward() then
+        self:settext(THEME:GetString( "StageAward", ToEnumShortString(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetStageAward())) );
+        self:diffusealpha(0):zoomx(0.5):sleep(0.63):decelerate(0.4):zoomx(1):diffusealpha(1);
+      end
+    end;
+  };
+};
+
+end;
+
+
+if GAMESTATE:IsHumanPlayer(PLAYER_2) == true then
+
+t[#t+1] = Def.ActorFrame {
+  InitCommand=cmd(zoom,1;diffusealpha,1;horizalign,right;x,SCREEN_CENTER_X+320;y,SCREEN_CENTER_Y-170);
+  OffCommand=cmd(decelerate,0.4;diffusealpha,0;);
+  Def.Quad {
+          InitCommand=cmd(zoomto,220,130;diffuse,color("#fce1a1"););
+          OnCommand=cmd(diffusealpha,0;sleep,0.6;decelerate,0.4;diffusealpha,0.4;)
+  };
+  LoadActor(THEME:GetPathG("GradeDisplay", "Grade " .. p2grade)) .. {
+      InitCommand=cmd(zoom,0.8;addy,-16;);
+      OnCommand=function(self)
+        if STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetStageAward() then
+          self:addy(0);
+        else
+          self:addy(16);
+        end;
+        self:diffusealpha(0):zoom(0.5):sleep(0.63):decelerate(0.4):zoom(0.8):diffusealpha(1);
+      end;
+  };
+  LoadFont("_roboto condensed Bold italic 24px") .. {
+    InitCommand=cmd(diffuse,color("#826216");zoom,1.0;addy,40;maxwidth,200;uppercase,true;);
+    OnCommand=cmd(playcommand,"Set");
+    SetCommand=function(self)
+      if STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetStageAward() then
+        self:settext(THEME:GetString( "StageAward", ToEnumShortString(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetStageAward())) );
+        self:diffusealpha(0):zoomx(0.5):sleep(0.63):decelerate(0.4):zoomx(1):diffusealpha(1);
+      end;
+    end;
+  };
+};
+
+end;
+
+t[#t+1] = StandardDecorationFromFileOptional("LifeDifficulty","LifeDifficulty");
+t[#t+1] = StandardDecorationFromFileOptional("TimingDifficulty","TimingDifficulty");
 
 return t;
