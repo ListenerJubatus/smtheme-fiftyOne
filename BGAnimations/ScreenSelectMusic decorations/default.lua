@@ -172,5 +172,17 @@ t[#t+1] = Def.ActorFrame {
 };
 
 t[#t+1] = StandardDecorationFromFileOptional("DifficultyList","DifficultyList");
+t[#t+1] = StandardDecorationFromFileOptional("SongOptions","SongOptionsText") .. {
+	ShowPressStartForOptionsCommand=THEME:GetMetric(Var "LoadingScreen","SongOptionsShowCommand");
+	ShowEnteringOptionsCommand=THEME:GetMetric(Var "LoadingScreen","SongOptionsEnterCommand");
+	HidePressStartForOptionsCommand=THEME:GetMetric(Var "LoadingScreen","SongOptionsHideCommand");
+};
+
+t[#t+1] = Def.ActorFrame{
+	Def.Quad{
+		InitCommand=cmd(draworder,99;FullScreen;diffuse,color("0,0,0,1");diffusealpha,0);
+		ShowPressStartForOptionsCommand=cmd(linear,0.2;diffusealpha,1);
+	};
+};
 
 return t;
