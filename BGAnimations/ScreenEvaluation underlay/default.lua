@@ -190,7 +190,7 @@ t[#t+1] = Def.ActorFrame {
       end;
     };
     LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_1));zoom,0.75;diffusealpha,1;horizalign,right;addy,24);
+      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_1));zoom,0.75;diffusealpha,1;horizalign,right;addy,29);
       OnCommand=cmd(playcommand,"Set");
       SetCommand=function(self)
         local p1percent = STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetPercentDancePoints()
@@ -302,7 +302,7 @@ t[#t+1] = Def.ActorFrame {
       end;
     };
     LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_2));zoom,0.75;diffusealpha,1;horizalign,right;addy,24);
+      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_2));zoom,0.75;diffusealpha,1;horizalign,right;addy,29);
       OnCommand=cmd(playcommand,"Set");
       SetCommand=function(self)
         local p1percent = STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetPercentDancePoints()
