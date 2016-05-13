@@ -291,6 +291,25 @@ t[#t+1] = Def.ActorFrame {
       end;
     };
 	};
+  Def.ActorFrame {
+    InitCommand=cmd(addy,40*8+4;);
+    OnCommand=cmd(diffusealpha,0;sleep,0.8;smooth,0.2;diffusealpha,1;);
+    LoadFont("_overpass 36px") .. {
+      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_2));zoom,1;diffusealpha,1;horizalign,right;);
+      OnCommand=cmd(playcommand,"Set");
+      SetCommand=function(self)
+        self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetScore())
+      end;
+    };
+    LoadFont("_overpass 36px") .. {
+      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_2));zoom,0.75;diffusealpha,1;horizalign,right;addy,24);
+      OnCommand=cmd(playcommand,"Set");
+      SetCommand=function(self)
+        local p1percent = STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetPercentDancePoints()
+        self:settext(FormatPercentScore(p1percent))
+      end;
+    };
+  };
 };
 
 if GAMESTATE:IsHumanPlayer(PLAYER_1) == true then
