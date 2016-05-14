@@ -323,7 +323,7 @@ for pn, menu in pairs(menus) do
 		Font= "Common Normal", InitCommand= function(self)
 			explanations[pn]= self
 			self:xy(menu_x[pn] - (menu_width / 2), _screen.cy+174)
-				:diffuse(PlayerColor(pn))
+				:diffuse(ColorDarkTone(PlayerColor(pn)))
 				:shadowlength(0):wrapwidthpixels(menu_width / .8):zoom(0.75)
 				:horizalign(left):vertalign(top)
 		end,

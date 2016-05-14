@@ -27,8 +27,9 @@ t[#t+1] = Def.ActorFrame {
             end;
     };
 
-    LoadFont("Common Condensed") .. {
-          InitCommand=cmd(zoom,0.8;y,SCREEN_CENTER_Y-198;maxwidth,SCREEN_WIDTH;diffuse,color("#9d324e");visible,not GAMESTATE:IsCourseMode(););
+    LoadFont("Common Italic Condensed") .. {
+          InitCommand=cmd(zoom,0.8;y,SCREEN_CENTER_Y-198;maxwidth,SCREEN_WIDTH;diffuse,color("#9d324e");uppercase,true;visible,not GAMESTATE:IsCourseMode(););
+          OnCommand=cmd(playcommand,"Set");
           SortOrderChangedMessageCommand=cmd(playcommand,"Set");
           ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set");
           SetCommand=function(self)
@@ -39,8 +40,7 @@ t[#t+1] = Def.ActorFrame {
 					self:diffusealpha(0);
 					self:addx(6);
                     self:settext(SortOrderToLocalizedString(sortorder));
-                    self:playcommand("Refresh");
-					(cmd(stoptweening;diffusealpha,0.0;zoomy,0;smooth,0.35;zoomy,0.8;diffusealpha,1))(self)
+                    self:playcommand("Refresh"):stoptweening():diffusealpha(0):smooth(0.3):diffusealpha(1)
 				else
 					self:settext("");
 					self:playcommand("Refresh");
@@ -65,6 +65,9 @@ t[#t+1] = Def.ActorFrame {
               self:playcommand("Refresh");
           end;
     };
+	StandardDecorationFromFileOptional("StageDisplay","StageDisplay") .. {
+	
+	};
 };
 
 -- Genre/Artist data
@@ -73,7 +76,7 @@ t[#t+1] = Def.ActorFrame {
     OnCommand=cmd(diffusealpha,0;smooth,0.3;diffusealpha,1;);
     OffCommand=cmd(smooth,0.3;diffusealpha,0;);
     -- Genre
-    LoadFont("Common Condensed") .. {
+    LoadFont("Common Italic Condensed") .. {
           InitCommand=cmd(horizalign,left;zoom,0.6;uppercase,true;y,SCREEN_CENTER_Y-9;diffuse,color("#512232");horizalign,left;visible,not GAMESTATE:IsCourseMode(););
           OnCommand=cmd(playcommand,"Set");
           ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set");

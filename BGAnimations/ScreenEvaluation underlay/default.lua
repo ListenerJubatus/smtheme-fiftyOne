@@ -535,6 +535,15 @@ t[#t+1] = Def.ActorFrame {
   };
 end;
 
+t[#t+1] = Def.ActorFrame {
+	InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y-122;);
+	OnCommand=cmd(zoomx,0.8;diffusealpha,0;decelerate,0.4;zoomx,1;diffusealpha,1;);
+	OffCommand=cmd(decelerate,0.4;diffusealpha,0;);
+	LoadActor(THEME:GetPathG("ScreenWithMenuElements", "StageDisplay")) .. {
+		OnCommand=cmd(diffuse,color("#9d324e"));
+	};
+};
+
 t[#t+1] = StandardDecorationFromFileOptional("LifeDifficulty","LifeDifficulty");
 t[#t+1] = StandardDecorationFromFileOptional("TimingDifficulty","TimingDifficulty");
 
