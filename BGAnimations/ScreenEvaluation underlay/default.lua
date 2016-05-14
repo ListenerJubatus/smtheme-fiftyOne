@@ -322,14 +322,14 @@ t[#t+1] = Def.ActorFrame {
           OnCommand=cmd(diffusealpha,0;sleep,0.6;decelerate,0.4;diffusealpha,0.4;)
   };
   LoadActor(THEME:GetPathG("GradeDisplay", "Grade " .. p1grade)) .. {
-      InitCommand=cmd(zoom,0.8;addy,-16;);
+      InitCommand=cmd(zoom,0.75;addy,-16;);
       OnCommand=function(self)
         if STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetStageAward() then
           self:addy(0);
         else
           self:addy(16);
         end;
-        self:diffusealpha(0):zoom(0.5):sleep(0.63):decelerate(0.4):zoom(0.8):diffusealpha(1);
+        self:diffusealpha(0):zoom(0.5):sleep(0.63):decelerate(0.4):zoom(0.75):diffusealpha(1);
       end;
   };
   LoadFont("_roboto condensed Bold italic 24px") .. {
@@ -406,14 +406,14 @@ t[#t+1] = Def.ActorFrame {
           OnCommand=cmd(diffusealpha,0;sleep,0.6;decelerate,0.4;diffusealpha,0.4;)
   };
   LoadActor(THEME:GetPathG("GradeDisplay", "Grade " .. p2grade)) .. {
-      InitCommand=cmd(zoom,0.8;addy,-16;);
+      InitCommand=cmd(zoom,0.75;addy,-16;);
       OnCommand=function(self)
         if STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetStageAward() then
           self:addy(0);
         else
           self:addy(16);
         end;
-        self:diffusealpha(0):zoom(0.5):sleep(0.63):decelerate(0.4):zoom(0.8):diffusealpha(1);
+        self:diffusealpha(0):zoom(0.5):sleep(0.63):decelerate(0.4):zoom(0.75):diffusealpha(1);
       end;
   };
   LoadFont("_roboto condensed Bold italic 24px") .. {
