@@ -5,7 +5,7 @@ local t = Def.ActorFrame {};
 
 t[#t+1] = Def.ActorFrame {
 	LoadFont("Common Italic Condensed") .. {
-		InitCommand=cmd(y,-1;zoom,0.8;);
+		InitCommand=cmd(y,-1;zoom,1;);
 		BeginCommand=function(self)
 			local top = SCREENMAN:GetTopScreen()
 			if top then

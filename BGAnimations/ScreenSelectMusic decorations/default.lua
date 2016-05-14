@@ -66,7 +66,7 @@ t[#t+1] = Def.ActorFrame {
           end;
     };
 	StandardDecorationFromFileOptional("StageDisplay","StageDisplay") .. {
-	
+		InitCommand=cmd(zoom,0.75);
 	};
 };
 
