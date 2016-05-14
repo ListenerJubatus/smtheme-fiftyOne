@@ -31,7 +31,6 @@ local t = Def.ActorFrame {};
 			  OnCommand=cmd(playcommand,"Set";);
 			  CurrentStepsP2ChangedMessageCommand=cmd(playcommand,"Set";); 
 			  ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set"); 
-			  OffCommand=cmd(sleep,0.6;decelerate,0.5;addy,-73;);
 			  SetCommand=function(self)
 				stepsP2 = GAMESTATE:GetCurrentSteps(PLAYER_2)
 				local song = GAMESTATE:GetCurrentSong();

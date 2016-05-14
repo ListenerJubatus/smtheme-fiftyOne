@@ -76,7 +76,7 @@ t[#t+1] = Def.ActorFrame {
     OnCommand=cmd(diffusealpha,0;smooth,0.3;diffusealpha,1;);
     OffCommand=cmd(smooth,0.3;diffusealpha,0;);
     -- Genre
-    LoadFont("Common Italic Condensed") .. {
+    LoadFont("Common Condensed") .. {
           InitCommand=cmd(horizalign,left;zoom,0.6;uppercase,true;y,SCREEN_CENTER_Y-9;diffuse,color("#512232");horizalign,left;visible,not GAMESTATE:IsCourseMode(););
           OnCommand=cmd(playcommand,"Set");
           ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set");
