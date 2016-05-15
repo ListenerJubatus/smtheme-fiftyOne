@@ -8,8 +8,8 @@ local headercolour = {
 ["Select Course"] = "#be784a",
 ["Select Options"] = "#544abe",
 ["Options"] = "#333333",
-["Result"] = "#be9d4a",
-["Summary Result"] = "#1da5fb",
+["Your Results"] = "#e8a120",
+["Summary Result"] = "#e8a120",
 }
 
 local headcolour = headercolour[Screen.String("HeaderText")]
