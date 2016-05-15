@@ -1,5 +1,30 @@
 local t = Def.ActorFrame {};
 
+-- To do: This needs to be based on screen names and not variable language strings.
+local headercolour = {
+["Select Style"] = "#be4a8c",
+["Select Mode"] = "#478e6f",
+["Select Music"] = "#3298aa",
+["Select Course"] = "#be784a",
+["Select Options"] = "#544abe",
+["Options"] = "#333333",
+["Result"] = "#be9d4a",
+["Summary Result"] = "#1da5fb",
+}
+
+local headcolour = headercolour[Screen.String("HeaderText")]
+if headcolour == nil then headcolour = "#666666" end
+local headicon = Screen.String("HeaderText").." icon"
+
+local headericon = Screen.String("HeaderText").." icon"
+if FILEMAN:DoesFileExist("Themes/"..THEME:GetCurThemeName().."/Graphics/ScreenWithMenuElements header/"..headericon..".png") then
+	headicon = headericon
+	print("iconerror: file does exist: "..headericon..".png")
+else
+	headicon = "Generic icon"
+	print("iconerror: file does not exist")
+end
+
 -- Base bar
 t[#t+1] = Def.Quad {
 	InitCommand=cmd(vertalign,top;zoomto,SCREEN_WIDTH,96;diffuse,color("#1C1C1B");diffusebottomedge,color("#333230");diffusealpha,0.9;);
@@ -13,7 +38,10 @@ t[#t+1] = Def.ActorFrame {
 	OnCommand=cmd(addx,-110;sleep,0.3;decelerate,0.7;addx,110;);
 	OffCommand=cmd(decelerate,0.3;addx,-110;);
 		Def.Quad {
-			InitCommand=cmd(vertalign,top;zoomto,54,54;diffuse,color("#3298aa");rotationz,45;);
+			InitCommand=cmd(vertalign,top;zoomto,54,54;rotationz,45;diffuse,color(headcolour););
+		};
+		LoadActor(headicon) .. {
+			InitCommand=cmd(horizalign,center;y,18;x,-20;);
 		};
 	};
 
