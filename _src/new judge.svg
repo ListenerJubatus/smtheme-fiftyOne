@@ -169,6 +169,38 @@
        x2="249.72508"
        y2="26.652653"
        gradientUnits="userSpaceOnUse" />
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Drop Shadow"
+       id="filter5455">
+      <feFlood
+         flood-opacity="0.72549"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         id="feFlood5457" />
+      <feComposite
+         in="flood"
+         in2="SourceGraphic"
+         operator="in"
+         result="composite1"
+         id="feComposite5459" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="1.1"
+         result="blur"
+         id="feGaussianBlur5461" />
+      <feOffset
+         dx="1.3"
+         dy="1.7"
+         result="offset"
+         id="feOffset5463" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite5465" />
+    </filter>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -207,7 +239,8 @@
      id="layer1"
      transform="translate(0,-572.36215)">
     <g
-       id="g5201">
+       id="g5201"
+       style="filter:url(#filter5455)">
       <flowRoot
          transform="translate(-12.425293,558.68792)"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:125%;font-family:'Eligible Sans';-inkscape-font-specification:'Eligible Sans';letter-spacing:-0.66px;word-spacing:0px;fill:url(#linearGradient5151);fill-opacity:1;stroke:#3d8fe0;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;"
