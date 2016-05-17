@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="32"
+   height="32"
+   viewBox="0 0 32 32.000001"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   inkscape:export-filename="C:\Apps\StepMania-dev\StepMania 5.1-master\stepmania-5_1_0\Themes\fiftyOne\Graphics\ScreenWithMenuElements header\Generic icon.png"
+   inkscape:export-xdpi="135"
+   inkscape:export-ydpi="135"
+   sodipodi:docname="missing.svg">
+  <defs
+     id="defs4">
+    <linearGradient
+       gradientTransform="matrix(0.46067987,0,0,0.46067987,17.535418,355.93672)"
+       xlink:href="#linearGradient5147"
+       id="linearGradient7103"
+       x1="244.91409"
+       y1="513.73285"
+       x2="373.05899"
+       y2="683.94354"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       id="linearGradient5147">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop5149" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="1"
+         id="stop5151" />
+    </linearGradient>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="13.025141"
+     inkscape:cx="2.3298352"
+     inkscape:cy="34.478308"
+     inkscape:document-units="px"
+     inkscape:current-layer="g4206"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="1680"
+     inkscape:window-height="987"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-1020.3622)">
+    <g
+       id="layer1-2"
+       transform="translate(-299.58641,714.34055)">
+      <g
+         transform="matrix(5,0,0,5,-463.63885,-2865.3078)"
+         id="g4206">
+        <flowRoot
+           xml:space="preserve"
+           id="flowRoot5830"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:125%;font-family:'Eligible Sans';-inkscape-font-specification:'Eligible Sans';letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:0.84523806;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           transform="matrix(0.12082777,-0.12082775,0.12082775,0.12082777,152.56162,639.51408)"><flowRegion
+             id="flowRegion5832"><rect
+               id="rect5834"
+               width="53.128025"
+               height="22.802057"
+               x="-4.2993779"
+               y="0.75273639"
+               style="fill:#ffffff;fill-opacity:0.84523806" /></flowRegion><flowPara
+             id="flowPara5836"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;line-height:89.99999762%;font-family:Overpass;-inkscape-font-specification:Overpass;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:0.84523806">GRAPHIC</flowPara><flowPara
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;line-height:89.99999762%;font-family:Overpass;-inkscape-font-specification:Overpass;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:0.84523806"
+             id="flowPara5838">MISSING</flowPara></flowRoot>      </g>
+    </g>
+  </g>
+</svg>
