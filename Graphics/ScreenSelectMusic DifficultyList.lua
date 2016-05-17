@@ -4,16 +4,21 @@ return Def.ActorFrame {
 		if song then
 -- 			self:setaux(0);
 			self:finishtweening();
-			self:playcommand("TweenOn");
+			self:decelerate(0.3):zoomx(1):diffusealpha(1)
 		elseif not song and self:GetZoomX() == 1 then
 -- 			self:setaux(1);
 			self:finishtweening();
-			self:playcommand("TweenOff");
+			self:decelerate(0.3):zoomx(0):diffusealpha(0)
 		end;
 	end;
 	Def.StepsDisplayList {
 		Name="StepsDisplayListRow";
-
+		OnCommand=function(self)
+		self:diffusealpha(0):zoomx(0):decelerate(0.4):zoomx(1):diffusealpha(1)
+		end;
+		OffCommand=function(self)
+		self:decelerate(0.3):zoomx(0):diffusealpha(0)
+		end;
 		CursorP1 = Def.ActorFrame {
 			InitCommand=cmd(x,-194+16;player,PLAYER_1);
 			PlayerJoinedMessageCommand=function(self, params)
