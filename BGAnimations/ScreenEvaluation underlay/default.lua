@@ -349,7 +349,7 @@ t[#t+1] = Def.ActorFrame {
   InitCommand=cmd(x,SCREEN_CENTER_X-180;y,SCREEN_CENTER_Y-170;zoom,0.6;visible,not GAMESTATE:IsCourseMode(););
   OnCommand=cmd(zoomx,0.3;diffusealpha,0;decelerate,0.4;zoomx,0.6;diffusealpha,1;);
   OffCommand=cmd(decelerate,0.4;diffusealpha,0;);
-    LoadActor(THEME:GetPathG("StepsDisplayListRow", "frame")) .. {
+    LoadActor(THEME:GetPathG("difficulty", "BannerBase")) .. {
       OnCommand=cmd(playcommand,"Set";);
       CurrentStepsP1ChangedMessageCommand=cmd(playcommand,"Set";);
       SetCommand=function(self)
@@ -433,7 +433,7 @@ t[#t+1] = Def.ActorFrame {
   InitCommand=cmd(x,SCREEN_CENTER_X-180;y,SCREEN_CENTER_Y-170;zoom,0.6;visible,not GAMESTATE:IsCourseMode(););
   OnCommand=cmd(zoomx,0.3;diffusealpha,0;decelerate,0.4;zoomx,0.6;diffusealpha,1;);
   OffCommand=cmd(decelerate,0.4;diffusealpha,0;);
-    LoadActor(THEME:GetPathG("StepsDisplayListRow", "frame")) .. {
+    LoadActor(THEME:GetPathG("difficulty", "BannerBase")) .. {
       OnCommand=cmd(playcommand,"Set";);
       CurrentStepsP1ChangedMessageCommand=cmd(playcommand,"Set";);
       SetCommand=function(self)

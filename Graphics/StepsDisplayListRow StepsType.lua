@@ -10,7 +10,7 @@ local t = Def.ActorFrame{
 			if param.Steps and param.Steps:IsAutogen() then
 				self:diffusebottomedge(color("0.75,0.75,0.75,1"));
 			else
-				self:diffuse(Color("White"));
+				self:diffuse(Color("Black")):diffusealpha(0.75);
 			end;
 			self:settext( sString );
 		end;
