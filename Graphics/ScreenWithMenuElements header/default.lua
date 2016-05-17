@@ -1,47 +1,52 @@
 local t = Def.ActorFrame {};
 
--- To do: This needs to be based on screen names and not variable language strings.
-local headercolour = {
-["Select Style"] = "#be4a8c",
-["Select Mode"] = "#478e6f",
-["Select Music"] = "#3298aa",
-["Select Course"] = "#be784a",
-["Select Options"] = "#544abe",
-["Options"] = "#333333",
-["Your Results"] = "#e8a120",
-["Summary Result"] = "#e8a120",
-}
+-- -- To do: This needs to be based on screen names and not variable language strings.
+-- local headercolour = {
+-- ["Select Style"] = "#be4a8c",
+-- ["Select Mode"] = "#478e6f",
+-- ["Select Music"] = "#3298aa",
+-- ["Select Course"] = "#be784a",
+-- ["Select Options"] = "#544abe",
+-- ["Options"] = "#333333",
+-- ["Your Results"] = "#e8a120",
+-- ["Summary Result"] = "#e8a120",
+-- }
 
-local headcolour = headercolour[Screen.String("HeaderText")]
-if headcolour == nil then headcolour = "#666666" end
-local headicon = Screen.String("HeaderText").." icon"
+-- local headcolour = headercolour[Screen.String("HeaderText")]
+-- if headcolour == nil then headcolour = "#666666" end
 
-local headericon = Screen.String("HeaderText").." icon"
-if FILEMAN:DoesFileExist("Themes/"..THEME:GetCurThemeName().."/Graphics/ScreenWithMenuElements header/"..headericon..".png") then
-	headicon = headericon
-	print("iconerror: file does exist: "..headericon..".png")
-else
-	headicon = "Generic icon"
-	print("iconerror: file does not exist")
-end
 
 -- Base bar
 t[#t+1] = Def.Quad {
 	InitCommand=cmd(vertalign,top;zoomto,SCREEN_WIDTH,96;diffuse,color("#1C1C1B");diffusebottomedge,color("#333230");diffusealpha,0.9;);
-	OnCommand=cmd(addy,-96;decelerate,0.5;addy,96;);
+	OnCommand=function(self)
+	self:addy(-96):decelerate(0.5):addy(96)
+		end;
 	OffCommand=cmd(sleep,0.3;decelerate,0.4;addy,-96;);
 };
 
--- Diamond (todo: Symbol system)
+-- Diamond (todo: Migrate mode colors to global vars)
 t[#t+1] = Def.ActorFrame {
 	InitCommand=cmd(x,-SCREEN_CENTER_X+76;y,SCREEN_TOP+30;);
 	OnCommand=cmd(addx,-110;sleep,0.3;decelerate,0.7;addx,110;);
 	OffCommand=cmd(decelerate,0.3;addx,-110;);
+		-- Diamond BG
 		Def.Quad {
-			InitCommand=cmd(vertalign,top;zoomto,54,54;rotationz,45;diffuse,color(headcolour););
+			InitCommand=cmd(vertalign,top;zoomto,54,54;rotationz,45;diffuse,color("#3298aa"););
 		};
-		LoadActor(headicon) .. {
+		-- Symbol selector
+		Def.Sprite {
+			Name="HeaderDiamondIcon";
 			InitCommand=cmd(horizalign,center;y,18;x,-20;);
+			OnCommand=function(self)
+				if FILEMAN:DoesFileExist("Themes/"..THEME:GetCurThemeName().."/Graphics/"..SCREENMAN:GetTopScreen():GetName().." icon.png") then
+					print("iconerror: file does exist: "..SCREENMAN:GetTopScreen():GetName()..".png")
+					self:Load(THEME:GetPathG(SCREENMAN:GetTopScreen():GetName(), "icon"))
+				else
+					print("iconerror: file does not exist")
+					self:Load(THEME:GetPathG("Generic", "icon"))
+				end;
+			end;
 		};
 	};
 
