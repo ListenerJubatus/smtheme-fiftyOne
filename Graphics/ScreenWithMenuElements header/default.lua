@@ -22,13 +22,23 @@ function HeaderColor(screen)
 end;
 
 -- Base bar diffuse,color("#1C1C1B");diffusebottomedge,color("#333230");
-t[#t+1] = Def.Quad {
-	InitCommand=cmd(vertalign,top;zoomto,SCREEN_WIDTH,96;);
+t[#t+1] = Def.ActorFrame {
+	InitCommand=cmd(vertalign,top;);
 	OnCommand=function(self)
-		self:diffuse(HeaderColor(SCREENMAN:GetTopScreen():GetName())):diffusetopedge(ColorDarkTone(HeaderColor(SCREENMAN:GetTopScreen():GetName()))):diffusealpha(0.8)
-		self:addy(-96):decelerate(0.5):addy(96);
+			self:addy(-104):decelerate(0.5):addy(104);
 	end;
-	OffCommand=cmd(sleep,0.3;decelerate,0.4;addy,-96;);
+	OffCommand=cmd(sleep,0.3;decelerate,0.4;addy,-105;);
+		Def.Quad {
+			InitCommand=cmd(vertalign,top;zoomto,SCREEN_WIDTH,96;);
+			OnCommand=function(self)
+				self:diffuse(HeaderColor(SCREENMAN:GetTopScreen():GetName())):diffusetopedge(ColorDarkTone(HeaderColor(SCREENMAN:GetTopScreen():GetName()))):diffusealpha(0.8)
+			end;
+		};
+		-- Shadow
+		Def.Quad {
+			InitCommand=cmd(vertalign,top;zoomto,SCREEN_WIDTH,8;y,96);
+			OnCommand=cmd(diffuse,Color("Black");fadebottom,1;diffusealpha,0.6);
+		};
 };
 
 -- Diamond (todo: Migrate mode colors to global vars)

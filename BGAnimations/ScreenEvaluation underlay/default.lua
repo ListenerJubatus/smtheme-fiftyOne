@@ -6,84 +6,91 @@ local p2grade = STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetGra
 t[#t+1] = Def.ActorFrame {
   InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y-80;);
 	OnCommand=cmd(zoomx,0;decelerate,0.8;zoomx,1;);
-	OffCommand=cmd(decelerate,0.6;zoomx,0;diffusealpha,0;);
     Def.ActorFrame {
 		OnCommand=cmd(diffusealpha,0;sleep,0.1;smooth,0.2;diffusealpha,1;);
+		OffCommand=cmd(sleep,0.1;smooth,0.2;diffusealpha,0;);
 		Def.Quad {
 			InitCommand=cmd(zoomto,200,36;diffuse,JudgmentLineToColor("JudgmentLine_W1");diffusealpha,0.6;);
 		};
 		LoadFont("_overpass 36px") .. {
-			InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.6;settext,string.upper(JudgmentLineToLocalizedString('JudgmentLine_W1')););
+			InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.8;settext,string.upper(JudgmentLineToLocalizedString('JudgmentLine_W1')););
 		};
 	};
 	Def.ActorFrame {
 		InitCommand=cmd(addy,40;);
 		OnCommand=cmd(diffusealpha,0;sleep,0.2;smooth,0.2;diffusealpha,1;);
+		OffCommand=cmd(sleep,0.2;smooth,0.2;diffusealpha,0;);
 		Def.Quad {
 			InitCommand=cmd(zoomto,200,36;diffuse,JudgmentLineToColor("JudgmentLine_W2");diffusealpha,0.6;);
 		};
 		LoadFont("_overpass 36px") .. {
-			InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.6;settext,string.upper(JudgmentLineToLocalizedString('JudgmentLine_W2')););
+			InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.8;settext,string.upper(JudgmentLineToLocalizedString('JudgmentLine_W2')););
 		};
 	};
 	Def.ActorFrame {
 		InitCommand=cmd(addy,40*2;);
 		OnCommand=cmd(diffusealpha,0;sleep,0.3;smooth,0.2;diffusealpha,1;);
+		OffCommand=cmd(sleep,0.3;smooth,0.2;diffusealpha,0;);
 		Def.Quad {
 			InitCommand=cmd(zoomto,200,36;diffuse,JudgmentLineToColor("JudgmentLine_W3");diffusealpha,0.6;);
 		};
 		LoadFont("_overpass 36px") .. {
-			InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.6;settext,string.upper(JudgmentLineToLocalizedString('JudgmentLine_W3')););
+			InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.8;settext,string.upper(JudgmentLineToLocalizedString('JudgmentLine_W3')););
 		};
 	};
 	Def.ActorFrame {
 		InitCommand=cmd(addy,40*3;);
 		OnCommand=cmd(diffusealpha,0;sleep,0.4;smooth,0.2;diffusealpha,1;);
+		OffCommand=cmd(sleep,0.4;smooth,0.2;diffusealpha,0;);
 		Def.Quad {
 			InitCommand=cmd(zoomto,200,36;diffuse,JudgmentLineToColor("JudgmentLine_W4");diffusealpha,0.6;);
 		};
 		LoadFont("_overpass 36px") .. {
-			InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.6;settext,string.upper(JudgmentLineToLocalizedString('JudgmentLine_W4')););
+			InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.8;settext,string.upper(JudgmentLineToLocalizedString('JudgmentLine_W4')););
 		};
 	};
 	Def.ActorFrame {
 		InitCommand=cmd(addy,40*4;);
 		OnCommand=cmd(diffusealpha,0;sleep,0.5;smooth,0.2;diffusealpha,1;);
+		OffCommand=cmd(sleep,0.5;smooth,0.2;diffusealpha,0;);
 		Def.Quad {
 			InitCommand=cmd(zoomto,200,36;diffuse,JudgmentLineToColor("JudgmentLine_W5");diffusealpha,0.6;);
 		};
 		LoadFont("_overpass 36px") .. {
-			InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.6;settext,string.upper(JudgmentLineToLocalizedString('JudgmentLine_W5')););
+			InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.8;settext,string.upper(JudgmentLineToLocalizedString('JudgmentLine_W5')););
 		};
 	};
 	Def.ActorFrame {
 		InitCommand=cmd(addy,40*5;);
 		OnCommand=cmd(diffusealpha,0;sleep,0.6;smooth,0.2;diffusealpha,1;);
+		OffCommand=cmd(sleep,0.6;smooth,0.2;diffusealpha,0;);
 		Def.Quad {
 			InitCommand=cmd(zoomto,200,36;diffuse,JudgmentLineToColor("JudgmentLine_Miss");diffusealpha,0.6;);
 		};
 		LoadFont("_overpass 36px") .. {
-			InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.6;settext,string.upper(JudgmentLineToLocalizedString('JudgmentLine_Miss')););
+			InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.8;settext,string.upper(JudgmentLineToLocalizedString('JudgmentLine_Miss')););
 		};
 	};
 	Def.ActorFrame {
 		InitCommand=cmd(addy,40*6;);
 		OnCommand=cmd(diffusealpha,0;sleep,0.7;smooth,0.2;diffusealpha,1;);
+		OffCommand=cmd(sleep,0.7;smooth,0.2;diffusealpha,0;);
 		Def.Quad {
 			InitCommand=cmd(zoomto,200,36;diffuse,JudgmentLineToColor("JudgmentLine_Held");diffusealpha,0.6;);
 		};
 		LoadFont("_overpass 36px") .. {
-			InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.6;settext,string.upper(JudgmentLineToLocalizedString('JudgmentLine_Held')););
+			InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.8;settext,string.upper(JudgmentLineToLocalizedString('JudgmentLine_Held')););
 		};
 	};
 	Def.ActorFrame {
 		InitCommand=cmd(addy,40*7;);
 		OnCommand=cmd(diffusealpha,0;sleep,0.8;smooth,0.2;diffusealpha,1;);
+		OffCommand=cmd(sleep,0.8;smooth,0.2;diffusealpha,0;sleep,1;);
 		Def.Quad {
 			InitCommand=cmd(zoomto,200,36;diffuse,JudgmentLineToColor("JudgmentLine_MaxCombo");diffusealpha,0.6;);
 		};
 		LoadFont("_overpass 36px") .. {
-			InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.6;settext,string.upper(JudgmentLineToLocalizedString('JudgmentLine_MaxCombo')););
+			InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.8;settext,string.upper(JudgmentLineToLocalizedString('JudgmentLine_MaxCombo')););
 		};
 	};
 };

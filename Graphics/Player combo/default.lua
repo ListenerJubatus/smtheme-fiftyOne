@@ -89,11 +89,11 @@ local t = Def.ActorFrame {
 			c.Number:diffuse(color("#FBE9DD"));
 -- 			c.Number:diffuse(PlayerColor(player));
 			c.Number:stopeffect();
-			(cmd(diffuse,color("#F5CB92");diffusebottomedge,color("#EFA97A")))(c.Label);
+			(cmd(diffuse,color("#F5CB92");diffusebottomedge,color("#EFA97A");strokecolor,color("#965A47");))(c.Label);
 		else
-			c.Number:diffuse(color("#ff0000"));
+			c.Number:diffuse(color("#FBE9DD"));
 			c.Number:stopeffect();
-			(cmd(diffuse,color("#ED6565");diffusebottomedge,color("#F98787")))(c.Label);
+			(cmd(diffuse,color("#F5CB92");diffusebottomedge,color("#EFA97A");strokecolor,color("#965A47");))(c.Label);
 		end
 		-- Pulse
 		Pulse( c.Number, param );

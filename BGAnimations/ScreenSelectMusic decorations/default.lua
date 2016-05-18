@@ -5,7 +5,7 @@ t[#t+1] = Def.ActorFrame {
     InitCommand=cmd(x,SCREEN_CENTER_X-230;draworder,125);
     OffCommand=cmd(smooth,0.2;diffusealpha,0;);
     Def.Quad {
-        InitCommand=cmd(zoomto,468,196;diffuse,color("#fce1a1");diffusealpha,0.4;y,SCREEN_CENTER_Y-94+25;);
+        InitCommand=cmd(zoomto,468,196;diffuse,color("#fce1a1");diffusealpha,0.4;vertalign,top;y,SCREEN_CENTER_Y-230+47;);
       };
 };
 
@@ -14,11 +14,11 @@ t[#t+1] = Def.ActorFrame {
     InitCommand=cmd(x,SCREEN_CENTER_X-226;);
     OffCommand=cmd(smooth,0.2;diffusealpha,0;);
     Def.Quad {
-        InitCommand=cmd(zoomto,150,60;diffuse,color("#fce1a1");diffusealpha,0.4;y,SCREEN_CENTER_Y-205;);
+        InitCommand=cmd(zoomto,150,60;diffuse,color("#fce1a1");diffusealpha,0.4;y,SCREEN_CENTER_Y-205-16;);
     };
 
     LoadFont("Common Normal") .. {
-            InitCommand=cmd(zoom,0.75;y,SCREEN_CENTER_Y-223;diffuse,color("#000000");diffusealpha,0.5;visible,not GAMESTATE:IsCourseMode(););
+            InitCommand=cmd(zoom,0.75;y,SCREEN_CENTER_Y-223-16;diffuse,color("#000000");diffusealpha,0.5;visible,not GAMESTATE:IsCourseMode(););
             OnCommand=cmd(playcommand,"Set");
             ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set");
             SetCommand=function(self)
@@ -28,7 +28,7 @@ t[#t+1] = Def.ActorFrame {
     };
 
     LoadFont("Common Italic Condensed") .. {
-          InitCommand=cmd(zoom,0.75;y,SCREEN_CENTER_Y-198;maxwidth,SCREEN_WIDTH;diffuse,color("#9d324e");uppercase,true;visible,not GAMESTATE:IsCourseMode(););
+          InitCommand=cmd(zoom,0.75;y,SCREEN_CENTER_Y-198-16;maxwidth,SCREEN_WIDTH;diffuse,color("#9d324e");uppercase,true;visible,not GAMESTATE:IsCourseMode(););
           OnCommand=cmd(playcommand,"Set");
           SortOrderChangedMessageCommand=cmd(playcommand,"Set");
           ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set");
@@ -53,11 +53,11 @@ t[#t+1] = Def.ActorFrame {
     OffCommand=cmd(sleep,0.1;smooth,0.2;diffusealpha,0;);
     InitCommand=cmd(x,SCREEN_CENTER_X-71;);
     Def.Quad {
-        InitCommand=cmd(zoomto,150,60;diffuse,color("#fce1a1");diffusealpha,0.4;y,SCREEN_CENTER_Y-205;);
+        InitCommand=cmd(zoomto,150,60;diffuse,color("#fce1a1");diffusealpha,0.4;y,SCREEN_CENTER_Y-205-16;);
     };
 
     LoadFont("Common Normal") .. {
-          InitCommand=cmd(zoom,0.75;y,SCREEN_CENTER_Y-223;diffuse,color("#000000");diffusealpha,0.5;visible,not GAMESTATE:IsCourseMode(););
+          InitCommand=cmd(zoom,0.75;y,SCREEN_CENTER_Y-223-16;diffuse,color("#000000");diffusealpha,0.5;visible,not GAMESTATE:IsCourseMode(););
           OnCommand=cmd(playcommand,"Set");
           ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set");
           SetCommand=function(self)
@@ -77,7 +77,7 @@ t[#t+1] = Def.ActorFrame {
     OffCommand=cmd(smooth,0.3;diffusealpha,0;);
     -- Length
     LoadFont("Common Condensed") .. {
-          InitCommand=cmd(horizalign,left;zoom,0.75;uppercase,true;y,SCREEN_CENTER_Y-9;diffuse,color("#512232");horizalign,left;visible,not GAMESTATE:IsCourseMode(););
+          InitCommand=cmd(horizalign,left;zoom,0.75;uppercase,true;y,SCREEN_CENTER_Y-9-16;diffuse,color("#512232");horizalign,left;visible,not GAMESTATE:IsCourseMode(););
           OnCommand=cmd(playcommand,"Set");
           ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set");
           SetCommand=function(self)
@@ -126,7 +126,7 @@ t[#t+1] = Def.ActorFrame {
     OffCommand=cmd(smooth,0.3;diffusealpha,0;);
     -- Genre
     LoadFont("Common Condensed") .. {
-          InitCommand=cmd(horizalign,left;zoom,0.75;uppercase,true;y,SCREEN_CENTER_Y-9;diffuse,color("#512232");horizalign,left;visible,not GAMESTATE:IsCourseMode(););
+          InitCommand=cmd(horizalign,left;zoom,0.75;uppercase,true;y,SCREEN_CENTER_Y-9-16;diffuse,color("#512232");horizalign,left;visible,not GAMESTATE:IsCourseMode(););
           OnCommand=cmd(playcommand,"Set");
           ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set");
           SetCommand=function(self)
@@ -134,7 +134,7 @@ t[#t+1] = Def.ActorFrame {
               end;
     };
     LoadFont("GenreDisplay genre") .. {
-          InitCommand=cmd(horizalign,left;zoom,1.0;y,SCREEN_CENTER_Y+12;maxwidth,180;diffuse,color("#512232");visible,not GAMESTATE:IsCourseMode(););
+          InitCommand=cmd(horizalign,left;zoom,1.0;y,SCREEN_CENTER_Y+12-16;maxwidth,180;diffuse,color("#512232");visible,not GAMESTATE:IsCourseMode(););
           CurrentSongChangedMessageCommand=cmd(playcommand,"Set");
           CurrentCourseChangedMessageCommand=cmd(playcommand,"Set");
           ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set");
@@ -156,7 +156,7 @@ t[#t+1] = Def.ActorFrame {
     OffCommand=cmd(smooth,0.3;diffusealpha,0;);
     -- Genre
     LoadFont("Common Condensed") .. {
-          InitCommand=cmd(horizalign,right;x,SCREEN_CENTER_X-48;zoom,0.75;uppercase,true;y,SCREEN_CENTER_Y-9;diffuse,color("#512232");horizalign,left;visible,not GAMESTATE:IsCourseMode(););
+          InitCommand=cmd(horizalign,right;x,SCREEN_CENTER_X-48;zoom,0.75;uppercase,true;y,SCREEN_CENTER_Y-9-16;diffuse,color("#512232");horizalign,left;visible,not GAMESTATE:IsCourseMode(););
           OnCommand=cmd(playcommand,"Set");
           ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set");
           SetCommand=function(self)
@@ -164,7 +164,7 @@ t[#t+1] = Def.ActorFrame {
               end;
     };
     LoadFont("Common Normal") .. {
-          InitCommand=cmd(horizalign,right;x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y+13;diffuse,color("#512232");horizalign,right;visible,not GAMESTATE:IsCourseMode(););
+          InitCommand=cmd(horizalign,right;x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y+13-16;diffuse,color("#512232");horizalign,right;visible,not GAMESTATE:IsCourseMode(););
           OnCommand=cmd(playcommand,"Set");
           ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set");
           SetCommand=function(self)
