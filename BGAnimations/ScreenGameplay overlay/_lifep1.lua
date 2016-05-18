@@ -19,7 +19,7 @@ local t = Def.ActorFrame {};
 					local diff = stepsP1:GetDifficulty();
 					local courseType = GAMESTATE:IsCourseMode() and SongOrCourse:GetCourseType() or nil;
 					local cd = GetCustomDifficulty(st, diff, courseType);
-					self:diffuse(ColorLightTone(CustomDifficultyToColor(cd)));
+					self:diffuse(CustomDifficultyToColor(cd));
 				end
 			end
     end;
@@ -28,6 +28,7 @@ local t = Def.ActorFrame {};
 	t[#t+1] = Def.ActorFrame {
 		InitCommand=cmd(visible,GAMESTATE:IsHumanPlayer(PLAYER_1);x,-206;y,-8;);
 		LoadFont("StepsDisplay description") .. {
+			  InitCommand=cmd(zoom,0.75);
 			  OnCommand=cmd(playcommand,"Set";);
 			  CurrentStepsP1ChangedMessageCommand=cmd(playcommand,"Set";);
 			  ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set");
@@ -41,7 +42,7 @@ local t = Def.ActorFrame {};
 						local courseType = GAMESTATE:IsCourseMode() and SongOrCourse:GetCourseType() or nil;
 						local cd = GetCustomDifficulty(st, diff, courseType);
 						self:settext(stepsP1:GetMeter())
-						self:diffuse(ColorLightTone(CustomDifficultyToColor(cd)));
+						self:diffuse(ColorDarkTone(CustomDifficultyToColor(cd)));
 					else
 						self:settext("")
 					end

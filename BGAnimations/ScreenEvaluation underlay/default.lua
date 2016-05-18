@@ -368,7 +368,7 @@ t[#t+1] = Def.ActorFrame {
             local diff = stepsP1:GetDifficulty();
             local courseType = GAMESTATE:IsCourseMode() and SongOrCourse:GetCourseType() or nil;
             local cd = GetCustomDifficulty(st, diff, courseType);
-            self:diffuse(ColorLightTone(CustomDifficultyToColor(cd)));
+            self:diffuse(CustomDifficultyToColor(cd));
           end
         end
       end;
@@ -389,7 +389,7 @@ t[#t+1] = Def.ActorFrame {
               local courseType = GAMESTATE:IsCourseMode() and SongOrCourse:GetCourseType() or nil;
               local cd = GetCustomDifficulty(st, diff, courseType);
               self:settext(stepsP1:GetMeter())
-              self:diffuse(ColorLightTone(CustomDifficultyToColor(cd)));
+              self:diffuse(ColorDarkTone(CustomDifficultyToColor(cd)));
             else
               self:settext("")
             end
@@ -452,7 +452,7 @@ t[#t+1] = Def.ActorFrame {
             local diff = stepsP1:GetDifficulty();
             local courseType = GAMESTATE:IsCourseMode() and SongOrCourse:GetCourseType() or nil;
             local cd = GetCustomDifficulty(st, diff, courseType);
-            self:diffuse(ColorLightTone(CustomDifficultyToColor(cd)));
+            self:diffuse(CustomDifficultyToColor(cd));
           end
         end
       end;
@@ -473,7 +473,7 @@ t[#t+1] = Def.ActorFrame {
               local courseType = GAMESTATE:IsCourseMode() and SongOrCourse:GetCourseType() or nil;
               local cd = GetCustomDifficulty(st, diff, courseType);
               self:settext(stepsP1:GetMeter())
-              self:diffuse(ColorLightTone(CustomDifficultyToColor(cd)));
+              self:diffuse(ColorDarkTone(CustomDifficultyToColor(cd)));
             else
               self:settext("")
             end
