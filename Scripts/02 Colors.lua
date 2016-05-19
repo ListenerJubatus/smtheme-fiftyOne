@@ -1,9 +1,40 @@
+-- color based on screen name
+function ScreenColor(screen)
+    local colors = {
+        ["ScreenSelectStyle"]         = ScreenColor.Style, 
+        ["ScreenSelectPlayMode"]      = ScreenColor.PlayMode, 
+        ["ScreenSelectMusic"]         = ScreenColor.Music, 
+        ["ScreenSelectCourse"]        = ScreenColor.Course, 
+        ["ScreenPlayerOptions"]       = ScreenColor.PlayerOptions,
+        ["ScreenNestyPlayerOptions"]  = ScreenColor.PlayerOptions,
+        ["ScreenOptionsService"]      = ScreenColor.OptionsService,
+        ["ScreenEvaluationNormal"]    = ScreenColor.Evaluation, 
+        ["ScreenEvaluationSummary"]   = ScreenColor.Summary, 
+        ["Default"]                   = ScreenColor.Default,
+    }
+
+    if colors[screen] then return colors[screen];
+    else return colors["Default"]; end;
+end;
+
+ScreenColor = {
+    Style           = color("#81468B"),
+    PlayMode        = color("#478e6f"),
+    Music           = color("#1268aa"),
+    Course          = color("#1268aa"),
+    PlayerOptions   = color("#544abe"),
+    OptionsService  = color("#1C1C1B"),
+    Evaluation      = color("#806635"),
+    Summary         = color("#B38D47"),
+    Default         = color("#1C1C1B"),
+}
+
 ModeIconColors = {
-	Normal		= color("#FFEE00"), -- yellow
-	Rave		= color("#db93ff"), -- violet
-	Nonstop		= color("#5ca9ff"), -- blue
-	Oni			= color("#00f1e2"), -- cyan
-	Endless		= color("#b4c3d2"), -- steel
+    Normal      = color("#FFEE00"), -- yellow
+    Rave        = color("#db93ff"), -- violet
+    Nonstop     = color("#5ca9ff"), -- blue
+    Oni         = color("#00f1e2"), -- cyan
+    Endless     = color("#b4c3d2"), -- steel
 }
 
 GameColor = {
