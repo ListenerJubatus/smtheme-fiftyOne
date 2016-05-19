@@ -374,7 +374,7 @@ t[#t+1] = Def.ActorFrame {
       end;
     };
 
-    LoadFont("_overpass 36px") .. {
+    LoadFont("StepsDisplay meter") .. {
         InitCommand=cmd(addy,26;zoom,1;);
         OnCommand=cmd(playcommand,"Set";);
         CurrentStepsP1ChangedMessageCommand=cmd(playcommand,"Set";);
@@ -458,7 +458,7 @@ t[#t+1] = Def.ActorFrame {
       end;
     };
 
-    LoadFont("_overpass 36px") .. {
+    LoadFont("StepsDisplay meter") .. {
         InitCommand=cmd(addy,26;zoom,1;);
         OnCommand=cmd(playcommand,"Set";);
         CurrentStepsP1ChangedMessageCommand=cmd(playcommand,"Set";);
