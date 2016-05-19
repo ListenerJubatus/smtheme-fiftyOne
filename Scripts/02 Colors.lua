@@ -1,23 +1,23 @@
 -- color based on screen name
 function ScreenColor(screen)
     local colors = {
-        ["ScreenSelectStyle"]         = ScreenColor.Style, 
-        ["ScreenSelectPlayMode"]      = ScreenColor.PlayMode, 
-        ["ScreenSelectMusic"]         = ScreenColor.Music, 
-        ["ScreenSelectCourse"]        = ScreenColor.Course, 
-        ["ScreenPlayerOptions"]       = ScreenColor.PlayerOptions,
-        ["ScreenNestyPlayerOptions"]  = ScreenColor.PlayerOptions,
-        ["ScreenOptionsService"]      = ScreenColor.OptionsService,
-        ["ScreenEvaluationNormal"]    = ScreenColor.Evaluation, 
-        ["ScreenEvaluationSummary"]   = ScreenColor.Summary, 
-        ["Default"]                   = ScreenColor.Default,
+        ["ScreenSelectStyle"]         = ScreenColors.Style, 
+        ["ScreenSelectPlayMode"]      = ScreenColors.PlayMode, 
+        ["ScreenSelectMusic"]         = ScreenColors.Music, 
+        ["ScreenSelectCourse"]        = ScreenColors.Course, 
+        ["ScreenPlayerOptions"]       = ScreenColors.PlayerOptions,
+        ["ScreenNestyPlayerOptions"]  = ScreenColors.PlayerOptions,
+        ["ScreenOptionsService"]      = ScreenColors.OptionsService,
+        ["ScreenEvaluationNormal"]    = ScreenColors.Evaluation, 
+        ["ScreenEvaluationSummary"]   = ScreenColors.Summary, 
+        ["Default"]                   = ScreenColors.Default,
     }
 
     if colors[screen] then return colors[screen];
     else return colors["Default"]; end;
 end;
 
-ScreenColor = {
+ScreenColors = {
     Style           = color("#81468B"),
     PlayMode        = color("#478e6f"),
     Music           = color("#1268aa"),
@@ -46,29 +46,7 @@ GameColor = {
         PLAYER_1 = color("#EB3F8C"),
         PLAYER_2 = color("#89385A"),
     },
-    Difficulty = {
-        --[[ These are for 'Custom' Difficulty Ranks. It can be very  useful
-        in some cases, especially to apply new colors for stuff you
-        couldn't before. (huh? -aj) ]]
-        Beginner    = color("#8541B9"),         --  purple
-        Easy        = color("#5EBA42"),         -- green
-        Medium      = color("#D1C340"),         -- yellow
-        Hard        = color("#CB4833"),         -- orange
-        Challenge   = color("#1cd8ff"),         -- light blue
-        Edit        = color("0.8,0.8,0.8,1"),   -- gray
-        Couple      = color("#ed0972"),         -- hot pink
-        Routine     = color("#ff9a00"),         -- orange
-        --[[ These are for courses, so let's slap them here in case someone
-        wanted to use Difficulty in Course and Step regions. ]]
-        Difficulty_Beginner = color("#8541B9"),     -- purple
-        Difficulty_Easy     = color("#5EBA42"),     -- green
-        Difficulty_Medium   = color("#D1C340"),     -- yellow
-        Difficulty_Hard     = color("#CB4833"),     -- orange
-        Difficulty_Challenge    = color("#1cd8ff"), -- light blue
-        Difficulty_Edit     = color("0.8,0.8,0.8,1"),       -- gray
-        Difficulty_Couple   = color("#ed0972"),             -- hot pink
-        Difficulty_Routine  = color("#ff9a00")              -- orange
-    },
+
     Stage = {
         Stage_1st   = color("#00ffc7"),
         Stage_2nd   = color("#58ff00"),
