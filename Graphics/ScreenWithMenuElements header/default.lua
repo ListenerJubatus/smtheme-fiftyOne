@@ -1,29 +1,5 @@
 local t = Def.ActorFrame {};
 
-<<<<<<< HEAD
-=======
--- Header color based on screen name
-function HeaderColor(screen)
-    local colors = {
-        ["ScreenSelectStyle"] = color("#81468B"), 
-        ["ScreenSelectPlayMode"] = color("#478e6f"), 
-        ["ScreenSelectMusic"] = color("#1268aa"), 
-        ["ScreenSelectCourse"] = color("#1268aa"), --is this a thing? LOL
-        ["ScreenPlayerOptions"] = color("#544abe"),
-        ["ScreenNestyPlayerOptions"] = color("#544abe"),
-        ["ScreenOptionsService"] = color("#1C1C1B"),
-        ["ScreenEvaluationNormal"] = color("#806635"), 
-        ["ScreenEvaluationSummary"] = color("#B38D47"), --is this also a thing?
-        ["Default"] = color("#1C1C1B"),
-    }
-    if colors[screen] then 
-        return colors[screen];
-    else
-        return colors["Default"];
-    end;
-end;
-
->>>>>>> parent of b856be8... start on course
 -- Base bar diffuse,color("#1C1C1B");diffusebottomedge,color("#333230");
 t[#t+1] = Def.ActorFrame {
 	InitCommand=cmd(vertalign,top;);
