@@ -1,23 +1,23 @@
 -- color based on screen name
 function ScreenColor(screen)
     local colors = {
-        ["ScreenSelectStyle"]         = ScreenColor.Style, 
-        ["ScreenSelectPlayMode"]      = ScreenColor.PlayMode, 
-        ["ScreenSelectMusic"]         = ScreenColor.Music, 
-        ["ScreenSelectCourse"]        = ScreenColor.Course, 
-        ["ScreenPlayerOptions"]       = ScreenColor.PlayerOptions,
-        ["ScreenNestyPlayerOptions"]  = ScreenColor.PlayerOptions,
-        ["ScreenOptionsService"]      = ScreenColor.OptionsService,
-        ["ScreenEvaluationNormal"]    = ScreenColor.Evaluation, 
-        ["ScreenEvaluationSummary"]   = ScreenColor.Summary, 
-        ["Default"]                   = ScreenColor.Default,
+        ["ScreenSelectStyle"]         = ScreenColors.Style, 
+        ["ScreenSelectPlayMode"]      = ScreenColors.PlayMode, 
+        ["ScreenSelectMusic"]         = ScreenColors.Music, 
+        ["ScreenSelectCourse"]        = ScreenColors.Course, 
+        ["ScreenPlayerOptions"]       = ScreenColors.PlayerOptions,
+        ["ScreenNestyPlayerOptions"]  = ScreenColors.PlayerOptions,
+        ["ScreenOptionsService"]      = ScreenColors.OptionsService,
+        ["ScreenEvaluationNormal"]    = ScreenColors.Evaluation, 
+        ["ScreenEvaluationSummary"]   = ScreenColors.Summary, 
+        ["Default"]                   = ScreenColors.Default,
     }
 
     if colors[screen] then return colors[screen];
     else return colors["Default"]; end;
 end;
 
-ScreenColor = {
+ScreenColors = {
     Style           = color("#81468B"),
     PlayMode        = color("#478e6f"),
     Music           = color("#1268aa"),
@@ -97,3 +97,8 @@ GameColor = {
         JudgmentLine_MaxCombo   = color("#ffc600")
     },
 }
+
+GameColor.Difficulty["Crazy"]       = GameColor.Difficulty["Hard"]
+GameColor.Difficulty["Freestyle"]   = GameColor.Difficulty["Easy"]
+GameColor.Difficulty["Nightmare"]   = GameColor.Difficulty["Challenge"]
+GameColor.Difficulty["HalfDouble"]  = GameColor.Difficulty["Medium"]
