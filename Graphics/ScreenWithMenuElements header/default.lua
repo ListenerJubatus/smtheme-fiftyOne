@@ -6,7 +6,7 @@ function HeaderColor(screen)
         ["ScreenSelectStyle"] = color("#81468B"), 
         ["ScreenSelectPlayMode"] = color("#478e6f"), 
         ["ScreenSelectMusic"] = color("#1268aa"), 
-        ["ScreenSelectCourse"] = color("#1268aa"), --is this a thing? LOL
+        ["ScreenSelectCourse"] = color("#2D5D22"), --is this a thing? LOL
         ["ScreenPlayerOptions"] = color("#544abe"),
         ["ScreenNestyPlayerOptions"] = color("#544abe"),
         ["ScreenOptionsService"] = color("#1C1C1B"),
