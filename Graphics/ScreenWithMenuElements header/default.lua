@@ -60,7 +60,7 @@ t[#t+1] = Def.ActorFrame {
 		InitCommand=cmd(horizalign,center;y,18;x,-20;diffusealpha,0.8);
 		OnCommand=function(self)
 			local screen = SCREENMAN:GetTopScreen():GetName();
-			if FILEMAN:DoesFileExist("Themes/"..THEME:GetCurThemeName().."/Graphics/ScreenWithMenuElements header/"..screen.." icon") then
+			if FILEMAN:DoesFileExist("Themes/"..THEME:GetCurThemeName().."/Graphics/ScreenWithMenuElements header/"..screen.." icon.png") then
 				self:Load(THEME:GetPathG("","ScreenWithMenuElements header/"..screen.." icon"));
 			else
 				print("iconerror: file does not exist")
