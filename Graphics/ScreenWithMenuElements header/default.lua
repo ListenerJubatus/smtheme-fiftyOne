@@ -1,26 +1,5 @@
 local t = Def.ActorFrame {};
 
--- Header color based on screen name
-function HeaderColor(screen)
-    local colors = {
-        ["ScreenSelectStyle"] = color("#81468B"), 
-        ["ScreenSelectPlayMode"] = color("#478e6f"), 
-        ["ScreenSelectMusic"] = color("#1268aa"), 
-        ["ScreenSelectCourse"] = color("#2D5D22"), --is this a thing? LOL
-        ["ScreenPlayerOptions"] = color("#544abe"),
-        ["ScreenNestyPlayerOptions"] = color("#544abe"),
-        ["ScreenOptionsService"] = color("#1C1C1B"),
-        ["ScreenEvaluationNormal"] = color("#806635"), 
-        ["ScreenEvaluationSummary"] = color("#B38D47"), --is this also a thing?
-        ["Default"] = color("#1C1C1B"),
-    }
-    if colors[screen] then 
-        return colors[screen];
-    else
-        return colors["Default"];
-    end;
-end;
-
 -- Base bar diffuse,color("#1C1C1B");diffusebottomedge,color("#333230");
 t[#t+1] = Def.ActorFrame {
 	InitCommand=cmd(vertalign,top;);
@@ -31,7 +10,7 @@ t[#t+1] = Def.ActorFrame {
 		Def.Quad {
 			InitCommand=cmd(vertalign,top;zoomto,SCREEN_WIDTH,96;);
 			OnCommand=function(self)
-				self:diffuse(HeaderColor(SCREENMAN:GetTopScreen():GetName())):diffusetopedge(ColorDarkTone(HeaderColor(SCREENMAN:GetTopScreen():GetName()))):diffusealpha(0.8)
+				self:diffuse(ScreenColor(SCREENMAN:GetTopScreen():GetName())):diffusetopedge(ColorDarkTone(ScreenColor(SCREENMAN:GetTopScreen():GetName()))):diffusealpha(0.8)
 			end;
 		};
 		-- Shadow
@@ -51,7 +30,7 @@ t[#t+1] = Def.ActorFrame {
 	Def.Quad {
 		InitCommand=cmd(vertalign,top;zoomto,54,54;rotationz,45;);
 		OnCommand=function(self)
-			self:diffuse(ColorLightTone(HeaderColor(SCREENMAN:GetTopScreen():GetName())))
+			self:diffuse(ColorLightTone(ScreenColor(SCREENMAN:GetTopScreen():GetName())))
 		end;
 	},
 	-- Symbol selector
