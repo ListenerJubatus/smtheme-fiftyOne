@@ -19,19 +19,19 @@ t[#t+1] = Def.ActorFrame {
 
     LoadFont("Common Normal") .. {
             InitCommand=cmd(zoom,0.75;y,SCREEN_CENTER_Y-223-16;diffuse,color("#000000");diffusealpha,0.5;);
-            OnCommand=cmd(playcommand,"Set");
-            ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set");
+            OnCommand=cmd(queuecommand,"Set");
+            ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set");
             SetCommand=function(self)
                 self:settext("SORT");
-                self:playcommand("Refresh");
+                self:queuecommand("Refresh");
             end;
     };
 
     LoadFont("Common Italic Condensed") .. {
           InitCommand=cmd(zoom,0.75;y,SCREEN_CENTER_Y-198-16;maxwidth,SCREEN_WIDTH;diffuse,color("#9d324e");uppercase,true;);
-          OnCommand=cmd(playcommand,"Set");
-          SortOrderChangedMessageCommand=cmd(playcommand,"Set");
-          ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set");
+          OnCommand=cmd(queuecommand,"Set");
+          SortOrderChangedMessageCommand=cmd(queuecommand,"Set");
+          ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set");
           SetCommand=function(self)
                local sortorder = GAMESTATE:GetSortOrder();
                if sortorder then
@@ -40,10 +40,10 @@ t[#t+1] = Def.ActorFrame {
 					self:diffusealpha(0);
 					self:addx(6);
                     self:settext(SortOrderToLocalizedString(sortorder));
-                    self:playcommand("Refresh"):stoptweening():diffusealpha(0):smooth(0.3):diffusealpha(1)
+                    self:queuecommand("Refresh"):stoptweening():diffusealpha(0):smooth(0.3):diffusealpha(1)
 				else
 					self:settext("");
-					self:playcommand("Refresh");
+					self:queuecommand("Refresh");
                end
           end;
     };
@@ -58,11 +58,11 @@ t[#t+1] = Def.ActorFrame {
 
     LoadFont("Common Normal") .. {
           InitCommand=cmd(zoom,0.75;y,SCREEN_CENTER_Y-223-16;diffuse,color("#000000");diffusealpha,0.5;);
-          OnCommand=cmd(playcommand,"Set");
-          ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set");
+          OnCommand=cmd(queuecommand,"Set");
+          ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set");
           SetCommand=function(self)
               self:settext("STAGE");
-              self:playcommand("Refresh");
+              self:queuecommand("Refresh");
           end;
     };
 	StandardDecorationFromFileOptional("StageDisplay","StageDisplay") .. {
@@ -78,8 +78,8 @@ t[#t+1] = Def.ActorFrame {
     -- Length
     LoadFont("Common Condensed") .. {
           InitCommand=cmd(horizalign,left;zoom,0.75;uppercase,true;y,SCREEN_CENTER_Y-9-16;diffuse,color("#512232");horizalign,left;);
-          OnCommand=cmd(playcommand,"Set");
-          ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set");
+          OnCommand=cmd(queuecommand,"Set");
+          ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set");
           SetCommand=function(self)
               self:settext("LENGTH")
               end;
@@ -90,7 +90,7 @@ t[#t+1] = Def.ActorFrame {
 		local length = 0.0;
 		if GAMESTATE:IsCourseMode() then
 			curSelection = GAMESTATE:GetCurrentCourse();
-			self:playcommand("Reset");
+			self:queuecommand("Reset");
 			if curSelection then
 				local trail = GAMESTATE:GetCurrentTrail(GAMESTATE:GetMasterPlayerNumber());
 				if trail then
@@ -103,27 +103,27 @@ t[#t+1] = Def.ActorFrame {
 			end;
 		else
 			curSelection = GAMESTATE:GetCurrentSong();
-			self:playcommand("Reset");
+			self:queuecommand("Reset");
 			if curSelection then
 				length = curSelection:MusicLengthSeconds();
 				if curSelection:IsLong() then
-					self:playcommand("Long");
+					self:queuecommand("Long");
 				elseif curSelection:IsMarathon() then
-					self:playcommand("Marathon");
+					self:queuecommand("Marathon");
 				else
-					self:playcommand("Reset");
+					self:queuecommand("Reset");
 				end
 			else
 				length = 0.0;
-				self:playcommand("Reset");
+				self:queuecommand("Reset");
 			end;
 		end;
 		self:settext( SecondsToMSS(length) );
 	end;
-    	CurrentSongChangedMessageCommand=cmd(playcommand,"Set");
-    	CurrentCourseChangedMessageCommand=cmd(playcommand,"Set");
-    	CurrentTrailP1ChangedMessageCommand=cmd(playcommand,"Set");
-    	CurrentTrailP2ChangedMessageCommand=cmd(playcommand,"Set");
+    	CurrentSongChangedMessageCommand=cmd(queuecommand,"Set");
+    	CurrentCourseChangedMessageCommand=cmd(queuecommand,"Set");
+    	CurrentTrailP1ChangedMessageCommand=cmd(queuecommand,"Set");
+    	CurrentTrailP2ChangedMessageCommand=cmd(queuecommand,"Set");
     };
 };
 
@@ -134,23 +134,23 @@ t[#t+1] = Def.ActorFrame {
     -- Genre
     LoadFont("Common Condensed") .. {
           InitCommand=cmd(horizalign,left;zoom,0.75;uppercase,true;y,SCREEN_CENTER_Y-9-16;diffuse,color("#512232");horizalign,left;visible,not GAMESTATE:IsCourseMode(););
-          OnCommand=cmd(playcommand,"Set");
-          ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set");
+          OnCommand=cmd(queuecommand,"Set");
+          ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set");
           SetCommand=function(self)
               self:settext("GENRE")
               end;
     };
     LoadFont("GenreDisplay genre") .. {
           InitCommand=cmd(horizalign,left;zoom,1.0;y,SCREEN_CENTER_Y+12-16;maxwidth,180;diffuse,color("#512232");visible,not GAMESTATE:IsCourseMode(););
-          CurrentSongChangedMessageCommand=cmd(playcommand,"Set");
-          CurrentCourseChangedMessageCommand=cmd(playcommand,"Set");
-          ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set");
+          CurrentSongChangedMessageCommand=cmd(queuecommand,"Set");
+          CurrentCourseChangedMessageCommand=cmd(queuecommand,"Set");
+          ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set");
           SetCommand=function(self)
             local song = GAMESTATE:GetCurrentSong();
                if song then
-                      self:finishtweening():diffusealpha(0):settext(song:GetGenre()):playcommand("Refresh"):smooth(0.2):diffusealpha(1)
+                      self:finishtweening():diffusealpha(0):settext(song:GetGenre()):queuecommand("Refresh"):smooth(0.2):diffusealpha(1)
 				       else
-					  self:settext(""):playcommand("Refresh")
+					  self:settext(""):queuecommand("Refresh")
                end
           end;
     };
@@ -164,27 +164,27 @@ t[#t+1] = Def.ActorFrame {
     -- Genre
     LoadFont("Common Condensed") .. {
           InitCommand=cmd(horizalign,left;zoom,0.75;uppercase,true;y,SCREEN_CENTER_Y-9-16;diffuse,color("#512232");horizalign,left;visible,GAMESTATE:IsCourseMode(););
-          OnCommand=cmd(playcommand,"Set");
-          ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set");
+          OnCommand=cmd(queuecommand,"Set");
+          ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set");
           SetCommand=function(self)
               self:settext("NUMBER OF SONGS")
               end;
     };
 	LoadFont("GenreDisplay genre") .. { 
           InitCommand=cmd(horizalign,left;zoom,1.0;y,SCREEN_CENTER_Y+12-16;maxwidth,180;diffuse,color("#512232");visible,GAMESTATE:IsCourseMode(););
-          CurrentCourseChangedMessageCommand=cmd(playcommand,"Set"); 
-          ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set"); 
+          CurrentCourseChangedMessageCommand=cmd(queuecommand,"Set"); 
+          ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set"); 
           SetCommand=function(self) 
                local course = GAMESTATE:GetCurrentCourse(); 
                if course then
 					self:smooth(0.2)
 					self:diffusealpha(0);
                     self:settext(course:GetEstimatedNumStages()); 
-                    self:playcommand("Refresh");
+                    self:queuecommand("Refresh");
 					(cmd(stoptweening;zoom,0.9;diffusealpha,0.0;smooth,0.2;diffusealpha,1;zoom,1;))(self)
 				else
 					self:settext("");
-					self:playcommand("Refresh"); 	
+					self:queuecommand("Refresh"); 	
                end 
           end; 
 		};
@@ -199,16 +199,16 @@ t[#t+1] = Def.ActorFrame {
     -- Genre
     LoadFont("Common Condensed") .. {
           InitCommand=cmd(horizalign,right;x,SCREEN_CENTER_X-48;zoom,0.75;uppercase,true;y,SCREEN_CENTER_Y-9-16;diffuse,color("#512232");horizalign,left;);
-          OnCommand=cmd(playcommand,"Set");
-          ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set");
+          OnCommand=cmd(queuecommand,"Set");
+          ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set");
           SetCommand=function(self)
               self:settext("SPEED")
               end;
     };
     LoadFont("Common Normal") .. {
           InitCommand=cmd(horizalign,right;x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y+13-16;diffuse,color("#512232");horizalign,right;visible,not GAMESTATE:IsCourseMode(););
-          OnCommand=cmd(playcommand,"Set");
-          ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set");
+          OnCommand=cmd(queuecommand,"Set");
+          ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set");
           SetCommand=function(self)
               self:settext("BPM")
               end;
