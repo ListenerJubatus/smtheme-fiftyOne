@@ -302,14 +302,14 @@ t[#t+1] = Def.ActorFrame {
     InitCommand=cmd(addy,40*8+4;);
     OnCommand=cmd(diffusealpha,0;sleep,0.8;smooth,0.2;diffusealpha,1;);
     LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_2));zoom,1;diffusealpha,1;horizalign,right;);
+      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_2));zoom,1;diffusealpha,1;horizalign,left;);
       OnCommand=cmd(playcommand,"Set");
       SetCommand=function(self)
         self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetScore())
       end;
     };
     LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_2));zoom,0.75;diffusealpha,1;horizalign,right;addy,29);
+      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_2));zoom,0.75;diffusealpha,1;horizalign,left;addy,29);
       OnCommand=cmd(playcommand,"Set");
       SetCommand=function(self)
         local p1percent = STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetPercentDancePoints()
@@ -437,7 +437,7 @@ t[#t+1] = Def.ActorFrame {
 
 -- Difficulty banner
 t[#t+1] = Def.ActorFrame {
-  InitCommand=cmd(x,SCREEN_CENTER_X-180;y,SCREEN_CENTER_Y-170;zoom,0.6;visible,not GAMESTATE:IsCourseMode(););
+  InitCommand=cmd(x,SCREEN_CENTER_X+180;y,SCREEN_CENTER_Y-170;zoom,0.6;visible,not GAMESTATE:IsCourseMode(););
   OnCommand=cmd(zoomx,0.3;diffusealpha,0;decelerate,0.4;zoomx,0.6;diffusealpha,1;);
   OffCommand=cmd(decelerate,0.4;diffusealpha,0;);
     LoadActor(THEME:GetPathG("difficulty", "BannerBase")) .. {
