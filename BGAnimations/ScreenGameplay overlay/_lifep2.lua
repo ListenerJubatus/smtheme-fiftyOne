@@ -17,8 +17,7 @@ local t = Def.ActorFrame {};
 				if stepsP1 ~= nil then
 					local st = stepsP2:GetStepsType();
 					local diff = stepsP2:GetDifficulty();
-					local courseType = GAMESTATE:IsCourseMode() and SongOrCourse:GetCourseType() or nil;
-					local cd = GetCustomDifficulty(st, diff, courseType);
+					local cd = GetCustomDifficulty(st, diff);
 					self:diffuse(CustomDifficultyToColor(cd));
 				end
 			end	
@@ -39,8 +38,7 @@ local t = Def.ActorFrame {};
 					if stepsP1 ~= nil then
 						local st = stepsP2:GetStepsType();
 						local diff = stepsP2:GetDifficulty();
-						local courseType = GAMESTATE:IsCourseMode() and SongOrCourse:GetCourseType() or nil;
-						local cd = GetCustomDifficulty(st, diff, courseType);
+						local cd = GetCustomDifficulty(st, diff);
 						self:settext(stepsP2:GetMeter())
 						self:diffuse(ColorDarkTone(CustomDifficultyToColor(cd)));
 					else
