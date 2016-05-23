@@ -25,9 +25,9 @@ local t = Def.ActorFrame {};
 	};
 
 	t[#t+1] = Def.ActorFrame {
-		InitCommand=cmd(visible,GAMESTATE:IsHumanPlayer(PLAYER_1);x,-206;y,-8;);
+		InitCommand=cmd(visible,GAMESTATE:IsHumanPlayer(PLAYER_1);x,-207;y,0;);
 		LoadFont("StepsDisplay description") .. {
-			  InitCommand=cmd(zoom,0.75);
+			  InitCommand=cmd(zoom,0.75;horizalign,center;);
 			  OnCommand=cmd(playcommand,"Set";);
 			  CurrentStepsP1ChangedMessageCommand=cmd(playcommand,"Set";);
 			  ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set");
