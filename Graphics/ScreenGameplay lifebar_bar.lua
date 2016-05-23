@@ -1,6 +1,6 @@
 local pn = ...
 
-local life_meter_width = 426
+local life_meter_width = 400
 local life_meter_num_segments = 46
 local life_meter_height = 20
 local life_meter_tip_width = 2
@@ -51,7 +51,6 @@ local function updateFunc(self)
 	c.Fill:zoomtowidth( math.max(0,(_clampedWidth/life_meter_num_segments) * life_meter_width) )
 	--c.Fill:zoomtowidth( (life_meter_width * self.life) - beat * life_meter_tip_gap)
 	c.Tip:x( clamp(-life_meter_tip_width/2 + scale((_tipClamped/life_meter_num_segments) * life_meter_width,0,life_meter_width, -life_meter_width/2, life_meter_width/2),0, life_meter_width) ) 
-	c.Health:settextf("%03i%%", self.life * 100 )
 end
 
 t[#t+1] = Def.ActorFrame {
@@ -113,12 +112,6 @@ t[#t+1] = Def.ActorFrame {
 		AliveCommand=cmd(diffuse,ColorLightTone(PlayerColor(pn));stopeffect),
 		DangerCommand=cmd(diffuse,Color.Red;diffuseshift;effectclock,'beat';effectcolor1,color("#000000");effectcolor2,Color.Red;),
 		DeadCommand=cmd(diffuse,Color.Red;stopeffect)
-	},
-	LoadFont("_overpass 36px") .. {
-		Name="Health",
-		Text="100%",
-		InitCommand=cmd(x,-life_meter_width/2.4;y,0;diffusealpha,0.75;horizalign,pn == PLAYER_1 and left or right),
-		OnCommand=cmd(zoomy,0.5;zoomx,pn_offset;shadowlength,1)
 	}
 }
 

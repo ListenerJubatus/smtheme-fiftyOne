@@ -1,31 +1,28 @@
 local t = Def.ActorFrame {};
 	-- Bar
-	t[#t+1] = LoadActor(THEME:GetPathG("LifeMeter", "p2 bar")) .. {
+	t[#t+1] = LoadActor(THEME:GetPathG("LifeMeter", "p1 bar")) .. {
 	};
 	
 	-- Difficulty
-	t[#t+1] = LoadActor(THEME:GetPathG("LifeMeter", "p2 shad")) .. {
-	};
-
-	t[#t+1] = LoadActor(THEME:GetPathG("LifeMeter", "p2 diff")) .. {
-		OnCommand=cmd(playcommand,"Set";);
-		CurrentStepsP2ChangedMessageCommand=cmd(playcommand,"Set";); 
-		SetCommand=function(self)
-			stepsP2 = GAMESTATE:GetCurrentSteps(PLAYER_2)
-			local song = GAMESTATE:GetCurrentSong();
-			if song then 
-				if stepsP1 ~= nil then
-					local st = stepsP2:GetStepsType();
-					local diff = stepsP2:GetDifficulty();
-					local cd = GetCustomDifficulty(st, diff);
-					self:diffuse(CustomDifficultyToColor(cd));
-				end
-			end	
-          end;
-	};
 	
 	t[#t+1] = Def.ActorFrame {
 		InitCommand=cmd(visible,GAMESTATE:IsHumanPlayer(PLAYER_2);x,207;y,0;);
+		LoadActor("_diffdia") .. {
+			OnCommand=cmd(playcommand,"Set";);
+			CurrentStepsP2ChangedMessageCommand=cmd(playcommand,"Set";); 
+			SetCommand=function(self)
+				stepsP2 = GAMESTATE:GetCurrentSteps(PLAYER_2)
+				local song = GAMESTATE:GetCurrentSong();
+				if song then 
+					if stepsP1 ~= nil then
+						local st = stepsP2:GetStepsType();
+						local diff = stepsP2:GetDifficulty();
+						local cd = GetCustomDifficulty(st, diff);
+						self:diffuse(CustomDifficultyToColor(cd));
+					end
+				end	
+			end;
+			};
 		LoadFont("StepsDisplay description") .. { 
 			  InitCommand=cmd(zoom,0.75;horizalign,center;);
 			  OnCommand=cmd(playcommand,"Set";);

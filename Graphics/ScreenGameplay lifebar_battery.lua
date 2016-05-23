@@ -1,5 +1,5 @@
 local pn = ...
-local life_meter_width = 426
+local life_meter_width = 400
 local life_meter_height = 20
 local life_meter_outline = 0
 

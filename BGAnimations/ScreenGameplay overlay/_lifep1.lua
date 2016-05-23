@@ -4,10 +4,10 @@ local t = Def.ActorFrame {};
 	};
 
 	-- Difficulty
-	t[#t+1] = LoadActor(THEME:GetPathG("LifeMeter", "p1 shad")) .. {
-	};
 
-	t[#t+1] = LoadActor(THEME:GetPathG("LifeMeter", "p1 diff")) .. {
+	t[#t+1] = Def.ActorFrame {
+		InitCommand=cmd(visible,GAMESTATE:IsHumanPlayer(PLAYER_1);x,-207;y,0;);
+		LoadActor("_diffdia") .. {
 		OnCommand=cmd(playcommand,"Set";);
 		CurrentStepsP1ChangedMessageCommand=cmd(playcommand,"Set";);
 		SetCommand=function(self)
@@ -21,11 +21,8 @@ local t = Def.ActorFrame {};
 					self:diffuse(CustomDifficultyToColor(cd));
 				end
 			end
-    end;
-	};
-
-	t[#t+1] = Def.ActorFrame {
-		InitCommand=cmd(visible,GAMESTATE:IsHumanPlayer(PLAYER_1);x,-207;y,0;);
+		end;
+		};
 		LoadFont("StepsDisplay description") .. {
 			  InitCommand=cmd(zoom,0.75;horizalign,center;);
 			  OnCommand=cmd(playcommand,"Set";);
