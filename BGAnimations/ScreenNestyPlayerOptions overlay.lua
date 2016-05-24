@@ -1,4 +1,4 @@
-local menu_height= 400
+local menu_height= 300
 local menu_width= 250
 local menu_x= {
 	[PLAYER_1]= _screen.w * .25,
@@ -52,7 +52,7 @@ local pn_skew_mult= {[PLAYER_1]= 1, [PLAYER_2]= -1}
 
 local function perspective_entry(name, skew_mult, rot_mult)
 	return {
-		name= name, translatable= true, execute= function(pn)
+		name= name, translatable= true, type= "choice", execute= function(pn)
 			local conf_data= newfield_prefs_config:get_data(pn)
 			local old_rot= get_element_by_path(conf_data, "rotation_x")
 			local old_skew= get_element_by_path(conf_data, "vanish_x")
@@ -72,7 +72,7 @@ local function perspective_entry(name, skew_mult, rot_mult)
 			MESSAGEMAN:Broadcast("ConfigValueChanged", {
 				config_name= newfield_prefs_config.name, field_name= "rotation_x", value= new_rot, pn= pn})
 		end,
-		underline= function(pn)
+		value= function(pn)
 			local conf_data= newfield_prefs_config:get_data(pn)
 			local old_rot= get_element_by_path(conf_data, "rotation_x")
 			local old_skew= get_element_by_path(conf_data, "vanish_x")
@@ -166,9 +166,14 @@ local life_options= {
 
 local base_options= {
 	{name= "speed_mod", menu= nesty_option_menus.adjustable_float,
-	 translatable= true, args= gen_speed_menu, exec_args= true},
+	 translatable= true, args= gen_speed_menu, exec_args= true,
+	 value= function(pn)
+		 return newfield_prefs_config:get_data(pn).speed_mod
+	 end},
 	{name= "speed_type", menu= nesty_option_menus.enum_option,
-	 translatable= true,
+	 translatable= true, value= function(pn)
+		 return newfield_prefs_config:get_data(pn).speed_type
+	 end,
 	 args= {
 		 name= "speed_type", enum= newfield_speed_types, fake_enum= true,
 		 obj_get= function(pn) return newfield_prefs_config:get_data(pn) end,
@@ -189,7 +194,7 @@ local base_options= {
 	nesty_options.float_song_mod_toggle_val("Haste", 1, 0),
 	{name= "perspective", translatable= true, menu= nesty_option_menus.menu, args= perspective_mods},
 	nesty_options.float_config_toggle_val(newfield_prefs_config, "reverse", -1, 1),
-	nesty_options.float_config_val(newfield_prefs_config, "zoom", -2, -1, 1),
+	nesty_options.float_config_val(newfield_prefs_config, "zoom", -2, -1, 0),
 	{name= "chart_mods", translatable= true, menu= nesty_option_menus.menu, args= chart_mods},
 	{name= "newskin", translatable= true, menu= nesty_option_menus.newskins},
 	{name= "newskin_params", translatable= true, menu= nesty_option_menus.menu,
@@ -240,7 +245,8 @@ local function input(event)
 	local pn= event.PlayerNumber
 	if not pn then return end
 	if not menus[pn] then return end
-	if menu_stack_generic_input(menus, event) then
+	if menu_stack_generic_input(menus, event)
+	and event.type == "InputEventType_FirstPress" then
 		if event.GameButton == "Back" then
 			SCREENMAN:GetTopScreen():StartTransitioningScreen("SM_GoToPrevScreen")
 		else
@@ -268,45 +274,36 @@ local frame= Def.ActorFrame{
 	end,
 }
 local item_params= {
-	text_actor= Def.BitmapText{
-		Font= "nestyMenu item", InitCommand= function(self)
-			self:shadowlength(0)
-		end,
-		SetCommand= function(self, params)
-			if params.type == "menu" then
-				self:diffuse(color("#512232"))
-			elseif params.type == "number" then
-				self:diffuse(color("#512232"))
-			elseif params.type == "choice" then
-				self:diffuse(color("#9d324e"))
-			elseif params.type == "action" then
-				self:diffuse(color("#512232"))
-			elseif params.type == "bool" then
-				self:diffuse(color("#512232"))
-			elseif params.type == "enum" then
-				self:diffuse(color("#512232"))
-			elseif params.type == "back" then
-				self:diffuse(color("#6e1818"))
-			else
-				self:rotationz(0)
-			end
-			self:settext(params.text)
-			width_limit_text(self, params.width, params.zoom)
-			params.ret_width= self:GetZoomedWidth()
-		end,
-	}
+	text_font= "Common Normal",
+	text_on= function(self)
+		self:rotationz(720):linear(1):rotationz(0)
+	end,
+	text_width= .7,
+	value_font= "Common Normal",
+	value_text_on= function(self)
+		self:rotationz(-720):linear(1):rotationz(0)
+	end,
+	value_image_on= function(self)
+		self:rotationz(-720):linear(1):rotationz(0)
+	end,
+	value_width= .25,
+	type_images= {
+		bool= THEME:GetPathG("", "menu_icons/bool"),
+		choice= THEME:GetPathG("", "menu_icons/bool"),
+		menu= THEME:GetPathG("", "menu_icons/menu"),
+	},
 }
 for pn, menu in pairs(menus) do
 	frame[#frame+1]= LoadActor(
-		THEME:GetPathG("ScreenOptions", "halfpage (doubleres)")) .. {
+		THEME:GetPathG("ScreenOptions", "halfpage")) .. {
 		InitCommand= function(self)
-			self:xy(menu_x[pn], 370)
+			self:xy(menu_x[pn], 250)
 		end
 	}
 	frame[#frame+1]= menu:create_actors{
-		x= menu_x[pn], y= 140, width= menu_width, height= menu_height,
+		x= menu_x[pn], y= 96, width= menu_width, height= menu_height,
 		translation_section= "newfield_options",
-		num_displays= 1, pn= pn, el_height= 30,
+		num_displays= 1, pn= pn, el_height= 20,
 		menu_sounds= {
 			pop= THEME:GetPathS("Common", "Cancel"),
 			push= THEME:GetPathS("_common", "row"),
@@ -317,15 +314,19 @@ for pn, menu in pairs(menus) do
 			inc= THEME:GetPathS("_switch", "up"),
 			dec= THEME:GetPathS("_switch", "down"),
 		},
-		display_params= {el_zoom= 1.0, item_params= item_params},
+		display_params= {
+			el_zoom= .55, item_params= item_params, item_mt= nesty_items.value,
+			on= function(self)
+				self:rotationx(720):linear(1):rotationx(0)
+			end},
 	}
 	frame[#frame+1]= Def.BitmapText{
 		Font= "Common Normal", InitCommand= function(self)
 			explanations[pn]= self
 			self:xy(menu_x[pn] - (menu_width / 2), _screen.cy+174)
-				:diffuse(ColorDarkTone(PlayerColor(pn)))
-				:shadowlength(0):wrapwidthpixels(menu_width / .8):zoom(0.75)
-				:horizalign(left):vertalign(top)
+				:diffuse(PlayerColor(pn))
+				:shadowlength(1):wrapwidthpixels(menu_width / .5):zoom(.5)
+				:horizalign(left)
 		end,
 		change_explanationCommand= function(self, param)
 			local text= ""
@@ -341,7 +342,7 @@ for pn, menu in pairs(menus) do
 	frame[#frame+1]= Def.BitmapText{
 		Font= "Common Normal", Text= "READY!", InitCommand= function(self)
 			ready_indicators[pn]= self
-			self:xy(menu_x[pn], 160):zoom(1.5):diffuse(Color.Green):diffusealpha(0)
+			self:xy(menu_x[pn], 106):zoom(1.5):diffuse(Color.Green):diffusealpha(0)
 		end,
 		show_readyCommand= function(self)
 			self:stoptweening():decelerate(.5):diffusealpha(1)
