@@ -273,19 +273,33 @@ local frame= Def.ActorFrame{
 		end
 	end,
 }
+
 local item_params= {
-	text_font= "Common Condensed",
-	text_on= function(self)
-		self:diffuse(color("#73112E")):diffusealpha(0):decelerate(0.2):diffusealpha(1)
-	end,
+	text_commands= {
+		Font= "Common Condensed", OnCommand= function(self)
+			self:diffuse(color("#73112E")):diffusealpha(0):decelerate(0.2):diffusealpha(1)
+		end,
+		OffCommand=function(self)
+			self:smooth(0.3):diffusealpha(0)
+		end,
+	},
 	text_width= .7,
-	value_font= "Common Condensed",
-	value_text_on= function(self)
-		self:diffuse(color("#AC214A")):diffusealpha(0):decelerate(0.2):diffusealpha(1)
-	end,
-	value_image_on= function(self)
-		self:diffusealpha(0):decelerate(0.2):diffusealpha(1)
-	end,
+	value_text_commands= {
+		Font= "Common Condensed", OnCommand= function(self)
+			self:diffuse(color("#AC214A")):diffusealpha(0):decelerate(0.2):diffusealpha(1)
+		end,
+		OffCommand=function(self)
+			self:smooth(0.3):diffusealpha(0)
+		end,
+	},
+	value_image_commands= {
+		OnCommand= function(self)
+			self:diffusealpha(0):smooth(0.3):diffusealpha(1)
+		end,
+		OffCommand=function(self)
+			self:smooth(0.3):diffusealpha(0)
+		end,
+	},
 	value_width= .25,
 	type_images= {
 		bool= THEME:GetPathG("", "menu_icons/bool"),
@@ -293,6 +307,7 @@ local item_params= {
 		menu= THEME:GetPathG("", "menu_icons/menu"),
 	},
 }
+
 for pn, menu in pairs(menus) do
 	frame[#frame+1]= LoadActor(
 		THEME:GetPathG("ScreenOptions", "halfpage")) .. {
