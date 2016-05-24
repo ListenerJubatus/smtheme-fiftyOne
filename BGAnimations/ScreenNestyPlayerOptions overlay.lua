@@ -1,4 +1,4 @@
-local menu_height= 300
+local menu_height= 400
 local menu_width= 250
 local menu_x= {
 	[PLAYER_1]= _screen.w * .25,
@@ -274,17 +274,17 @@ local frame= Def.ActorFrame{
 	end,
 }
 local item_params= {
-	text_font= "Common Normal",
+	text_font= "Common Condensed",
 	text_on= function(self)
-		self:rotationz(720):linear(1):rotationz(0)
+		self:diffuse(color("#73112E")):diffusealpha(0):decelerate(0.2):diffusealpha(1)
 	end,
 	text_width= .7,
-	value_font= "Common Normal",
+	value_font= "Common Condensed",
 	value_text_on= function(self)
-		self:rotationz(-720):linear(1):rotationz(0)
+		self:diffuse(color("#AC214A")):diffusealpha(0):decelerate(0.2):diffusealpha(1)
 	end,
 	value_image_on= function(self)
-		self:rotationz(-720):linear(1):rotationz(0)
+		self:diffusealpha(0):decelerate(0.2):diffusealpha(1)
 	end,
 	value_width= .25,
 	type_images= {
@@ -297,13 +297,19 @@ for pn, menu in pairs(menus) do
 	frame[#frame+1]= LoadActor(
 		THEME:GetPathG("ScreenOptions", "halfpage")) .. {
 		InitCommand= function(self)
-			self:xy(menu_x[pn], 250)
-		end
+			self:xy(menu_x[pn], 360)
+		end;
+		OnCommand=function(self)
+			self:diffusealpha(0):zoomx(0.8):decelerate(0.3):diffusealpha(1):zoomx(1)
+		end;
+		OffCommand=function(self)
+			self:decelerate(0.3):diffusealpha(0):zoomx(0)
+		end;
 	}
 	frame[#frame+1]= menu:create_actors{
-		x= menu_x[pn], y= 96, width= menu_width, height= menu_height,
+		x= menu_x[pn], y= 120, width= menu_width, height= menu_height,
 		translation_section= "newfield_options",
-		num_displays= 1, pn= pn, el_height= 20,
+		num_displays= 1, pn= pn, el_height= 32,
 		menu_sounds= {
 			pop= THEME:GetPathS("Common", "Cancel"),
 			push= THEME:GetPathS("_common", "row"),
@@ -315,17 +321,17 @@ for pn, menu in pairs(menus) do
 			dec= THEME:GetPathS("_switch", "down"),
 		},
 		display_params= {
-			el_zoom= .55, item_params= item_params, item_mt= nesty_items.value,
+			el_zoom= .75, item_params= item_params, item_mt= nesty_items.value, heading_height = 48,
 			on= function(self)
-				self:rotationx(720):linear(1):rotationx(0)
+				self:diffusealpha(0):decelerate(0.2):diffusealpha(1)
 			end},
 	}
 	frame[#frame+1]= Def.BitmapText{
 		Font= "Common Normal", InitCommand= function(self)
 			explanations[pn]= self
-			self:xy(menu_x[pn] - (menu_width / 2), _screen.cy+174)
-				:diffuse(PlayerColor(pn))
-				:shadowlength(1):wrapwidthpixels(menu_width / .5):zoom(.5)
+			self:xy(menu_x[pn] - (menu_width / 2), _screen.cy+154)
+				:diffuse(ColorDarkTone((PlayerColor(pn)))):horizalign(left):vertalign(top)		
+				:wrapwidthpixels(menu_width / .8):zoom(.75)
 				:horizalign(left)
 		end,
 		change_explanationCommand= function(self, param)
@@ -340,7 +346,7 @@ for pn, menu in pairs(menus) do
 		end,
 	}
 	frame[#frame+1]= Def.BitmapText{
-		Font= "Common Normal", Text= "READY!", InitCommand= function(self)
+		Font= "Common Condensed", Text= "READY!", InitCommand= function(self)
 			ready_indicators[pn]= self
 			self:xy(menu_x[pn], 106):zoom(1.5):diffuse(Color.Green):diffusealpha(0)
 		end,
