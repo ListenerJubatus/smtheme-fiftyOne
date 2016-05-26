@@ -186,24 +186,33 @@ t[#t+1] = Def.ActorFrame {
       end;
     };
 	};
-  Def.ActorFrame {
-    InitCommand=cmd(addy,40*8+4;);
-    OnCommand=cmd(diffusealpha,0;sleep,0.8;smooth,0.2;diffusealpha,1;);
-    LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_1));zoom,1;diffusealpha,1;horizalign,right;);
-      OnCommand=cmd(playcommand,"Set");
-      SetCommand=function(self)
-        self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetScore())
-      end;
-    };
-    LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_1));zoom,0.75;diffusealpha,1;horizalign,right;addy,29);
-      OnCommand=cmd(playcommand,"Set");
-      SetCommand=function(self)
-        local p1percent = STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetPercentDancePoints()
-        self:settext(FormatPercentScore(p1percent))
-      end;
-    };
+    Def.ActorFrame {
+	  InitCommand=cmd(addy,40*8+4;);
+	  OnCommand=cmd(diffusealpha,0;sleep,0.8;smooth,0.2;diffusealpha,1;);
+		LoadFont("_overpass 36px") .. {
+		  InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_1));zoom,1;diffusealpha,1;horizalign,right;);
+		  OnCommand=cmd(playcommand,"Set");
+		  SetCommand=function(self)
+			local p1percent = STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetPercentDancePoints()
+			if PREFSMAN:GetPreference("PercentageScoring") == false then
+				self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetScore())
+			else
+				self:settext(FormatPercentScore(p1percent))
+			end
+		  end;
+		};
+		LoadFont("_overpass 36px") .. {
+		  InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_1));zoom,0.75;diffusealpha,1;horizalign,right;addy,29);
+		  OnCommand=cmd(playcommand,"Set");
+		  SetCommand=function(self)
+			local p1percent = STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetPercentDancePoints()
+			if PREFSMAN:GetPreference("PercentageScoring") == true then
+				self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetScore())
+			else
+				self:settext(FormatPercentScore(p1percent))
+			end
+		  end;
+		};
   };
 };
 
@@ -298,24 +307,33 @@ t[#t+1] = Def.ActorFrame {
       end;
     };
 	};
-  Def.ActorFrame {
-    InitCommand=cmd(addy,40*8+4;);
-    OnCommand=cmd(diffusealpha,0;sleep,0.8;smooth,0.2;diffusealpha,1;);
-    LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_2));zoom,1;diffusealpha,1;horizalign,left;);
-      OnCommand=cmd(playcommand,"Set");
-      SetCommand=function(self)
-        self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetScore())
-      end;
-    };
-    LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_2));zoom,0.75;diffusealpha,1;horizalign,left;addy,29);
-      OnCommand=cmd(playcommand,"Set");
-      SetCommand=function(self)
-        local p1percent = STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetPercentDancePoints()
-        self:settext(FormatPercentScore(p1percent))
-      end;
-    };
+    Def.ActorFrame {
+	  InitCommand=cmd(addy,40*8+4;);
+	  OnCommand=cmd(diffusealpha,0;sleep,0.8;smooth,0.2;diffusealpha,1;);
+		LoadFont("_overpass 36px") .. {
+		  InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_2));zoom,1;diffusealpha,1;horizalign,right;);
+		  OnCommand=cmd(playcommand,"Set");
+		  SetCommand=function(self)
+			local p2percent = STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetPercentDancePoints()
+			if PREFSMAN:GetPreference("PercentageScoring") == false then
+				self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetScore())
+			else
+				self:settext(FormatPercentScore(p2percent))
+			end
+		  end;
+		};
+		LoadFont("_overpass 36px") .. {
+		  InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_2));zoom,0.75;diffusealpha,1;horizalign,right;addy,29);
+		  OnCommand=cmd(playcommand,"Set");
+		  SetCommand=function(self)
+			local p2percent = STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetPercentDancePoints()
+			if PREFSMAN:GetPreference("PercentageScoring") == true then
+				self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetScore())
+			else
+				self:settext(FormatPercentScore(p2percent))
+			end
+		  end;
+		};
   };
 };
 
