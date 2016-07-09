@@ -132,12 +132,9 @@ local insertion_chart_mods= {
 }
 
 local chart_mods= {
-	{name= "turn_chart_mods", menu= nesty_option_menus.menu,
-	 translatable= true, args= turn_chart_mods},
-	{name= "removal_chart_mods", menu= nesty_option_menus.menu,
-	 translatable= true, args= removal_chart_mods},
-	{name= "insertion_chart_mods", menu= nesty_option_menus.menu,
-	 translatable= true, args= insertion_chart_mods},
+	nesty_options.submenu("turn_chart_mods", turn_chart_mods),
+	nesty_options.submenu("removal_chart_mods", removal_chart_mods),
+	nesty_options.submenu("insertion_chart_mods", insertion_chart_mods),
 }
 
 local gameplay_options= {
@@ -146,6 +143,7 @@ local gameplay_options= {
 	nesty_options.bool_config_val(player_config, "GameplayShowStepsDisplay"),
 	nesty_options.bool_config_val(player_config, "GameplayShowScore"),
 	nesty_options.bool_config_val(player_config, "JudgmentUnderField"),
+	nesty_options.bool_config_val(player_config, "Protiming"),
 }
 
 -- The time life bar doesn't work sensibly outside the survival courses, so
