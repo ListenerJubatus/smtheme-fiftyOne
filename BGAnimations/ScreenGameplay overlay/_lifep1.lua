@@ -24,7 +24,7 @@ local t = Def.ActorFrame {};
 		end;
 		};
 		LoadFont("StepsDisplay description") .. {
-			  InitCommand=cmd(zoom,0.75;horizalign,center;);
+			  InitCommand=cmd(zoom,0.75;horizalign,center;rotationz,90);
 			  OnCommand=cmd(playcommand,"Set";);
 			  CurrentStepsP1ChangedMessageCommand=cmd(playcommand,"Set";);
 			  ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set");
