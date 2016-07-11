@@ -27,17 +27,17 @@ local bg = Def.ActorFrame{
 		LoadActor(THEME:GetPathG("_rave result","P1"))..{
 			Name="P1Win";
 			InitCommand=cmd(Center;cropbottom,1;fadebottom,1;);
-			StartTransitioningCommand=cmd(sleep,2;linear,0.5;cropbottom,0;fadebottom,0;sleep,1.75;linear,0.25;diffusealpha,0);
+			StartTransitioningCommand=cmd(sleep,1;linear,0.5;cropbottom,0;fadebottom,0;sleep,1.75;linear,0.25;diffusealpha,0);
 		};
 		LoadActor(THEME:GetPathG("_rave result","P2"))..{
 			Name="P2Win";
 			InitCommand=cmd(Center;cropbottom,1;fadebottom,1;);
-			StartTransitioningCommand=cmd(sleep,2;linear,0.5;cropbottom,0;fadebottom,0;sleep,1.75;linear,0.25;diffusealpha,0);
+			StartTransitioningCommand=cmd(sleep,1;linear,0.5;cropbottom,0;fadebottom,0;sleep,1.75;linear,0.25;diffusealpha,0);
 		};
 		LoadActor(THEME:GetPathG("_rave result","draw"))..{
 			Name="Draw";
 			InitCommand=cmd(Center;cropbottom,1;fadebottom,1;);
-			StartTransitioningCommand=cmd(sleep,2;linear,0.5;cropbottom,0;fadebottom,0;sleep,1.75;linear,0.25;diffusealpha,0);
+			StartTransitioningCommand=cmd(sleep,1;linear,0.5;cropbottom,0;fadebottom,0;sleep,1.75;linear,0.25;diffusealpha,0);
 		};
 	};
 };

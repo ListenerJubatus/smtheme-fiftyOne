@@ -16,7 +16,6 @@ local variants= {
 	"growing_random_in_rows_with_gaps",
 	"falling_in_order",
 	"falling_in_rows",
-	"falling_random",
 	"streaking",
 	"streaking_random",
 }
