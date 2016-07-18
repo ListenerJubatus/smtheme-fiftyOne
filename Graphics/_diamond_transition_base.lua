@@ -19,14 +19,14 @@ local variants= {
 	"streaking",
 	"streaking_random",
 }
-local picked_variant= variants[math.random(1, #variants)]
+local picked_variant= "growing_in_rows_with_gaps"
 
 local diamonds_across= math.random(8, 32)
 local diamonds_high= math.random(4, 16)
 local diamond_width= _screen.w / diamonds_across
 local diamond_height= _screen.h / diamonds_high
 local num_diagonals= diamonds_across + diamonds_high
-local transition_time= 0.8
+local transition_time= 0.6
 local diamond_side_len= math.sqrt((diamond_width^2) + (diamond_height^2))
 local diagonal_start_x= diamond_width * diamonds_high * -.5
 local diagonal_angle= math.atan2(diamond_height, diamond_width) / math.pi * 180

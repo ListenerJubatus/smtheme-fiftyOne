@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="128"
+   height="128"
+   viewBox="0 0 128 128"
+   id="svg4393"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="Hold judgment.svg"
+   inkscape:export-filename="C:\Apps\StepMania-dev\SM51-nearlyalpha3\StepMania-5.1-git-b06ec60-win32\Themes\fiftyOne\Graphics\HoldJudgment label 1x2.png"
+   inkscape:export-xdpi="45"
+   inkscape:export-ydpi="45">
+  <defs
+     id="defs4395">
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient5797"
+       id="linearGradient4708"
+       gradientUnits="userSpaceOnUse"
+       x1="288.53616"
+       y1="29.979855"
+       x2="282.53616"
+       y2="90.383469" />
+    <linearGradient
+       id="linearGradient5797"
+       inkscape:collect="always">
+      <stop
+         id="stop5799"
+         offset="0"
+         style="stop-color:#ff2727;stop-opacity:1" />
+      <stop
+         id="stop5801"
+         offset="1"
+         style="stop-color:#ce4c4c;stop-opacity:1" />
+    </linearGradient>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Drop Shadow"
+       id="filter5274">
+      <feFlood
+         flood-opacity="0.678431"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         id="feFlood5276" />
+      <feComposite
+         in="SourceGraphic"
+         in2="flood"
+         operator="in"
+         result="composite1"
+         id="feComposite5278" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="2.3"
+         result="blur"
+         id="feGaussianBlur5280" />
+      <feOffset
+         dx="-6.93889e-016"
+         dy="2.77556e-017"
+         result="offset"
+         id="feOffset5282" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite5284" />
+    </filter>
+    <linearGradient
+       y2="73.383469"
+       x2="294.53616"
+       y1="17.979855"
+       x1="294.53616"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4476"
+       xlink:href="#linearGradient4221"
+       inkscape:collect="always" />
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient4221">
+      <stop
+         style="stop-color:#e83e3e;stop-opacity:1"
+         offset="0"
+         id="stop4223" />
+      <stop
+         style="stop-color:#812323;stop-opacity:1"
+         offset="1"
+         id="stop4225" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4584"
+       id="linearGradient4700"
+       gradientUnits="userSpaceOnUse"
+       x1="295.52637"
+       y1="22.428049"
+       x2="288.52637"
+       y2="86.428047" />
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient4584">
+      <stop
+         style="stop-color:#ffe9b3;stop-opacity:1"
+         offset="0"
+         id="stop4586" />
+      <stop
+         id="stop4592"
+         offset="0.4244186"
+         style="stop-color:#eada8e;stop-opacity:1" />
+      <stop
+         style="stop-color:#ffad1b;stop-opacity:1"
+         offset="1"
+         id="stop4588" />
+    </linearGradient>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Drop Shadow"
+       id="filter5226">
+      <feFlood
+         flood-opacity="0.678431"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         id="feFlood5228" />
+      <feComposite
+         in="SourceGraphic"
+         in2="flood"
+         operator="in"
+         result="composite1"
+         id="feComposite5230" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="2.3"
+         result="blur"
+         id="feGaussianBlur5232" />
+      <feOffset
+         dx="-6.93889e-016"
+         dy="2.77556e-017"
+         result="offset"
+         id="feOffset5234" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite5236" />
+    </filter>
+    <linearGradient
+       y2="65.428047"
+       x2="295.52637"
+       y1="22.428049"
+       x1="295.52637"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4452"
+       xlink:href="#linearGradient4584"
+       inkscape:collect="always" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4584"
+       id="linearGradient5184"
+       gradientUnits="userSpaceOnUse"
+       x1="295.52637"
+       y1="22.428049"
+       x2="295.52637"
+       y2="65.428047" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4584"
+       id="linearGradient5186"
+       gradientUnits="userSpaceOnUse"
+       x1="295.52637"
+       y1="22.428049"
+       x2="295.52637"
+       y2="65.428047" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4221"
+       id="linearGradient5188"
+       gradientUnits="userSpaceOnUse"
+       x1="294.53616"
+       y1="17.979855"
+       x2="294.53616"
+       y2="73.383469" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4221"
+       id="linearGradient5190"
+       gradientUnits="userSpaceOnUse"
+       x1="294.53616"
+       y1="17.979855"
+       x2="294.53616"
+       y2="73.383469" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="4.553201"
+     inkscape:cx="61.842743"
+     inkscape:cy="47.586097"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="1680"
+     inkscape:window-height="987"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata4398">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-924.36216)">
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4139-2-6"
+       style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:condensed;font-size:16px;line-height:125%;font-family:Roboto;-inkscape-font-specification:'Roboto Bold Italic Condensed';letter-spacing:0px;word-spacing:0px;display:inline;fill:url(#linearGradient4700);fill-opacity:1;stroke:#5e4415;stroke-width:1.70000005;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:2.9000001;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter5226);"
+       transform="matrix(0.84938715,0,0,0.84938715,-192.11926,909.60607)"><flowRegion
+         id="flowRegion4141-9-3"
+         style="fill:url(#linearGradient5186);fill-opacity:1"><rect
+           id="rect4143-8-4"
+           width="462"
+           height="85"
+           x="68"
+           y="17"
+           style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:condensed;font-family:Roboto;-inkscape-font-specification:'Roboto Bold Italic Condensed';fill:url(#linearGradient5184);fill-opacity:1;stroke:#5e4415;stroke-width:1.70000005;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:2.9000001;stroke-dasharray:none;stroke-opacity:1;" /></flowRegion><flowPara
+         id="flowPara4145-5-1"
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:condensed;font-size:60px;font-family:Roboto;-inkscape-font-specification:'Roboto Bold Italic Condensed';text-align:center;letter-spacing:-0.94999999px;text-anchor:middle;fill:url(#linearGradient4452);fill-opacity:1;stroke:#5e4415;stroke-width:1.70000005;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:2.9000001;stroke-dasharray:none;stroke-opacity:1;">YEAH</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4139-2-8-0-6"
+       style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:condensed;font-size:16px;line-height:125%;font-family:Roboto;-inkscape-font-specification:'Roboto Bold Italic Condensed';letter-spacing:0px;word-spacing:0px;display:inline;fill:url(#linearGradient4708);fill-opacity:1;stroke:#2c0505;stroke-width:1.70000005;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:2.9000001;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter5274);"
+       transform="matrix(0.84938715,0,0,0.84938715,-190.00611,973.60607)"><flowRegion
+         id="flowRegion4141-9-8-7-7"
+         style="fill:url(#linearGradient5190);fill-opacity:1"><rect
+           id="rect4143-8-0-5-0"
+           width="462"
+           height="85"
+           x="68"
+           y="17"
+           style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:condensed;font-family:Roboto;-inkscape-font-specification:'Roboto Bold Italic Condensed';fill:url(#linearGradient5188);fill-opacity:1;stroke:#2c0505;stroke-width:1.70000005;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:2.9000001;stroke-dasharray:none;stroke-opacity:1;" /></flowRegion><flowPara
+         id="flowPara4145-5-2-9-3"
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:condensed;font-size:60px;font-family:Roboto;-inkscape-font-specification:'Roboto Bold Italic Condensed';text-align:center;letter-spacing:-0.94999999px;text-anchor:middle;fill:url(#linearGradient4476);fill-opacity:1;stroke:#2c0505;stroke-width:1.70000005;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:2.9000001;stroke-dasharray:none;stroke-opacity:1;">BAD</flowPara></flowRoot>  </g>
+</svg>

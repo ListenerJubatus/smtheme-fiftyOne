@@ -1,4 +1,4 @@
-local offset= 64
+local offset= 52
 local hns_states= {
 	HoldNoteScore_Held= 0,
 	HoldNoteScore_LetGo= 1,
