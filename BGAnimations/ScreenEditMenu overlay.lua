@@ -11,29 +11,29 @@ local function stype_transform(self, item_index, num_items)
 end
 local stype_item_mt= edit_pick_menu_steps_display_item(
 	stype_transform, Def.BitmapText{
-		Font= "Common Normal", InitCommand= function(self)
-			self:zoom(.5):horizalign(left)
+		Font= "Common Condensed", InitCommand= function(self)
+			self:zoom(.75):horizalign(left)
 		end,
 		SetCommand= function(self, param)
-			self:settext(ToEnumShortString(param.stype))
+			self:settext(THEME:GetString("LongStepsType", ToEnumShortString(param.stype)))
 		end,
 																 },
 	steps_transform, Def.BitmapText{
-		Font= "Common Normal", InitCommand= function(self)
-			self:zoom(.5)
+		Font= "Common Fallback Font", InitCommand= function(self)
+			self:zoom(.75)
 		end,
 		SetCommand= function(self, param)
 			self:settext(param.steps:GetMeter())
-				:diffuse(GameColor.Difficulty[param.steps:GetDifficulty()])
+				:diffuse(ColorDarkTone(GameColor.Difficulty[param.steps:GetDifficulty()]))
 			width_limit_text(self, steps_item_width, .5)
 		end,
 })
 
 local picker_width= _screen.w * .5
-local spacer= _screen.h * .05
+local spacer= _screen.h * .06
 local jacket_size= _screen.h * .2
 local jacket_x= _screen.w - spacer - (jacket_size / 2)
-local jacket_y= _screen.h * .2
+local jacket_y= _screen.h * .26
 local banner_width= _screen.w - picker_width - jacket_size - (spacer * 3)
 local banner_height= _screen.h * .2
 local banner_x= jacket_x - spacer - (jacket_size / 2) - (banner_width / 2)
@@ -47,21 +47,63 @@ local title_y= bpm_y
 local artist_x= title_x
 local artist_y= length_y
 local steps_display_x= title_x
-local steps_display_y= title_y + (spacer * 1.5)
+local steps_display_y= title_y + (spacer * 1.55)
 local steps_display_items= (_screen.h - steps_display_y) / steps_type_item_space
 
 local menu_params= {
-	name= "menu", x= _screen.cx*.5, y= 10, width= _screen.cx,
-	cursor_above_options= true, translation_section= "ScreenEditMenu",
-	num_displays= 1, el_height= 24, display_params= {
-		heading_actor= cons_heading_actor(),
-		no_status= true,
-		height= _screen.h-32, el_zoom= menu_zoom,
-		item_mt= cons_option_item_mt, item_params= cons_item_params(),
+	name= "menu", x= _screen.cx*.47, y= 125, width= _screen.cx-100,
+	translation_section= "ScreenEditMenu",
+	menu_sounds= {
+		pop= THEME:GetPathS("Common", "Cancel"),
+		push= THEME:GetPathS("_common", "row"),
+		act= THEME:GetPathS("Common", "value"),
+		move= THEME:GetPathS("_switch", "down"),
+		move_up= THEME:GetPathS("_switch", "up"),
+		move_down= THEME:GetPathS("_switch", "down"),
+		inc= THEME:GetPathS("_switch", "up"),
+		dec= THEME:GetPathS("_switch", "down"),
 	},
-	cursor_mt= cursor_mt, cursor_params= {
-		main= pn_to_color(nil), button_list= button_list_for_menu_cursor(),
-		t= .5},
+	num_displays= 1, el_height= 24, display_params= {
+		no_status= true,
+		height= _screen.h-170, el_zoom= .75,
+		heading_height= 20,
+		on= function(self)
+			self:diffusealpha(0):decelerate(0.2):diffusealpha(1)
+		end,
+		item_mt= cons_option_item_mt, item_params= {
+			text_commands= {
+				Font= "Common Fallback Font", OnCommand= function(self)
+					self:diffuse(color("#452429")):diffusealpha(0):decelerate(0.2):diffusealpha(1)
+				end,
+				OffCommand=function(self)
+					self:smooth(0.3):diffusealpha(0)
+				end,
+			},
+			text_width= .7,
+			value_text_commands= {
+				Font= "Common Fallback Font", OnCommand= function(self)
+					self:diffuse(color("#6E2C34")):diffusealpha(0):decelerate(0.2):diffusealpha(1)
+				end,
+				OffCommand=function(self)
+					self:smooth(0.3):diffusealpha(0)
+				end,
+			},
+			value_image_commands= {
+				OnCommand= function(self)
+					self:diffusealpha(0):smooth(0.3):diffusealpha(1)
+				end,
+				OffCommand=function(self)
+					self:smooth(0.3):diffusealpha(0)
+				end,
+			},
+			value_width= .25,
+			type_images= {
+				bool= THEME:GetPathG("", "menu_icons/bool"),
+				choice= THEME:GetPathG("", "menu_icons/bool"),
+				menu= THEME:GetPathG("", "menu_icons/menu"),
+			},
+		},
+	},
 }
 
 local frame= Def.ActorFrame{
@@ -112,21 +154,21 @@ local frame= Def.ActorFrame{
 		end,
 	},
 	Def.BitmapText{
-		Name= "length", Font= "Common Normal", InitCommand= function(self)
-			self:xy(length_x, length_y):horizalign(right):zoom(.5)
+		Name= "length", Font= "Common Fallback Font", InitCommand= function(self)
+			self:xy(length_x, length_y):horizalign(right):zoom(.75)
 		end,
 		edit_menu_selection_changedMessageCommand= function(self, params)
 			if params.group then
 				self:visible(false)
 			elseif params.song then
-				self:settext(secs_to_str(params.song:MusicLengthSeconds()))
+				self:settext(SecondsToMSS(params.song:MusicLengthSeconds()))
 				self:visible(true)
 			end
 		end,
 	},
 	Def.BitmapText{
-		Name= "bpm", Font= "Common Normal", InitCommand= function(self)
-			self:xy(bpm_x, bpm_y):horizalign(right):zoom(.5)
+		Name= "bpm", Font= "Common Fallback Font", InitCommand= function(self)
+			self:xy(bpm_x, bpm_y):horizalign(right):zoom(.75)
 		end,
 		edit_menu_selection_changedMessageCommand= function(self, params)
 			if params.group then
@@ -143,8 +185,8 @@ local frame= Def.ActorFrame{
 		end,
 	},
 	Def.BitmapText{
- 		Name= "title", Font= "Common Normal", InitCommand= function(self)
-			self:xy(title_x, title_y):horizalign(left):zoom(.5)
+ 		Name= "title", Font= "Common Fallback Font", InitCommand= function(self)
+			self:xy(title_x, title_y):horizalign(left):zoom(.75)
 		end,
 		edit_menu_selection_changedMessageCommand= function(self, params)
 			if params.group then
@@ -156,8 +198,8 @@ local frame= Def.ActorFrame{
 		end,
 	},
 	Def.BitmapText{
- 		Name= "artist", Font= "Common Normal", InitCommand= function(self)
-			self:xy(artist_x, artist_y):horizalign(left):zoom(.5)
+ 		Name= "artist", Font= "Common Fallback Font", InitCommand= function(self)
+			self:xy(artist_x, artist_y):horizalign(left):zoom(.75)
 		end,
 		edit_menu_selection_changedMessageCommand= function(self, params)
 			if params.group then

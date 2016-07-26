@@ -10,6 +10,7 @@ function ScreenColor(screen)
         ["ScreenOptionsService"]      = ScreenColors.OptionsService,
         ["ScreenEvaluationNormal"]    = ScreenColors.Evaluation, 
         ["ScreenEvaluationSummary"]   = ScreenColors.Summary, 
+        ["ScreenEditMenu"]			  = ScreenColors.Edit, 
         ["Default"]                   = ScreenColors.Default,
     }
 
@@ -26,6 +27,7 @@ ScreenColors = {
     OptionsService  = color("#1C1C1B"),
     Evaluation      = color("#806635"),
     Summary         = color("#B38D47"),
+    Edit         = color("#B34754"),
     Default         = color("#1C1C1B"),
 }
 
