@@ -30,7 +30,7 @@ local stype_item_mt= edit_pick_menu_steps_display_item(
 })
 
 local picker_width= _screen.w * .5
-local spacer= _screen.h * .06
+local spacer= _screen.h * .07
 local jacket_size= _screen.h * .2
 local jacket_x= _screen.w - spacer - (jacket_size / 2)
 local jacket_y= _screen.h * .26
@@ -63,9 +63,9 @@ local menu_params= {
 		inc= THEME:GetPathS("_switch", "up"),
 		dec= THEME:GetPathS("_switch", "down"),
 	},
-	num_displays= 1, el_height= 24, display_params= {
+	num_displays= 1, el_height= 32, display_params= {
 		no_status= true,
-		height= _screen.h-170, el_zoom= .75,
+		height= _screen.h-170, el_zoom= 1.0,
 		heading_height= 20,
 		on= function(self)
 			self:diffusealpha(0):decelerate(0.2):diffusealpha(1)
@@ -100,7 +100,7 @@ local menu_params= {
 			type_images= {
 				bool= THEME:GetPathG("", "menu_icons/bool"),
 				choice= THEME:GetPathG("", "menu_icons/bool"),
-				menu= THEME:GetPathG("", "menu_icons/menu"),
+				menu= THEME:GetPathG("", "menu_icons/chevron"),
 			},
 		},
 	},
@@ -155,7 +155,7 @@ local frame= Def.ActorFrame{
 	},
 	Def.BitmapText{
 		Name= "length", Font= "Common Fallback Font", InitCommand= function(self)
-			self:xy(length_x, length_y):horizalign(right):zoom(.75)
+			self:xy(length_x, length_y):horizalign(right):zoom(.75):diffuse(color("#2E0F0F"))
 		end,
 		edit_menu_selection_changedMessageCommand= function(self, params)
 			if params.group then
@@ -168,7 +168,7 @@ local frame= Def.ActorFrame{
 	},
 	Def.BitmapText{
 		Name= "bpm", Font= "Common Fallback Font", InitCommand= function(self)
-			self:xy(bpm_x, bpm_y):horizalign(right):zoom(.75)
+			self:xy(bpm_x, bpm_y):horizalign(right):zoom(.75):diffuse(color("#451515"))
 		end,
 		edit_menu_selection_changedMessageCommand= function(self, params)
 			if params.group then
@@ -186,7 +186,7 @@ local frame= Def.ActorFrame{
 	},
 	Def.BitmapText{
  		Name= "title", Font= "Common Fallback Font", InitCommand= function(self)
-			self:xy(title_x, title_y):horizalign(left):zoom(.75)
+			self:xy(title_x, title_y):horizalign(left):zoom(.75):diffuse(color("#451515"))
 		end,
 		edit_menu_selection_changedMessageCommand= function(self, params)
 			if params.group then
@@ -199,7 +199,7 @@ local frame= Def.ActorFrame{
 	},
 	Def.BitmapText{
  		Name= "artist", Font= "Common Fallback Font", InitCommand= function(self)
-			self:xy(artist_x, artist_y):horizalign(left):zoom(.75)
+			self:xy(artist_x, artist_y):horizalign(left):zoom(.75):diffuse(color("#2E0F0F"))
 		end,
 		edit_menu_selection_changedMessageCommand= function(self, params)
 			if params.group then
