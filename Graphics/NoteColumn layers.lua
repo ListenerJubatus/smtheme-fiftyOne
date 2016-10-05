@@ -9,7 +9,7 @@ return {
 	Def.Sprite{
 		Texture= THEME:GetPathG("HoldJudgment", "label"),
 		InitCommand= function(self)
-			self:draworder(newfield_draw_order.under_field)
+			self:draworder(notefield_draw_order.under_field)
 				:y(offset):animate(false):diffusealpha(0)
 		end,
 		WidthSetCommand= function(self, param)
@@ -19,9 +19,9 @@ return {
 		end,
 		PlayerStateSetCommand= function(self, param)
 			if player_config:get_data(param.PlayerNumber).JudgmentUnderField then
-				self:draworder(newfield_draw_order.under_field)
+				self:draworder(notefield_draw_order.under_field)
 			else
-				self:draworder(newfield_draw_order.over_field)
+				self:draworder(notefield_draw_order.over_field)
 			end
 		end,
 		ColumnJudgmentCommand= function(self, param)

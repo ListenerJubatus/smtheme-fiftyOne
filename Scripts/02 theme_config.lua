@@ -2,6 +2,10 @@ local theme_config_default= {
 	AutoSetStyle= true,
 	LongFail= false,
 	ComboOnRolls= false,
+	FancyUIBG= false,
+	TimingDisplay= false,
+	GameplayFooter= false,
+	Use12HourClock= false,
 }
 
 theme_config= create_lua_config{

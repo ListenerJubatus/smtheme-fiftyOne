@@ -320,7 +320,7 @@ for pn, menu in pairs(menus) do
 	}
 	frame[#frame+1]= menu:create_actors{
 		x= menu_x[pn], y= 120, width= menu_width, height= menu_height,
-		translation_section= "newfield_options",
+		translation_section= "notefield_options",
 		num_displays= 1, pn= pn, el_height= 32,
 		menu_sounds= {
 			pop= THEME:GetPathS("Common", "Cancel"),
@@ -348,8 +348,8 @@ for pn, menu in pairs(menus) do
 		end,
 		change_explanationCommand= function(self, param)
 			local text= ""
-			if THEME:HasString("newfield_explanations", param.text) then
-				text= THEME:GetString("newfield_explanations", param.text)
+			if THEME:HasString("notefield_explanations", param.text) then
+				text= THEME:GetString("notefield_explanations", param.text)
 			end
 			self:playcommand("translated_explanation", {text= text})
 		end,
