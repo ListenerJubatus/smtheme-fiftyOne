@@ -12,18 +12,13 @@ t[#t+1] = Def.ActorFrame {
 	LoseFocusCommand=cmd(stoptweening;stopeffect;decelerate,0.1;zoom,0.9);
 	OffCommand=cmd(decelerate,0.2;zoom,0.7;diffusealpha,0;);
 	
-	Def.Quad {
-		InitCommand=cmd(zoomto,icon_size,icon_size;rotationz,45);
+	LoadActor("_background base") .. {
 		LoseFocusCommand=cmd(diffuse,ColorMidTone(icon_color););
 		GainFocusCommand=cmd(diffuse,icon_color;);
 	};
-	--LoadActor("_background effect");
-	--LoadActor("_gloss");
-	--LoadActor("_stroke");
-	--LoadActor("_cutout");
 	
 	LoadActor( gc:GetName() ) .. {
-		InitCommand=cmd(addy,-20);
+		InitCommand=cmd(addy,-20;diffuse,Color.Black);
 		GainFocusCommand=cmd(diffusealpha,1.0);
 		LoseFocusCommand=cmd(diffusealpha,0.7;);
 	};
@@ -35,9 +30,15 @@ t[#t+1] = Def.ActorFrame {
 		GainFocusCommand=cmd(diffusealpha,0.8);
 		LoseFocusCommand=cmd(diffusealpha,0.6;);
 	};
+	-- Will this ever actually be used?
 	-- LoadFont("Common Normal")..{
 		-- Text=string.upper(string_expl);
 		-- InitCommand=cmd(y,27.5;maxwidth,232);
 	-- };
+	
+	LoadActor("_highlight") .. {
+		LoseFocusCommand=cmd(stopeffect;decelerate,0.1;diffuse,Color.Invisible;);
+		GainFocusCommand=cmd(decelerate,0.2;diffuse,Color.White;diffuseshift;effectcolor1,Color.White;effectcolor2,color("#FFFFFF99"););
+	};
 };
 return t
