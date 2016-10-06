@@ -20,14 +20,18 @@ t[#t+1] = Def.ActorFrame {
 	--LoadActor("_stroke");
 	--LoadActor("_cutout");
 	
-	--Not in use yet!
-	--LoadActor( gc:GetName() ) .. {}
+	LoadActor( gc:GetName() ) .. {
+		GainFocusCommand=cmd(diffusealpha,1.0);
+		LoseFocusCommand=cmd(diffusealpha,0.7;);
+	};
 
 	-- todo: generate a better font for these.
 	LoadFont("_overpass 48px")..{
 		Text=string.upper(string_name);
-		InitCommand=cmd(x,icon_size/3.4;y,icon_size/3.4;zoom,0.6;maxwidth,icon_size*1.4);
-		OnCommand=cmd(rotationz,-45;diffuse,Color.White;strokecolor,Color.Outline);
+		InitCommand=cmd(x,icon_size/3.4;y,icon_size/3.4;zoom,0.6;maxwidth,icon_size*1.4;diffusecolor,color("#000000"););
+		OnCommand=cmd(rotationz,-45;);
+		GainFocusCommand=cmd(diffusealpha,0.8);
+		LoseFocusCommand=cmd(diffusealpha,0.6;);
 	};
 	-- LoadFont("Common Normal")..{
 		-- Text=string.upper(string_expl);
