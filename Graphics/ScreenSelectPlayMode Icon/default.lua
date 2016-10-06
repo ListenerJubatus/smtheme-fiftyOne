@@ -7,13 +7,15 @@ local icon_size = 192
 
 local t = Def.ActorFrame {};
 t[#t+1] = Def.ActorFrame {
+	OnCommand=cmd(diffusealpha,0;linear,0.4;diffusealpha,1;);
 	GainFocusCommand=cmd(stoptweening;bob;effectmagnitude,0,0,3;decelerate,0.1;zoom,0.95);
 	LoseFocusCommand=cmd(stoptweening;stopeffect;decelerate,0.1;zoom,0.9);
-
+	OffCommand=cmd(decelerate,0.2;zoom,0.7;diffusealpha,0;);
+	
 	Def.Quad {
 		InitCommand=cmd(zoomto,icon_size,icon_size;rotationz,45);
-		DisabledCommand=cmd(diffuse,ColorMidTone(icon_color);diffuselowerright,ColorDarkTone(icon_color));
-		EnabledCommand=cmd(diffuse,icon_color;diffuselowerright,ColorMidTone(icon_color));
+		LoseFocusCommand=cmd(diffuse,ColorMidTone(icon_color););
+		GainFocusCommand=cmd(diffuse,icon_color;);
 	};
 	--LoadActor("_background effect");
 	--LoadActor("_gloss");
@@ -21,6 +23,7 @@ t[#t+1] = Def.ActorFrame {
 	--LoadActor("_cutout");
 	
 	LoadActor( gc:GetName() ) .. {
+		InitCommand=cmd(addy,-20);
 		GainFocusCommand=cmd(diffusealpha,1.0);
 		LoseFocusCommand=cmd(diffusealpha,0.7;);
 	};
@@ -28,8 +31,7 @@ t[#t+1] = Def.ActorFrame {
 	-- todo: generate a better font for these.
 	LoadFont("_overpass 48px")..{
 		Text=string.upper(string_name);
-		InitCommand=cmd(x,icon_size/3.4;y,icon_size/3.4;zoom,0.6;maxwidth,icon_size*1.4;diffusecolor,color("#000000"););
-		OnCommand=cmd(rotationz,-45;);
+		InitCommand=cmd(horizalign,center;y,icon_size/3.4;zoom,0.5;maxwidth,icon_size*1.3;diffusecolor,color("#000000"););
 		GainFocusCommand=cmd(diffusealpha,0.8);
 		LoseFocusCommand=cmd(diffusealpha,0.6;);
 	};

@@ -32,11 +32,11 @@ ScreenColors = {
 }
 
 ModeIconColors = {
-    Normal      = color("#FFEE00"), -- yellow
-    Rave        = color("#db93ff"), -- violet
-    Nonstop     = color("#5ca9ff"), -- blue
-    Oni         = color("#00f1e2"), -- cyan
-    Endless     = color("#b4c3d2"), -- steel
+    Normal      = color("#339FF2"),
+    Rave        = color("#6BFF90"), 
+    Nonstop     = color("#FF66AB"),
+    Oni         = color("#FFDA6B"),
+    Endless     = color("#D4C7C1"),
 }
 
 GameColor = {
