@@ -39,7 +39,7 @@ t[#t+1] = Def.ActorFrame {
     };
 
     LoadFont("Common Italic Condensed") .. {
-          InitCommand=cmd(zoom,0.8;y,SCREEN_CENTER_Y+198+60;maxwidth,SCREEN_WIDTH;diffuse,color("#9d324e");uppercase,true;);
+          InitCommand=cmd(zoom,0.8;y,SCREEN_CENTER_Y+198+60;maxwidth,SCREEN_WIDTH;diffuse,color("#692033");uppercase,true;);
           OnCommand=cmd(queuecommand,"Set");
           SortOrderChangedMessageCommand=cmd(queuecommand,"Set");
           ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set");
@@ -189,8 +189,10 @@ t[#t+1] = Def.ActorFrame {
 							local cd = GetCustomDifficulty(st, diff, courseType);
 							self:finishtweening():linear(0.2):diffuse(ColorLightTone(CustomDifficultyToColor(cd)));
 						else
+							self:diffuse(color("#666666"));
 						end
 					else
+							self:diffuse(color("#666666"));
 					end
 				  end
 		};
@@ -209,8 +211,10 @@ t[#t+1] = Def.ActorFrame {
 							local cd = GetCustomDifficulty(st, diff, courseType);
 							self:finishtweening():linear(0.2):diffuse(ColorMidTone(CustomDifficultyToColor(cd)));
 						else
+							self:diffuse(color("#666666"));
 						end
 					else
+						self:diffuse(color("#666666"));
 					end
 				  end
 		};
@@ -316,8 +320,10 @@ t[#t+1] = Def.ActorFrame {
 							local cd = GetCustomDifficulty(st, diff, courseType);
 							self:finishtweening():linear(0.2):diffuse(ColorLightTone(CustomDifficultyToColor(cd)));
 						else
+							self:diffuse(color("#666666"));
 						end
 					else
+						self:diffuse(color("#666666"));
 					end
 				  end
 		};
@@ -336,8 +342,10 @@ t[#t+1] = Def.ActorFrame {
 							local cd = GetCustomDifficulty(st, diff, courseType);
 							self:finishtweening():linear(0.2):diffuse(ColorMidTone(CustomDifficultyToColor(cd)));
 						else
+							self:diffuse(color("#666666"));
 						end
 					else
+						self:diffuse(color("#666666"));
 					end
 				  end
 		};

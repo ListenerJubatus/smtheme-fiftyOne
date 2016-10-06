@@ -5,7 +5,7 @@ local t = Def.ActorFrame {};
 
 t[#t+1] = Def.ActorFrame {
 	LoadFont("Common Italic Condensed") .. {
-		InitCommand=cmd(y,-1;zoom,1;);
+		InitCommand=cmd(y,-1;zoom,1.2;);
 		BeginCommand=function(self)
 			local top = SCREENMAN:GetTopScreen()
 			if top then
@@ -30,7 +30,7 @@ t[#t+1] = Def.ActorFrame {
 				end;
 			end;
 			-- StepMania is being stupid so we have to do this here;
-			self:diffuse(StageToColor(curStage));
+			self:diffuse(StageToColor(curStage)):diffusebottomedge(ColorMidTone(StageToColor(curStage)));
 			self:diffusealpha(0):smooth(0.3):diffusealpha(1);
 		end;
 	};
