@@ -122,5 +122,11 @@ t[#t+1] = Def.ActorFrame {
 	CreatePaneDisplayItem( iPN, "Hands", 'RadarCategory_Hands' ) .. {
 		InitCommand=cmd(x,1;y,-14+26*4);
 	};
+	
+	LoadFont("Common Italic Condensed")..{
+		InitCommand=cmd(x,62;y,-14+26*5;horizalign,center);
+		OnCommand=cmd(zoom,0.75;diffuse,color("0.9,0.9,0.9");shadowlength,1);
+		Text=string.upper(THEME:GetString("PaneDisplay", "MachineHigh"));
+	};
 };
 return t;
