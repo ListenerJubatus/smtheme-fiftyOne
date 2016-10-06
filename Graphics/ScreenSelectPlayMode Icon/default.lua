@@ -24,7 +24,7 @@ t[#t+1] = Def.ActorFrame {
 	--LoadActor( gc:GetName() ) .. {}
 
 	-- todo: generate a better font for these.
-	LoadFont("Common Large")..{
+	LoadFont("_overpass 48px")..{
 		Text=string.upper(string_name);
 		InitCommand=cmd(x,icon_size/3.4;y,icon_size/3.4;zoom,0.6;maxwidth,icon_size*1.4);
 		OnCommand=cmd(rotationz,-45;diffuse,Color.White;strokecolor,Color.Outline);
