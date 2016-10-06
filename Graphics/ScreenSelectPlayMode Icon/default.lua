@@ -21,6 +21,7 @@ t[#t+1] = Def.ActorFrame {
 	--LoadActor("_cutout");
 	
 	LoadActor( gc:GetName() ) .. {
+		InitCommand=cmd(rotationz,-45);
 		GainFocusCommand=cmd(diffusealpha,1.0);
 		LoseFocusCommand=cmd(diffusealpha,0.7;);
 	};
