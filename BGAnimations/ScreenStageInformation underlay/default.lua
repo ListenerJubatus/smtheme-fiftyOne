@@ -27,6 +27,41 @@ else
 	};
 end
 
+
+t[#t+1] = Def.ActorFrame {
+
+	LoadActor(THEME:GetPathG("", "_pt1")) .. {
+		InitCommand=cmd(zoomto,SCREEN_WIDTH,SCREEN_HEIGHT;x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;diffuse,color("#000000"););
+		OnCommand=cmd(diffusealpha,1;sleep,1.1;sleep,0.1;linear,0.2;diffusealpha,0;);
+	};
+	
+	LoadActor(THEME:GetPathG("", "_pt2")) .. {
+	InitCommand=cmd(zoomto,SCREEN_WIDTH,SCREEN_HEIGHT;x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;diffuse,color("#000000"););
+	OnCommand=cmd(diffusealpha,1;sleep,1.1;sleep,0.2;linear,0.2;diffusealpha,0;);
+	};
+
+	LoadActor(THEME:GetPathG("", "_pt3")) .. {
+	InitCommand=cmd(zoomto,SCREEN_WIDTH,SCREEN_HEIGHT;x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;diffuse,color("#000000"););
+	OnCommand=cmd(diffusealpha,1;sleep,1.1;sleep,0.3;linear,0.2;diffusealpha,0;);
+	};
+	
+	LoadActor(THEME:GetPathG("", "_pt4")) .. {
+	InitCommand=cmd(zoomto,SCREEN_WIDTH,SCREEN_HEIGHT;x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;diffuse,color("#000000"););	
+	OnCommand=cmd(diffusealpha,1;sleep,1.1;sleep,0.4;linear,0.2;diffusealpha,0;);
+	};
+	
+	LoadActor(THEME:GetPathG("", "_pt5")) .. {
+	InitCommand=cmd(zoomto,SCREEN_WIDTH,SCREEN_HEIGHT;x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;diffuse,color("#000000"););	
+	OnCommand=cmd(diffusealpha,1;sleep,1.1;sleep,0.5;linear,0.2;diffusealpha,0;);
+	};
+	
+	LoadActor(THEME:GetPathG("", "_pt6")) .. {
+	InitCommand=cmd(zoomto,SCREEN_WIDTH,SCREEN_HEIGHT;x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;diffuse,color("#000000"););	
+	OnCommand=cmd(diffusealpha,1;sleep,1.1;sleep,0.6;linear,0.2;diffusealpha,0;);
+	};
+	
+};
+
 local stage_num_actor= THEME:GetPathG("ScreenStageInformation", "Stage " .. ToEnumShortString(sStage), true)
 if stage_num_actor ~= "" and FILEMAN:DoesFileExist(stage_num_actor) then
 	stage_num_actor= LoadActor(stage_num_actor)
@@ -48,7 +83,7 @@ end
 t[#t+1] = Def.ActorFrame {
 	InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y);
 	stage_num_actor .. {
-		OnCommand=cmd(zoom,1.2;diffusealpha,0;decelerate,2;zoom,1;diffusealpha,1;sleep,0.5;decelerate,1;zoom,1.3;diffusealpha,0);
+		OnCommand=cmd(zoom,1.2;diffusealpha,0;decelerate,1.4;zoom,1;diffusealpha,1;sleep,2;linear,0.5;zoom,1.3;diffusealpha,0);
 	};
 };
 
@@ -64,27 +99,6 @@ t[#t+1] = Def.ActorFrame {
 		Text=GAMESTATE:IsCourseMode() and ToEnumShortString( GAMESTATE:GetCurrentCourse():GetCourseType() ) or GAMESTATE:GetCurrentSong():GetDisplayArtist();
 		InitCommand=cmd(strokecolor,Color("Outline");zoom,0.8;addy,11);
 		OnCommand=cmd(diffusealpha,0;decelerate,0.5;diffusealpha,1;sleep,2;decelerate,0.5;diffusealpha,0);
-	};
-	LoadFont("Common Condensed") .. {
-		InitCommand=cmd(strokecolor,Color("Outline");diffuse,color("#EA8357")zoom,0.75;y,39);
-		BeginCommand=function(self)
-			local text = "";
-			local SongOrCourse;
-			if GAMESTATE:IsCourseMode() then
-				local trail = GAMESTATE:GetCurrentTrail(GAMESTATE:GetMasterPlayerNumber());
-				SongOrCourse = GAMESTATE:GetCurrentCourse();
-				if SongOrCourse:GetEstimatedNumStages() == 1 then
-					text = SongOrCourse:GetEstimatedNumStages() .." Stage / ".. SecondsToMSSMsMs( TrailUtil.GetTotalSeconds(trail) );
-				else
-					text = SongOrCourse:GetEstimatedNumStages() .." Stages / ".. SecondsToMSSMsMs( TrailUtil.GetTotalSeconds(trail) );
-				end
-			else
-				SongOrCourse = GAMESTATE:GetCurrentSong();
-				text = SecondsToMSSMsMs( SongOrCourse:MusicLengthSeconds() );
-			end;
-			self:settext(text);
-		end;
-    OnCommand=cmd(diffusealpha,0;decelerate,0.5;diffusealpha,1;sleep,2;decelerate,0.5;diffusealpha,0);
 	};
 };
 
