@@ -164,6 +164,8 @@ t[#t+1] = Def.ActorFrame {
 t[#t+1] = StandardDecorationFromFileOptional("CourseContentsList","CourseContentsList");
 
 
+if not GAMESTATE:IsCourseMode() then
+
 -- P1 Difficulty Pane
 t[#t+1] = Def.ActorFrame {
 		InitCommand=cmd(visible,GAMESTATE:IsHumanPlayer(PLAYER_1);horizalign,center;x,SCREEN_CENTER_X-237-168;y,SCREEN_CENTER_Y+100;);
@@ -428,7 +430,9 @@ t[#t+1] = Def.ActorFrame {
 
 t[#t+1] = StandardDecorationFromFileOptional("PaneDisplayTextP1","PaneDisplayTextP1");
 t[#t+1] = StandardDecorationFromFileOptional("PaneDisplayTextP2","PaneDisplayTextP2");	
-	
+
+end;
+
 -- BPMDisplay
 t[#t+1] = Def.ActorFrame {
     InitCommand=cmd(draworder,126;visible,not GAMESTATE:IsCourseMode(););
