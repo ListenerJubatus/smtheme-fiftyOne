@@ -1,378 +1,200 @@
-local t = Def.ActorFrame {};
-local p1grade = STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetGrade()
-local p2grade = STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetGrade()
+-- ...So I realize that I completely ignored almost each and every
+-- metrics-bound element this screen could use, but it's okay, right?
 
--- Evaluation levels
-t[#t+1] = Def.ActorFrame {
-  InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y-80;);
-	OnCommand=cmd(zoomx,0;decelerate,0.8;zoomx,1;);
-    Def.ActorFrame {
-		OnCommand=cmd(diffusealpha,0;sleep,0.1;smooth,0.2;diffusealpha,1;);
-		OffCommand=cmd(sleep,0.1;smooth,0.2;diffusealpha,0;);
-		Def.Quad {
-			InitCommand=cmd(zoomto,200,36;diffuse,JudgmentLineToColor("JudgmentLine_W1");diffusealpha,0.6;);
-		};
-		LoadFont("_overpass 36px") .. {
-			InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.8;settext,string.upper(JudgmentLineToLocalizedString('JudgmentLine_W1')););
-		};
-	};
-	Def.ActorFrame {
-		InitCommand=cmd(addy,40;);
-		OnCommand=cmd(diffusealpha,0;sleep,0.2;smooth,0.2;diffusealpha,1;);
-		OffCommand=cmd(sleep,0.2;smooth,0.2;diffusealpha,0;);
-		Def.Quad {
-			InitCommand=cmd(zoomto,200,36;diffuse,JudgmentLineToColor("JudgmentLine_W2");diffusealpha,0.6;);
-		};
-		LoadFont("_overpass 36px") .. {
-			InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.8;settext,string.upper(JudgmentLineToLocalizedString('JudgmentLine_W2')););
-		};
-	};
-	Def.ActorFrame {
-		InitCommand=cmd(addy,40*2;);
-		OnCommand=cmd(diffusealpha,0;sleep,0.3;smooth,0.2;diffusealpha,1;);
-		OffCommand=cmd(sleep,0.3;smooth,0.2;diffusealpha,0;);
-		Def.Quad {
-			InitCommand=cmd(zoomto,200,36;diffuse,JudgmentLineToColor("JudgmentLine_W3");diffusealpha,0.6;);
-		};
-		LoadFont("_overpass 36px") .. {
-			InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.8;settext,string.upper(JudgmentLineToLocalizedString('JudgmentLine_W3')););
-		};
-	};
-	Def.ActorFrame {
-		InitCommand=cmd(addy,40*3;);
-		OnCommand=cmd(diffusealpha,0;sleep,0.4;smooth,0.2;diffusealpha,1;);
-		OffCommand=cmd(sleep,0.4;smooth,0.2;diffusealpha,0;);
-		Def.Quad {
-			InitCommand=cmd(zoomto,200,36;diffuse,JudgmentLineToColor("JudgmentLine_W4");diffusealpha,0.6;);
-		};
-		LoadFont("_overpass 36px") .. {
-			InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.8;settext,string.upper(JudgmentLineToLocalizedString('JudgmentLine_W4')););
-		};
-	};
-	Def.ActorFrame {
-		InitCommand=cmd(addy,40*4;);
-		OnCommand=cmd(diffusealpha,0;sleep,0.5;smooth,0.2;diffusealpha,1;);
-		OffCommand=cmd(sleep,0.5;smooth,0.2;diffusealpha,0;);
-		Def.Quad {
-			InitCommand=cmd(zoomto,200,36;diffuse,JudgmentLineToColor("JudgmentLine_W5");diffusealpha,0.6;);
-		};
-		LoadFont("_overpass 36px") .. {
-			InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.8;settext,string.upper(JudgmentLineToLocalizedString('JudgmentLine_W5')););
-		};
-	};
-	Def.ActorFrame {
-		InitCommand=cmd(addy,40*5;);
-		OnCommand=cmd(diffusealpha,0;sleep,0.6;smooth,0.2;diffusealpha,1;);
-		OffCommand=cmd(sleep,0.6;smooth,0.2;diffusealpha,0;);
-		Def.Quad {
-			InitCommand=cmd(zoomto,200,36;diffuse,JudgmentLineToColor("JudgmentLine_Miss");diffusealpha,0.6;);
-		};
-		LoadFont("_overpass 36px") .. {
-			InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.8;settext,string.upper(JudgmentLineToLocalizedString('JudgmentLine_Miss')););
-		};
-	};
-	Def.ActorFrame {
-		InitCommand=cmd(addy,40*6;);
-		OnCommand=cmd(diffusealpha,0;sleep,0.7;smooth,0.2;diffusealpha,1;);
-		OffCommand=cmd(sleep,0.7;smooth,0.2;diffusealpha,0;);
-		Def.Quad {
-			InitCommand=cmd(zoomto,200,36;diffuse,JudgmentLineToColor("JudgmentLine_Held");diffusealpha,0.6;);
-		};
-		LoadFont("_overpass 36px") .. {
-			InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.8;settext,string.upper(JudgmentLineToLocalizedString('JudgmentLine_Held')););
-		};
-	};
-	Def.ActorFrame {
-		InitCommand=cmd(addy,40*7;);
-		OnCommand=cmd(diffusealpha,0;sleep,0.8;smooth,0.2;diffusealpha,1;);
-		OffCommand=cmd(sleep,0.8;smooth,0.2;diffusealpha,0;sleep,1;);
-		Def.Quad {
-			InitCommand=cmd(zoomto,200,36;diffuse,JudgmentLineToColor("JudgmentLine_MaxCombo");diffusealpha,0.6;);
-		};
-		LoadFont("_overpass 36px") .. {
-			InitCommand=cmd(diffuse,Color("Black");zoom,0.75;diffusealpha,0.8;settext,string.upper(JudgmentLineToLocalizedString('JudgmentLine_MaxCombo')););
-		};
-	};
-};
+local t = Def.ActorFrame{}
 
--- P1 Values
-t[#t+1] = Def.ActorFrame {
-    InitCommand=cmd(x,SCREEN_CENTER_X-130;y,SCREEN_CENTER_Y-80;visible,GAMESTATE:IsHumanPlayer(PLAYER_1););
-    OffCommand=cmd(decelerate,0.3;diffusealpha,0;);
-    Def.ActorFrame {
-  		OnCommand=cmd(diffusealpha,0;sleep,0.1;smooth,0.2;diffusealpha,1;);
-  		LoadFont("_overpass 36px") .. {
-  			InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_1));zoom,0.75;diffusealpha,1.0;horizalign,right;);
-        OnCommand=cmd(playcommand,"Set");
-        SetCommand=function(self)
-          self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetTapNoteScores("TapNoteScore_W1"))
-        end;
-  		};
-	};
-	Def.ActorFrame {
-		InitCommand=cmd(addy,40;);
-		OnCommand=cmd(diffusealpha,0;sleep,0.2;smooth,0.2;diffusealpha,1;);
-    LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_1));zoom,0.75;diffusealpha,1.0;horizalign,right;);
-      OnCommand=cmd(playcommand,"Set");
-      SetCommand=function(self)
-        self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetTapNoteScores("TapNoteScore_W2"))
-      end;
-    };
-	};
-	Def.ActorFrame {
-		InitCommand=cmd(addy,40*2;);
-		OnCommand=cmd(diffusealpha,0;sleep,0.3;smooth,0.2;diffusealpha,1;);
-    LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_1));;zoom,0.75;diffusealpha,1.0;horizalign,right;);
-      OnCommand=cmd(playcommand,"Set");
-      SetCommand=function(self)
-        self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetTapNoteScores("TapNoteScore_W3"))
-      end;
-    };
-	};
-	Def.ActorFrame {
-		InitCommand=cmd(addy,40*3;);
-		OnCommand=cmd(diffusealpha,0;sleep,0.4;smooth,0.2;diffusealpha,1;);
-    LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_1));;zoom,0.75;diffusealpha,1.0;horizalign,right;);
-      OnCommand=cmd(playcommand,"Set");
-      SetCommand=function(self)
-        self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetTapNoteScores("TapNoteScore_W4"))
-      end;
-    };
-	};
-	Def.ActorFrame {
-		InitCommand=cmd(addy,40*4;);
-		OnCommand=cmd(diffusealpha,0;sleep,0.5;smooth,0.2;diffusealpha,1;);
-    LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_1));;zoom,0.75;diffusealpha,1.0;horizalign,right;);
-      OnCommand=cmd(playcommand,"Set");
-      SetCommand=function(self)
-        self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetTapNoteScores("TapNoteScore_W5"))
-      end;
-    };
-	};
-	Def.ActorFrame {
-		InitCommand=cmd(addy,40*5;);
-		OnCommand=cmd(diffusealpha,0;sleep,0.6;smooth,0.2;diffusealpha,1;);
-    LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_1));zoom,0.75;diffusealpha,1.0;horizalign,right;);
-      OnCommand=cmd(playcommand,"Set");
-      SetCommand=function(self)
-        self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetTapNoteScores("TapNoteScore_Miss"))
-      end;
-    };
-	};
-	Def.ActorFrame {
-		InitCommand=cmd(addy,40*6;);
-		OnCommand=cmd(diffusealpha,0;sleep,0.7;smooth,0.2;diffusealpha,1;);
-    LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_1));zoom,0.75;diffusealpha,1.0;horizalign,right;);
-      OnCommand=cmd(playcommand,"Set");
-      SetCommand=function(self)
-        self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetHoldNoteScores("HoldNoteScore_Held"))
-      end;
-    };
-	};
-	Def.ActorFrame {
-		InitCommand=cmd(addy,40*7;);
-		OnCommand=cmd(diffusealpha,0;sleep,0.8;smooth,0.2;diffusealpha,1;);
-    LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_1));zoom,0.75;diffusealpha,1.0;horizalign,right;);
-      OnCommand=cmd(playcommand,"Set");
-      SetCommand=function(self)
-        self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):MaxCombo())
-      end;
-    };
-	};
-    Def.ActorFrame {
-	  InitCommand=cmd(addy,40*8+4;);
-	  OnCommand=cmd(diffusealpha,0;sleep,0.8;smooth,0.2;diffusealpha,1;);
-		LoadFont("_overpass 36px") .. {
-		  InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_1));zoom,1;diffusealpha,1;horizalign,right;);
-		  OnCommand=cmd(playcommand,"Set");
-		  SetCommand=function(self)
-			local p1percent = STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetPercentDancePoints()
-			if PREFSMAN:GetPreference("PercentageScoring") == false then
-				self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetScore())
-			else
-				self:settext(FormatPercentScore(p1percent))
-			end
-		  end;
-		};
-		LoadFont("_overpass 36px") .. {
-		  InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_1));zoom,0.75;diffusealpha,1;horizalign,right;addy,29);
-		  OnCommand=cmd(playcommand,"Set");
-		  SetCommand=function(self)
-			local p1percent = STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetPercentDancePoints()
-			if PREFSMAN:GetPreference("PercentageScoring") == true then
-				self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetScore())
-			else
-				self:settext(FormatPercentScore(p1percent))
-			end
-		  end;
-		};
-  };
-};
+-- A very useful table...
+local eval_lines = {
+	"W1",
+	"W2",
+	"W3",
+	"W4",
+	"W5",
+	"Miss",
+	"Held",
+	"MaxCombo"
+}
 
--- P2 Values
-t[#t+1] = Def.ActorFrame {
-    InitCommand=cmd(x,SCREEN_CENTER_X+130;y,SCREEN_CENTER_Y-80;visible,GAMESTATE:IsHumanPlayer(PLAYER_2););
-    OffCommand=cmd(decelerate,0.3;diffusealpha,0;);
-    Def.ActorFrame {
-  		OnCommand=cmd(diffusealpha,0;sleep,0.1;smooth,0.2;diffusealpha,1;);
-  		LoadFont("_overpass 36px") .. {
-  			InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_2));zoom,0.75;diffusealpha,1.0;horizalign,left;);
-        OnCommand=cmd(playcommand,"Set");
-        SetCommand=function(self)
-          self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetTapNoteScores("TapNoteScore_W1"))
-        end;
-  		};
-	};
-	Def.ActorFrame {
-		InitCommand=cmd(addy,40;);
-		OnCommand=cmd(diffusealpha,0;sleep,0.2;smooth,0.2;diffusealpha,1;);
-    LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_2));zoom,0.75;diffusealpha,1.0;horizalign,left;);
-      OnCommand=cmd(playcommand,"Set");
-      SetCommand=function(self)
-        self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetTapNoteScores("TapNoteScore_W2"))
-      end;
-    };
-	};
-	Def.ActorFrame {
-		InitCommand=cmd(addy,40*2;);
-		OnCommand=cmd(diffusealpha,0;sleep,0.3;smooth,0.2;diffusealpha,1;);
-    LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_2));zoom,0.75;diffusealpha,1.0;horizalign,left;);
-      OnCommand=cmd(playcommand,"Set");
-      SetCommand=function(self)
-        self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetTapNoteScores("TapNoteScore_W3"))
-      end;
-    };
-	};
-	Def.ActorFrame {
-		InitCommand=cmd(addy,40*3;);
-		OnCommand=cmd(diffusealpha,0;sleep,0.4;smooth,0.2;diffusealpha,1;);
-    LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_2));zoom,0.75;diffusealpha,1.0;horizalign,left;);
-      OnCommand=cmd(playcommand,"Set");
-      SetCommand=function(self)
-        self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetTapNoteScores("TapNoteScore_W4"))
-      end;
-    };
-	};
-	Def.ActorFrame {
-		InitCommand=cmd(addy,40*4;);
-		OnCommand=cmd(diffusealpha,0;sleep,0.5;smooth,0.2;diffusealpha,1;);
-    LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_2));zoom,0.75;diffusealpha,1.0;horizalign,left;);
-      OnCommand=cmd(playcommand,"Set");
-      SetCommand=function(self)
-        self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetTapNoteScores("TapNoteScore_W5"))
-      end;
-    };
-	};
-	Def.ActorFrame {
-		InitCommand=cmd(addy,40*5;);
-		OnCommand=cmd(diffusealpha,0;sleep,0.6;smooth,0.2;diffusealpha,1;);
-    LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_2));zoom,0.75;diffusealpha,1.0;horizalign,left;);
-      OnCommand=cmd(playcommand,"Set");
-      SetCommand=function(self)
-        self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetTapNoteScores("TapNoteScore_Miss"))
-      end;
-    };
-	};
-	Def.ActorFrame {
-		InitCommand=cmd(addy,40*6;);
-		OnCommand=cmd(diffusealpha,0;sleep,0.7;smooth,0.2;diffusealpha,1;);
-    LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_2));zoom,0.75;diffusealpha,1.0;horizalign,left;);
-      OnCommand=cmd(playcommand,"Set");
-      SetCommand=function(self)
-        self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetHoldNoteScores("HoldNoteScore_Held"))
-      end;
-    };
-	};
-	Def.ActorFrame {
-		InitCommand=cmd(addy,40*7;);
-		OnCommand=cmd(diffusealpha,0;sleep,0.8;smooth,0.2;diffusealpha,1;);
-    LoadFont("_overpass 36px") .. {
-      InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_2));zoom,0.75;diffusealpha,1.0;horizalign,left;);
-      OnCommand=cmd(playcommand,"Set");
-      SetCommand=function(self)
-        self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):MaxCombo())
-      end;
-    };
-	};
-    Def.ActorFrame {
-	  InitCommand=cmd(addy,40*8+4;);
-	  OnCommand=cmd(diffusealpha,0;sleep,0.8;smooth,0.2;diffusealpha,1;);
-		LoadFont("_overpass 36px") .. {
-		  InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_2));zoom,1;diffusealpha,1;horizalign,left;);
-		  OnCommand=cmd(playcommand,"Set");
-		  SetCommand=function(self)
-			local p2percent = STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetPercentDancePoints()
-			if PREFSMAN:GetPreference("PercentageScoring") == false then
-				self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetScore())
-			else
-				self:settext(FormatPercentScore(p2percent))
-			end
-		  end;
-		};
-		LoadFont("_overpass 36px") .. {
-		  InitCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PLAYER_2));zoom,0.75;diffusealpha,1;horizalign,left;addy,29);
-		  OnCommand=cmd(playcommand,"Set");
-		  SetCommand=function(self)
-			local p2percent = STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetPercentDancePoints()
-			if PREFSMAN:GetPreference("PercentageScoring") == true then
-				self:settext(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetScore())
-			else
-				self:settext(FormatPercentScore(p2percent))
-			end
-		  end;
-		};
-  };
-};
+-- And a function to make even better use out of the table.
+local function GetJLineValue(line, pl)
+	if line == "Held" then
+		return STATSMAN:GetCurStageStats():GetPlayerStageStats(pl):GetHoldNoteScores("HoldNoteScore_Held")
+	elseif line == "MaxCombo" then
+		return STATSMAN:GetCurStageStats():GetPlayerStageStats(pl):MaxCombo()
+	else
+		return STATSMAN:GetCurStageStats():GetPlayerStageStats(pl):GetTapNoteScores("TapNoteScore_" .. line)
+	end
+	return "???"
+end
 
+-- You know what, we'll deal with getting the overall scores with a function too.
+local function GetPlScore(pl, scoretype)
+	local primary_score = STATSMAN:GetCurStageStats():GetPlayerStageStats(pl):GetScore()
+	local secondary_score = FormatPercentScore(STATSMAN:GetCurStageStats():GetPlayerStageStats(pl):GetPercentDancePoints())
+	
+	if PREFSMAN:GetPreference("PercentageScoring") then
+		primary_score, secondary_score = secondary_score, primary_score
+	end
+	
+	if scoretype == "primary" then
+		return primary_score
+	else
+		return secondary_score
+	end
+end
+
+-- #################################################
+-- That's enough functions; let's get this done.
+
+-- Shared portion.
+local mid_pane = Def.ActorFrame {
+	OffCommand=cmd(decelerate,0.4;diffusealpha,0),
+	-- Song/course banner.
+	Def.Sprite {
+		InitCommand=function(self)
+			local target = GAMESTATE:IsCourseMode() and GAMESTATE:GetCurrentCourse() or GAMESTATE:GetCurrentSong()
+			if target and target:HasBanner() then
+				self:Load(target:GetBannerPath())
+			else
+				self:Load(THEME:GetPathG("Common fallback", "banner"))
+			end
+			self:scaletoclipped(468,146):x(_screen.cx):y(_screen.cy-173):zoom(0.8)
+		end
+	},
+	-- Banner frame.
+	LoadActor("_underbanner") .. {
+		InitCommand=cmd(x,_screen.cx;y,_screen.cy-172;zoom,0.8)
+	},
+	LoadActor("_bannerframe") .. {
+		InitCommand=cmd(x,_screen.cx;y,_screen.cy-172;zoom,0.8)
+	}
+}
+
+
+-- Text that's slapped on top of the banner frame.
+if not GAMESTATE:IsCourseMode() then
+	mid_pane[#mid_pane+1] = LoadActor(THEME:GetPathG("ScreenWithMenuElements", "StageDisplay")) .. {
+		OnCommand=cmd(x,_screen.cx;y,_screen.cy-135;diffuse,color("#9d324e"))
+	}
+else
+	mid_pane[#mid_pane+1] = Def.BitmapText {
+		Font="_roboto condensed Bold italic 24px",
+		InitCommand=function(self)
+			local course = GAMESTATE:GetCurrentCourse()
+			self:settext(ToEnumShortString( course:GetCourseType() ))
+			self:x(_screen.cx):y(_screen.cy-118.5):diffuse(color("#9d324e")):uppercase(true)
+		end,
+		OnCommand=cmd(playcommand,"Set";zoomx,0.8;diffusealpha,0;decelerate,0.4;zoomx,1;diffusealpha,1),
+		OffCommand=cmd(decelerate,0.4;diffusealpha,0)
+	}
+end
+
+-- Each line's text, and associated decorations.
+for i, v in ipairs(eval_lines) do
+	local spacing = 38*i
+	local cur_line = "JudgmentLine_" .. v
+	
+	mid_pane[#mid_pane+1] = Def.ActorFrame{
+		InitCommand=cmd(x,_screen.cx;y,(_screen.cy/1.4)+(spacing)),
+		
+		Def.Quad {
+			InitCommand=cmd(zoomto,200,36;diffuse,JudgmentLineToColor(cur_line);diffusealpha,0.75;);
+		};
+	
+		Def.BitmapText {
+			Font = "_overpass 36px",
+			InitCommand=cmd(zoom,0.6;diffuse,color("#000000BB");settext,string.upper(JudgmentLineToLocalizedString(cur_line)))
+		}
+	}
+end
+
+t[#t+1] = mid_pane
+
+-- #################################################
+-- Time to deal with all of the player stats. ALL OF THEM.
+
+local eval_parts = Def.ActorFrame {}
+
+for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
+	-- Some things to help positioning
+	local step_count_offs = string.find(p, "P1") and -150 or 150
+	local grade_parts_offs = string.find(p, "P1") and -320 or 320
+	local p_grade = STATSMAN:GetCurStageStats():GetPlayerStageStats(p):GetGrade()
+	
+	-- Step counts.
+	for i, v in ipairs(eval_lines) do
+		local spacing = 38*i
+		eval_parts[#eval_parts+1] = Def.BitmapText {
+			Font = "_overpass 36px",
+			InitCommand=cmd(x,_screen.cx + step_count_offs;y,(_screen.cy/1.4)+(spacing);diffuse,color("#9d324e");zoom,0.75;diffusealpha,1.0;horizalign,center),
+			OnCommand=function(self)
+				self:settext(GetJLineValue(v, p))
+			end
+		}
+	end
+	
+	-- Primary score.
+	eval_parts[#eval_parts+1] = Def.BitmapText {
+		Font = "_overpass 36px",
+		InitCommand=cmd(x,_screen.cx + (grade_parts_offs * 0.72);y,(_screen.cy/1.7)+350;diffuse,ColorMidTone(PlayerColor(p));zoom,1),
+		OnCommand=function(self)
+			self:settext(GetPlScore(p, "primary"))
+			if string.find(p, "P1") then
+				self:horizalign(right)
+			else
+				self:horizalign(left)
+			end
+		end
+	}
+	-- Secondary score.
+	eval_parts[#eval_parts+1] = Def.BitmapText {
+		Font = "_overpass 36px",
+		InitCommand=cmd(x,_screen.cx + (grade_parts_offs * 0.72);y,(_screen.cy/1.7)+378;diffuse,ColorMidTone(PlayerColor(p));zoom,0.75),
+		OnCommand=function(self)
+			self:settext(GetPlScore(p, "secondary"))
+			if string.find(p, "P1") then
+				self:horizalign(right)
+			else
+				self:horizalign(left)
+			end
+		end
+	}
+	
+	-- Letter grade and associated parts.
+	eval_parts[#eval_parts+1] = Def.ActorFrame{
+		InitCommand=cmd(x,_screen.cx + grade_parts_offs;y,_screen.cy/1.93),
+		
+		Def.Quad {
+			InitCommand=cmd(zoomto,140,120;diffuse,color("#fce1a1");diffusealpha,0.4)
+		},
+		
+		LoadActor(THEME:GetPathG("GradeDisplay", "Grade " .. p_grade)) .. {
+			InitCommand=cmd(zoom,0.75);
+			OnCommand=cmd(diffusealpha,0;zoom,1;sleep,0.63;decelerate,0.4;zoom,0.75;diffusealpha,1)
+		},
+		
+		Def.BitmapText {
+			Font = "_roboto condensed Bold italic 24px",
+			InitCommand=cmd(diffuse,Color.White;zoom,1.0;addy,38;maxwidth,200;uppercase,true),
+			OnCommand=function(self)
+				if STATSMAN:GetCurStageStats():GetPlayerStageStats(p):GetStageAward() then
+					self:settext(THEME:GetString( "StageAward", ToEnumShortString(STATSMAN:GetCurStageStats():GetPlayerStageStats(p):GetStageAward()) ))
+					self:diffusealpha(0):zoomx(0.5):sleep(0.63):decelerate(0.4):zoomx(1):diffusealpha(1)
+				end
+			end
+		}
+	}
+end
+
+t[#t+1] = eval_parts
+
+
+-- todo: replace.
 if GAMESTATE:IsHumanPlayer(PLAYER_1) == true then
--- Grade display
-t[#t+1] = Def.ActorFrame {
-  InitCommand=cmd(zoom,1;diffusealpha,1;horizalign,left;x,SCREEN_CENTER_X-320;y,SCREEN_CENTER_Y-170);
-  OffCommand=cmd(decelerate,0.4;diffusealpha,0;);
-  Def.Quad {
-          InitCommand=cmd(zoomto,220,130;diffuse,color("#fce1a1"););
-          OnCommand=cmd(diffusealpha,0;sleep,0.6;decelerate,0.4;diffusealpha,0.4;)
-  };
-  LoadActor(THEME:GetPathG("GradeDisplay", "Grade " .. p1grade)) .. {
-      InitCommand=cmd(zoom,0.75;addy,-16;);
-      OnCommand=function(self)
-        if STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetStageAward() then
-          self:addy(0);
-        else
-          self:addy(16);
-        end;
-        self:diffusealpha(0):zoom(0.5):sleep(0.63):decelerate(0.4):zoom(0.75):diffusealpha(1);
-      end;
-  };
-  LoadFont("_roboto condensed Bold italic 24px") .. {
-    InitCommand=cmd(diffuse,color("#826216");zoom,1.0;addy,40;maxwidth,200;uppercase,true;);
-    OnCommand=cmd(playcommand,"Set");
-    SetCommand=function(self)
-      if STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetStageAward() then
-        self:settext(THEME:GetString( "StageAward", ToEnumShortString(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetStageAward())) );
-        self:diffusealpha(0):zoomx(0.5):sleep(0.63):decelerate(0.4):zoomx(1):diffusealpha(1);
-      end
-    end;
-  };
-};
-
 	if GAMESTATE:IsCourseMode() == false then
 	-- Difficulty banner
 	t[#t+1] = Def.ActorFrame {
-	  InitCommand=cmd(x,SCREEN_CENTER_X-180;y,SCREEN_CENTER_Y-170;zoom,0.6;visible,not GAMESTATE:IsCourseMode(););
+	  InitCommand=cmd(x,SCREEN_CENTER_X-223;y,SCREEN_CENTER_Y-170;zoom,0.6;visible,not GAMESTATE:IsCourseMode(););
 	  OnCommand=cmd(zoomx,0.3;diffusealpha,0;decelerate,0.4;zoomx,0.6;diffusealpha,1;);
 	  OffCommand=cmd(decelerate,0.4;diffusealpha,0;);
 		LoadActor(THEME:GetPathG("difficulty", "BannerBase")) .. {
@@ -424,41 +246,11 @@ end;
 
 
 if GAMESTATE:IsHumanPlayer(PLAYER_2) == true then
--- Grade display
-t[#t+1] = Def.ActorFrame {
-  InitCommand=cmd(zoom,1;diffusealpha,1;horizalign,right;x,SCREEN_CENTER_X+320;y,SCREEN_CENTER_Y-170);
-  OffCommand=cmd(decelerate,0.4;diffusealpha,0;);
-  Def.Quad {
-          InitCommand=cmd(zoomto,220,130;diffuse,color("#fce1a1"););
-          OnCommand=cmd(diffusealpha,0;sleep,0.6;decelerate,0.4;diffusealpha,0.4;)
-  };
-  LoadActor(THEME:GetPathG("GradeDisplay", "Grade " .. p2grade)) .. {
-      InitCommand=cmd(zoom,0.75;addy,-16;);
-      OnCommand=function(self)
-        if STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetStageAward() then
-          self:addy(0);
-        else
-          self:addy(16);
-        end;
-        self:diffusealpha(0):zoom(0.5):sleep(0.63):decelerate(0.4):zoom(0.75):diffusealpha(1);
-      end;
-  };
-  LoadFont("_roboto condensed Bold italic 24px") .. {
-    InitCommand=cmd(diffuse,color("#826216");zoom,1.0;addy,40;maxwidth,200;uppercase,true;);
-    OnCommand=cmd(playcommand,"Set");
-    SetCommand=function(self)
-      if STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetStageAward() then
-        self:settext(THEME:GetString( "StageAward", ToEnumShortString(STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_2):GetStageAward())) );
-        self:diffusealpha(0):zoomx(0.5):sleep(0.63):decelerate(0.4):zoomx(1):diffusealpha(1);
-      end;
-    end;
-  };
-};
 
 	if GAMESTATE:IsCourseMode() == false then
 	-- Difficulty banner
 	t[#t+1] = Def.ActorFrame {
-	  InitCommand=cmd(x,SCREEN_CENTER_X+180;y,SCREEN_CENTER_Y-170;zoom,0.6;visible,not GAMESTATE:IsCourseMode(););
+	  InitCommand=cmd(x,SCREEN_CENTER_X+223;y,SCREEN_CENTER_Y-170;zoom,0.6;visible,not GAMESTATE:IsCourseMode(););
 	  OnCommand=cmd(zoomx,0.3;diffusealpha,0;decelerate,0.4;zoomx,0.6;diffusealpha,1;);
 	  OffCommand=cmd(decelerate,0.4;diffusealpha,0;);
 		LoadActor(THEME:GetPathG("difficulty", "BannerBase")) .. {
@@ -509,90 +301,8 @@ t[#t+1] = Def.ActorFrame {
 
 end;
 
-if not GAMESTATE:IsCourseMode() then
-t[#t+1] = Def.ActorFrame {
-  InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y-170-18;);
-  OnCommand=cmd(zoomx,0.8;diffusealpha,0;decelerate,0.4;zoomx,1;diffusealpha,1;);
-  OffCommand=cmd(decelerate,0.4;diffusealpha,0;);
-  Def.Quad {
-          InitCommand=cmd(zoomto,300,130;diffuse,color("#fce1a1");addy,18;diffusealpha,0.4;);
-  };
-  Def.Sprite {
-  		name="SongBanner";
-      InitCommand=cmd(playcommand,"Set";);
-          SetCommand=function(self)
-          local song = GAMESTATE:GetCurrentSong();
-    			if song then
-              if song:HasBanner() then
-                  self:Load(song:GetBannerPath())
-                  self:scaletoclipped(300,94)
-              else
-                self:Load(THEME:GetPathG("Common fallback", "banner"))
-              end
-  			  else
-  				self:diffusealpha(0)
-              end
-          end;
-  		};
-  };
-end;
-
-if GAMESTATE:IsCourseMode() then
-t[#t+1] = Def.ActorFrame {
-  InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y-170-18;);
-  OnCommand=cmd(zoomx,0.8;diffusealpha,0;decelerate,0.4;zoomx,1;diffusealpha,1;);
-  OffCommand=cmd(decelerate,0.4;diffusealpha,0;);
-  Def.Quad {
-          InitCommand=cmd(zoomto,300,130;diffuse,color("#fce1a1");addy,18;diffusealpha,0.4;);
-  };
-  Def.Sprite {
-  		name="CourseBanner";
-      InitCommand=cmd(playcommand,"Set";);
-          SetCommand=function(self)
-          local course = GAMESTATE:GetCurrentCourse();
-    			if course then
-              if course:HasBanner() then
-                  self:Load(course:GetBannerPath())
-                  self:scaletoclipped(300,94)
-              else
-                self:Load(THEME:GetPathG("Common fallback", "banner"))
-              end
-  			  else
-  				self:diffusealpha(0)
-              end
-          end;
-  		};
-  };
-end;
-
-if not GAMESTATE:IsCourseMode() then
-t[#t+1] = Def.ActorFrame {
-	InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y-122;);
-	OnCommand=cmd(zoomx,0.8;diffusealpha,0;decelerate,0.4;zoomx,1;diffusealpha,1;);
-	OffCommand=cmd(decelerate,0.4;diffusealpha,0;);
-	LoadActor(THEME:GetPathG("ScreenWithMenuElements", "StageDisplay")) .. {
-		OnCommand=cmd(diffuse,color("#9d324e"));
-	};
-};
-end
-
-if GAMESTATE:IsCourseMode()then
-t[#t+1] = LoadFont("_roboto condensed Bold italic 24px") .. {
-		InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y-122;diffuse,color("#9d324e");zoom,1.0;uppercase,true;);
-		OnCommand=cmd(playcommand,"Set";zoomx,0.8;diffusealpha,0;decelerate,0.4;zoomx,1;diffusealpha,1);
-		OffCommand=cmd(decelerate,0.4;diffusealpha,0;);
-		SetCommand=function(self)
-			if GAMESTATE:GetPlayMode() == 'PlayMode_Nonstop' then
-				self:settext("Nonstop Course")
-			elseif GAMESTATE:GetPlayMode() == 'PlayMode_Oni' then
-				self:settext("Oni Course")
-			elseif GAMESTATE:GetPlayMode() == 'PlayMode_Endless' then
-				self:settext("Endless")
-			end;
-		end;
-		};
-end
-
+t[#t+1] = StandardDecorationFromFileOptional("LifeDifficulty","LifeDifficulty");
+t[#t+1] = StandardDecorationFromFileOptional("TimingDifficulty","TimingDifficulty");
 
 if gameplay_pause_count > 0 then
 	t[#t+1]= Def.BitmapText{
@@ -607,7 +317,5 @@ if gameplay_pause_count > 0 then
 	}
 end
 
-t[#t+1] = StandardDecorationFromFileOptional("LifeDifficulty","LifeDifficulty");
-t[#t+1] = StandardDecorationFromFileOptional("TimingDifficulty","TimingDifficulty");
-
 return t;
+
