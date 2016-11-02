@@ -33,5 +33,5 @@ local t = Def.ActorFrame {};
 	};
 	
 	t[#t+1] = StandardDecorationFromFileOptional("StageDisplay","StageDisplay");
-	
+	t[#t+1]= LoadActor(THEME:GetPathG("", "pause_menu"))
 return t

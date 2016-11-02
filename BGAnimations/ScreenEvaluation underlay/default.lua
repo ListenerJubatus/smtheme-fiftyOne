@@ -593,6 +593,20 @@ t[#t+1] = LoadFont("_roboto condensed Bold italic 24px") .. {
 		};
 end
 
+
+if gameplay_pause_count > 0 then
+	t[#t+1]= Def.BitmapText{
+		Font= "_roboto condensed 24px",
+		Text= THEME:GetString("PauseMenu", "pause_count") .. ": " .. gameplay_pause_count,
+		InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_BOTTOM-100+26;);
+		OnCommand=function(self)
+			self:diffuse(color("#512232")):zoom(0.8);
+			self:diffusealpha(0):sleep(0.5):smooth(0.3):diffusealpha(1);
+		end;
+		OffCommand=cmd(decelerate,0.3;diffusealpha,0);
+	}
+end
+
 t[#t+1] = StandardDecorationFromFileOptional("LifeDifficulty","LifeDifficulty");
 t[#t+1] = StandardDecorationFromFileOptional("TimingDifficulty","TimingDifficulty");
 
