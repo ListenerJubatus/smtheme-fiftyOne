@@ -1,19 +1,28 @@
 local t = Def.ActorFrame {};
 
 t[#t+1] = Def.ActorFrame {
-  FOV=90;
-  InitCommand=cmd(Center);
-	Def.Quad {
-		InitCommand=cmd(scaletoclipped,SCREEN_WIDTH,SCREEN_HEIGHT);
-		OnCommand=cmd(diffuse,color("#fdbe28");diffusebottomedge,color("#f67849"));
+	LoadActor("_base") .. {
+		InitCommand=cmd(zoomto,SCREEN_WIDTH,SCREEN_HEIGHT;x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;);
 	};
 	Def.ActorFrame {
-    InitCommand=cmd(diffusealpha,0.2;);
-		LoadActor("_checkerboard") .. {
-			InitCommand=cmd(rotationy,0;rotationz,0;rotationx,-90/4*3.5;zoomto,SCREEN_WIDTH*2,SCREEN_HEIGHT*2;customtexturerect,0,0,SCREEN_WIDTH*4/256,SCREEN_HEIGHT*4/256);
-			OnCommand=cmd(texcoordvelocity,0,0.25;diffuse,color("#ffffff");fadetop,1);
-		};
+		OnCommand=cmd(diffusealpha,1;diffuseshift;effectcolor1,color("1,1,1,0.1");effectcolor2,color("1,1,1,0.3");effectperiod,10);
 	};
+	LoadActor("_tunnel1") .. {
+		InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;blend,'BlendMode_Add';rotationz,-20);
+		OnCommand=cmd(zoom,1.75;diffusealpha,0.25;spin;effectmagnitude,0,0,11;);
+	};		
+	LoadActor("_tunnel1") .. {
+		InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;blend,'BlendMode_Add';rotationz,-10);
+		OnCommand=cmd(zoom,1.0;diffusealpha,0.20;spin;effectmagnitude,0,0,-11;);
+	};
+	LoadActor("_tunnel1") .. {
+		InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;blend,'BlendMode_Add';rotationz,0);
+		OnCommand=cmd(zoom,0.5;diffusealpha,0.15;spin;effectmagnitude,0,0,11;);
+	};		
+	LoadActor("_tunnel1") .. {
+		InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;blend,'BlendMode_Add';rotationz,-10);
+		OnCommand=cmd(zoom,0.2;diffusealpha,0.10;spin;effectmagnitude,0,0,-11;);
+	};		
 };
 
 return t;

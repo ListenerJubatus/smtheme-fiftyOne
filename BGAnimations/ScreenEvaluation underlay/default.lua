@@ -62,9 +62,6 @@ local mid_pane = Def.ActorFrame {
 		end
 	},
 	-- Banner frame.
-	LoadActor("_underbanner") .. {
-		InitCommand=cmd(x,_screen.cx;y,_screen.cy-172;zoom,0.8)
-	},
 	LoadActor("_bannerframe") .. {
 		InitCommand=cmd(x,_screen.cx;y,_screen.cy-172;zoom,0.8)
 	}
@@ -73,8 +70,8 @@ local mid_pane = Def.ActorFrame {
 
 -- Text that's slapped on top of the banner frame.
 if not GAMESTATE:IsCourseMode() then
-	mid_pane[#mid_pane+1] = LoadActor(THEME:GetPathG("ScreenWithMenuElements", "StageDisplay")) .. {
-		OnCommand=cmd(x,_screen.cx;y,_screen.cy-135;diffuse,color("#9d324e"))
+	mid_pane[#mid_pane+1] = LoadActor(THEME:GetPathG("ScreenEvaluation", "StageDisplay")) .. {
+		OnCommand=cmd(x,_screen.cx;y,_screen.cy-98;diffuse,color("#9d324e"))
 	}
 else
 	mid_pane[#mid_pane+1] = Def.BitmapText {
@@ -98,7 +95,7 @@ for i, v in ipairs(eval_lines) do
 		InitCommand=cmd(x,_screen.cx;y,(_screen.cy/1.4)+(spacing)),
 		
 		Def.Quad {
-			InitCommand=cmd(zoomto,200,36;diffuse,JudgmentLineToColor(cur_line);diffusealpha,0.75;);
+			InitCommand=cmd(zoomto,400,36;diffuse,JudgmentLineToColor(cur_line);diffusealpha,0.75;fadeleft,0.5;faderight,0.5;);
 		};
 	
 		Def.BitmapText {
@@ -126,7 +123,7 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 		local spacing = 38*i
 		eval_parts[#eval_parts+1] = Def.BitmapText {
 			Font = "_overpass 36px",
-			InitCommand=cmd(x,_screen.cx + step_count_offs;y,(_screen.cy/1.4)+(spacing);diffuse,color("#9d324e");zoom,0.75;diffusealpha,1.0;horizalign,center),
+			InitCommand=cmd(x,_screen.cx + step_count_offs;y,(_screen.cy/1.4)+(spacing);diffuse,color("#9d324e");zoom,0.75;diffusealpha,1.0;horizalign,center;shadowlength,1),
 			OnCommand=function(self)
 				self:settext(GetJLineValue(v, p))
 			end
@@ -136,7 +133,7 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 	-- Primary score.
 	eval_parts[#eval_parts+1] = Def.BitmapText {
 		Font = "_overpass 36px",
-		InitCommand=cmd(x,_screen.cx + (grade_parts_offs * 0.72);y,(_screen.cy/1.7)+350;diffuse,ColorMidTone(PlayerColor(p));zoom,1),
+		InitCommand=cmd(x,_screen.cx + (grade_parts_offs * 0.72);y,(_screen.cy/1.7)+350;diffuse,ColorMidTone(PlayerColor(p));zoom,1;shadowlength,1),
 		OnCommand=function(self)
 			self:settext(GetPlScore(p, "primary"))
 			if string.find(p, "P1") then
@@ -149,7 +146,7 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 	-- Secondary score.
 	eval_parts[#eval_parts+1] = Def.BitmapText {
 		Font = "_overpass 36px",
-		InitCommand=cmd(x,_screen.cx + (grade_parts_offs * 0.72);y,(_screen.cy/1.7)+378;diffuse,ColorMidTone(PlayerColor(p));zoom,0.75),
+		InitCommand=cmd(x,_screen.cx + (grade_parts_offs * 0.72);y,(_screen.cy/1.7)+378;diffuse,ColorMidTone(PlayerColor(p));zoom,0.75;shadowlength,1),
 		OnCommand=function(self)
 			self:settext(GetPlScore(p, "secondary"))
 			if string.find(p, "P1") then
@@ -162,10 +159,10 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 	
 	-- Letter grade and associated parts.
 	eval_parts[#eval_parts+1] = Def.ActorFrame{
-		InitCommand=cmd(x,_screen.cx + grade_parts_offs;y,_screen.cy/1.93),
+		InitCommand=cmd(x,_screen.cx + grade_parts_offs;y,_screen.cy/1.91),
 		
 		Def.Quad {
-			InitCommand=cmd(zoomto,140,120;diffuse,color("#fce1a1");diffusealpha,0.4)
+			InitCommand=cmd(zoomto,190,115;diffuse,color("#fce1a1");diffusealpha,0.4)
 		},
 		
 		LoadActor(THEME:GetPathG("GradeDisplay", "Grade " .. p_grade)) .. {
@@ -194,29 +191,11 @@ if GAMESTATE:IsHumanPlayer(PLAYER_1) == true then
 	if GAMESTATE:IsCourseMode() == false then
 	-- Difficulty banner
 	t[#t+1] = Def.ActorFrame {
-	  InitCommand=cmd(x,SCREEN_CENTER_X-223;y,SCREEN_CENTER_Y-170;zoom,0.6;visible,not GAMESTATE:IsCourseMode(););
-	  OnCommand=cmd(zoomx,0.3;diffusealpha,0;decelerate,0.4;zoomx,0.6;diffusealpha,1;);
+	  InitCommand=cmd(x,_screen.cx -320;y,_screen.cy-98;visible,not GAMESTATE:IsCourseMode(););
+	  OnCommand=cmd(zoomx,0.3;diffusealpha,0;decelerate,0.4;zoomx,1;diffusealpha,1;);
 	  OffCommand=cmd(decelerate,0.4;diffusealpha,0;);
-		LoadActor(THEME:GetPathG("difficulty", "BannerBase")) .. {
-		  OnCommand=cmd(playcommand,"Set";);
-		  CurrentStepsP1ChangedMessageCommand=cmd(playcommand,"Set";);
-		  SetCommand=function(self)
-			stepsP1 = GAMESTATE:GetCurrentSteps(PLAYER_1)
-			local song = GAMESTATE:GetCurrentSong();
-			if song then
-			  if stepsP1 ~= nil then
-				local st = stepsP1:GetStepsType();
-				local diff = stepsP1:GetDifficulty();
-				local courseType = GAMESTATE:IsCourseMode() and SongOrCourse:GetCourseType() or nil;
-				local cd = GetCustomDifficulty(st, diff, courseType);
-				self:diffuse(CustomDifficultyToColor(cd));
-			  end
-			end
-		  end;
-		};
-
-		LoadFont("StepsDisplay meter") .. {
-			InitCommand=cmd(addy,26;zoom,1;);
+	  LoadFont("Common Italic Condensed") .. {
+			InitCommand=cmd(zoom,1;horizalign,center;);
 			OnCommand=cmd(playcommand,"Set";);
 			CurrentStepsP1ChangedMessageCommand=cmd(playcommand,"Set";);
 			ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set";);
@@ -229,8 +208,8 @@ if GAMESTATE:IsHumanPlayer(PLAYER_1) == true then
 				  local diff = stepsP1:GetDifficulty();
 				  local courseType = GAMESTATE:IsCourseMode() and SongOrCourse:GetCourseType() or nil;
 				  local cd = GetCustomDifficulty(st, diff, courseType);
-				  self:settext(stepsP1:GetMeter())
-				  self:diffuse(ColorDarkTone(CustomDifficultyToColor(cd)));
+				  self:settext(string.upper(THEME:GetString("CustomDifficulty",ToEnumShortString(diff))));
+				  self:diffuse(ColorDarkTone(CustomDifficultyToColor(cd)));				  
 				else
 				  self:settext("")
 				end
@@ -250,43 +229,25 @@ if GAMESTATE:IsHumanPlayer(PLAYER_2) == true then
 	if GAMESTATE:IsCourseMode() == false then
 	-- Difficulty banner
 	t[#t+1] = Def.ActorFrame {
-	  InitCommand=cmd(x,SCREEN_CENTER_X+223;y,SCREEN_CENTER_Y-170;zoom,0.6;visible,not GAMESTATE:IsCourseMode(););
-	  OnCommand=cmd(zoomx,0.3;diffusealpha,0;decelerate,0.4;zoomx,0.6;diffusealpha,1;);
+	  InitCommand=cmd(x,_screen.cx+320;y,_screen.cy-98;visible,not GAMESTATE:IsCourseMode(););
+	  OnCommand=cmd(zoomx,0.3;diffusealpha,0;decelerate,0.4;zoomx,1;diffusealpha,1;);
 	  OffCommand=cmd(decelerate,0.4;diffusealpha,0;);
-		LoadActor(THEME:GetPathG("difficulty", "BannerBase")) .. {
-		  OnCommand=cmd(playcommand,"Set";);
-		  CurrentStepsP1ChangedMessageCommand=cmd(playcommand,"Set";);
-		  SetCommand=function(self)
-			stepsP1 = GAMESTATE:GetCurrentSteps(PLAYER_2)
-			local song = GAMESTATE:GetCurrentSong();
-			if song then
-			  if stepsP1 ~= nil then
-				local st = stepsP1:GetStepsType();
-				local diff = stepsP1:GetDifficulty();
-				local courseType = GAMESTATE:IsCourseMode() and SongOrCourse:GetCourseType() or nil;
-				local cd = GetCustomDifficulty(st, diff, courseType);
-				self:diffuse(CustomDifficultyToColor(cd));
-			  end
-			end
-		  end;
-		};
-
-		LoadFont("StepsDisplay meter") .. {
-			InitCommand=cmd(addy,26;zoom,1;);
+	  LoadFont("Common Italic Condensed") .. {
+			InitCommand=cmd(zoom,1;horizalign,center;);
 			OnCommand=cmd(playcommand,"Set";);
-			CurrentStepsP1ChangedMessageCommand=cmd(playcommand,"Set";);
+			CurrentStepsP2ChangedMessageCommand=cmd(playcommand,"Set";);
 			ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set";);
 			SetCommand=function(self)
-			stepsP1 = GAMESTATE:GetCurrentSteps(PLAYER_2)
+			stepsP2 = GAMESTATE:GetCurrentSteps(PLAYER_2)
 			local song = GAMESTATE:GetCurrentSong();
 			  if song then
-				if stepsP1 ~= nil then
-				  local st = stepsP1:GetStepsType();
-				  local diff = stepsP1:GetDifficulty();
+				if stepsP2 ~= nil then
+				  local st = stepsP2:GetStepsType();
+				  local diff = stepsP2:GetDifficulty();
 				  local courseType = GAMESTATE:IsCourseMode() and SongOrCourse:GetCourseType() or nil;
 				  local cd = GetCustomDifficulty(st, diff, courseType);
-				  self:settext(stepsP1:GetMeter())
-				  self:diffuse(ColorDarkTone(CustomDifficultyToColor(cd)));
+				  self:settext(string.upper(THEME:GetString("CustomDifficulty",ToEnumShortString(diff))));
+				  self:diffuse(ColorDarkTone(CustomDifficultyToColor(cd)));				  
 				else
 				  self:settext("")
 				end

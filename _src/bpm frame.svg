@@ -82,11 +82,11 @@
        inkscape:collect="always"
        id="linearGradient4157">
       <stop
-         style="stop-color:#d48757;stop-opacity:1;"
+         style="stop-color:#e79f61;stop-opacity:1"
          offset="0"
          id="stop4159" />
       <stop
-         style="stop-color:#fabc6c;stop-opacity:1"
+         style="stop-color:#fdf8be;stop-opacity:1"
          offset="1"
          id="stop4161" />
     </linearGradient>
@@ -134,9 +134,7 @@
        width="282.89355"
        height="53.702026"
        x="122.53921"
-       y="981.8219"
-       rx="4.5440917"
-       ry="4.5440917" />
+       y="981.8219" />
   </g>
   <g
      inkscape:groupmode="layer"
