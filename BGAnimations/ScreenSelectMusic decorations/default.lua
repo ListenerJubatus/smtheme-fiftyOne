@@ -81,7 +81,7 @@ t[#t+1] = LoadActor("_bpmbg") .. {
 		};
 
 t[#t+1] = Def.ActorFrame {
-    InitCommand=cmd(x,SCREEN_CENTER_X-330;draworder,126);
+    InitCommand=cmd(x,SCREEN_CENTER_X-330+6;draworder,126);
     OnCommand=cmd(diffusealpha,0;smooth,0.3;diffusealpha,1;);
     OffCommand=cmd(smooth,0.3;diffusealpha,0;);
     -- Length
@@ -438,8 +438,8 @@ t[#t+1] = Def.ActorFrame {
     InitCommand=cmd(draworder,126;visible,not GAMESTATE:IsCourseMode(););
     OnCommand=cmd(diffusealpha,0;smooth,0.3;diffusealpha,1;);
     OffCommand=cmd(linear,0.3;diffusealpha,0;);
-    LoadFont("Common Italic Condensed") .. {
-          InitCommand=cmd(horizalign,right;x,SCREEN_CENTER_X-198+68;y,SCREEN_CENTER_Y-64+8;diffuse,color("#512232");horizalign,right;visible,not GAMESTATE:IsCourseMode(););
+    LoadFont("Common Condensed") .. {
+          InitCommand=cmd(horizalign,right;x,SCREEN_CENTER_X-198+69;y,SCREEN_CENTER_Y-64+2;diffuse,color("#512232");horizalign,right;visible,not GAMESTATE:IsCourseMode(););
           OnCommand=cmd(queuecommand,"Set");
           ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set");
           SetCommand=function(self)

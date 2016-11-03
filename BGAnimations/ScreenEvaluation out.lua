@@ -1,6 +1,7 @@
 local raveChildren
 
 local bg = Def.ActorFrame{
+	if GAMESTATE:GetPlayMode() == 'PlayMode_Rave' then
 	Def.ActorFrame{
 		Name="RaveMessages";
 		InitCommand=function(self)
@@ -40,6 +41,7 @@ local bg = Def.ActorFrame{
 			StartTransitioningCommand=cmd(sleep,1;linear,0.5;cropbottom,0;fadebottom,0;sleep,1.75;linear,0.25;diffusealpha,0);
 		};
 	};
+	end;
 };
 
 return bg
