@@ -95,7 +95,7 @@ for i, v in ipairs(eval_lines) do
 		InitCommand=cmd(x,_screen.cx;y,(_screen.cy/1.4)+(spacing)),
 		
 		Def.Quad {
-			InitCommand=cmd(zoomto,400,36;diffuse,JudgmentLineToColor(cur_line);diffusealpha,0.75;fadeleft,0.5;faderight,0.5;);
+			InitCommand=cmd(zoomto,400,36;diffuse,JudgmentLineToColor(cur_line);fadeleft,0.5;faderight,0.5;);
 		};
 	
 		Def.BitmapText {
@@ -166,13 +166,13 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 		},
 		
 		LoadActor(THEME:GetPathG("GradeDisplay", "Grade " .. p_grade)) .. {
-			InitCommand=cmd(zoom,0.75);
+			InitCommand=cmd(zoom,0.75;addy,-6);
 			OnCommand=cmd(diffusealpha,0;zoom,1;sleep,0.63;decelerate,0.4;zoom,0.75;diffusealpha,1)
 		},
 		
 		Def.BitmapText {
 			Font = "_roboto condensed Bold italic 24px",
-			InitCommand=cmd(diffuse,Color.White;zoom,1.0;addy,38;maxwidth,200;uppercase,true),
+			InitCommand=cmd(diffuse,Color.White;zoom,1.0;addy,38;maxwidth,180;uppercase,true;diffuse,color("#4A4038");diffusetopedge,color("#A68844");),
 			OnCommand=function(self)
 				if STATSMAN:GetCurStageStats():GetPlayerStageStats(p):GetStageAward() then
 					self:settext(THEME:GetString( "StageAward", ToEnumShortString(STATSMAN:GetCurStageStats():GetPlayerStageStats(p):GetStageAward()) ))

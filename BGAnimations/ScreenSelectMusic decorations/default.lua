@@ -463,4 +463,6 @@ t[#t+1] = Def.ActorFrame{
 	};
 };
 
+t[#t+1] = StandardDecorationFromFileOptional("AlternateHelpDisplay","AlternateHelpDisplay");
+
 return t;
