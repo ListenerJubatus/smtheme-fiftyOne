@@ -256,7 +256,7 @@ for pn, menu in pairs(menus) do
 	frame[#frame+1]= Def.BitmapText{
 		Font= "Common Condensed", Text= "READY!", InitCommand= function(self)
 			ready_indicators[pn]= self
-			self:xy(menu_x[pn], 146):zoom(1.5):diffuse(Color.Green):diffusealpha(0)
+			self:xy(menu_x[pn], 146):zoom(1.5):diffuse(Color.Green):strokecolor(color("#2E540F")):diffusealpha(0)
 		end,
 		show_readyCommand= function(self)
 			self:stoptweening():decelerate(.5):diffusealpha(1)

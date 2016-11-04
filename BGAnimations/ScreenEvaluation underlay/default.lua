@@ -123,9 +123,14 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 		local spacing = 38*i
 		eval_parts[#eval_parts+1] = Def.BitmapText {
 			Font = "_overpass 36px",
-			InitCommand=cmd(x,_screen.cx + step_count_offs;y,(_screen.cy/1.4)+(spacing);diffuse,color("#9d324e");zoom,0.75;diffusealpha,1.0;horizalign,center;shadowlength,1),
+			InitCommand=cmd(x,_screen.cx + step_count_offs;y,(_screen.cy/1.4)+(spacing);diffuse,color("#9d324e");zoom,0.75;diffusealpha,1.0;shadowlength,1),
 			OnCommand=function(self)
 				self:settext(GetJLineValue(v, p))
+				if string.find(p, "P1") then
+					self:horizalign(right)
+				else
+					self:horizalign(left)
+				end	
 			end
 		}
 	end

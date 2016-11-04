@@ -22,24 +22,24 @@ local t = LoadFallbackB();
 
 -- Sort and stage display tiles
 t[#t+1] = Def.ActorFrame {
-    InitCommand=cmd(x,SCREEN_CENTER_X-228;visible,not GAMESTATE:IsCourseMode(););
+    InitCommand=cmd(x,SCREEN_CENTER_X+228+40;visible,not GAMESTATE:IsCourseMode(););
     OffCommand=cmd(linear,0.3;diffusealpha,0;);
-    Def.Quad {
-        InitCommand=cmd(zoomto,160,50;diffuse,color("#fce1a1");diffusealpha,0.7;y,SCREEN_CENTER_Y+205+60;fadetop,1;);
-    };
+	LoadActor(THEME:GetPathG("", "_stageFrame"))  .. {
+	    InitCommand=cmd(y,SCREEN_CENTER_Y+223+54;diffusealpha,0.9;zoom,1.5);
+	};
 
-    LoadFont("Common Normal") .. {
-            InitCommand=cmd(zoom,0.75;y,SCREEN_CENTER_Y+223+54;diffuse,color("#000000");diffusealpha,0.5;);
+    LoadFont("Common Condensed") .. {
+            InitCommand=cmd(zoom,1;y,SCREEN_CENTER_Y+223+54;diffuse,color("#FFFFFF");diffusealpha,0.75;horizalign,left;addx,-115;);
             OnCommand=cmd(queuecommand,"Set");
             ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set");
             SetCommand=function(self)
-                self:settext("SORT");
+                self:settext("SORT:");
                 self:queuecommand("Refresh");
             end;
     };
 
-    LoadFont("Common Italic Condensed") .. {
-          InitCommand=cmd(zoom,0.8;y,SCREEN_CENTER_Y+198+60;maxwidth,SCREEN_WIDTH;diffuse,color("#692033");uppercase,true;);
+    LoadFont("Common Normal") .. {
+          InitCommand=cmd(zoom,1;y,SCREEN_CENTER_Y+223+54;maxwidth,SCREEN_WIDTH;addx,115;diffuse,color("#FFFFFF");uppercase,true;horizalign,right;);
           OnCommand=cmd(queuecommand,"Set");
           SortOrderChangedMessageCommand=cmd(queuecommand,"Set");
           ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set");
@@ -49,7 +49,6 @@ t[#t+1] = Def.ActorFrame {
 					self:finishtweening();
 					self:smooth(0.4);
 					self:diffusealpha(0);
-					self:addx(6);
                     self:settext(SortOrderToLocalizedString(sortorder));
                     self:queuecommand("Refresh"):stoptweening():diffusealpha(0):smooth(0.3):diffusealpha(1)
 				else
@@ -58,15 +57,6 @@ t[#t+1] = Def.ActorFrame {
                end
           end;
     };
-};
-
-t[#t+1] = Def.ActorFrame {
-    OffCommand=cmd(sleep,0.1;linear,0.2;diffusealpha,0;);
-    InitCommand=cmd(x,SCREEN_CENTER_X-228;visible,not GAMESTATE:IsCourseMode(););
-
-	StandardDecorationFromFileOptional("StageDisplay","StageDisplay") .. {
-		InitCommand=cmd(zoom,1);
-	};
 };
 
 -- Genre/Artist data
@@ -464,5 +454,15 @@ t[#t+1] = Def.ActorFrame{
 };
 
 t[#t+1] = StandardDecorationFromFileOptional("AlternateHelpDisplay","AlternateHelpDisplay");
+
+
+t[#t+1] = Def.ActorFrame {
+    OffCommand=cmd(sleep,0.1;linear,0.2;diffusealpha,0;);
+    InitCommand=cmd(x,SCREEN_CENTER_X-228;visible,not GAMESTATE:IsCourseMode(););
+
+	StandardDecorationFromFileOptional("StageDisplay","StageDisplay") .. {
+		InitCommand=cmd(zoom,1);
+	};
+};
 
 return t;

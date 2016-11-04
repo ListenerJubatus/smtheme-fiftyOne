@@ -4,6 +4,9 @@ local curStageIndex = GAMESTATE:GetCurrentStageIndex();
 local t = Def.ActorFrame {};
 
 t[#t+1] = Def.ActorFrame {
+	LoadActor(THEME:GetPathG("", "_stageFrame"))  .. {
+	    InitCommand=cmd(diffusealpha,0.85;zoom,1.25);
+	};
 	LoadFont("Common Italic Condensed") .. {
 		InitCommand=cmd(y,-1;zoom,1.2;);
 		BeginCommand=function(self)
@@ -30,7 +33,7 @@ t[#t+1] = Def.ActorFrame {
 				end;
 			end;
 			-- StepMania is being stupid so we have to do this here;
-			self:diffuse(StageToColor(curStage)):diffusebottomedge(ColorMidTone(StageToColor(curStage)));
+			self:diffuse(ColorLightTone(StageToColor(curStage))):diffusebottomedge(StageToColor(curStage));
 			self:diffusealpha(0):smooth(0.3):diffusealpha(1);
 		end;
 	};
