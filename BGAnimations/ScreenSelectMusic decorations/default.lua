@@ -22,14 +22,14 @@ local t = LoadFallbackB();
 
 -- Sort and stage display tiles
 t[#t+1] = Def.ActorFrame {
-    InitCommand=cmd(x,SCREEN_CENTER_X+228+40;visible,not GAMESTATE:IsCourseMode(););
+    InitCommand=cmd(x,SCREEN_CENTER_X+228+40;y,SCREEN_CENTER_Y-223;visible,not GAMESTATE:IsCourseMode(););
     OffCommand=cmd(linear,0.3;diffusealpha,0;);
 	LoadActor(THEME:GetPathG("", "_stageFrame"))  .. {
-	    InitCommand=cmd(y,SCREEN_CENTER_Y+223+54;diffusealpha,0.9;zoom,1.5);
+	    InitCommand=cmd(diffusealpha,0.9;zoom,1.5);
 	};
 
     LoadFont("Common Condensed") .. {
-            InitCommand=cmd(zoom,1;y,SCREEN_CENTER_Y+223+54;diffuse,color("#FFFFFF");diffusealpha,0.75;horizalign,left;addx,-115;);
+            InitCommand=cmd(zoom,1;diffuse,color("#FFFFFF");diffusealpha,0.75;horizalign,left;addx,-115;);
             OnCommand=cmd(queuecommand,"Set");
             ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set");
             SetCommand=function(self)
@@ -39,7 +39,7 @@ t[#t+1] = Def.ActorFrame {
     };
 
     LoadFont("Common Normal") .. {
-          InitCommand=cmd(zoom,1;y,SCREEN_CENTER_Y+223+54;maxwidth,SCREEN_WIDTH;addx,115;diffuse,color("#FFFFFF");uppercase,true;horizalign,right;);
+          InitCommand=cmd(zoom,1;maxwidth,SCREEN_WIDTH;addx,115;diffuse,color("#FFFFFF");uppercase,true;horizalign,right;);
           OnCommand=cmd(queuecommand,"Set");
           SortOrderChangedMessageCommand=cmd(queuecommand,"Set");
           ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set");

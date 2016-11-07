@@ -1,7 +1,7 @@
 -- ...So I realize that I completely ignored almost each and every
 -- metrics-bound element this screen could use, but it's okay, right?
 
-local t = Def.ActorFrame{}
+local t = LoadFallbackB()
 
 -- A very useful table...
 local eval_lines = {
@@ -212,8 +212,8 @@ if GAMESTATE:IsHumanPlayer(PLAYER_1) == true then
 	  InitCommand=cmd(horizalign,center;x,_screen.cx + grade_parts_offs;y,_screen.cy-98;visible,not GAMESTATE:IsCourseMode(););
 	  OnCommand=cmd(zoomx,0.3;diffusealpha,0;sleep,0.5;decelerate,0.4;zoomx,1;diffusealpha,1;);
 	  OffCommand=cmd(decelerate,0.4;diffusealpha,0;);
-	  LoadFont("Common Italic Condensed") .. {
-			InitCommand=cmd(zoom,1;horizalign,center;);
+	  LoadFont("Common Fallback") .. {
+			InitCommand=cmd(zoom,1;horizalign,center;shadowlength,1);
 			OnCommand=cmd(playcommand,"Set";);
 			CurrentStepsP1ChangedMessageCommand=cmd(playcommand,"Set";);
 			ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set";);
@@ -250,8 +250,8 @@ if GAMESTATE:IsHumanPlayer(PLAYER_2) == true then
 	  InitCommand=cmd(horizalign,center;x,_screen.cx + grade_parts_offs;y,_screen.cy-98;visible,not GAMESTATE:IsCourseMode(););
 	  OnCommand=cmd(zoomx,0.3;diffusealpha,0;sleep,0.5;decelerate,0.4;zoomx,1;diffusealpha,1;);
 	  OffCommand=cmd(decelerate,0.4;diffusealpha,0;);
-	  LoadFont("Common Italic Condensed") .. {
-			InitCommand=cmd(zoom,1;horizalign,center;);
+	  LoadFont("Common Fallback") .. {
+			InitCommand=cmd(zoom,1;horizalign,center;shadowlength,1);
 			OnCommand=cmd(playcommand,"Set";);
 			CurrentStepsP2ChangedMessageCommand=cmd(playcommand,"Set";);
 			ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set";);
