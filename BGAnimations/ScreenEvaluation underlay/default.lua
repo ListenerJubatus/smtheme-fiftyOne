@@ -48,7 +48,6 @@ end
 
 -- Shared portion.
 local mid_pane = Def.ActorFrame {
-	OffCommand=cmd(decelerate,0.4;diffusealpha,0),
 	-- Song/course banner.
 	Def.Sprite {
 		InitCommand=function(self)
@@ -96,11 +95,23 @@ for i, v in ipairs(eval_lines) do
 		
 		Def.Quad {
 			InitCommand=cmd(zoomto,400,36;diffuse,JudgmentLineToColor(cur_line);fadeleft,0.5;faderight,0.5;);
+			OnCommand=function(self)			
+				self:diffusealpha(0):sleep(0.1 * i):decelerate(0.9):diffusealpha(1)
+			end;
+			OffCommand=function(self)			
+				self:sleep(0.1 * i):decelerate(0.3):diffusealpha(0)
+			end;			
 		};
 	
 		Def.BitmapText {
 			Font = "_overpass 36px",
-			InitCommand=cmd(zoom,0.6;diffuse,color("#000000BB");settext,string.upper(JudgmentLineToLocalizedString(cur_line)))
+			InitCommand=cmd(zoom,0.6;diffuse,color("#000000");settext,string.upper(JudgmentLineToLocalizedString(cur_line)));
+			OnCommand=function(self)			
+				self:diffusealpha(0):sleep(0.1 * i):decelerate(0.9):diffusealpha(0.8)
+			end;
+			OffCommand=function(self)			
+				self:sleep(0.1 * i):decelerate(0.3):diffusealpha(0)
+			end;
 		}
 	}
 end
@@ -130,35 +141,29 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 					self:horizalign(right)
 				else
 					self:horizalign(left)
-				end	
-			end
+				end
+				self:diffusealpha(0):sleep(0.1 * i):decelerate(0.9):diffusealpha(1)
+			end;
+			OffCommand=function(self)			
+				self:sleep(0.1 * i):decelerate(0.3):diffusealpha(0)
+			end;
 		}
 	end
 	
 	-- Primary score.
 	eval_parts[#eval_parts+1] = Def.BitmapText {
 		Font = "_overpass 36px",
-		InitCommand=cmd(x,_screen.cx + (grade_parts_offs * 0.72);y,(_screen.cy/1.7)+350;diffuse,ColorMidTone(PlayerColor(p));zoom,1;shadowlength,1),
+		InitCommand=cmd(horizalign,center;x,_screen.cx + (grade_parts_offs);y,(_screen.cy-65);diffuse,ColorMidTone(PlayerColor(p));zoom,1;shadowlength,1),
 		OnCommand=function(self)
 			self:settext(GetPlScore(p, "primary"))
-			if string.find(p, "P1") then
-				self:horizalign(right)
-			else
-				self:horizalign(left)
-			end
 		end
 	}
 	-- Secondary score.
 	eval_parts[#eval_parts+1] = Def.BitmapText {
 		Font = "_overpass 36px",
-		InitCommand=cmd(x,_screen.cx + (grade_parts_offs * 0.72);y,(_screen.cy/1.7)+378;diffuse,ColorMidTone(PlayerColor(p));zoom,0.75;shadowlength,1),
+		InitCommand=cmd(horizalign,center;x,_screen.cx + (grade_parts_offs);y,(_screen.cy-65)+30;diffuse,ColorDarkTone(PlayerColor(p));zoom,0.75;shadowlength,1),
 		OnCommand=function(self)
 			self:settext(GetPlScore(p, "secondary"))
-			if string.find(p, "P1") then
-				self:horizalign(right)
-			else
-				self:horizalign(left)
-			end
 		end
 	}
 	
@@ -171,8 +176,15 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 		},
 		
 		LoadActor(THEME:GetPathG("GradeDisplay", "Grade " .. p_grade)) .. {
-			InitCommand=cmd(zoom,0.75;addy,-6);
-			OnCommand=cmd(diffusealpha,0;zoom,1;sleep,0.63;decelerate,0.4;zoom,0.75;diffusealpha,1)
+			InitCommand=cmd(zoom,0.75;);
+			OnCommand=function(self)
+			        self:diffusealpha(0):zoom(1):sleep(0.63):decelerate(0.4):zoom(0.75):diffusealpha(1)
+					if STATSMAN:GetCurStageStats():GetPlayerStageStats(p):GetStageAward() then
+					  self:sleep(0.1):decelerate(0.4):addy(-6);
+					else
+					  self:addy(0);
+					end;
+			end;
 		},
 		
 		Def.BitmapText {
@@ -181,7 +193,7 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 			OnCommand=function(self)
 				if STATSMAN:GetCurStageStats():GetPlayerStageStats(p):GetStageAward() then
 					self:settext(THEME:GetString( "StageAward", ToEnumShortString(STATSMAN:GetCurStageStats():GetPlayerStageStats(p):GetStageAward()) ))
-					self:diffusealpha(0):zoomx(0.5):sleep(0.63):decelerate(0.4):zoomx(1):diffusealpha(1)
+					self:diffusealpha(0):zoomx(0.5):sleep(1):decelerate(0.4):zoomx(1):diffusealpha(1)
 				end
 			end
 		}
@@ -195,9 +207,10 @@ t[#t+1] = eval_parts
 if GAMESTATE:IsHumanPlayer(PLAYER_1) == true then
 	if GAMESTATE:IsCourseMode() == false then
 	-- Difficulty banner
+	local grade_parts_offs = -320
 	t[#t+1] = Def.ActorFrame {
-	  InitCommand=cmd(x,_screen.cx -320;y,_screen.cy-98;visible,not GAMESTATE:IsCourseMode(););
-	  OnCommand=cmd(zoomx,0.3;diffusealpha,0;decelerate,0.4;zoomx,1;diffusealpha,1;);
+	  InitCommand=cmd(horizalign,center;x,_screen.cx + grade_parts_offs;y,_screen.cy-98;visible,not GAMESTATE:IsCourseMode(););
+	  OnCommand=cmd(zoomx,0.3;diffusealpha,0;sleep,0.5;decelerate,0.4;zoomx,1;diffusealpha,1;);
 	  OffCommand=cmd(decelerate,0.4;diffusealpha,0;);
 	  LoadFont("Common Italic Condensed") .. {
 			InitCommand=cmd(zoom,1;horizalign,center;);
@@ -213,7 +226,7 @@ if GAMESTATE:IsHumanPlayer(PLAYER_1) == true then
 				  local diff = stepsP1:GetDifficulty();
 				  local courseType = GAMESTATE:IsCourseMode() and SongOrCourse:GetCourseType() or nil;
 				  local cd = GetCustomDifficulty(st, diff, courseType);
-				  self:settext(string.upper(THEME:GetString("CustomDifficulty",ToEnumShortString(diff))));
+				  self:settext(string.upper(THEME:GetString("CustomDifficulty",ToEnumShortString(diff))) .. "  " .. stepsP1:GetMeter());
 				  self:diffuse(ColorDarkTone(CustomDifficultyToColor(cd)));				  
 				else
 				  self:settext("")
@@ -232,10 +245,10 @@ end;
 if GAMESTATE:IsHumanPlayer(PLAYER_2) == true then
 
 	if GAMESTATE:IsCourseMode() == false then
-	-- Difficulty banner
+	local grade_parts_offs = 320	
 	t[#t+1] = Def.ActorFrame {
-	  InitCommand=cmd(x,_screen.cx+320;y,_screen.cy-98;visible,not GAMESTATE:IsCourseMode(););
-	  OnCommand=cmd(zoomx,0.3;diffusealpha,0;decelerate,0.4;zoomx,1;diffusealpha,1;);
+	  InitCommand=cmd(horizalign,center;x,_screen.cx + grade_parts_offs;y,_screen.cy-98;visible,not GAMESTATE:IsCourseMode(););
+	  OnCommand=cmd(zoomx,0.3;diffusealpha,0;sleep,0.5;decelerate,0.4;zoomx,1;diffusealpha,1;);
 	  OffCommand=cmd(decelerate,0.4;diffusealpha,0;);
 	  LoadFont("Common Italic Condensed") .. {
 			InitCommand=cmd(zoom,1;horizalign,center;);
@@ -251,7 +264,7 @@ if GAMESTATE:IsHumanPlayer(PLAYER_2) == true then
 				  local diff = stepsP2:GetDifficulty();
 				  local courseType = GAMESTATE:IsCourseMode() and SongOrCourse:GetCourseType() or nil;
 				  local cd = GetCustomDifficulty(st, diff, courseType);
-				  self:settext(string.upper(THEME:GetString("CustomDifficulty",ToEnumShortString(diff))));
+				  self:settext(string.upper(THEME:GetString("CustomDifficulty",ToEnumShortString(diff))) .. "  " .. stepsP1:GetMeter());
 				  self:diffuse(ColorDarkTone(CustomDifficultyToColor(cd)));				  
 				else
 				  self:settext("")
