@@ -1,3 +1,9 @@
+WARNING
+-----------
+This theme _requires_ a nightly build of StepMania 5.1, because it reflects changes that make it incompatible with the current "5.1 -3" milestone.
+
+You can get them (Windows only) from the [build server](https://ci.appveyor.com/project/wolfman2000/stepmania-wm87c/history) or compile SM from source. 
+
 Introduction
 -----------
 Lambda (formerly FiftyOne) is a project to create a new, prospective default theme for StepMania 5.1.

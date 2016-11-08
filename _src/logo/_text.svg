@@ -17,7 +17,10 @@
    version="1.1"
    inkscape:version="0.91 r13725"
    style="shape-rendering:crispEdges"
-   sodipodi:docname="_text.svg">
+   sodipodi:docname="_text.svg"
+   inkscape:export-filename="C:\Apps\StepMania-dev\SM 51 3cc307\Themes\fiftyOne\Graphics\ScreenTitleMenu logo\_text (dither).png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <defs
      id="defs4998">
     <linearGradient
@@ -149,6 +152,51 @@
        y1="-5.8920002"
        x2="134.98819"
        y2="98.393715" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient6617"
+       id="linearGradient5743"
+       gradientUnits="userSpaceOnUse"
+       x1="134.98819"
+       y1="-5.8920002"
+       x2="134.98819"
+       y2="98.393715" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient6617"
+       id="linearGradient5745"
+       gradientUnits="userSpaceOnUse"
+       x1="134.98819"
+       y1="-5.8920002"
+       x2="134.98819"
+       y2="98.393715" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient6617"
+       id="linearGradient5747"
+       gradientUnits="userSpaceOnUse"
+       x1="134.98819"
+       y1="-5.8920002"
+       x2="134.98819"
+       y2="98.393715" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient6617"
+       id="linearGradient5749"
+       gradientUnits="userSpaceOnUse"
+       x1="134.98819"
+       y1="-5.8920002"
+       x2="134.98819"
+       y2="98.393715" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient6617"
+       id="linearGradient5751"
+       gradientUnits="userSpaceOnUse"
+       x1="134.98819"
+       y1="-5.8920002"
+       x2="134.98819"
+       y2="98.393715" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -189,26 +237,26 @@
     <flowRoot
        xml:space="preserve"
        id="flowRoot4136-4"
-       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.93491173px;line-height:125%;font-family:'Eligible Sans';-inkscape-font-specification:'Eligible Sans';letter-spacing:-0.00942081px;word-spacing:0px;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:url(#linearGradient5741);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.19637926px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;filter-blend-mode:normal;filter-gaussianBlur-deviation:0"
-       transform="translate(25.726101,943.25416)"><flowRegion
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.93491173px;line-height:125%;font-family:'Eligible Sans';-inkscape-font-specification:'Eligible Sans';letter-spacing:-0.00942081px;word-spacing:0px;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:url(#linearGradient5741);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.1963793px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+       transform="translate(55.440387,943.25416)"><flowRegion
          id="flowRegion4138-4"
-         style="fill:url(#linearGradient5741);fill-opacity:1"><rect
+         style="fill:url(#linearGradient5745);fill-opacity:1"><rect
            id="rect4140-5"
            width="883.39661"
            height="249.35437"
            x="-6.362855"
            y="-9.9205751"
-           style="color:#000000;letter-spacing:-0.00942081px;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:url(#linearGradient5741);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.19637926px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;filter-blend-mode:normal;filter-gaussianBlur-deviation:0" /></flowRegion><flowPara
+           style="color:#000000;letter-spacing:-0.00942081px;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:url(#linearGradient5743);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.1963793px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" /></flowRegion><flowPara
          id="flowPara4142-31"
-         style="color:#000000;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:134.26774597px;font-family:Overpass;-inkscape-font-specification:'Overpass Bold';letter-spacing:-7.53664494px;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:url(#linearGradient5741);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.19637926px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;filter-blend-mode:normal;filter-gaussianBlur-deviation:0"><flowSpan
-           style="color:#000000;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:127.74084473px;font-family:Overpass;-inkscape-font-specification:'Overpass Bold';letter-spacing:-7.53664494px;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:url(#linearGradient5741);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.19637926px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;filter-blend-mode:normal;filter-gaussianBlur-deviation:0"
+         style="color:#000000;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:134.26774597px;font-family:Overpass;-inkscape-font-specification:'Overpass Bold';letter-spacing:-7.53664494px;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:url(#linearGradient5751);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.1963793px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"><flowSpan
+           style="color:#000000;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:127.74084473px;font-family:Overpass;-inkscape-font-specification:'Overpass Bold';letter-spacing:-7.53664494px;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:url(#linearGradient5747);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.1963793px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
            id="flowSpan4185-3">S</flowSpan><flowSpan
-           style="color:#000000;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:111.8897934px;font-family:Overpass;-inkscape-font-specification:'Overpass Bold';letter-spacing:-7.53664494px;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:url(#linearGradient5741);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.19637926px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;filter-blend-mode:normal;filter-gaussianBlur-deviation:0"
+           style="color:#000000;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:111.8897934px;font-family:Overpass;-inkscape-font-specification:'Overpass Bold';letter-spacing:-7.53664494px;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:url(#linearGradient5749);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.1963793px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
            id="flowSpan4144-2">TEP</flowSpan></flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot4136-4-4"
        style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.66867352px;line-height:125%;font-family:'Eligible Sans';-inkscape-font-specification:'Eligible Sans';letter-spacing:-0.01px;word-spacing:0px;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:url(#linearGradient5646);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.26993299px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       transform="matrix(0.94208062,0,0,0.94208062,270.22363,273.55826)"><flowRegion
+       transform="matrix(0.94208062,0,0,0.94208062,299.93792,273.55826)"><flowRegion
          id="flowRegion4138-4-1"
          style="fill:url(#linearGradient5638);fill-opacity:1"><rect
            id="rect4140-5-5"
