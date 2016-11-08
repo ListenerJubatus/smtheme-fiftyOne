@@ -211,13 +211,13 @@ for pn, menu in pairs(menus) do
 			self:diffusealpha(0):zoomx(0.8):decelerate(0.3):diffusealpha(1):zoomx(1)
 		end;
 		OffCommand=function(self)
-			self:decelerate(0.3):diffusealpha(0):zoomx(0)
+			self:decelerate(0.3):diffusealpha(0)
 		end;
 	}
 	frame[#frame+1]= menu:create_actors{
 		x= menu_x[pn], y= 120, width= menu_width, height= menu_height,
 		translation_section= "notefield_options",
-		num_displays= 1, pn= pn, el_height= 32,
+		num_displays= 1, pn= pn, el_height= 36,
 		menu_sounds= {
 			pop= THEME:GetPathS("Common", "Cancel"),
 			push= THEME:GetPathS("_common", "row"),
@@ -229,10 +229,14 @@ for pn, menu in pairs(menus) do
 			dec= THEME:GetPathS("_switch", "down"),
 		},
 		display_params= {
-			el_zoom= .75, item_params= item_params, item_mt= nesty_items.value, heading_height = 48,
+			el_zoom= 0.8, item_params= item_params, item_mt= nesty_items.value, heading_height = 48,
 			on= function(self)
 				self:diffusealpha(0):decelerate(0.2):diffusealpha(1)
-			end},
+			end,
+			off= function(self)
+				self:decelerate(0.2):diffusealpha(0)
+			end,	
+			},
 	}
 	frame[#frame+1]= Def.BitmapText{
 		Font= "Common Normal", InitCommand= function(self)

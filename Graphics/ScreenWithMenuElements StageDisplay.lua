@@ -6,6 +6,9 @@ local t = Def.ActorFrame {};
 t[#t+1] = Def.ActorFrame {
 	LoadActor(THEME:GetPathG("", "_stageFrame"))  .. {
 	    InitCommand=cmd(diffusealpha,0.85;zoom,1.25);
+		OnCommand=function(self)
+			self:diffuse(ColorMidTone(StageToColor(curStage)))
+		end;
 	};
 	LoadFont("Common Italic Condensed") .. {
 		InitCommand=cmd(y,-1;zoom,1.2;);

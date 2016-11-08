@@ -24,12 +24,15 @@ local t = LoadFallbackB();
 t[#t+1] = Def.ActorFrame {
     InitCommand=cmd(x,SCREEN_CENTER_X+228+40;y,SCREEN_CENTER_Y-223;visible,not GAMESTATE:IsCourseMode(););
     OffCommand=cmd(linear,0.3;diffusealpha,0;);
-	LoadActor(THEME:GetPathG("", "_stageFrame"))  .. {
+	LoadActor(THEME:GetPathG("", "_sortFrame"))  .. {
 	    InitCommand=cmd(diffusealpha,0.9;zoom,1.5);
+		OnCommand=function(self)
+			self:diffuse(ScreenColor(SCREENMAN:GetTopScreen():GetName()));
+		end
 	};
 
     LoadFont("Common Condensed") .. {
-            InitCommand=cmd(zoom,1;diffuse,color("#FFFFFF");diffusealpha,0.75;horizalign,left;addx,-115;);
+            InitCommand=cmd(zoom,1;diffuse,color("#FFFFFF");diffusealpha,0.85;horizalign,left;addx,-115;);
             OnCommand=cmd(queuecommand,"Set");
             ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set");
             SetCommand=function(self)
