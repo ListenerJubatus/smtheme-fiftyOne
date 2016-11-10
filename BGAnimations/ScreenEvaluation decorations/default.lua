@@ -155,16 +155,22 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 		Font = "_overpass 36px",
 		InitCommand=cmd(horizalign,center;x,_screen.cx + (grade_parts_offs);y,(_screen.cy-65);diffuse,ColorMidTone(PlayerColor(p));zoom,1;shadowlength,1),
 		OnCommand=function(self)
-			self:settext(GetPlScore(p, "primary"))
-		end
+			self:settext(GetPlScore(p, "primary")):diffusealpha(0):sleep(0.5):decelerate(0.3):diffusealpha(1)
+		end;
+		OffCommand=function(self)
+			self:decelerate(0.3):diffusealpha(0)
+		end;
 	}
 	-- Secondary score.
 	eval_parts[#eval_parts+1] = Def.BitmapText {
 		Font = "_overpass 36px",
 		InitCommand=cmd(horizalign,center;x,_screen.cx + (grade_parts_offs);y,(_screen.cy-65)+30;diffuse,ColorDarkTone(PlayerColor(p));zoom,0.75;shadowlength,1),
 		OnCommand=function(self)
-			self:settext(GetPlScore(p, "secondary"))
-		end
+			self:settext(GetPlScore(p, "secondary")):diffusealpha(0):sleep(0.6):decelerate(0.3):diffusealpha(1)
+		end;
+		OffCommand=function(self)
+			self:sleep(0.1):decelerate(0.3):diffusealpha(0)
+		end;
 	}
 	
 	-- Letter grade and associated parts.
@@ -172,7 +178,11 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 		InitCommand=cmd(x,_screen.cx + grade_parts_offs;y,_screen.cy/1.91),
 		
 		Def.Quad {
-			InitCommand=cmd(zoomto,190,115;diffuse,color("#fce1a1");diffusealpha,0.4)
+			InitCommand=cmd(zoomto,190,115;diffuse,color("#fce1a1"););
+			OnCommand=function(self)
+			    self:diffusealpha(0):decelerate(0.4):diffusealpha(0.3)
+			end;
+			OffCommand=cmd(decelerate,0.3;diffusealpha,0);
 		},
 		
 		LoadActor(THEME:GetPathG("GradeDisplay", "Grade " .. p_grade)) .. {
@@ -185,6 +195,7 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 					  self:addy(0);
 					end;
 			end;
+			OffCommand=cmd(decelerate,0.3;diffusealpha,0);			
 		},
 		
 		Def.BitmapText {
@@ -195,7 +206,8 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 					self:settext(THEME:GetString( "StageAward", ToEnumShortString(STATSMAN:GetCurStageStats():GetPlayerStageStats(p):GetStageAward()) ))
 					self:diffusealpha(0):zoomx(0.5):sleep(1):decelerate(0.4):zoomx(1):diffusealpha(1)
 				end
-			end
+			end;
+			OffCommand=cmd(decelerate,0.3;diffusealpha,0);
 		}
 	}
 end

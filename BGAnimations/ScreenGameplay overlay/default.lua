@@ -12,26 +12,6 @@ local t = Def.ActorFrame {};
 	};
 	end;
 
-
-	t[#t+1] = LoadFont("TextBanner text") .. {
-			  InitCommand=cmd(zoom,1;shadowlength,1;x,SCREEN_CENTER_X;y,SCREEN_BOTTOM-55;maxwidth,350;strokecolor,color("#000000");shadowlength,1;);
-			  OnCommand=cmd(diffusealpha,0;sleep,1.3;smooth,0.6;diffusealpha,1;);
-			  OffCommand=cmd(sleep,1;decelerate,1.4;diffusealpha,0;);
-			  CurrentSongChangedMessageCommand=cmd(finishtweening;playcommand,"Set");
-			  CurrentCourseChangedMessageCommand=cmd(finishtweening;playcommand,"Set");
-			  ChangedLanguageDisplayMessageCommand=cmd(finishtweening;playcommand,"Set");
-			  SetCommand=function(self)
-				   local song = GAMESTATE:GetCurrentSong();
-				   if song then
-						self:settext(song:GetDisplayFullTitle());
-						self:playcommand("Refresh");
-					else
-						self:settext("");
-						self:playcommand("Refresh");
-				   end
-			  end;
-	};
-	
 	t[#t+1] = StandardDecorationFromFileOptional("StageDisplay","StageDisplay");
 	t[#t+1]= LoadActor(THEME:GetPathG("", "pause_menu"))
 return t
