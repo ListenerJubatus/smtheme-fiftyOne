@@ -77,17 +77,20 @@ local life_options= {
 	nesty_options.enum_player_mod_single_val("fail_immediate_continue", "FailType_ImmediateContinue", "FailSetting"),
 	nesty_options.enum_player_mod_single_val("fail_end_of_song", "FailType_EndOfSong", "FailSetting"),
 	nesty_options.enum_player_mod_single_val("fail_off", "FailType_Off", "FailSetting"),
-	nesty_options.float_player_mod_val("BatteryLives", 0, 0, 0, 1, 10, 4),
+	nesty_options.float_player_mod_val("BatteryLives", 1, -1, 1, 1, 10, 4),
 }
 
+-- I suppose now would be a good time to mention that, since the float menu code ...thingy doesn't rely on powers of 10 anymore,
+-- the values passed in will be different.
 local base_options= {
-	notefield_prefs_speed_mod_menu(),
 	notefield_prefs_speed_type_menu(),
-	nesty_options.float_song_mod_val("MusicRate", -2, -1, -1, .5, 2, 1),
+	notefield_prefs_speed_mod_menu(),
+	--Turns out the music rate can't handle values higher than 3!
+	nesty_options.float_song_mod_val("MusicRate", 0.1, -1, 1, .1, 3, 1),
 	nesty_options.float_song_mod_toggle_val("Haste", 1, 0),
 	notefield_perspective_menu(),
 	nesty_options.float_config_toggle_val(notefield_prefs_config, "reverse", -1, 1),
-	nesty_options.float_config_val(notefield_prefs_config, "zoom", -2, -1, 0),
+	nesty_options.float_config_val(notefield_prefs_config, "zoom", 0.1, -1, 1),
 	nesty_options.submenu("chart_mods", chart_mods),
 	{name= "noteskin", translatable= true, menu= nesty_option_menus.noteskins},
 	{name= "noteskin_params", translatable= true, menu= nesty_option_menus.menu,
@@ -102,7 +105,7 @@ local base_options= {
 	nesty_options.bool_song_mod_val("AssistMetronome"),
 	nesty_options.bool_song_mod_val("StaticBackground"),
 	nesty_options.bool_song_mod_val("RandomBGOnly"),
-	nesty_options.float_config_val(player_config, "ScreenFilter", -2, -1, 0),
+	nesty_options.float_config_val(player_config, "ScreenFilter", 0.1, -1, 0.5),
 	get_notefield_mods_toggle_menu(true, true),
 	{name= "reload_noteskins", translatable= true, type= "action",
 	 execute= function() NOTESKIN:reload_skins() end},
