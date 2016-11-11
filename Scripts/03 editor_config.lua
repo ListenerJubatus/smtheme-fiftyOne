@@ -270,7 +270,7 @@ local function editor_menu_options(field, field_name, stepstype)
 	end
 	-- Again, because of mutilating the nested options code, values passed in are slightly different.
 	local ret= {
-		nesty_options.float_song_mod_val("MusicRate", 0.1, -1, 1, .1, 3, 1),
+		nesty_options.float_song_mod_val_new("MusicRate", 0.1, -1, 1, .1, 3, 1),
 		editor_noteskin_menu(field, stepstype),
 		editor_preferred_noteskin_menu(),
 		{name= "noteskin_params", translatable= true, menu= nesty_option_menus.menu, args= editor_noteskin_param_menu(field, stepstype)},
