@@ -275,28 +275,28 @@ local function editor_menu_options(field, field_name, stepstype)
 		editor_preferred_noteskin_menu(),
 		{name= "noteskin_params", translatable= true, menu= nesty_option_menus.menu, args= editor_noteskin_param_menu(field, stepstype)},
 		nesty_options.bool_table_val(field_name, config, "hidden"),
-		nesty_options.float_table_val(field_name, config, "hidden_offset", 1, -1, 10),
+		nesty_options.float_table_val_new(field_name, config, "hidden_offset", 1, -1, 10),
 		nesty_options.bool_table_val(field_name, config, "sudden"),
-		nesty_options.float_table_val(field_name, config, "sudden_offset", 1, -1, 10),
-		nesty_options.float_table_val(field_name, config, "fade_dist", 1, -1, 10),
+		nesty_options.float_table_val_new(field_name, config, "sudden_offset", 1, -1, 10),
+		nesty_options.float_table_val_new(field_name, config, "fade_dist", 1, -1, 10),
 		nesty_options.bool_table_val(field_name, config, "glow_during_fade"),
-		nesty_options.float_table_val(field_name, config, "fov", 1, 0, 10, 1, 179),
-		nesty_options.float_table_val(field_name, config, "reverse", 0.1, -1, 1),
-		nesty_options.float_table_val(field_name, config, "rotation_x", 10, -1, 45),
-		nesty_options.float_table_val(field_name, config, "rotation_y", 10, -1, 45),
-		nesty_options.float_table_val(field_name, config, "rotation_z", 10, -1, 45),
-		nesty_options.float_table_val(field_name, config, "yoffset", 1, 1, 10),
-		nesty_options.float_table_val(field_name, config, "zoom", 0.1, -1, 1),
-		nesty_options.float_table_val(field_name, config, "zoom_x", 0.1, -1, 1),
-		nesty_options.float_table_val(field_name, config, "zoom_y", 0.1, -1, 1),
-		nesty_options.float_table_val(field_name, config, "zoom_z", 0.1, -1, 1),
+		nesty_options.float_table_val_new(field_name, config, "fov", 1, 0, 10, 1, 179),
+		nesty_options.float_table_val_new(field_name, config, "reverse", 0.1, -1, 1),
+		nesty_options.float_table_val_new(field_name, config, "rotation_x", 10, -1, 45),
+		nesty_options.float_table_val_new(field_name, config, "rotation_y", 10, -1, 45),
+		nesty_options.float_table_val_new(field_name, config, "rotation_z", 10, -1, 45),
+		nesty_options.float_table_val_new(field_name, config, "yoffset", 1, 1, 10),
+		nesty_options.float_table_val_new(field_name, config, "zoom", 0.1, -1, 1),
+		nesty_options.float_table_val_new(field_name, config, "zoom_x", 0.1, -1, 1),
+		nesty_options.float_table_val_new(field_name, config, "zoom_y", 0.1, -1, 1),
+		nesty_options.float_table_val_new(field_name, config, "zoom_z", 0.1, -1, 1),
 	}
 	if config.speed_type then
 		table.insert(ret, 1,
-			nesty_options.float_table_val(field_name, config, "speed_mod", 0.25, -1, 1) ..
+			nesty_options.float_table_val_new(field_name, config, "speed_mod", 0.25, -1, 1) ..
 			 {req_func= use_multiple_speed_mod(config)})
 		table.insert(ret, 2,
-			nesty_options.float_table_val(field_name, config, "speed_mod", 25, 1, 100) ..
+			nesty_options.float_table_val_new(field_name, config, "speed_mod", 25, 1, 100) ..
 			 {req_func= not_use_multiple(config)})
 		table.insert(ret, 3, speed_type_menu(config))
 	end

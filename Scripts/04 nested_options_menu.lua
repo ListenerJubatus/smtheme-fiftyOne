@@ -951,9 +951,175 @@ local function find_scale_for_number(num, min_scale)
 	return ret_scale, cv
 end
 
+nesty_option_menus.adjustable_float= {
+	type= "number",
+	__index= {
+		initialize= function(self, pn, extra)
+			local function check_member(member_name)
+				assert(self[member_name],
+							 "adjustable_float '" .. self.name .. "' warning: " ..
+								 member_name .. " not provided.")
+			end
+			local function to_text_default(pn, value)
+				if value == -0 then return "0" end
+				return tostring(value)
+			end
+			--Trace("adjustable_float extra:")
+			--rec_print_table(extra)
+			assert(extra, "adjustable_float passed a nil extra table.")
+			self.name= extra.name
+			self.cursor_pos= 1
+			self.pn= pn
+			self.reset_value= extra.reset_value or 0
+			self.min_scale= extra.min_scale
+			check_member("min_scale")
+			self.scale= extra.scale or 0
+			self.current_value= extra.initial_value(pn) or 0
+			if self.current_value ~= 0 then
+				self.min_scale_used, self.current_value=
+					find_scale_for_number(self.current_value, self.min_scale)
+			end
+			self.min_scale_used= math.min(self.scale, self.min_scale_used or 0)
+			self.max_scale= extra.max_scale
+			check_member("max_scale")
+			if self.min_scale > self.max_scale then
+				self.min_scale, self.max_scale= self.max_scale, self.min_scale
+			end
+			self.set= extra.set
+			check_member("set")
+			self.val_min= extra.val_min
+			self.val_max= extra.val_max
+			self.val_to_text= extra.val_to_text or to_text_default
+			self.scale_to_text= extra.scale_to_text or to_text_default
+			self.info_set= {nesty_menu_up_element}
+			self.menu_functions= {function() return "pop" end}
+			--local scale_text= THEME:GetString("OptionNames", "scale")
+			local scale_text= "scale"
+			local scale_range= self.max_scale - self.min_scale
+			if scale_range < 4 then
+				-- {+100, +10, +1, -1, -10, -100, Round, Reset}
+				self.mode= "small"
+				for s= self.max_scale, self.min_scale, -1 do
+					self.info_set[#self.info_set+1]= {
+						text= "+"..self.scale_to_text(self.pn, 10^s), sound= "inc",
+						type= "action"}
+					self.menu_functions[#self.menu_functions+1]= function()
+						self.min_scale_used= math.min(s, self.min_scale_used)
+						self:set_new_val(self.current_value + 10^s)
+						return true
+					end
+					self.info_set[#self.info_set+1]= {
+						text= "-"..self.scale_to_text(self.pn, 10^s), sound= "dec",
+						type= "action"}
+					self.menu_functions[#self.menu_functions+1]= function()
+						self.min_scale_used= math.min(s, self.min_scale_used)
+						self:set_new_val(self.current_value - 10^s)
+						return true
+					end
+				end
+			else
+				-- {+scale, -scale, ...}
+				self.info_set[#self.info_set+1]= {text= "+"..self.scale_to_text(self.pn, 10^self.scale),sound= "inc", type= "action"}
+				self.info_set[#self.info_set+1]= {text= "-"..self.scale_to_text(self.pn, 10^self.scale),sound= "dec", type= "action"}
+				self.menu_functions[#self.menu_functions+1]= function() -- increment
+					self:set_new_val(self.current_value + 10^self.scale)
+					return true
+				end
+				self.menu_functions[#self.menu_functions+1]= function() -- decrement
+					self:set_new_val(self.current_value - 10^self.scale)
+					return true
+				end
+				if scale_range < 7 then
+					-- {..., scale=1, scale=2, ..., Round, Reset}
+					self.mode= "medium"
+					for s= self.min_scale, self.max_scale do
+						self.info_set[#self.info_set+1]= {
+							text= scale_text.."="..(10^s), sound= "inc", typej= "action"}
+						self.menu_functions[#self.menu_functions+1]= function()
+							self:set_new_scale(s)
+						end
+					end
+				else
+					-- {..., scale*10, scale/10, Round, Reset}
+					self.mode= "bignum"
+					self.info_set[#self.info_set+1]= {text= scale_text.."*10",sound= "inc", type= "action"}
+					self.info_set[#self.info_set+1]= {text= scale_text.."/10",sound= "dec", type= "action"}
+					self.menu_functions[#self.menu_functions+1]= function() -- scale up
+						self:set_new_scale(self.scale + 1)
+						return true
+					end
+					self.menu_functions[#self.menu_functions+1]= function() -- scale down
+						self:set_new_scale(self.scale - 1)
+						return true
+					end
+				end
+			end
+			if self.min_scale < 0 then
+				self.info_set[#self.info_set+1]= {
+					text= "Round", translatable= true, type= "action"}
+				self.menu_functions[#self.menu_functions+1]= function()
+					self:set_new_val(math.round(self.current_value))
+					return true
+				end
+			end
+			self.info_set[#self.info_set+1]= {
+				text= "Reset", translatable= true, type= "action"}
+			self.menu_functions[#self.menu_functions+1]= function()
+				local new_scale, new_value=
+					find_scale_for_number(self.reset_value, self.min_scale)
+				if self.mode ~= "small" then
+					self:set_new_scale(new_scale)
+				end
+				self:set_new_val(new_value)
+				return true
+			end
+		end,
+		interpret_start= function(self)
+			if self.menu_functions[self.cursor_pos] then
+				return self.menu_functions[self.cursor_pos]()
+			end
+			return false
+		end,
+		set_status= function(self)
+			if self.display then
+				self.display:set_heading(self.name)
+				local val_text=
+					self.val_to_text(self.pn, self.current_value)
+				self.display:set_status(val_text)
+			end
+		end,
+		cooked_val= function(self, nval)
+			return nval
+		end,
+		set_new_val= function(self, nval)
+			local raise= 10^-self.min_scale_used
+			local lower= 10^self.min_scale_used
+			local rounded_val= math.round(nval * raise) * lower
+			if self.val_max and rounded_val > self.val_max then
+				rounded_val= self.val_max
+			end
+			if self.val_min and rounded_val < self.val_min then
+				rounded_val= self.val_min
+			end
+			self.current_value= rounded_val
+			rounded_val= self:cooked_val(rounded_val)
+			self.set(self.pn, rounded_val)
+			self:set_status()
+		end,
+		set_new_scale= function(self, nscale)
+			if nscale >= self.min_scale and nscale <= self.max_scale then
+				self.min_scale_used= math.min(nscale, self.min_scale_used)
+				self.scale= nscale
+				self:update_el_text(2, "+" .. self.scale_to_text(self.pn, 10^nscale))
+				self:update_el_text(3, "-" .. self.scale_to_text(self.pn, 10^nscale))
+			end
+		end
+	}
+}
+
 -- This poor thing practically got gutted in my attempts at doing stuff.
 -- todo: nuke the "scale" variable from every function associated with this
-nesty_option_menus.adjustable_float= {
+nesty_option_menus.adjustable_float_new= {
 	type= "number",
 	__index= {
 		initialize= function(self, pn, extra)
@@ -1808,5 +1974,87 @@ nesty_options= {
 			},
 			mergable_table_mt
 		)
+	end,
+	-- Alternate float-related things below.
+	float_song_mod_val_new = function(valname, min_scale, scale, max_scale, val_min, val_max, val_reset)
+		local ret= {
+			name= valname, translatable= true,
+			menu= nesty_option_menus.adjustable_float_new,
+			args= {
+				name= valname, min_scale= min_scale, scale= scale,
+				max_scale= max_scale, val_min= val_min, val_max= val_max,
+				reset_value= val_reset,
+				initial_value= function()
+					local song_ops= GAMESTATE:GetSongOptionsObject("ModsLevel_Preferred")
+					if not song_ops[valname] then
+						lua.ReportScriptError("No such song option: " .. tostring(valname))
+					end
+					return song_ops[valname](song_ops)
+				end,
+				set= function(pn, value)
+					local song_ops= GAMESTATE:GetSongOptionsObject("ModsLevel_Preferred")
+					song_ops[valname](song_ops, value)
+					-- Apply the change to the current and song levels too, so that if
+					-- this occurs during gameplay, it takes effect immediately.
+					GAMESTATE:ApplyPreferredSongOptionsToOtherLevels()
+				end,
+		}}
+		ret.value= float_val_func(min_scale, ret.args.initial_value)
+		return setmetatable(ret, mergable_table_mt)
+	end,
+	float_player_mod_val_new = function(valname, min_scale, scale, max_scale, val_min, val_max, val_reset)
+		local ret= {
+			name= valname, translatable= true,
+			menu= nesty_option_menus.adjustable_float_new, args= {
+				name= valname, min_scale= min_scale, scale= scale,
+				max_scale= max_scale, val_min= val_min, val_max= val_max,
+				reset_value= val_reset,
+				initial_value= function(pn)
+					local plops= GAMESTATE:GetPlayerState(pn):get_player_options_no_defect("ModsLevel_Preferred")
+					if not plops[valname] then
+						lua.ReportScriptError("No such player option: " .. tostring(valname))
+					end
+					return plops[valname](plops)
+				end,
+				set= function(pn, value)
+					local pstate= GAMESTATE:GetPlayerState(pn)
+					local plops= pstate:get_player_options_no_defect("ModsLevel_Preferred")
+					plops[valname](plops, value)
+					pstate:ApplyPreferredOptionsToOtherLevels()
+				end,
+		}}
+		ret.value= float_val_func(min_scale, ret.args.initial_value)
+		return setmetatable(ret, mergable_table_mt)
+	end,
+	float_config_val_new = function(
+			conf, field_name, mins, scale, maxs, val_min, val_max)
+		local ret= {
+			name= field_name, translatable= true,
+			menu= nesty_option_menus.adjustable_float_new,
+			args= nesty_options.float_config_val_args(conf, field_name, mins, scale, maxs, val_min, val_max),
+		}
+		ret.value= float_val_func(mins, ret.args.initial_value)
+		return setmetatable(ret, mergable_table_mt)
+	end,
+	float_table_val_new = function(table_name, tab, field_name, mins, scale, maxs, val_min, val_max)
+		return setmetatable({
+				name= field_name, translatable= true,
+				menu= nesty_option_menus.adjustable_float_new, args= {
+					name= field_name, min_scale= mins, scale= scale, max_scale= maxs,
+					val_min= val_min, val_max= val_max,
+					reset_value= get_element_by_path(tab, field_name),
+					initial_value= function()
+						return get_element_by_path(tab, field_name) or 0
+					end,
+					set= function(pn, value)
+						set_element_by_path(tab, field_name, value)
+						MESSAGEMAN:Broadcast(
+							"ConfigValueChanged", {table_name= table_name, field_name= field_name, value= value})
+					end,
+				},
+				value= function()
+					return get_element_by_path(tab, field_name)
+				end,
+												}, mergable_table_mt)
 	end,
 }
