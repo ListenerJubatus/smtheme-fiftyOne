@@ -6,7 +6,7 @@ t[#t+1] = Def.ActorFrame {
 	OnCommand=function(self)
 			self:addy(-104):decelerate(0.5):addy(104);
 	end;
-	OffCommand=cmd(sleep,0.3;decelerate,0.4;addy,-105;);
+	OffCommand=cmd(sleep,0.175;decelerate,0.4;addy,-105;);
 		Def.Quad {
 			InitCommand=cmd(vertalign,top;zoomto,SCREEN_WIDTH,96;);
 			OnCommand=function(self)
@@ -30,7 +30,7 @@ t[#t+1] = Def.ActorFrame {
 t[#t+1] = Def.ActorFrame {
 	InitCommand=cmd(x,-SCREEN_CENTER_X+76;y,SCREEN_TOP+30;);
 	OnCommand=cmd(addx,-110;sleep,0.3;decelerate,0.7;addx,110;);
-	OffCommand=cmd(decelerate,0.3;addx,-110;);
+	OffCommand=cmd(decelerate,0.175;addx,-110;);
 
 	-- Diamond BG
 	Def.Quad {
@@ -64,7 +64,7 @@ t[#t+1] = LoadFont("Common Header") .. {
 	UpdateScreenHeaderMessageCommand=function(self,param)
 		self:settext(param.Header);
 	end;
-	OffCommand=cmd(smooth,0.3;diffusealpha,0;);
+	OffCommand=cmd(smooth,0.175;diffusealpha,0;);
 };
 
 -- t[#t+1] = LoadFont("Common Condensed") .. {
