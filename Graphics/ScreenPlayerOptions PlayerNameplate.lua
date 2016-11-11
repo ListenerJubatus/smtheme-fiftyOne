@@ -1,7 +1,7 @@
 local PlayerNumber = ...
 assert( PlayerNumber )
 
-local bpm_text_zoom = 0.5
+local bpm_text_zoom = 0.6
 
 local song_bpms= {}
 local bpm_text= "??? - ???"
@@ -22,24 +22,24 @@ if GAMESTATE:GetCurrentSong() then
 end
 
 local t = Def.ActorFrame {
-	LoadActor(THEME:GetPathB("_frame","3x1"),"rounded fill", 192-8) .. {
-		OnCommand=cmd(diffuse,ColorMidTone(PlayerColor(PlayerNumber));diffusealpha,0.875);
+	LoadActor(THEME:GetPathB("_frame","3x1"),"rounded fill", 250-16) .. {
+		OnCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PlayerNumber));diffusealpha,0.9);
 	};
 	LoadFont("Common Condensed") .. {
 		Text=ToEnumShortString(PlayerNumber);
 		Name="PlayerShortName",
-		InitCommand=cmd(x,-102;maxwidth,32;zoom,0.75),
+		InitCommand=cmd(x,-127;maxwidth,32;zoom,0.75),
 		OnCommand=cmd(diffuse,PlayerColor(PlayerNumber);)
 	},
 	LoadFont("_overpass 36px") .. {
 		Text=bpm_text;
 		Name="BPMRangeOld",
-		InitCommand=cmd(x,-40;maxwidth,88/bpm_text_zoom),
+		InitCommand=cmd(x,-60;maxwidth,88/bpm_text_zoom),
 		OnCommand=cmd(zoom,bpm_text_zoom)
 	},
 	LoadActor(THEME:GetPathG("_StepsDisplayListRow","arrow")) .. {
 		Name="Seperator",
-		InitCommand=cmd(x,14)
+		InitCommand=cmd(x,4)
 	},
 	LoadFont("_overpass 36px") .. {
 		Text="100 - 200000";

@@ -48,6 +48,8 @@ end
 
 -- Shared portion.
 local mid_pane = Def.ActorFrame {
+	OnCommand=cmd(diffusealpha,0;sleep,0.3;decelerate,0.4;diffusealpha,1);
+	OffCommand=cmd(decelerate,0.3;diffusealpha,0);
 	-- Song/course banner.
 	Def.Sprite {
 		InitCommand=function(self)
@@ -104,10 +106,10 @@ for i, v in ipairs(eval_lines) do
 		};
 	
 		Def.BitmapText {
-			Font = "_overpass 36px",
+			Font = "_roboto condensed Bold 48px",
 			InitCommand=cmd(zoom,0.6;diffuse,color("#000000");settext,string.upper(JudgmentLineToLocalizedString(cur_line)));
 			OnCommand=function(self)			
-				self:diffusealpha(0):sleep(0.1 * i):decelerate(0.9):diffusealpha(0.8)
+				self:diffusealpha(0):sleep(0.1 * i):decelerate(0.9):diffusealpha(0.6)
 			end;
 			OffCommand=function(self)			
 				self:sleep(0.1 * i):decelerate(0.3):diffusealpha(0)
@@ -134,7 +136,7 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 		local spacing = 38*i
 		eval_parts[#eval_parts+1] = Def.BitmapText {
 			Font = "_overpass 36px",
-			InitCommand=cmd(x,_screen.cx + step_count_offs;y,(_screen.cy/1.4)+(spacing);diffuse,color("#9d324e");zoom,0.75;diffusealpha,1.0;shadowlength,1),
+			InitCommand=cmd(x,_screen.cx + step_count_offs;y,(_screen.cy/1.4)+(spacing);diffuse,ColorDarkTone(PlayerColor(p));zoom,0.75;diffusealpha,1.0;shadowlength,1),
 			OnCommand=function(self)
 				self:settext(GetJLineValue(v, p))
 				if string.find(p, "P1") then

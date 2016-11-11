@@ -170,7 +170,7 @@ local frame= Def.ActorFrame{
 local item_params= {
 	text_commands= {
 		Font= "Common Condensed", OnCommand= function(self)
-			self:diffuse(color("#73112E")):diffusealpha(0):decelerate(0.2):diffusealpha(1)
+			self:diffuse(color("#3D1D23")):diffusealpha(0):decelerate(0.2):diffusealpha(1)
 		end,
 		OffCommand=function(self)
 			self:smooth(0.3):diffusealpha(0)
