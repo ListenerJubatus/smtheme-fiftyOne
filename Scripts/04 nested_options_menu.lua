@@ -1,5 +1,8 @@
 -- Copied from _fallback.
 
+-- I believe this involves *very* elaborate usage of the lua-based item scroller (aka sick_wheel).
+-- If you know how to work that, you might understand this more than I do.
+
 local move_time= 0.1
 local line_height= 24
 
@@ -114,6 +117,7 @@ local cursor_param_defaults= {
 	name= "", parts_name= "OptionsCursor",
 }
 
+-- Exactly what it sounds like; stuff involving the cursor.
 nesty_cursor_mt= {
 	__index= {
 		create_actors= function(self, params)
@@ -512,10 +516,11 @@ nesty_option_display_mt= {
 			self.el_zoom= params.el_zoom or 1
 			self.translation_section= "OptionNames"
 			local frame= {
-				Name= name, InitCommand= function(subself)
+				Name= name,
+				InitCommand= function(subself)
 					subself:xy(params.x, params.y)
-					self.container= subself
-					self.heading= subself:GetChild("heading")
+					self.container = subself
+					self.heading = subself:GetChild("heading")
 					local next_y= 0
 					if self.heading then
 						self.heading:zoom(params.heading_zoom)
@@ -527,17 +532,17 @@ nesty_option_display_mt= {
 					end
 					self:regeo_items()
 				end,
-				OnCommand= params.on or noop_nil
+				OnCommand = params.on or noop_nil
 			}
 			if not params.no_heading then
-				local head_actor= params.heading_actor or default_item_text()
-				head_actor.Name= "heading"
-				frame[#frame+1]= head_actor
+				local head_actor = params.heading_actor or default_item_text()
+				head_actor.Name = "heading"
+				frame[#frame+1] = head_actor
 			end
 			if not params.no_status then
-				local disp_actor= params.status_actor or default_item_text()
-				disp_actor.Name= "status"
-				frame[#frame+1]= disp_actor
+				local disp_actor = params.status_actor or default_item_text()
+				disp_actor.Name = "status"
+				frame[#frame+1] = disp_actor
 			end
 			self.scroller= setmetatable({disable_wrapping= true}, item_scroller_mt)
 			self.item_mt= params.item_mt
@@ -599,7 +604,8 @@ nesty_option_display_mt= {
 				item:lose_focus()
 			end
 		end,
-}}
+	}
+}
 
 nesty_menu_up_element= {text= "&leftarrow;", type= "back"}
 
@@ -641,7 +647,8 @@ local general_menu_mt= {
 			self.cursor_pos= ((pos-1) % #self.info_set) + 1
 			self.display:scroll(self.cursor_pos)
 		end,
-		-- This is where a good amount of additions will be made.
+		-- The changes made here are pretty important for the mangling of the adjustable float
+		-- submenu that I did.
 		interpret_code= function(self, code)
 			-- Protect against other code changing cursor_pos to an element that
 			-- isn't visible.
@@ -664,7 +671,7 @@ local general_menu_mt= {
 						end
 						return action, action_data, sound
 					end
-					-- ...which will be skipped over if the function doesn't exist in self.
+					-- ...which will be skipped over if the function doesn't exist.
 					
 					unfocus_cursor(self)
 					if self.cursor_pos > 1 then
@@ -677,6 +684,7 @@ local general_menu_mt= {
 					return true, false, "move_up"
 				end,
 				MenuRight= function(self)
+					-- Same here. You can do this to other buttons if you so need.
 					if self.interpret_mright then
 						local action, action_data= self:interpret_mright()
 						local sound= self.info_set[self.cursor_pos].sound or "act"
@@ -760,7 +768,8 @@ local general_menu_mt= {
 			local item= self.info_set[self.cursor_pos]
 			if item then return item.name or item.text end
 		end,
-}}
+	}
+}
 
 nesty_option_menus= {}
 
@@ -770,6 +779,8 @@ nesty_option_menus= {}
 --   args= {} -- Args to return to options_menu_mt to construct the new menu
 --     menu= {} -- metatable for the submenu
 --     args= {} -- extra args for the initialize function of the metatable
+
+-- Main menu. Or a submenu. Who knows?
 nesty_option_menus.menu= {
 	type= "menu",
 	__index= {
@@ -936,7 +947,8 @@ nesty_option_menus.menu= {
 			end
 			return self.up_text or ""
 		end,
-}}
+	}
+}
 
 local function find_scale_for_number(num, min_scale)
 	local cv= math.round(num /10^min_scale) * 10^min_scale
@@ -951,6 +963,8 @@ local function find_scale_for_number(num, min_scale)
 	return ret_scale, cv
 end
 
+-- The "infamous" float menu. Kept around for stuff that wouldn't be so easy to
+-- adapt to the mangling found after this one (noteskin parameters, for instance).
 nesty_option_menus.adjustable_float= {
 	type= "number",
 	__index= {
@@ -1117,8 +1131,11 @@ nesty_option_menus.adjustable_float= {
 	}
 }
 
--- This poor thing practically got gutted in my attempts at doing stuff.
--- todo: nuke the "scale" variable from every function associated with this
+-- A copy of the menu we just went through, practically gutted for the purpose of
+-- (hopefully) having better support for setups with only 3 menu buttons.
+-- It's honestly quite simple compared to the rest of the menus, but hey...
+-- if you need to learn how to make a new menu type for some reason, better overly cut-down
+-- and simple than nothing at all, right?
 nesty_option_menus.adjustable_float_new= {
 	type= "number",
 	__index= {
@@ -1139,6 +1156,9 @@ nesty_option_menus.adjustable_float_new= {
 			self.cursor_pos= 1
 			self.pn= pn
 			self.reset_value= extra.reset_value or 0
+			-- The original code used the scaling values with powers of 10 - so +1, +10, +100, etc.
+			-- This had to be ditched in favor of pure numbers.
+			-- max_scale and reset_value aren't used... yet. I'll figure out something.
 			self.min_scale= extra.min_scale
 			check_member("min_scale")
 			self.current_value= extra.initial_value(pn) or 0
@@ -1153,7 +1173,8 @@ nesty_option_menus.adjustable_float_new= {
 			self.val_max= extra.val_max
 			self.val_to_text= extra.val_to_text or to_text_default
 			self.scale_to_text= extra.scale_to_text or to_text_default
-			-- A bunch of dummy menu items.
+			-- A bunch of dummy menu items for the sole purpose of explanations.
+			-- todo: make it look a little better in game? how does one hide the cursor here...
 			self.info_set= {
 				nesty_menu_up_element,
 				{
@@ -1172,16 +1193,15 @@ nesty_option_menus.adjustable_float_new= {
 						type= "action"
 				}
 			}
+			-- And actions linked to said menu items, which is... basically nothing at all.
 			self.menu_functions= {
 				function() return "pop" end,
 				function() return false end,
 				function() return false end,
 				function() return false end
 			}
-			-- There used to be something about a scale range here, but it got nuked big-time.
 		end,
-		-- The original code also used the scaling values with powers of 10 - so +1, +10, +100, etc.
-		-- I think we'll have to ditch that too
+		-- Those copies of interpret_start finally become useful.
 		interpret_mleft = function(self)
 			self:set_new_val(self.current_value - self.min_scale)
 			return true
@@ -1190,6 +1210,8 @@ nesty_option_menus.adjustable_float_new= {
 			self:set_new_val(self.current_value + self.min_scale)
 			return true
 		end,
+		-- interpret_start is usually used to apply the neatly generated choices...
+		-- No point in that when the choices are linked to the other menu buttons though
 		interpret_start = function(self)
 			return "pop"
 		end,
@@ -1201,9 +1223,6 @@ nesty_option_menus.adjustable_float_new= {
 				self.display:set_status(val_text)
 			end
 		end,
-		cooked_val= function(self, nval)
-			return nval
-		end,
 		-- the rounded value is a lie
 		set_new_val= function(self, nval)
 			local rounded_val= nval
@@ -1214,7 +1233,6 @@ nesty_option_menus.adjustable_float_new= {
 				rounded_val= self.val_min
 			end
 			self.current_value= rounded_val
-			rounded_val= self:cooked_val(rounded_val)
 			self.set(self.pn, rounded_val)
 			self:set_status()
 		end,
@@ -1616,7 +1634,8 @@ local function float_val_func(min_scale, get)
 	end
 end
 
--- Buncha wrappers.
+-- All of these are basically the closest you'll get to a "finished product", so to speak.
+-- Most of the menu items you'll see in the main options menu go through one of these functions.
 nesty_options= {
 	submenu= function(name, items)
 		local ret= {
@@ -1854,6 +1873,25 @@ nesty_options= {
 		}
 		return setmetatable(ret, mergable_table_mt)
 	end,
+	-- Um, uh oh.
+	float_config_val_args_new= function(
+			conf, field_name, mins, maxs, val_min, val_max)
+		local ret= {
+			name= field_name, min_scale= mins, max_scale= maxs,
+			val_min= val_min, val_max= val_max,
+			reset_value= get_element_by_path(conf:get_default(), field_name),
+			initial_value= function(pn)
+				return get_element_by_path(conf:get_data(pn), field_name) or 0
+			end,
+			set= function(pn, value)
+				set_element_by_path(conf:get_data(pn), field_name, value)
+				conf:set_dirty(pn)
+				MESSAGEMAN:Broadcast("ConfigValueChanged", {
+					config_name= conf.name, field_name= field_name, value= value, pn= pn})
+			end,
+		}
+		return setmetatable(ret, mergable_table_mt)
+	end,
 	float_config_val= function(
 			conf, field_name, mins, scale, maxs, val_min, val_max)
 		local ret= {
@@ -1975,13 +2013,13 @@ nesty_options= {
 			mergable_table_mt
 		)
 	end,
-	-- Alternate float-related things below.
-	float_song_mod_val_new = function(valname, min_scale, scale, max_scale, val_min, val_max, val_reset)
+	-- Stuff that uses the mangled float adjustment menu; aka everything that isn't notefield parameters.
+	float_song_mod_val_new = function(valname, min_scale, max_scale, val_min, val_max, val_reset)
 		local ret= {
 			name= valname, translatable= true,
 			menu= nesty_option_menus.adjustable_float_new,
 			args= {
-				name= valname, min_scale= min_scale, scale= scale,
+				name= valname, min_scale= min_scale,
 				max_scale= max_scale, val_min= val_min, val_max= val_max,
 				reset_value= val_reset,
 				initial_value= function()
@@ -2002,11 +2040,13 @@ nesty_options= {
 		ret.value= float_val_func(min_scale, ret.args.initial_value)
 		return setmetatable(ret, mergable_table_mt)
 	end,
-	float_player_mod_val_new = function(valname, min_scale, scale, max_scale, val_min, val_max, val_reset)
+	float_player_mod_val_new = function(valname, min_scale, max_scale, val_min, val_max, val_reset)
 		local ret= {
-			name= valname, translatable= true,
-			menu= nesty_option_menus.adjustable_float_new, args= {
-				name= valname, min_scale= min_scale, scale= scale,
+			name= valname,
+			translatable= true,
+			menu= nesty_option_menus.adjustable_float_new,
+			args= {
+				name= valname, min_scale= min_scale,
 				max_scale= max_scale, val_min= val_min, val_max= val_max,
 				reset_value= val_reset,
 				initial_value= function(pn)
@@ -2026,17 +2066,17 @@ nesty_options= {
 		ret.value= float_val_func(min_scale, ret.args.initial_value)
 		return setmetatable(ret, mergable_table_mt)
 	end,
-	float_config_val_new = function(
-			conf, field_name, mins, scale, maxs, val_min, val_max)
+	float_config_val_new = function(conf, field_name, mins, maxs, val_min, val_max)
 		local ret= {
-			name= field_name, translatable= true,
+			name= field_name,
+			translatable= true,
 			menu= nesty_option_menus.adjustable_float_new,
-			args= nesty_options.float_config_val_args(conf, field_name, mins, scale, maxs, val_min, val_max),
+			args= nesty_options.float_config_val_args_new(conf, field_name, mins, maxs, val_min, val_max),
 		}
 		ret.value= float_val_func(mins, ret.args.initial_value)
 		return setmetatable(ret, mergable_table_mt)
 	end,
-	float_table_val_new = function(table_name, tab, field_name, mins, scale, maxs, val_min, val_max)
+	float_table_val_new = function(table_name, tab, field_name, mins, maxs, val_min, val_max)
 		return setmetatable({
 				name= field_name, translatable= true,
 				menu= nesty_option_menus.adjustable_float_new, args= {
@@ -2055,6 +2095,6 @@ nesty_options= {
 				value= function()
 					return get_element_by_path(tab, field_name)
 				end,
-												}, mergable_table_mt)
+							}, mergable_table_mt)
 	end,
 }
