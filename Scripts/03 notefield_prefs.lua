@@ -187,27 +187,27 @@ end
 
 function advanced_notefield_prefs_menu()
 	return nesty_options.submenu("advanced_notefield_config", {
-		nesty_options.float_config_val_new(notefield_prefs_config, "hidden_offset", 1, -1, 10),
-		nesty_options.float_config_val_new(notefield_prefs_config, "sudden_offset", 1, -1, 10),
+		nesty_options.float_config_val_new(notefield_prefs_config, "hidden_offset", 1, 10),
+		nesty_options.float_config_val_new(notefield_prefs_config, "sudden_offset", 1, 10),
 		nesty_options.bool_config_val(notefield_prefs_config, "hidden"),
 		nesty_options.bool_config_val(notefield_prefs_config, "sudden"),
-		nesty_options.float_config_val_new(notefield_prefs_config, "fade_dist", 1, -1, 10),
+		nesty_options.float_config_val_new(notefield_prefs_config, "fade_dist", 1, 10),
 		nesty_options.bool_config_val(notefield_prefs_config, "glow_during_fade"),
-		nesty_options.float_config_val_new(notefield_prefs_config, "reverse", 0.1, -1, 1),
-		nesty_options.float_config_val_new(notefield_prefs_config, "zoom", 0.1, -1, 1),
-		nesty_options.float_config_val_new(notefield_prefs_config, "rotation_x", 10, -1, 45),
-		nesty_options.float_config_val_new(notefield_prefs_config, "rotation_y", 10, -1, 45),
-		nesty_options.float_config_val_new(notefield_prefs_config, "rotation_z", 10, -1, 45),
+		nesty_options.float_config_val_new(notefield_prefs_config, "reverse", 0.1, 1),
+		nesty_options.float_config_val_new(notefield_prefs_config, "zoom", 0.1, 1),
+		nesty_options.float_config_val_new(notefield_prefs_config, "rotation_x", 10, 45),
+		nesty_options.float_config_val_new(notefield_prefs_config, "rotation_y", 10, 45),
+		nesty_options.float_config_val_new(notefield_prefs_config, "rotation_z", 10, 45),
 		-- Something tells me the notefield code still doesn't handle the vanish
 		-- point right, so the vanish point options are disabled until I'm sure
 		-- it's right. -Kyz
 --		nesty_options.float_config_val(notefield_prefs_config, "vanish_x", -1, 1, 2),
 --		nesty_options.float_config_val(notefield_prefs_config, "vanish_y", -1, 1, 2),
 --		nesty_options.float_config_val(notefield_prefs_config, "fov", -1, 0, 1, 1, 179),
-		nesty_options.float_config_val_new(notefield_prefs_config, "yoffset", 1, -1, 10),
-		nesty_options.float_config_val_new(notefield_prefs_config, "zoom_x", 0.1, -1, 1),
-		nesty_options.float_config_val_new(notefield_prefs_config, "zoom_y", 0.1, -1, 1),
-		nesty_options.float_config_val_new(notefield_prefs_config, "zoom_z", 0.1, -1, 1),
+		nesty_options.float_config_val_new(notefield_prefs_config, "yoffset", 1, 10),
+		nesty_options.float_config_val_new(notefield_prefs_config, "zoom_x", 0.1, 1),
+		nesty_options.float_config_val_new(notefield_prefs_config, "zoom_y", 0.1, 1),
+		nesty_options.float_config_val_new(notefield_prefs_config, "zoom_z", 0.1, 1),
 	})
 end
 
