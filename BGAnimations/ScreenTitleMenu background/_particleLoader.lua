@@ -36,7 +36,7 @@ for i=1,Params.NumParticles do
 		self:y(math.random(SCREEN_TOP+(self:GetHeight()/2),SCREEN_BOTTOM-(self:GetHeight()/2)));
 		--self:z(math.random(-64,0));
 	end;
-		OnCommand=cmd(diffusealpha,0.15);
+		OnCommand=cmd(diffusealpha,1);
 	};
 end
 

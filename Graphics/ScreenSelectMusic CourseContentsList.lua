@@ -1,5 +1,10 @@
 local transform = function(self,offsetFromCenter,itemIndex,numitems)
-	self:y( offsetFromCenter * 62 );
+	self:y( offsetFromCenter * 34 );
+	if offsetFromCenter < 0 or offsetFromCenter > 5 then
+		self:diffusealpha(0)
+	else
+		self:diffusealpha(1)
+	end
 end
 return Def.CourseContentsList {
 	MaxSongs = 10;
@@ -10,9 +15,9 @@ return Def.CourseContentsList {
 		self:SetFromGameState();
 		self:SetCurrentAndDestinationItem(0);
 		self:SetPauseCountdownSeconds(1);
-		self:SetSecondsPauseBetweenItems( 0.25 );
+		self:SetSecondsPauseBetweenItems( 0.5 );
 		self:SetTransformFromFunction(transform);
-		--
+		
 		self:SetDestinationItem( math.max(0,self:GetNumItems() - 4) );
 		self:SetLoop(false);
 		self:SetMask(0,0);
@@ -21,33 +26,25 @@ return Def.CourseContentsList {
 	CurrentTrailP2ChangedMessageCommand=cmd(playcommand,"Set");
 
 	Display = Def.ActorFrame { 
-		InitCommand=cmd(setsize,290,64);
+		InitCommand=cmd(setsize,270,44);
 
 		LoadActor(THEME:GetPathG("CourseEntryDisplay","bar")) .. {
+-- 			InitCommand=cmd(diffusetopedge,Color("Invisible"));
 			SetSongCommand=function(self, params)
 				if params.Difficulty then
-					self:diffuse(ColorDarkTone(CustomDifficultyToColor(params.Difficulty)));
-				else
-					self:diffuse( color("#FFFFFF") );
-				end
-				(cmd(finishtweening;diffusealpha,0;sleep,0.125*params.Number;smooth,0.2;diffusealpha,1))(self);
-			end;
-		};
-		
-		LoadActor(THEME:GetPathG("CourseEntryDisplay","diamond")) .. {
-			SetSongCommand=function(self, params)
-				if params.Difficulty then
+-- 					self:diffuse( SONGMAN:GetSongColor(params.Song) );
 					self:diffuse( CustomDifficultyToColor(params.Difficulty) );
 				else
 					self:diffuse( color("#FFFFFF") );
+-- 					self:diffuse( CustomDifficultyToColor(params.Difficulty) );
 				end
 
-				(cmd(finishtweening;diffusealpha,0;sleep,0.125*params.Number;smooth,0.2;diffusealpha,1))(self);
+				(cmd(finishtweening;diffusealpha,0;sleep,0.125*params.Number;linear,0.125;diffusealpha,1;linear,0.05;glow,color("1,1,1,0.5");decelerate,0.1;glow,color("1,1,1,0")))(self);
 			end;
 		};
 
 		Def.TextBanner {
-			InitCommand=cmd(x,-10;y,-1;Load,"TextBanner";SetFromString,"", "", "", "", "", "");
+			InitCommand=cmd(x,-220;y,6;zoom,1;Load,"TextBannerCourse";SetFromString,"", "", "", "", "", "");
 			SetSongCommand=function(self, params)
 				if params.Song then
 					if GAMESTATE:GetCurrentCourse():GetDisplayFullTitle() == "Abomination" then
@@ -66,7 +63,7 @@ return Def.CourseContentsList {
 					else
 						self:SetFromSong( params.Song );
 					end;
-					self:diffuse(ColorLightTone(CustomDifficultyToColor(params.Difficulty) ));
+					self:diffusecolor(color("#FFFFFF"));
 -- 					self:glow("1,1,1,0.5");
 				else
 					self:SetFromString( "??????????", "??????????", "", "", "", "" );
@@ -74,19 +71,20 @@ return Def.CourseContentsList {
 -- 					self:glow("1,1,1,0");
 				end
 				
-				(cmd(finishtweening;diffusealpha,0;sleep,0.125*params.Number;smooth,0.2;diffusealpha,1;))(self);
+				(cmd(finishtweening;diffusealpha,0;sleep,0.125*params.Number;smooth,0.3;diffusealpha,1;))(self);
 			end;
 		};
 
- 		LoadFont("CourseEntryDisplay","difficulty") .. {
+ 		LoadFont("StepsDisplayListRow meter") .. {
 			Text="0";
-			InitCommand=cmd(x,205;y,0;zoom,0.75;);
+			InitCommand=cmd(x,210;y,0;zoom,0.75;shadowlength,1);
 			SetSongCommand=function(self, params)
 				if params.PlayerNumber ~= GAMESTATE:GetMasterPlayerNumber() then return end
 				self:settext( params.Meter );
-				self:diffuse(ColorDarkTone(CustomDifficultyToColor(params.Difficulty) ));
-				(cmd(finishtweening;zoomy,0;sleep,0.125*params.Number;linear,0.125;zoom,1.1;linear,0.05;zoom,1))(self);
+				self:diffuse( CustomDifficultyToLightColor(params.Difficulty) );
+				(cmd(finishtweening;diffusealpha,0;sleep,0.125*params.Number;smooth,0.3;diffusealpha,1;))(self);
 			end;
 		}; 
+
 	};
 };
