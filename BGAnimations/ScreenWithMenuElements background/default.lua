@@ -1,5 +1,5 @@
 return Def.ActorFrame {
-	LoadActor("_base") .. {
+	LoadActor(THEME:GetPathG("common bg", "base")) .. {
 		InitCommand=cmd(Center;zoomto,SCREEN_WIDTH,SCREEN_HEIGHT)
 	},
 	LoadActor("_maze") .. {
