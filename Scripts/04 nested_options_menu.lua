@@ -373,6 +373,7 @@ local value_item_mt= {
 			width_limit_text(self.value_text, value_width, self.zoom)
 			self.value_text:x(value_right)
 			scale_to_fit(self.value_image, value_width, self.height)
+			--self.value_image:zoomto(value_width, self.height)
 			self.value_image:x(value_right)
 		end,
 		set_player_number= function(self, pn)
@@ -1790,7 +1791,7 @@ nesty_options= {
 				max_scale= max_scale, val_min= val_min, val_max= val_max,
 				reset_value= val_reset,
 				initial_value= function(pn)
-					local plops= GAMESTATE:GetPlayerState(pn):get_player_options_no_defect("ModsLevel_Preferred")
+					local plops= GAMESTATE:GetPlayerState(pn):GetPlayerOptions("ModsLevel_Preferred")
 					if not plops[valname] then
 						lua.ReportScriptError("No such player option: " .. tostring(valname))
 					end
@@ -1798,7 +1799,7 @@ nesty_options= {
 				end,
 				set= function(pn, value)
 					local pstate= GAMESTATE:GetPlayerState(pn)
-					local plops= pstate:get_player_options_no_defect("ModsLevel_Preferred")
+					local plops= pstate:GetPlayerOptions("ModsLevel_Preferred")
 					plops[valname](plops, value)
 					pstate:ApplyPreferredOptionsToOtherLevels()
 				end,
@@ -1810,12 +1811,12 @@ nesty_options= {
 		local ret= {
 			type= "bool",
 			name= valname, translatable= true, execute= function(pn)
-				local plops= GAMESTATE:GetPlayerState(pn):get_player_options_no_defect("ModsLevel_Preferred")
+				local plops= GAMESTATE:GetPlayerState(pn):GetPlayerOptions("ModsLevel_Preferred")
 				local new_val= not plops[valname](plops)
 				plops[valname](plops, new_val)
 			end,
 			value= function(pn)
-				local plops= GAMESTATE:GetPlayerState(pn):get_player_options_no_defect("ModsLevel_Preferred")
+				local plops= GAMESTATE:GetPlayerState(pn):GetPlayerOptions("ModsLevel_Preferred")
 				if not plops[valname] then
 					lua.ReportScriptError("No such player option: " .. tostring(valname))
 				end
@@ -2050,7 +2051,7 @@ nesty_options= {
 				max_scale= max_scale, val_min= val_min, val_max= val_max,
 				reset_value= val_reset,
 				initial_value= function(pn)
-					local plops= GAMESTATE:GetPlayerState(pn):get_player_options_no_defect("ModsLevel_Preferred")
+					local plops= GAMESTATE:GetPlayerState(pn):GetPlayerOptions("ModsLevel_Preferred")
 					if not plops[valname] then
 						lua.ReportScriptError("No such player option: " .. tostring(valname))
 					end
@@ -2058,7 +2059,7 @@ nesty_options= {
 				end,
 				set= function(pn, value)
 					local pstate= GAMESTATE:GetPlayerState(pn)
-					local plops= pstate:get_player_options_no_defect("ModsLevel_Preferred")
+					local plops= pstate:GetPlayerOptions("ModsLevel_Preferred")
 					plops[valname](plops, value)
 					pstate:ApplyPreferredOptionsToOtherLevels()
 				end,

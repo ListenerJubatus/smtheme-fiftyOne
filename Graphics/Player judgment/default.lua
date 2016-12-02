@@ -23,11 +23,12 @@ local TNSFrames = {
 };
 local frame = Def.ActorFrame {
 	InitCommand = function(self)
-		if player_config:get_data(player).JudgmentUnderField then
-			self:draworder(notefield_draw_order.under_field)
-		else
-			self:draworder(notefield_draw_order.over_field)
-		end
+		-- We'll have to deal with this later
+		--if player_config:get_data(player).JudgmentUnderField then
+		--	self:draworder(notefield_draw_order.under_field)
+		--else
+		--	self:draworder(notefield_draw_order.over_field)
+		--end
 		c = self:GetChildren();
 	end,
 	LoadActor(THEME:GetPathG("Judgment","Normal")) .. {
