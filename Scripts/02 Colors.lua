@@ -41,13 +41,13 @@ ModeIconColors = {
 
 GameColor = {
     PlayerColors = {
-        [PLAYER_1] = color("#437CE7"),
-        [PLAYER_2] = color("#EB3F8C"),
+        PLAYER_1 = color("#437CE7"),
+        PLAYER_2 = color("#EB3F8C"),
 		both = color("#FFFFFF"),
     },
     PlayerDarkColors = {
-        [PLAYER_1] = color("#EB3F8C"),
-        [PLAYER_2] = color("#89385A"),
+        PLAYER_1 = color("#EB3F8C"),
+        PLAYER_2 = color("#89385A"),
 		both = color("#F5E1E1"),
     },
     Difficulty = {
