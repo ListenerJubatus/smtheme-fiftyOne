@@ -96,6 +96,12 @@ local Prefs =
 		Choices = { OptionNameString('Default'), OptionNameString('TNS_W1'), OptionNameString('TNS_W2'), OptionNameString('TNS_W3'), OptionNameString('TNS_W4')  },
 		Values = { "default", "TapNoteScore_W1", "TapNoteScore_W2", "TapNoteScore_W3", "TapNoteScore_W4" }
 	},
+	ForcedExtraMods =
+	{
+		Default = true,
+		Choices = { OptionNameString('Off'), OptionNameString('On') },
+		Values = { false, true }
+	}
 }
 
 ThemePrefs.InitAll(Prefs)

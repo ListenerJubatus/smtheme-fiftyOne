@@ -1,6 +1,8 @@
 -- Everything involving the recent song/group menus has been removed
 -- until I can muster myself up to deal with it properly.
 
+-- note: There appears to be no tangible function to load a song's autosave file.
+
 local song_menu_stack= setmetatable({}, nesty_menu_stack_mt)
 local song_menu_choices
 
@@ -86,25 +88,37 @@ local function steps_compare(left, right)
 end
 
 -- TODO: Allow picking any stepstype.
-local editable_stepstypes= {}
+local editable_stepstypes = {}
 do
-	for i, style in ipairs(
-		GAMEMAN:GetStylesForGame(GAMESTATE:GetCurrentGame():GetName())) do
-		editable_stepstypes[style:GetStepsType()]= true
+	for i, style in ipairs(GAMEMAN:GetStylesForGame(GAMESTATE:GetCurrentGame():GetName())) do
+		editable_stepstypes[style:GetStepsType()] = true
 	end
 end
 
+-- From GameState.cpp:
+--	// Arg forms:
+--	// 1.  Edit existing steps:
+--	//    song, steps
+--	// 2.  Create new steps to edit:
+--	//    song, nil, stepstype, difficulty
+--	// 3.  Copy steps to new difficulty to edit:
+--	//    song, steps, stepstype, difficulty
+-- ...But even after making tweaks based on this info, it still crashes.
+-- What else do I need to do?
 local function handle_edit_setup(song, steps, stype, diff, desc)
 	GAMESTATE:JoinPlayer(PLAYER_1)
-	local edit_steps= false
+	-- What's the point of this... variable thing?
+	-- local edit_steps = false
 	if stype then
-		edit_steps= GAMESTATE:SetStepsForEditMode(song, steps, stype, diff, desc)
+		-- Must be trying to make a new chart.
+		-- GAMESTATE:SetStepsForEditMode(song, steps, stype, diff, desc)
+		GAMESTATE:SetStepsForEditMode(song, steps, stype, diff)
 	else
-		edit_steps= GAMESTATE:SetStepsForEditMode(song, steps)
+		-- Load a chart.
+		GAMESTATE:SetStepsForEditMode(song, steps)
 	end
 	--add_to_recently_edited(song, edit_steps)
-	SCREENMAN:GetTopScreen():SetNextScreenName("ScreenEdit")
-		:StartTransitioningScreen("SM_GoToNextScreen")
+	SCREENMAN:GetTopScreen():SetNextScreenName("ScreenEdit"):StartTransitioningScreen("SM_GoToNextScreen")
 end
 
 local function handle_edit_description_prompt(info)
@@ -148,6 +162,7 @@ local function generate_steps_action(info)
 					THEME:GetString("ScreenEditMenu", "delete_chart_prompt"), 1,
 					function(answer)
 						if answer == "yes" then
+							-- It's pretty obvious this doesn't work.
 							info.song:delete_steps(info.steps)
 						end
 						song_menu_stack:pop_menu_stack()
@@ -251,11 +266,13 @@ local function generate_new_chart_slot_menu(info)
 			local name_format= THEME:GetString("ScreenEditMenu", "new_chart_slot_format")
 			local name= name_format:format(translate_stype(info.stype), translate_diff(diff))
 			choices[#choices+1]= {
-				name= name, translatable= false, execute= function()
+				name= name,
+				translatable= false,
+				execute= function()
 					if diff == "Difficulty_Edit" then
 						handle_edit_description_prompt(info)
 					else
-						handle_edit_setup(info.song, info.steps, info.stype, diff)
+						handle_edit_setup(info.song, nil, info.stype, diff)
 					end
 				end,
 			}
@@ -276,15 +293,17 @@ local function generate_new_chart_stype_menu(info)
 				name= translate_stype(stype), translatable= false,
 				menu= nesty_option_menus.menu, args= function()
 					return generate_new_chart_slot_menu{
-						song= info.song, stype= stype, slots= slots}
+						song= info.song, stype= stype, slots= slots
+					}
 				end,
 			}
-	end)
+		end
+	)
 	return choices
 end
 
 local function generate_steps_list(song)
-	MESSAGEMAN:Broadcast("edit_menu_selection_changed", {song= song})
+	MESSAGEMAN:Broadcast("EditMenuSelectionChanged", {song= song})
 	local all_steps= song:GetAllSteps()
 	do
 		local id= #all_steps
@@ -309,7 +328,7 @@ local function generate_steps_list(song)
 					return generate_steps_action{song= song, steps= steps}
 				end,
 				on_focus= function()
-					MESSAGEMAN:Broadcast("edit_menu_selection_changed", {steps= steps})
+					MESSAGEMAN:Broadcast("EditMenuSelectionChanged", {steps= steps})
 				end,
 			}
 		end
@@ -343,7 +362,7 @@ local function generate_song_list(group_name)
 				return generate_steps_list(song)
 			end,
 			on_focus= function()
-				MESSAGEMAN:Broadcast("edit_menu_selection_changed", {song= song})
+				MESSAGEMAN:Broadcast("EditMenuSelectionChanged", {song= song})
 			end,
 		}
 	end
@@ -365,54 +384,54 @@ local function shorten_name(name)
 	return name:sub(1, short_name_length)
 end
 
-local function recently_edited_menu()
-	local recent= editor_config:get_data().recently_edited
-	local menu_entries= {}
-	for i, entry in ipairs(recent) do
-		local song= SONGMAN:find_song_by_dir(entry.song_dir)
-		if song then
-			local steps= find_steps_entry_in_song(entry, song:GetAllSteps())
-			if steps then
-				menu_entries[#menu_entries+1]= {
-					name= shorten_name(song:GetGroupName()) .. " &leftarrow; " ..
-						shorten_name(song:GetDisplayFullTitle()) .. " &leftarrow; " ..
-						name_for_steps(steps),
-					execute= function()
-						handle_edit_setup(song, steps)
-					end,
-					on_focus= function()
-						MESSAGEMAN:Broadcast("edit_menu_selection_changed", {song= song, steps= steps})
-					end,
-				}
-			end
-		end
-	end
-	return nesty_options.submenu("recently_edited", menu_entries)
-end
+-- local function recently_edited_menu()
+	-- local recent= editor_config:get_data().recently_edited
+	-- local menu_entries= {}
+	-- for i, entry in ipairs(recent) do
+		-- local song= SONGMAN:find_song_by_dir(entry.song_dir)
+		-- if song then
+			-- local steps= find_steps_entry_in_song(entry, song:GetAllSteps())
+			-- if steps then
+				-- menu_entries[#menu_entries+1]= {
+					-- name= shorten_name(song:GetGroupName()) .. " &leftarrow; " ..
+						-- shorten_name(song:GetDisplayFullTitle()) .. " &leftarrow; " ..
+						-- name_for_steps(steps),
+					-- execute= function()
+						-- handle_edit_setup(song, steps)
+					-- end,
+					-- on_focus= function()
+						-- MESSAGEMAN:Broadcast("EditMenuSelectionChanged", {song= song, steps= steps})
+					-- end,
+				-- }
+			-- end
+		-- end
+	-- end
+	-- return nesty_options.submenu("recently_edited", menu_entries)
+-- end
 
-local function recent_groups_menu()
-	local function gen_entries()
-		local recent= editor_config:get_data().recent_groups
-		local menu_entries= {
-			name= "recent_groups",
-		}
-		for i, group_name in ipairs(recent) do
-			if SONGMAN:DoesSongGroupExist(group_name) then
-				menu_entries[#menu_entries+1]= {
-					name= group_name, translatable= false,
-					menu= nesty_option_menus.menu, args= function()
-						return generate_song_list(group_name)
-					end,
-					on_focus= function()
-						MESSAGEMAN:Broadcast("edit_menu_selection_changed", {group= group_name})
-					end,
-				}
-			end
-		end
-		return menu_entries
-	end
-	return nesty_options.submenu("recent_groups", gen_entries)
-end
+-- local function recent_groups_menu()
+	-- local function gen_entries()
+		-- local recent= editor_config:get_data().recent_groups
+		-- local menu_entries= {
+			-- name= "recent_groups",
+		-- }
+		-- for i, group_name in ipairs(recent) do
+			-- if SONGMAN:DoesSongGroupExist(group_name) then
+				-- menu_entries[#menu_entries+1]= {
+					-- name= group_name, translatable= false,
+					-- menu= nesty_option_menus.menu, args= function()
+						-- return generate_song_list(group_name)
+					-- end,
+					-- on_focus= function()
+						-- MESSAGEMAN:Broadcast("EditMenuSelectionChanged", {group= group_name})
+					-- end,
+				-- }
+			-- end
+		-- end
+		-- return menu_entries
+	-- end
+	-- return nesty_options.submenu("recent_groups", gen_entries)
+-- end
 
 local function init_edit_picker()
 	local groups= SONGMAN:GetSongGroupNames()
@@ -426,7 +445,7 @@ local function init_edit_picker()
 				return generate_song_list(group_name)
 			end,
 			on_focus= function()
-				MESSAGEMAN:Broadcast("edit_menu_selection_changed", {group= group_name})
+				MESSAGEMAN:Broadcast("EditMenuSelectionChanged", {group= group_name})
 			end,
 		}
 	end
