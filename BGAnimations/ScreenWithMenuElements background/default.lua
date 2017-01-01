@@ -1,7 +1,7 @@
 -- You know what, I guess the "fancy UI background" theme option can be put to use.
 if ThemePrefs.Get("FancyUIBG") then
 	return Def.ActorFrame {
-		LoadActor("_base") .. {
+		LoadActor(THEME:GetPathG("common bg", "base")) .. {
 			InitCommand=cmd(Center;zoomto,SCREEN_WIDTH,SCREEN_HEIGHT)
 		},
 		LoadActor("_maze") .. {

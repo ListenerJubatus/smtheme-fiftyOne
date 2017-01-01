@@ -121,30 +121,11 @@ t[#t+1] = Def.ActorFrame {
 
 -- Course type
 t[#t+1] = Def.ActorFrame {
-<<<<<<< HEAD
-    InitCommand=cmd(x,THEME:GetMetric(Var "LoadingScreen","NumCourseSongsX");y,THEME:GetMetric(Var "LoadingScreen","NumCourseSongsY");
-		horizalign,right;draworder,126),
-    OnCommand=cmd(diffusealpha,0;smooth,0.3;diffusealpha,1),
-    OffCommand=cmd(smooth,0.3;diffusealpha,0),
-    -- "# of songs" label...
-    LoadFont("Common Condensed") .. {
-		InitCommand=cmd(zoom,0.75;uppercase,true;y,-10;diffuse,color("#512232");visible,GAMESTATE:IsCourseMode()),
-		OnCommand=cmd(queuecommand,"Set"),
-		ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set"),
-		SetCommand=function(self)
-			self:settext("SONG COUNT")
-		end
-    },
-	-- and the song count.
-	LoadFont("GenreDisplay genre") .. { 
-          InitCommand=cmd(y,9;maxwidth,180;diffuse,color("#512232");visible,GAMESTATE:IsCourseMode(););
-=======
     InitCommand=cmd(x,SCREEN_CENTER_X-127;draworder,126);
     OnCommand=cmd(diffusealpha,0;smooth,0.3;diffusealpha,1;);
     OffCommand=cmd(smooth,0.2;diffusealpha,0;);
 	LoadFont("Common Condensed") .. { 
           InitCommand=cmd(horizalign,right;zoom,1.0;y,SCREEN_CENTER_Y-64+2;maxwidth,180;diffuse,color("#512232");visible,GAMESTATE:IsCourseMode(););
->>>>>>> refs/remotes/origin/master
           CurrentCourseChangedMessageCommand=cmd(queuecommand,"Set"); 
           ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set"); 
           SetCommand=function(self) 
@@ -152,17 +133,13 @@ t[#t+1] = Def.ActorFrame {
                if course then
                     self:settext(course:GetEstimatedNumStages() .. " songs"); 
                     self:queuecommand("Refresh");
-<<<<<<< HEAD
-					(cmd(stoptweening;zoom,0.8;diffusealpha,0.0;smooth,0.2;diffusealpha,1;zoom,0.9))(self)
-=======
->>>>>>> refs/remotes/origin/master
 				else
 					self:settext("");
 					self:queuecommand("Refresh"); 	
                end 
           end; 
-	}
-}
+		};
+};
 t[#t+1] = StandardDecorationFromFileOptional("CourseContentsList","CourseContentsList");
 
 
