@@ -20,7 +20,7 @@ local t = LoadFallbackB();
 
 -- Sort and stage display tiles
 t[#t+1] = Def.ActorFrame {
-    InitCommand=cmd(x,SCREEN_CENTER_X+228+40;y,SCREEN_CENTER_Y-223;visible,not GAMESTATE:IsCourseMode(););
+    InitCommand=cmd(x,SCREEN_CENTER_X+228+40;y,SCREEN_CENTER_Y-223;);
     OffCommand=cmd(linear,0.3;diffusealpha,0;);
 	LoadActor(THEME:GetPathG("", "_sortFrame"))  .. {
 	    InitCommand=cmd(diffusealpha,0.9;zoom,1.5);
@@ -121,6 +121,7 @@ t[#t+1] = Def.ActorFrame {
 
 -- Course type
 t[#t+1] = Def.ActorFrame {
+<<<<<<< HEAD
     InitCommand=cmd(x,THEME:GetMetric(Var "LoadingScreen","NumCourseSongsX");y,THEME:GetMetric(Var "LoadingScreen","NumCourseSongsY");
 		horizalign,right;draworder,126),
     OnCommand=cmd(diffusealpha,0;smooth,0.3;diffusealpha,1),
@@ -137,16 +138,24 @@ t[#t+1] = Def.ActorFrame {
 	-- and the song count.
 	LoadFont("GenreDisplay genre") .. { 
           InitCommand=cmd(y,9;maxwidth,180;diffuse,color("#512232");visible,GAMESTATE:IsCourseMode(););
+=======
+    InitCommand=cmd(x,SCREEN_CENTER_X-127;draworder,126);
+    OnCommand=cmd(diffusealpha,0;smooth,0.3;diffusealpha,1;);
+    OffCommand=cmd(smooth,0.2;diffusealpha,0;);
+	LoadFont("Common Condensed") .. { 
+          InitCommand=cmd(horizalign,right;zoom,1.0;y,SCREEN_CENTER_Y-64+2;maxwidth,180;diffuse,color("#512232");visible,GAMESTATE:IsCourseMode(););
+>>>>>>> refs/remotes/origin/master
           CurrentCourseChangedMessageCommand=cmd(queuecommand,"Set"); 
           ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set"); 
           SetCommand=function(self) 
                local course = GAMESTATE:GetCurrentCourse(); 
                if course then
-					self:smooth(0.2)
-					self:diffusealpha(0);
-                    self:settext(course:GetEstimatedNumStages()); 
+                    self:settext(course:GetEstimatedNumStages() .. " songs"); 
                     self:queuecommand("Refresh");
+<<<<<<< HEAD
 					(cmd(stoptweening;zoom,0.8;diffusealpha,0.0;smooth,0.2;diffusealpha,1;zoom,0.9))(self)
+=======
+>>>>>>> refs/remotes/origin/master
 				else
 					self:settext("");
 					self:queuecommand("Refresh"); 	
