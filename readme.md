@@ -2,7 +2,7 @@ Notice
 -----------
 The master branch, as of April 10, 2017, is now the 5.0 branch that was created by Riakodoadm, and the previous version has been moved to a new "5.2" branch. This mirrors the similar rollback that StepMania itself performed.
 
-Since the new 5.1 is meant to be more compatible with 5.0.x, you no longer need a nightly build to run this theme.
+Since the new 5.1 is meant to be more compatible with 5.0.x, you no longer need a nightly build to run this theme. However, the edit mode menu is broken because it will require some backend support code to be backported from the 5.2 branch of StepMania.
 
 Introduction
 -----------
