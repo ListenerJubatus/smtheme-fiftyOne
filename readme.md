@@ -1,16 +1,16 @@
-WARNING
+Notice
 -----------
-This theme _requires_ a nightly build of StepMania 5.1, because it reflects changes that make it incompatible with the current "5.1 -3" milestone.
+The master branch, as of April 10, 2017, is now the 5.0 branch that was created by Riakodoadm, and the previous version has been moved to a new "5.2" branch. This mirrors the similar rollback that StepMania itself performed.
 
-You can get them (Windows only) from the [build server](https://ci.appveyor.com/project/wolfman2000/stepmania-wm87c/history) or compile SM from source. 
+Since the new 5.1 is meant to be more compatible with 5.0.x, you no longer need a nightly build to run this theme.
 
 Introduction
 -----------
 Lambda (formerly FiftyOne) is a project to create a new, prospective default theme for StepMania 5.1.
 
-The current default theme dates back to the original sm-ssc fork, and barring design tweaks over the years, has remained relatively unchanged. As 5.1 has some of the most significant changes to StepMania in quite a long time, it is only appropriate that a new default theme be constructed to showcase its advancements.
+The current default theme dates back to the original sm-ssc fork, and barring design tweaks over the years, has remained relatively unchanged. ~~As 5.1 has some of the most significant changes to StepMania in quite a long time,~~ it is only appropriate that a new default theme be constructed to showcase its advancements.
 
-Among the technical goals for Lambda are to provide the same level of functionality as the current default theme, as well as familiarities, whilst futureproofing it for future changes by reducing its reliance on legacy components. Lambda is also meant to reflect modern design trends, utilizing a clean and gradient-based aesthetic with a friendlier and more inviting look. The theme is also meant to have a more vivid and less duochromatic appearance than the previous default. To provide more efficient use of space on larger displays, Lambda uses a base resolution of 720p as opposed to 480p. Yes, this may break some stuff, but it's not like SM 5.1 has already broken stuff for the sake of progress to begin with.
+Among the technical goals for Lambda are to provide the same level of functionality as the current default theme, as well as familiarities, ~~whilst futureproofing it for future changes by reducing its reliance on legacy components~~. Lambda is also meant to reflect modern design trends, utilizing a clean and gradient-based aesthetic with a friendlier and more inviting look. The theme is also meant to have a more vivid and less duochromatic appearance than the previous default. To provide more efficient use of space on larger displays, Lambda uses a base resolution of 720p as opposed to 480p. Yes, this may break some stuff, but it's not like SM 5.1 has already broken stuff for the sake of progress to begin with.
 
 Progress
 -----------
