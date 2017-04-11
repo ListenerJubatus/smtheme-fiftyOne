@@ -93,8 +93,6 @@ local base_options= {
 	nesty_options.float_config_val_new(notefield_prefs_config, "zoom", 0.1, 1),
 	nesty_options.submenu("chart_mods", chart_mods),
 	{name= "noteskin", translatable= true, menu= nesty_option_menus.noteskins},
-	{name= "noteskin_params", translatable= true, menu= nesty_option_menus.menu,
-	 args= gen_noteskin_param_menu, req_func= show_noteskin_param_menu},
 	{name= "shown_noteskins", translatable= true, menu= nesty_option_menus.shown_noteskins, args= {}},
 	nesty_options.bool_config_val(notefield_prefs_config, "hidden"),
 	nesty_options.bool_config_val(notefield_prefs_config, "sudden"),

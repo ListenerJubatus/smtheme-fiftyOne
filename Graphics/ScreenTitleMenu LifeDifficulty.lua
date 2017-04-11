@@ -1,5 +1,5 @@
 local icon_params = {
-	base_color = color("#FFFFFF"),
+	base_color = ColorLightTone(Color.Red),
 	label_text = Screen.String("LifeDifficulty"),
 	value_text = GetLifeDifficulty()
 }

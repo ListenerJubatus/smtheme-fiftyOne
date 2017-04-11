@@ -1,5 +1,7 @@
 -- ...So I realize that I completely ignored almost each and every
 -- metrics-bound element this screen could use, but it's okay, right?
+-- todo: make a more metrics-bound version of this screen anyways for beginner accessibility.
+-- todo: accommodate EvaluationSummary too
 
 local t = LoadFallbackB()
 
@@ -179,12 +181,20 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 	eval_parts[#eval_parts+1] = Def.ActorFrame{
 		InitCommand=cmd(x,_screen.cx + grade_parts_offs;y,_screen.cy/1.91),
 		
+		--Containers. todo: replace with, erm... not quads
 		Def.Quad {
-			InitCommand=cmd(zoomto,190,115;diffuse,color("#fce1a1"););
+			InitCommand=cmd(zoomto,190,115;diffuse,ColorLightTone(PlayerColor(p))),
 			OnCommand=function(self)
 			    self:diffusealpha(0):decelerate(0.4):diffusealpha(0.3)
-			end;
-			OffCommand=cmd(decelerate,0.3;diffusealpha,0);
+			end,
+			OffCommand=cmd(decelerate,0.3;diffusealpha,0)
+		},
+		Def.Quad {
+			InitCommand=cmd(y,110;zoomto,190,100;diffuse,color("#fce1a1")),
+			OnCommand=function(self)
+			    self:diffusealpha(0):decelerate(0.4):diffusealpha(0.3)
+			end,
+			OffCommand=cmd(decelerate,0.3;diffusealpha,0)
 		},
 		
 		LoadActor(THEME:GetPathG("GradeDisplay", "Grade " .. p_grade)) .. {

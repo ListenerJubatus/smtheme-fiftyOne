@@ -107,14 +107,14 @@ local menu_params= {
 }
 
 local frame= Def.ActorFrame{
-	edit_menu_selection_changedMessageCommand=
+	EditMenuSelectionChangedMessageCommand=
 		edit_pick_menu_update_steps_display_info(steps_display),
 	edit_pick_menu_actor(menu_params),
 	Def.Sprite{
 		Name= "jacket", InitCommand= function(self)
 			self:xy(jacket_x, jacket_y)
 		end,
-		edit_menu_selection_changedMessageCommand= function(self, params)
+		EditMenuSelectionChangedMessageCommand= function(self, params)
 			if params.group then
 				self:visible(false)
 			elseif params.song then
@@ -132,7 +132,7 @@ local frame= Def.ActorFrame{
 		Name= "banner", InitCommand= function(self)
 			self:xy(banner_x, banner_y)
 		end,
-		edit_menu_selection_changedMessageCommand= function(self, params)
+		EditMenuSelectionChangedMessageCommand= function(self, params)
 			if params.group then
 				local path= SONGMAN:GetSongGroupBannerPath(params.group)
 				if #path > 0 then
@@ -157,7 +157,7 @@ local frame= Def.ActorFrame{
 		Name= "length", Font= "Common Fallback Font", InitCommand= function(self)
 			self:xy(length_x, length_y):horizalign(right):zoom(.75):diffuse(color("#2E0F0F")):shadowlength(1)
 		end,
-		edit_menu_selection_changedMessageCommand= function(self, params)
+		EditMenuSelectionChangedMessageCommand= function(self, params)
 			if params.group then
 				self:visible(false)
 			elseif params.song then
@@ -170,7 +170,7 @@ local frame= Def.ActorFrame{
 		Name= "bpm", Font= "Common Fallback Font", InitCommand= function(self)
 			self:xy(bpm_x, bpm_y):horizalign(right):zoom(.75):diffuse(color("#451515")):shadowlength(1)
 		end,
-		edit_menu_selection_changedMessageCommand= function(self, params)
+		EditMenuSelectionChangedMessageCommand= function(self, params)
 			if params.group then
 				self:visible(false)
 			elseif params.song then
@@ -188,7 +188,7 @@ local frame= Def.ActorFrame{
  		Name= "title", Font= "Common Fallback Font", InitCommand= function(self)
 			self:xy(title_x, title_y):horizalign(left):zoom(.75):diffuse(color("#451515")):shadowlength(1)
 		end,
-		edit_menu_selection_changedMessageCommand= function(self, params)
+		EditMenuSelectionChangedMessageCommand= function(self, params)
 			if params.group then
 				self:visible(false)
 			elseif params.song then
@@ -201,7 +201,7 @@ local frame= Def.ActorFrame{
  		Name= "artist", Font= "Common Fallback Font", InitCommand= function(self)
 			self:xy(artist_x, artist_y):horizalign(left):zoom(.75):diffuse(color("#2E0F0F")):shadowlength(1)
 		end,
-		edit_menu_selection_changedMessageCommand= function(self, params)
+		EditMenuSelectionChangedMessageCommand= function(self, params)
 			if params.group then
 				self:visible(false)
 			elseif params.song then
