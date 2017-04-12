@@ -14,7 +14,9 @@ Among the technical goals for Lambda are to provide the same level of functional
 
 Progress
 -----------
-Lambda is still a major WIP, and it has only scratched the surface. Feel free to contribute and make pull requests. 
+I'd say it's about 55% done. Needs a bit more eye-candy, some screens and modes still need to be fixed up/polished, and Edit mode needs to be worked on (especially after 5.1 is modified to support the new edit menu scripting).
+
+Feel free to contribute and make pull requests. 
 
 Source code
 -----------

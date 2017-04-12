@@ -96,15 +96,14 @@ for i, v in ipairs(eval_lines) do
 	
 	mid_pane[#mid_pane+1] = Def.ActorFrame{
 		InitCommand=cmd(x,_screen.cx;y,(_screen.cy/1.4)+(spacing)),
-		
+		OffCommand=function(self)			
+			self:sleep(0.1 * i):decelerate(0.3):diffusealpha(0)
+		end;	
 		Def.Quad {
 			InitCommand=cmd(zoomto,400,36;diffuse,JudgmentLineToColor(cur_line);fadeleft,0.5;faderight,0.5;);
 			OnCommand=function(self)			
 				self:diffusealpha(0):sleep(0.1 * i):decelerate(0.9):diffusealpha(1)
-			end;
-			OffCommand=function(self)			
-				self:sleep(0.1 * i):decelerate(0.3):diffusealpha(0)
-			end;			
+			end;		
 		};
 	
 		Def.BitmapText {
@@ -112,9 +111,6 @@ for i, v in ipairs(eval_lines) do
 			InitCommand=cmd(zoom,0.6;diffuse,color("#000000");settext,string.upper(JudgmentLineToLocalizedString(cur_line)));
 			OnCommand=function(self)			
 				self:diffusealpha(0):sleep(0.1 * i):decelerate(0.9):diffusealpha(0.6)
-			end;
-			OffCommand=function(self)			
-				self:sleep(0.1 * i):decelerate(0.3):diffusealpha(0)
 			end;
 		}
 	}
@@ -183,14 +179,14 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 		
 		--Containers. todo: replace with, erm... not quads
 		Def.Quad {
-			InitCommand=cmd(zoomto,190,115;diffuse,ColorLightTone(PlayerColor(p))),
+			InitCommand=cmd(zoomto,190,115;diffuse,ColorMidTone(PlayerColor(p))),
 			OnCommand=function(self)
-			    self:diffusealpha(0):decelerate(0.4):diffusealpha(0.3)
+			    self:diffusealpha(0):decelerate(0.4):diffusealpha(0.5)
 			end,
 			OffCommand=cmd(decelerate,0.3;diffusealpha,0)
 		},
 		Def.Quad {
-			InitCommand=cmd(y,110;zoomto,190,100;diffuse,color("#fce1a1")),
+			InitCommand=cmd(y,110;zoomto,190,100;diffuse,color("#fce1a1");),
 			OnCommand=function(self)
 			    self:diffusealpha(0):decelerate(0.4):diffusealpha(0.3)
 			end,
@@ -202,7 +198,7 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 			OnCommand=function(self)
 			        self:diffusealpha(0):zoom(1):sleep(0.63):decelerate(0.4):zoom(0.75):diffusealpha(1)
 					if STATSMAN:GetCurStageStats():GetPlayerStageStats(p):GetStageAward() then
-					  self:sleep(0.1):decelerate(0.4):addy(-6);
+					  self:sleep(0.1):decelerate(0.4):addy(-12);
 					else
 					  self:addy(0);
 					end;
@@ -212,7 +208,7 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 		
 		Def.BitmapText {
 			Font = "_roboto condensed Bold italic 24px",
-			InitCommand=cmd(diffuse,Color.White;zoom,1.0;addy,38;maxwidth,180;uppercase,true;diffuse,color("#4A4038");diffusetopedge,color("#A68844");),
+			InitCommand=cmd(diffuse,Color.White;zoom,1.0;addy,38;maxwidth,180;uppercase,true;diffuse,ColorLightTone(PlayerColor(p));diffusetopedge,color("#FFFFFF");strokecolor,ColorLightTone(PlayerColor(p));),
 			OnCommand=function(self)
 				if STATSMAN:GetCurStageStats():GetPlayerStageStats(p):GetStageAward() then
 					self:settext(THEME:GetString( "StageAward", ToEnumShortString(STATSMAN:GetCurStageStats():GetPlayerStageStats(p):GetStageAward()) ))

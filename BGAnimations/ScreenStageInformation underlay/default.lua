@@ -59,12 +59,13 @@ t[#t+1] = Def.ActorFrame {
 	OnCommand=cmd(sleep,4;decelerate,0.7;diffusealpha,0);
 	-- Behind P1 credit
 	Def.Quad {
-		InitCommand=cmd(horizalign,center;x,SCREEN_LEFT;y,SCREEN_BOTTOM-68;zoomto,SCREEN_WIDTH*0.4,55;diffuse,color("#000000");diffusealpha,0.75;faderight,0.6);
-		OnCommand=function(self)
+		InitCommand=cmd(horizalign,center;x,SCREEN_LEFT;y,SCREEN_BOTTOM-68;zoomto,SCREEN_WIDTH*0.4,55;diffuse,ColorDarkTone(PlayerColor(PLAYER_1));diffuseleftedge,ColorMidTone(PlayerColor(PLAYER_1));diffusealpha,0.9;faderight,0.15;visible,GAMESTATE:IsHumanPlayer(PLAYER_1););
+		OnCommand=cmd(playcommand,"Set";);
+		SetCommand=function(self)
 			stepsP1 = GAMESTATE:GetCurrentSteps(PLAYER_1)
 			local song = GAMESTATE:GetCurrentSong();
 			if song then
-				if stepsP1 ~= nil then
+				if stepsP1:GetAuthorCredit() ~= "" then
 					self:visible(true)
 				else
 					self:visible(false)
@@ -76,12 +77,13 @@ t[#t+1] = Def.ActorFrame {
 	};
 	-- Behind P2 credit
 	Def.Quad {
-		InitCommand=cmd(horizalign,right;x,SCREEN_RIGHT;y,SCREEN_BOTTOM-68;zoomto,SCREEN_WIDTH*0.4,55;diffuse,color("#000000");diffusealpha,0.75;faderight,0.6);
-		OnCommand=function(self)
+		InitCommand=cmd(horizalign,right;x,SCREEN_RIGHT;y,SCREEN_BOTTOM-68;zoomto,SCREEN_WIDTH*0.4,55;diffuse,ColorDarkTone(PlayerColor(PLAYER_2));diffuserightedge,ColorMidTone(PlayerColor(PLAYER_2));diffusealpha,0.9;fadeleft,0.15;visible,GAMESTATE:IsHumanPlayer(PLAYER_2););
+		OnCommand=cmd(playcommand,"Set";);
+		SetCommand=function(self)
 			stepsP2 = GAMESTATE:GetCurrentSteps(PLAYER_2)
 			local song = GAMESTATE:GetCurrentSong();
 			if song then
-				if stepsP2 ~= nil then
+				if stepsP2:GetAuthorCredit() ~= "" then
 					self:visible(true)
 				else
 					self:visible(false)
@@ -91,8 +93,12 @@ t[#t+1] = Def.ActorFrame {
 			end
           end
 	};
+	-- Behind song
 	Def.Quad {
-		InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_BOTTOM-68;zoomto,SCREEN_WIDTH*0.5,55;diffuse,color("#000000");diffusealpha,0.9;fadeleft,0.8;faderight,0.8);
+		InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_BOTTOM-68;zoomto,SCREEN_WIDTH*0.5,55;);
+		OnCommand=function(self)
+			self:diffuse(ColorMidTone(ScreenColor(SCREENMAN:GetTopScreen():GetName()))):diffusebottomedge(ColorMidTone(ScreenColor(SCREENMAN:GetTopScreen():GetName()))):diffusetopedge(ColorMidTone(ScreenColor(SCREENMAN:GetTopScreen():GetName()))):diffusealpha(1):fadeleft(0.2):faderight(0.2);
+		end
 	};
 };
 
@@ -102,7 +108,7 @@ t[#t+1] = Def.ActorFrame {
 	InitCommand=cmd(y,SCREEN_BOTTOM-80;x,SCREEN_LEFT+40;);
 	OnCommand=cmd(sleep,4;decelerate,0.7;diffusealpha,0);
 		LoadFont("Common Italic Condensed") .. {
-		  OnCommand=cmd(playcommand,"Set";horizalign,left;diffuse,color("#FFFFFF");strokecolor,color("#000000"););
+		  OnCommand=cmd(playcommand,"Set";horizalign,left;diffuse,color("#FFFFFF"););
           SetCommand=function(self)
 			stepsP1 = GAMESTATE:GetCurrentSteps(PLAYER_1)
 			local song = GAMESTATE:GetCurrentSong();
@@ -119,7 +125,7 @@ t[#t+1] = Def.ActorFrame {
 		};
 		LoadFont("Common Fallback Font") .. {
 		  InitCommand=cmd(addy,22);
-		  OnCommand=cmd(playcommand,"Set";horizalign,left;zoom,0.75;diffuse,color("#FFFFFF");strokecolor,color("#000000"););
+		  OnCommand=cmd(playcommand,"Set";horizalign,left;zoom,0.75;diffuse,color("#FFFFFF"););
           SetCommand=function(self)
 			stepsP1 = GAMESTATE:GetCurrentSteps(PLAYER_1)
 			local song = GAMESTATE:GetCurrentSong();
@@ -142,7 +148,7 @@ t[#t+1] = Def.ActorFrame {
 	InitCommand=cmd(y,SCREEN_BOTTOM-80;x,SCREEN_RIGHT-40;);
 	OnCommand=cmd(sleep,4;decelerate,0.7;diffusealpha,0);
 	LoadFont("Common Italic Condensed") .. {
-		  OnCommand=cmd(playcommand,"Set";horizalign,right;diffuse,color("#FFFFFF");strokecolor,color("#000000"););
+		  OnCommand=cmd(playcommand,"Set";horizalign,right;diffuse,color("#FFFFFF"););
           SetCommand=function(self)
 			stepsP2 = GAMESTATE:GetCurrentSteps(PLAYER_2)
 			local song = GAMESTATE:GetCurrentSong();
@@ -161,7 +167,7 @@ t[#t+1] = Def.ActorFrame {
 
 	LoadFont("Common Fallback Font") .. {
 		  InitCommand=cmd(addy,22);
-		  OnCommand=cmd(playcommand,"Set";horizalign,right;zoom,0.75;diffuse,color("#FFFFFF");strokecolor,color("#000000"););
+		  OnCommand=cmd(playcommand,"Set";horizalign,right;zoom,0.75;diffuse,color("#FFFFFF"););
           SetCommand=function(self)
 			stepsP2 = GAMESTATE:GetCurrentSteps(PLAYER_2)
 			local song = GAMESTATE:GetCurrentSong();
