@@ -12,7 +12,7 @@ for i=1, 6 do
 	local sleep_time = 0.1 * i
 	t[#t+1] = LoadActor(THEME:GetPathG("", "_pt" .. i)) .. {
 		InitCommand=cmd(zoomto,SCREEN_WIDTH,SCREEN_HEIGHT;Center;diffuse,params.color),
-		OnCommand=cmd(diffusealpha,startAlpha;sleep,sleep_time;linear,0.2;diffusealpha,endAlpha)
+		OnCommand=cmd(diffusealpha,startAlpha;sleep,sleep_time;linear,0.14;diffusealpha,endAlpha)
 	}
 end
 

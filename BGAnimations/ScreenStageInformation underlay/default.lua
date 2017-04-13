@@ -1,4 +1,7 @@
 local playMode = GAMESTATE:GetPlayMode()
+local slideTime = 1.1;
+local slideWait = 1.25;
+local bottomSlide = 0.76;
 
 local sStage = ""
 sStage = GAMESTATE:GetCurrentStage()
@@ -11,18 +14,40 @@ local t = Def.ActorFrame {};
 t[#t+1] = Def.Quad {
 	InitCommand=cmd(Center;zoomto,SCREEN_WIDTH,SCREEN_HEIGHT;diffuse,Color("Black"));
 };
+
 if GAMESTATE:IsCourseMode() then
 	t[#t+1] = LoadActor("CourseDisplay");
 else
 	t[#t+1] = Def.Sprite {
-		InitCommand=cmd(Center;diffusealpha,0);
+		InitCommand=cmd(Center;diffusealpha,0.26);
 		BeginCommand=cmd(LoadFromCurrentSongBackground);
 		OnCommand=function(self)
 			self:scale_or_crop_background()
-			self:sleep(0.5):decelerate(0.50):diffusealpha(1):sleep(3)
+			self:addy(SCREEN_HEIGHT):sleep(slideWait):smooth(slideTime):addy(-SCREEN_HEIGHT):diffusealpha(1);
 		end;
 	};
 end
+
+
+-- BG for credits
+t[#t+1] = Def.ActorFrame {
+	OnCommand=cmd(addy,SCREEN_HEIGHT;sleep,slideWait;smooth,slideTime;addy,-SCREEN_HEIGHT;sleep,2;smooth,bottomSlide;addy,240);
+	-- Behind stage graphic
+	Def.Quad {
+		InitCommand=cmd(vertalign,bottom;x,SCREEN_CENTER_X;y,SCREEN_BOTTOM-110;zoomto,SCREEN_WIDTH,120;);
+		OnCommand=function(self)
+			self:diffuse(color("#000000")):diffusealpha(0.8);
+		end
+	};
+	-- Behind song
+	Def.Quad {
+		InitCommand=cmd(vertalign,bottom;x,SCREEN_CENTER_X;y,SCREEN_BOTTOM;zoomto,SCREEN_WIDTH,110;);
+		OnCommand=function(self)
+			self:diffuse(color("#000000")):diffusealpha(0.9);
+		end
+	};
+};
+
 
 local stage_num_actor= THEME:GetPathG("ScreenStageInformation", "Stage " .. ToEnumShortString(sStage), true)
 if stage_num_actor ~= "" and FILEMAN:DoesFileExist(stage_num_actor) then
@@ -43,62 +68,11 @@ else
 end
 
 t[#t+1] = Def.ActorFrame {
-	InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y);
-	Def.Quad {
-		InitCommand=cmd(zoomto,SCREEN_WIDTH,110;diffuse,color("#000000");diffusealpha,0.8;fadeleft,0.6;faderight,0.6);
-		OnCommand=cmd(sleep,4;decelerate,0.7;diffusealpha,0);
-	};
-	
-	stage_num_actor .. {
-		OnCommand=cmd(zoom,1;diffusealpha,1;sleep,4;decelerate,0.7;zoom,0.75;diffusealpha,0);
-	};
-};
+	InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y+190);
+	OnCommand=cmd(addy,SCREEN_HEIGHT;sleep,slideWait;smooth,slideTime;addy,-SCREEN_HEIGHT;sleep,2;smooth,bottomSlide;addy,240;);
 
--- BG for credits
-t[#t+1] = Def.ActorFrame {
-	OnCommand=cmd(sleep,4;decelerate,0.7;diffusealpha,0);
-	-- Behind P1 credit
-	Def.Quad {
-		InitCommand=cmd(horizalign,center;x,SCREEN_LEFT;y,SCREEN_BOTTOM-68;zoomto,SCREEN_WIDTH*0.4,55;diffuse,ColorDarkTone(PlayerColor(PLAYER_1));diffuseleftedge,ColorMidTone(PlayerColor(PLAYER_1));diffusealpha,0.9;faderight,0.15;visible,GAMESTATE:IsHumanPlayer(PLAYER_1););
-		OnCommand=cmd(playcommand,"Set";);
-		SetCommand=function(self)
-			stepsP1 = GAMESTATE:GetCurrentSteps(PLAYER_1)
-			local song = GAMESTATE:GetCurrentSong();
-			if song then
-				if stepsP1:GetAuthorCredit() ~= "" then
-					self:visible(true)
-				else
-					self:visible(false)
-				end
-			else
-				self:visible(false)
-			end
-          end
-	};
-	-- Behind P2 credit
-	Def.Quad {
-		InitCommand=cmd(horizalign,right;x,SCREEN_RIGHT;y,SCREEN_BOTTOM-68;zoomto,SCREEN_WIDTH*0.4,55;diffuse,ColorDarkTone(PlayerColor(PLAYER_2));diffuserightedge,ColorMidTone(PlayerColor(PLAYER_2));diffusealpha,0.9;fadeleft,0.15;visible,GAMESTATE:IsHumanPlayer(PLAYER_2););
-		OnCommand=cmd(playcommand,"Set";);
-		SetCommand=function(self)
-			stepsP2 = GAMESTATE:GetCurrentSteps(PLAYER_2)
-			local song = GAMESTATE:GetCurrentSong();
-			if song then
-				if stepsP2:GetAuthorCredit() ~= "" then
-					self:visible(true)
-				else
-					self:visible(false)
-				end
-			else
-				self:visible(false)
-			end
-          end
-	};
-	-- Behind song
-	Def.Quad {
-		InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_BOTTOM-68;zoomto,SCREEN_WIDTH*0.5,55;);
-		OnCommand=function(self)
-			self:diffuse(ColorMidTone(ScreenColor(SCREENMAN:GetTopScreen():GetName()))):diffusebottomedge(ColorMidTone(ScreenColor(SCREENMAN:GetTopScreen():GetName()))):diffusetopedge(ColorMidTone(ScreenColor(SCREENMAN:GetTopScreen():GetName()))):diffusealpha(1):fadeleft(0.2):faderight(0.2);
-		end
+	stage_num_actor .. {
+		OnCommand=cmd(zoom,1;diffusealpha,1);
 	};
 };
 
@@ -106,7 +80,7 @@ t[#t+1] = Def.ActorFrame {
 	if GAMESTATE:IsHumanPlayer(PLAYER_1) == true then
 	t[#t+1] = Def.ActorFrame {
 	InitCommand=cmd(y,SCREEN_BOTTOM-80;x,SCREEN_LEFT+40;);
-	OnCommand=cmd(sleep,4;decelerate,0.7;diffusealpha,0);
+	OnCommand=cmd(addy,SCREEN_HEIGHT;sleep,slideWait;smooth,slideTime;addy,-SCREEN_HEIGHT;sleep,2;smooth,bottomSlide;addy,240;);
 		LoadFont("Common Italic Condensed") .. {
 		  OnCommand=cmd(playcommand,"Set";horizalign,left;diffuse,color("#FFFFFF"););
           SetCommand=function(self)
@@ -146,7 +120,7 @@ t[#t+1] = Def.ActorFrame {
 	if GAMESTATE:IsHumanPlayer(PLAYER_2) == true then
 	t[#t+1] = Def.ActorFrame {
 	InitCommand=cmd(y,SCREEN_BOTTOM-80;x,SCREEN_RIGHT-40;);
-	OnCommand=cmd(sleep,4;decelerate,0.7;diffusealpha,0);
+	OnCommand=cmd(addy,SCREEN_HEIGHT;sleep,slideWait;smooth,slideTime;addy,-SCREEN_HEIGHT;sleep,2;smooth,bottomSlide;addy,240;);
 	LoadFont("Common Italic Condensed") .. {
 		  OnCommand=cmd(playcommand,"Set";horizalign,right;diffuse,color("#FFFFFF"););
           SetCommand=function(self)
@@ -188,51 +162,34 @@ t[#t+1] = Def.ActorFrame {
 -- Song title and artist
 t[#t+1] = Def.ActorFrame {
 	InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_BOTTOM-80);
-	OnCommand=cmd(sleep,4;decelerate,0.7;diffusealpha,0);
+	OnCommand=cmd(addy,SCREEN_HEIGHT;sleep,slideWait;smooth,slideTime;addy,-SCREEN_HEIGHT;sleep,2;smooth,bottomSlide;addy,240;);
 	LoadFont("Common Fallback Font") .. {
 		Text=GAMESTATE:IsCourseMode() and GAMESTATE:GetCurrentCourse():GetDisplayFullTitle() or GAMESTATE:GetCurrentSong():GetDisplayFullTitle();
-		InitCommand=cmd(diffuse,color("#FFFFFF");strokecolor,color("#000000");maxwidth,SCREEN_WIDTH*0.78);
+		InitCommand=cmd(diffuse,color("#FFFFFF");maxwidth,SCREEN_WIDTH*0.6);
 		OnCommand=cmd(zoom,1;);
 	};
 	LoadFont("Common Fallback Font") .. {
 		Text=GAMESTATE:IsCourseMode() and ToEnumShortString( GAMESTATE:GetCurrentCourse():GetCourseType() ) or GAMESTATE:GetCurrentSong():GetDisplayArtist();
-		InitCommand=cmd(diffuse,color("#FFFFFF");strokecolor,color("#000000");maxwidth,SCREEN_WIDTH*0.78);
+		InitCommand=cmd(diffuse,color("#FFFFFF");maxwidth,SCREEN_WIDTH*0.6);
 		OnCommand=cmd(zoom,0.75;addy,24;);
 	};
 };
 
+-- Stunt BG in case the BG accidentally overhangs
+t[#t+1] = Def.Quad {
+	InitCommand=cmd(Center;zoomto,SCREEN_WIDTH,SCREEN_HEIGHT;diffuse,Color("Black"));
+	OnCommand=cmd(sleep,slideWait;smooth,slideTime;addy,-SCREEN_HEIGHT;sleep,0.2;diffusealpha,0);
+};
+
 t[#t+1] = Def.ActorFrame {
-
-	LoadActor(THEME:GetPathG("", "_pt1")) .. {
-		InitCommand=cmd(zoomto,SCREEN_WIDTH,SCREEN_HEIGHT;x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;diffuse,color("#000000"););
-		OnCommand=cmd(diffusealpha,1;sleep,1.1;sleep,0.1;linear,0.2;diffusealpha,0;);
+	LoadActor("_arrow") .. {
+		InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;diffuse,color("#DAD6CC"););
+		OnCommand=cmd(diffusealpha,0;sleep,0.5;diffusealpha,0.6;decelerate,0.4;zoom,1.2;diffusealpha,0;);
 	};
-	
-	LoadActor(THEME:GetPathG("", "_pt2")) .. {
-	InitCommand=cmd(zoomto,SCREEN_WIDTH,SCREEN_HEIGHT;x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;diffuse,color("#000000"););
-	OnCommand=cmd(diffusealpha,1;sleep,1.1;sleep,0.2;linear,0.2;diffusealpha,0;);
+	LoadActor("_arrow") .. {
+		InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;diffuse,color("#DAD6CC"););
+		OnCommand=cmd(zoom,0;bounceend,0.5;zoom,1;sleep,0.75;smooth,slideTime;addy,-SCREEN_HEIGHT;);
 	};
-
-	LoadActor(THEME:GetPathG("", "_pt3")) .. {
-	InitCommand=cmd(zoomto,SCREEN_WIDTH,SCREEN_HEIGHT;x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;diffuse,color("#000000"););
-	OnCommand=cmd(diffusealpha,1;sleep,1.1;sleep,0.3;linear,0.2;diffusealpha,0;);
-	};
-	
-	LoadActor(THEME:GetPathG("", "_pt4")) .. {
-	InitCommand=cmd(zoomto,SCREEN_WIDTH,SCREEN_HEIGHT;x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;diffuse,color("#000000"););	
-	OnCommand=cmd(diffusealpha,1;sleep,1.1;sleep,0.4;linear,0.2;diffusealpha,0;);
-	};
-	
-	LoadActor(THEME:GetPathG("", "_pt5")) .. {
-	InitCommand=cmd(zoomto,SCREEN_WIDTH,SCREEN_HEIGHT;x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;diffuse,color("#000000"););	
-	OnCommand=cmd(diffusealpha,1;sleep,1.1;sleep,0.5;linear,0.2;diffusealpha,0;);
-	};
-	
-	LoadActor(THEME:GetPathG("", "_pt6")) .. {
-	InitCommand=cmd(zoomto,SCREEN_WIDTH,SCREEN_HEIGHT;x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;diffuse,color("#000000"););	
-	OnCommand=cmd(diffusealpha,1;sleep,1.1;sleep,0.6;linear,0.2;diffusealpha,0;);
-	};
-	
 };
 
 return t
