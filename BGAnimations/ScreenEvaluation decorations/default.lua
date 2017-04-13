@@ -245,9 +245,9 @@ if GAMESTATE:IsHumanPlayer(PLAYER_1) == true then
 				  local st = stepsP1:GetStepsType();
 				  local diff = stepsP1:GetDifficulty();
 				  local courseType = GAMESTATE:IsCourseMode() and SongOrCourse:GetCourseType() or nil;
-				  local cd = GetCustomDifficulty(st, diff, courseType);
+				  local cdp1 = GetCustomDifficulty(st, diff, courseType);
 				  self:settext(string.upper(THEME:GetString("CustomDifficulty",ToEnumShortString(diff))) .. "  " .. stepsP1:GetMeter());
-				  self:diffuse(ColorDarkTone(CustomDifficultyToColor(cd)));				  
+				  self:diffuse(ColorDarkTone(CustomDifficultyToColor(cdp1)));				  
 				else
 				  self:settext("")
 				end
@@ -283,9 +283,9 @@ if GAMESTATE:IsHumanPlayer(PLAYER_2) == true then
 				  local st = stepsP2:GetStepsType();
 				  local diff = stepsP2:GetDifficulty();
 				  local courseType = GAMESTATE:IsCourseMode() and SongOrCourse:GetCourseType() or nil;
-				  local cd = GetCustomDifficulty(st, diff, courseType);
-				  self:settext(string.upper(THEME:GetString("CustomDifficulty",ToEnumShortString(diff))) .. "  " .. stepsP1:GetMeter());
-				  self:diffuse(ColorDarkTone(CustomDifficultyToColor(cd)));				  
+				  local cdp2 = GetCustomDifficulty(st, diff, courseType);
+				  self:settext(string.upper(THEME:GetString("CustomDifficulty",ToEnumShortString(diff))) .. "  " .. stepsP2:GetMeter());
+				  self:diffuse(ColorDarkTone(CustomDifficultyToColor(cdp2)));				  
 				else
 				  self:settext("")
 				end
