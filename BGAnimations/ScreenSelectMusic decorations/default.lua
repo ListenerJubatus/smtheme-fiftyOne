@@ -12,15 +12,15 @@ local t = LoadFallbackB();
 -- Banner 
 
 	t[#t+1] = LoadActor("_bannerframe") .. {
-		 InitCommand=cmd(zoom,1;x,SCREEN_CENTER_X-228;y,SCREEN_CENTER_Y-165;draworder,47);
+		 InitCommand=cmd(zoom,1;x,SCREEN_CENTER_X-228;y,SCREEN_CENTER_Y-165-11;draworder,47);
 		 OnCommand=cmd(zoomy,0;decelerate,0.3;zoomy,1;);
 		 OffCommand=cmd(decelerate,0.15;zoomx,0;);
 	};
 
 
--- Sort and stage display tiles
+-- Sort display tiles
 t[#t+1] = Def.ActorFrame {
-    InitCommand=cmd(x,SCREEN_CENTER_X+228+40;y,SCREEN_CENTER_Y-223;);
+    InitCommand=cmd(x,SCREEN_CENTER_X-228;y,SCREEN_CENTER_Y+282-6;);
     OffCommand=cmd(linear,0.3;diffusealpha,0;);
 	LoadActor(THEME:GetPathG("", "_sortFrame"))  .. {
 	    InitCommand=cmd(diffusealpha,0.9;zoom,1.5);
@@ -39,7 +39,7 @@ t[#t+1] = Def.ActorFrame {
             end;
     };
 
-    LoadFont("Common Normal") .. {
+    LoadFont("Common Condensed") .. {
           InitCommand=cmd(zoom,1;maxwidth,SCREEN_WIDTH;addx,115;diffuse,color("#FFFFFF");uppercase,true;horizalign,right;);
           OnCommand=cmd(queuecommand,"Set");
           SortOrderChangedMessageCommand=cmd(queuecommand,"Set");

@@ -47,8 +47,7 @@ local t = Def.ActorFrame {
 				end
 			end;
 			self:zoom(1);
-			self:diffuse(StageToColor(curStage));
-			self:diffusetopedge(ColorLightTone(StageToColor(curStage)));
+			self:diffuse(StageToColor(curStage)):diffusetopedge(ColorLightTone(StageToColor(curStage)));
 		end;
 	};
 };
