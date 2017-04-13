@@ -1,6 +1,7 @@
 if not GAMESTATE:IsCourseMode() then return Def.ActorFrame{} end; -- short circuit
-local slideTime = 1.6;
+local slideTime = 1.1;
 local slideWait = 1.25;
+local bottomSlide = 0.76;
 local course = GAMESTATE:GetCurrentCourse()
 
 local t = Def.ActorFrame{
