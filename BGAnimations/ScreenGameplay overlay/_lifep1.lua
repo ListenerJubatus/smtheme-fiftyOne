@@ -36,8 +36,7 @@ local t = Def.ActorFrame {};
 						local st = stepsP1:GetStepsType();
 						local diff = stepsP1:GetDifficulty();
 						local cd = GetCustomDifficulty(st, diff);
-						self:settext(stepsP1:GetMeter())
-						self:diffuse(ColorDarkTone(CustomDifficultyToColor(cd)));
+						self:settext(stepsP1:GetMeter()):diffuse(color("#000000")):diffusealpha(0.8);
 					else
 						self:settext("")
 					end
