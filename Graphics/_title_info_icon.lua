@@ -9,7 +9,7 @@ return Def.ActorFrame {
 	},
 	-- The wanted value
 	LoadFont("Common Normal") .. {
-		InitCommand=cmd(diffuse,color("#FFFFFF");diffusealpha,0.95;),
+		InitCommand=cmd(diffuse,color("#FFFFFF");diffusealpha,0.85;),
 		OnCommand=function(self)
 			self:settext( params.value_text )
 			self:zoom(string.len(params.value_text) > 3 and 0.6 or 1.5)

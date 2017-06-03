@@ -1,3 +1,5 @@
+local curStage = GAMESTATE:GetCurrentStage();
+local curStageIndex = GAMESTATE:GetCurrentStageIndex();
 local t = LoadFallbackB();
 
 -- Banner underlay
@@ -18,61 +20,20 @@ local t = LoadFallbackB();
 	};
 
 
--- Sort display tiles
-t[#t+1] = Def.ActorFrame {
-    InitCommand=cmd(x,SCREEN_CENTER_X-228;y,SCREEN_CENTER_Y+282-6;);
-    OffCommand=cmd(linear,0.3;diffusealpha,0;);
-	LoadActor(THEME:GetPathG("", "_sortFrame"))  .. {
-	    InitCommand=cmd(diffusealpha,0.9;zoom,1.5);
-		OnCommand=function(self)
-			self:diffuse(ScreenColor(SCREENMAN:GetTopScreen():GetName()));
-		end
-	};
-
-    LoadFont("Common Condensed") .. {
-            InitCommand=cmd(zoom,1;diffuse,color("#FFFFFF");diffusealpha,0.85;horizalign,left;addx,-115;);
-            OnCommand=cmd(queuecommand,"Set");
-            ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set");
-            SetCommand=function(self)
-                self:settext("SORT:");
-                self:queuecommand("Refresh");
-            end;
-    };
-
-    LoadFont("Common Condensed") .. {
-          InitCommand=cmd(zoom,1;maxwidth,SCREEN_WIDTH;addx,115;diffuse,color("#FFFFFF");uppercase,true;horizalign,right;);
-          OnCommand=cmd(queuecommand,"Set");
-          SortOrderChangedMessageCommand=cmd(queuecommand,"Set");
-          ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set");
-          SetCommand=function(self)
-               local sortorder = GAMESTATE:GetSortOrder();
-               if sortorder then
-					self:finishtweening();
-					self:smooth(0.4);
-					self:diffusealpha(0);
-                    self:settext(SortOrderToLocalizedString(sortorder));
-                    self:queuecommand("Refresh"):stoptweening():diffusealpha(0):smooth(0.3):diffusealpha(1)
-				else
-					self:settext("");
-					self:queuecommand("Refresh");
-               end
-          end;
-    };
-};
-
 -- Genre/Artist data
 t[#t+1] = LoadActor("_bpmbg") .. {
-		InitCommand=cmd(horizalign,center;x,SCREEN_CENTER_X-234;y,SCREEN_CENTER_Y-60;zoom,0.75;);
+		InitCommand=cmd(horizalign,center;x,SCREEN_CENTER_X-228;y,SCREEN_CENTER_Y-75;zoom,1;);
 		OnCommand=function(self)
-		self:zoomx(0):diffusealpha(0):decelerate(0.3):zoomx(0.75):diffusealpha(1);
+			self:diffuse(ColorMidTone(StageToColor(curStage)));
+			self:zoomx(0):diffusealpha(0):decelerate(0.3):zoomx(1):diffusealpha(1);
 		end;
 		OffCommand=function(self)
-		self:sleep(0.2):decelerate(0.3):zoomx(0):diffusealpha(0);
+			self:sleep(0.2):decelerate(0.3):zoomx(0):diffusealpha(0);
 		end;
 		};
 
 t[#t+1] = Def.ActorFrame {
-    InitCommand=cmd(x,SCREEN_CENTER_X-330+6;draworder,126);
+    InitCommand=cmd(x,SCREEN_CENTER_X-330+6-138;draworder,126);
     OnCommand=cmd(diffusealpha,0;smooth,0.3;diffusealpha,1;);
     OffCommand=cmd(smooth,0.3;diffusealpha,0;);
     -- Length
@@ -121,11 +82,11 @@ t[#t+1] = Def.ActorFrame {
 
 -- Course type
 t[#t+1] = Def.ActorFrame {
-    InitCommand=cmd(x,SCREEN_CENTER_X-127;draworder,126);
+    InitCommand=cmd(x,SCREEN_CENTER_X-200;draworder,126);
     OnCommand=cmd(diffusealpha,0;smooth,0.3;diffusealpha,1;);
     OffCommand=cmd(smooth,0.2;diffusealpha,0;);
 	LoadFont("Common Condensed") .. { 
-          InitCommand=cmd(horizalign,right;zoom,1.0;y,SCREEN_CENTER_Y-64+2;maxwidth,180;diffuse,color("#512232");visible,GAMESTATE:IsCourseMode(););
+          InitCommand=cmd(horizalign,right;zoom,1.0;y,SCREEN_CENTER_Y-78+2;maxwidth,180;diffuse,color("#DFE2E9");visible,GAMESTATE:IsCourseMode(););
           CurrentCourseChangedMessageCommand=cmd(queuecommand,"Set"); 
           ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set"); 
           SetCommand=function(self) 
@@ -147,7 +108,7 @@ if not GAMESTATE:IsCourseMode() then
 
 -- P1 Difficulty Pane
 t[#t+1] = Def.ActorFrame {
-		InitCommand=cmd(visible,GAMESTATE:IsHumanPlayer(PLAYER_1);horizalign,center;x,SCREEN_CENTER_X-237-168;y,SCREEN_CENTER_Y+100;);
+		InitCommand=cmd(visible,GAMESTATE:IsHumanPlayer(PLAYER_1);horizalign,center;x,SCREEN_CENTER_X-210;y,SCREEN_CENTER_Y+230;);
 		OnCommand=cmd(zoomy,0.8;diffusealpha,0;smooth,0.4;diffusealpha,1;zoomy,1);
 		PlayerJoinedMessageCommand=function(self,param)
 			if param.Player == PLAYER_1 then
@@ -177,30 +138,8 @@ t[#t+1] = Def.ActorFrame {
 					end
 				  end
 		};
-		LoadActor("_diffpane")..{
-			CurrentStepsP1ChangedMessageCommand=cmd(queuecommand,"Set";); 
-			PlayerJoinedMessageCommand=cmd(queuecommand,"Set";diffusealpha,0;decelerate,0.3;diffusealpha,1;);
-			ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set");
-			SetCommand=function(self)
-					stepsP1 = GAMESTATE:GetCurrentSteps(PLAYER_1)
-					local song = GAMESTATE:GetCurrentSong();
-					if song then 
-						if stepsP1 ~= nil then
-							local st = stepsP1:GetStepsType();
-							local diff = stepsP1:GetDifficulty();
-							local courseType = GAMESTATE:IsCourseMode() and SongOrCourse:GetCourseType() or nil;
-							local cd = GetCustomDifficulty(st, diff, courseType);
-							self:finishtweening():linear(0.2):diffuse(ColorMidTone(CustomDifficultyToColor(cd)));
-						else
-							self:diffuse(color("#666666"));
-						end
-					else
-						self:diffuse(color("#666666"));
-					end
-				  end
-		};
 		LoadFont("StepsDisplay meter") .. { 
-			  InitCommand=cmd(zoom,1;addy,-120;diffuse,color("#000000"););
+			  InitCommand=cmd(zoom,1.25;diffuse,color("#000000");addx,-143;addy,20);
 			  OnCommand=cmd(diffusealpha,0;smooth,0.2;diffusealpha,0.75;);
 			  OffCommand=cmd(linear,0.3;diffusealpha,0;);
 			  CurrentStepsP1ChangedMessageCommand=cmd(queuecommand,"Set";); 
@@ -224,8 +163,8 @@ t[#t+1] = Def.ActorFrame {
 				end
 			  end
 		};
-		LoadFont("Common Condensed") .. { 
-			  InitCommand=cmd(uppercase,true;zoom,0.75;addy,-170;diffuse,color("#000000"););
+		LoadFont("Common Italic Condensed") .. { 
+			  InitCommand=cmd(uppercase,true;zoom,1;addy,-40;addx,-143;diffuse,color("#000000");maxwidth,115;);
 			  OnCommand=cmd(diffusealpha,0;smooth,0.2;diffusealpha,0.75;);
 			  OffCommand=cmd(linear,0.3;diffusealpha,0;);
 			  CurrentStepsP1ChangedMessageCommand=cmd(queuecommand,"Set";); 
@@ -249,8 +188,8 @@ t[#t+1] = Def.ActorFrame {
 				end
 			  end
 		};
-		LoadFont("Common Condensed") .. { 
-			  InitCommand=cmd(uppercase,true;zoom,0.75;addy,-151;diffuse,color("#000000"););
+		LoadFont("Common Normal") .. { 
+			  InitCommand=cmd(uppercase,true;zoom,0.75;addy,-20;addx,-143;diffuse,color("#000000"););
 			  OnCommand=cmd(diffusealpha,0;smooth,0.2;diffusealpha,0.75;);
 			  OffCommand=cmd(linear,0.3;diffusealpha,0;);
 			  CurrentStepsP1ChangedMessageCommand=cmd(queuecommand,"Set";); 
@@ -278,7 +217,7 @@ t[#t+1] = Def.ActorFrame {
 	
 -- P2 Difficulty Pane	
 t[#t+1] = Def.ActorFrame {
-		InitCommand=cmd(visible,GAMESTATE:IsHumanPlayer(PLAYER_2);horizalign,center;x,SCREEN_CENTER_X-237+186;y,SCREEN_CENTER_Y+100;);
+		InitCommand=cmd(visible,GAMESTATE:IsHumanPlayer(PLAYER_2);horizalign,center;x,SCREEN_CENTER_X+210;y,SCREEN_CENTER_Y+230;);
 		OnCommand=cmd(zoomy,0.8;diffusealpha,0;smooth,0.4;diffusealpha,1;zoomy,1);
 		PlayerJoinedMessageCommand=function(self,param)
 			if param.Player == PLAYER_2 then
@@ -287,6 +226,7 @@ t[#t+1] = Def.ActorFrame {
 		end;
 		OffCommand=cmd(decelerate,0.3;zoomy,0.8;diffusealpha,0);
 		LoadActor("_diffnum")..{
+			InitCommand=cmd(zoomx,-1;);
 			CurrentStepsP2ChangedMessageCommand=cmd(queuecommand,"Set";); 
 			PlayerJoinedMessageCommand=cmd(queuecommand,"Set";diffusealpha,0;decelerate,0.3;diffusealpha,1;);
 			ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set");
@@ -308,30 +248,8 @@ t[#t+1] = Def.ActorFrame {
 					end
 				  end
 		};
-		LoadActor("_diffpane")..{
-			CurrentStepsP2ChangedMessageCommand=cmd(queuecommand,"Set";); 
-			PlayerJoinedMessageCommand=cmd(queuecommand,"Set";diffusealpha,0;decelerate,0.3;diffusealpha,1;);
-			ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set");
-			SetCommand=function(self)
-					stepsP2 = GAMESTATE:GetCurrentSteps(PLAYER_2)
-					local song = GAMESTATE:GetCurrentSong();
-					if song then 
-						if stepsP2 ~= nil then
-							local st = stepsP2:GetStepsType();
-							local diff = stepsP2:GetDifficulty();
-							local courseType = GAMESTATE:IsCourseMode() and SongOrCourse:GetCourseType() or nil;
-							local cd = GetCustomDifficulty(st, diff, courseType);
-							self:finishtweening():linear(0.2):diffuse(ColorMidTone(CustomDifficultyToColor(cd)));
-						else
-							self:diffuse(color("#666666"));
-						end
-					else
-						self:diffuse(color("#666666"));
-					end
-				  end
-		};
-				LoadFont("StepsDisplay meter") .. { 
-			  InitCommand=cmd(zoom,1;addy,-120;diffuse,color("#000000"););
+		LoadFont("StepsDisplay meter") .. { 
+			  InitCommand=cmd(zoom,1.25;diffuse,color("#000000");addx,143;addy,20);
 			  OnCommand=cmd(diffusealpha,0;smooth,0.2;diffusealpha,0.75;);
 			  OffCommand=cmd(linear,0.3;diffusealpha,0;);
 			  CurrentStepsP2ChangedMessageCommand=cmd(queuecommand,"Set";); 
@@ -355,8 +273,8 @@ t[#t+1] = Def.ActorFrame {
 				end
 			  end
 		};
-		LoadFont("Common Condensed") .. { 
-			  InitCommand=cmd(uppercase,true;zoom,0.75;addy,-170;diffuse,color("#000000"););
+		LoadFont("Common Italic Condensed") .. { 
+			  InitCommand=cmd(uppercase,true;zoom,1;addy,-40;addx,143;diffuse,color("#000000");maxwidth,115;);
 			  OnCommand=cmd(diffusealpha,0;smooth,0.2;diffusealpha,0.75;);
 			  OffCommand=cmd(linear,0.3;diffusealpha,0;);
 			  CurrentStepsP2ChangedMessageCommand=cmd(queuecommand,"Set";); 
@@ -380,8 +298,8 @@ t[#t+1] = Def.ActorFrame {
 				end
 			  end
 		};
-		LoadFont("Common Condensed") .. { 
-			  InitCommand=cmd(uppercase,true;zoom,0.75;addy,-151;diffuse,color("#000000"););
+		LoadFont("Common Normal") .. { 
+			  InitCommand=cmd(uppercase,true;zoom,0.75;addy,-20;addx,143;diffuse,color("#000000"););
 			  OnCommand=cmd(diffusealpha,0;smooth,0.2;diffusealpha,0.75;);
 			  OffCommand=cmd(linear,0.3;diffusealpha,0;);
 			  CurrentStepsP2ChangedMessageCommand=cmd(queuecommand,"Set";); 
@@ -418,11 +336,11 @@ t[#t+1] = Def.ActorFrame {
     OnCommand=cmd(diffusealpha,0;smooth,0.3;diffusealpha,1;);
     OffCommand=cmd(linear,0.3;diffusealpha,0;);
     LoadFont("Common Condensed") .. {
-          InitCommand=cmd(horizalign,right;x,SCREEN_CENTER_X-198+69;y,SCREEN_CENTER_Y-64+2;diffuse,color("#512232");horizalign,right;visible,not GAMESTATE:IsCourseMode(););
+          InitCommand=cmd(horizalign,right;x,SCREEN_CENTER_X-198+69-66;y,SCREEN_CENTER_Y-78+2;diffuse,color("#512232");horizalign,right;visible,not GAMESTATE:IsCourseMode(););
           OnCommand=cmd(queuecommand,"Set");
           ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set");
           SetCommand=function(self)
-              self:settext("BPM")
+              self:settext("BPM"):diffuse(ColorLightTone(StageToColor(curStage)));
               end;
     };
     StandardDecorationFromFileOptional("BPMDisplay","BPMDisplay");
@@ -447,7 +365,7 @@ t[#t+1] = StandardDecorationFromFileOptional("AlternateHelpDisplay","AlternateHe
 
 t[#t+1] = Def.ActorFrame {
     OffCommand=cmd(sleep,0.1;linear,0.2;diffusealpha,0;);
-    InitCommand=cmd(x,SCREEN_CENTER_X-228;visible,not GAMESTATE:IsCourseMode(););
+    InitCommand=cmd(x,SCREEN_CENTER_X-84;visible,not GAMESTATE:IsCourseMode(););
 
 	StandardDecorationFromFileOptional("StageDisplay","StageDisplay") .. {
 		InitCommand=cmd(zoom,1);
