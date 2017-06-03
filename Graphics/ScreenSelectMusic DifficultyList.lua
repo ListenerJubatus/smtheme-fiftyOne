@@ -52,7 +52,7 @@ return Def.ActorFrame {
 				end;
 			end;
 			LoadActor(THEME:GetPathG("_StepsDisplayListRow","Cursor")) .. {
-				InitCommand=cmd(diffuse,ColorLightTone(PlayerColor(PLAYER_1));x,-8;zoom,0.75;zoomx,-0.75;);
+				InitCommand=cmd(diffuse,ColorLightTone(PlayerColor(PLAYER_2));x,-8;zoom,0.75;zoomx,-0.75;);
 			};
 		};
 		CursorP1Frame = Def.Actor{
