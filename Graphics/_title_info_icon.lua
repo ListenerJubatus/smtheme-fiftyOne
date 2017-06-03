@@ -5,11 +5,11 @@ return Def.ActorFrame {
 	-- Base
 	-- todo; make getting the base's image less stupid
 	LoadActor(THEME:GetPathG("","ScreenSelectPlayMode Icon/_background base")) .. {
-		InitCommand=cmd(zoomto,70,70;diffuse,params.base_color)
+		InitCommand=cmd(zoomto,70,70;diffuse,params.base_color;diffusebottomedge,ColorMidTone(params.base_color);)
 	},
 	-- The wanted value
 	LoadFont("Common Normal") .. {
-		InitCommand=cmd(diffuse,ColorDarkTone(ColorDarkTone(params.base_color))),
+		InitCommand=cmd(diffuse,color("#FFFFFF");diffusealpha,0.95;),
 		OnCommand=function(self)
 			self:settext( params.value_text )
 			self:zoom(string.len(params.value_text) > 3 and 0.6 or 1.5)
