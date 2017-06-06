@@ -7,26 +7,23 @@ if ThemePrefs.Get("FancyUIBG") then
 		LoadActor("_maze") .. {
 			OnCommand=cmd(Center;diffuse,color("#f6784922");effectperiod,10;spin;effectmagnitude,0,0,2.2)
 		},
-		LoadActor("_tunnel1") .. {
-			InitCommand=cmd(Center;blend,'BlendMode_Add';rotationz,-20),
-			OnCommand=cmd(zoom,1.75;diffusealpha,0.12;spin;effectmagnitude,0,0,16.5)
-		},		
-		LoadActor("_tunnel1") .. {
-			InitCommand=cmd(Center;blend,'BlendMode_Add';rotationz,-10),
-			OnCommand=cmd(zoom,1.0;diffusealpha,0.09;spin;effectmagnitude,0,0,-11)
+		--
+		Def.ActorFrame {
+		InitCommand=cmd(x,SCREEN_CENTER_X-40;y,SCREEN_CENTER_Y;rotationx,20;rotationy,12;diffusealpha,0.15);
+		OnCommand=cmd(queuecommand,"Animate");
+		AnimateCommand=cmd(rotationx,20;rotationy,12;smooth,20;rotationx,50;rotationy,36;smooth,20;rotationx,20;rotationy,12;queuecommand,"Animate");
+			LoadActor("_mask") .. {
+				InitCommand=cmd(blend,"BlendMode_NoEffect";zwrite,true;clearzbuffer,true);
+			};
+			
+			LoadActor("_mist") .. {
+				InitCommand=cmd(ztest,5;zoomto,1200,1200;blend,'BlendMode_Add');
+				OnCommand=cmd(customtexturerect,0,0,1,1;texcoordvelocity,0.11,0.11);
+			};
 		},
-		LoadActor("_tunnel1") .. {
-			InitCommand=cmd(Center;blend,'BlendMode_Add';rotationz,0),
-			OnCommand=cmd(zoom,0.5;diffusealpha,0.06;spin;effectmagnitude,0,0,5.5)
-		},		
-		LoadActor("_tunnel1") .. {
-			InitCommand=cmd(Center;blend,'BlendMode_Add';rotationz,-10),
-			OnCommand=cmd(zoom,0.2;diffusealpha,0.03;spin;effectmagnitude,0,0,-2.2)
-		}		
 	}
 else
-	return Def.Quad {
-		InitCommand=cmd(Center;scaletoclipped,SCREEN_WIDTH,SCREEN_HEIGHT);
-		OnCommand=cmd(diffuse,color("#fdbe28");diffusebottomedge,color("#f67849"));
+	return 	LoadActor(THEME:GetPathG("common bg", "base")) .. {
+		InitCommand=cmd(Center;zoomto,SCREEN_WIDTH,SCREEN_HEIGHT)
 	}
 end
