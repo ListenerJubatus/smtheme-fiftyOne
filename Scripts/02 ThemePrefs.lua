@@ -50,7 +50,7 @@ local Prefs =
 	},
 	FlashyCombo =
 	{
-		Default = false,
+		Default = true,
 		Choices = { OptionNameString('Off'), OptionNameString('On') },
 		Values = { false, true }
 	},

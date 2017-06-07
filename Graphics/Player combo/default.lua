@@ -12,6 +12,14 @@ local LabelMinZoom = THEME:GetMetric("Combo", "LabelMinZoom");
 local LabelMaxZoom = THEME:GetMetric("Combo", "LabelMaxZoom");
 
 local t = Def.ActorFrame {
+ 	LoadActor(THEME:GetPathG("Combo","100Milestone")) .. {
+		Name="OneHundredMilestone";
+		FiftyMilestoneCommand=cmd(playcommand,"Milestone");
+	};
+	LoadActor(THEME:GetPathG("Combo","1000Milestone")) .. {
+		Name="OneThousandMilestone";
+		ToastyAchievedMessageCommand=cmd(playcommand,"Milestone");
+	};
 	InitCommand=cmd(vertalign,bottom);
 	LoadFont( "Combo", "numbers" ) .. {
 		Name="Number";
