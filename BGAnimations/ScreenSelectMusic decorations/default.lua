@@ -28,7 +28,7 @@ t[#t+1] = LoadActor("_bpmbg") .. {
 			self:zoomx(0):diffusealpha(0):decelerate(0.3):zoomx(1):diffusealpha(1);
 		end;
 		OffCommand=function(self)
-			self:sleep(0.2):decelerate(0.3):zoomx(0):diffusealpha(0);
+			self:sleep(0.3):decelerate(0.15):zoomx(0):diffusealpha(0);
 		end;
 		};
 
