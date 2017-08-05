@@ -39,7 +39,7 @@ return Def.CourseContentsList {
 		LoadActor(THEME:GetPathG("CourseEntryDisplay","bar")) .. {
 			SetSongCommand=function(self, params)
 				if params.Difficulty then
-					self:diffuse(ColorDarkTone(CustomDifficultyToColor(params.Difficulty)));
+					self:diffuse(ColorLightTone(CustomDifficultyToColor(params.Difficulty)));
 				else
 					self:diffuse( color("#FFFFFF") );
 				end
@@ -47,21 +47,9 @@ return Def.CourseContentsList {
 				--(cmd(finishtweening;diffusealpha,0;sleep,0.125*params.Number;smooth,0.2;diffusealpha,1))(self);
 			end
 		},
-		
-		LoadActor(THEME:GetPathG("CourseEntryDisplay","diamond")) .. {
-			SetSongCommand=function(self, params)
-				if params.Difficulty then
-					self:diffuse( CustomDifficultyToColor(params.Difficulty) );
-				else
-					self:diffuse( color("#FFFFFF") );
-				end
-
-				--(cmd(finishtweening;diffusealpha,0;sleep,0.125*params.Number;smooth,0.2;diffusealpha,1))(self);
-			end
-		},
 
 		Def.TextBanner {
-			InitCommand=cmd(x,-10;y,-1;Load,"TextBanner";SetFromString,"", "", "", "", "", ""),
+			InitCommand=cmd(x,-10;y,-1;Load,"TextBannerCourse";SetFromString,"", "", "", "", "", ""),
 			SetSongCommand=function(self, params)
 				if params.Song then
 					if GAMESTATE:GetCurrentCourse():GetDisplayFullTitle() == "Abomination" then
@@ -80,7 +68,8 @@ return Def.CourseContentsList {
 					else
 						self:SetFromSong( params.Song );
 					end;
-					self:diffuse(ColorLightTone(CustomDifficultyToColor(params.Difficulty) ));
+					self:diffuse(color("#000000"));
+					self:diffusealpha(0.8);
 -- 					self:glow("1,1,1,0.5");
 				else
 					self:SetFromString( "??????????", "??????????", "", "", "", "" );
@@ -94,7 +83,7 @@ return Def.CourseContentsList {
 
  		LoadFont("CourseEntryDisplay","difficulty") .. {
 			Text="0",
-			InitCommand=cmd(x,205;y,0;zoom,0.75),
+			InitCommand=cmd(x,210;y,0;zoom,0.75),
 			SetSongCommand=function(self, params)
 				if params.PlayerNumber ~= GAMESTATE:GetMasterPlayerNumber() then return end
 				self:settext( params.Meter );

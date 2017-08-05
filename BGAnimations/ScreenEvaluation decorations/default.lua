@@ -77,12 +77,13 @@ if not GAMESTATE:IsCourseMode() then
 		OnCommand=cmd(x,_screen.cx;y,_screen.cy-98;diffuse,color("#9d324e"))
 	}
 else
+
 	mid_pane[#mid_pane+1] = Def.BitmapText {
 		Font="_roboto condensed Bold italic 24px",
 		InitCommand=function(self)
 			local course = GAMESTATE:GetCurrentCourse()
-			self:settext(ToEnumShortString( course:GetCourseType() ))
-			self:x(_screen.cx):y(_screen.cy-118.5):diffuse(color("#9d324e")):uppercase(true)
+			self:settext(string.upper(ToEnumShortString( course:GetCourseType() )))
+			self:x(_screen.cx):y(_screen.cy-98):diffuse(color("#9d324e"))
 		end,
 		OnCommand=cmd(playcommand,"Set";zoomx,0.8;diffusealpha,0;decelerate,0.4;zoomx,1;diffusealpha,1),
 		OffCommand=cmd(decelerate,0.4;diffusealpha,0)
