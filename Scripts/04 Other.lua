@@ -1,7 +1,3 @@
-function check_stop_course_early()
-	return course_stopped_by_pause_menu
-end
-
 local numbered_stages= {
 	Stage_1st= true,
 	Stage_2nd= true,
@@ -25,4 +21,8 @@ function thified_curstage_index(on_eval)
 	else
 		return ToEnumShortString(cur_stage)
 	end
+end
+
+function check_stop_course_early()
+	return course_stopped_by_pause_menu
 end
