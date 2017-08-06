@@ -98,7 +98,7 @@ for i, v in ipairs(eval_lines) do
 	mid_pane[#mid_pane+1] = Def.ActorFrame{
 		InitCommand=cmd(x,_screen.cx;y,(_screen.cy/1.4)+(spacing)),
 		OffCommand=function(self)			
-			self:sleep(0.1 * i):decelerate(0.3):diffusealpha(0)
+			self:sleep(0.06 * i):decelerate(0.1):diffusealpha(0)
 		end;	
 		Def.Quad {
 			InitCommand=cmd(zoomto,400,36;diffuse,JudgmentLineToColor(cur_line);fadeleft,0.5;faderight,0.5;);
