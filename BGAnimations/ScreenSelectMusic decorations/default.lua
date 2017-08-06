@@ -2,6 +2,69 @@ local curStage = GAMESTATE:GetCurrentStage();
 local curStageIndex = GAMESTATE:GetCurrentStageIndex();
 local t = LoadFallbackB();
 
+local function PercentScore(pn)
+	local t = LoadFont("_overpass Score")..{
+		InitCommand=cmd(zoom,1;diffuse,Color("Black");diffusealpha,0.75;);
+		BeginCommand=cmd(playcommand,"Set");
+		SetCommand=function(self)
+			local SongOrCourse, StepsOrTrail;
+			if GAMESTATE:IsCourseMode() then
+				SongOrCourse = GAMESTATE:GetCurrentCourse();
+				StepsOrTrail = GAMESTATE:GetCurrentTrail(pn);
+			else
+				SongOrCourse = GAMESTATE:GetCurrentSong();
+				StepsOrTrail = GAMESTATE:GetCurrentSteps(pn);
+			end;
+
+			local profile, scorelist;
+			local text = "";
+			if SongOrCourse and StepsOrTrail then
+				local st = StepsOrTrail:GetStepsType();
+				local diff = StepsOrTrail:GetDifficulty();
+				local courseType = GAMESTATE:IsCourseMode() and SongOrCourse:GetCourseType() or nil;
+				local cd = GetCustomDifficulty(st, diff, courseType);
+
+				if PROFILEMAN:IsPersistentProfile(pn) then
+					-- player profile
+					profile = PROFILEMAN:GetProfile(pn);
+				else
+					-- machine profile
+					profile = PROFILEMAN:GetMachineProfile();
+				end;
+
+				scorelist = profile:GetHighScoreList(SongOrCourse,StepsOrTrail);
+				assert(scorelist)
+				local scores = scorelist:GetHighScores();
+				local topscore = scores[1];
+				if topscore then
+					text = string.format("%.2f%%", topscore:GetPercentDP()*100.0);
+					-- 100% hack
+					if text == "100.00%" then
+						text = "100%";
+					end;
+				else
+					text = string.format("%.2f%%", 0);
+				end;
+			else
+				text = "";
+			end;
+			self:settext(text);
+		end;
+		CurrentSongChangedMessageCommand=cmd(playcommand,"Set");
+		CurrentCourseChangedMessageCommand=cmd(playcommand,"Set");
+	};
+
+	if pn == PLAYER_1 then
+		t.CurrentStepsP1ChangedMessageCommand=cmd(playcommand,"Set");
+		t.CurrentTrailP1ChangedMessageCommand=cmd(playcommand,"Set");
+	else
+		t.CurrentStepsP2ChangedMessageCommand=cmd(playcommand,"Set");
+		t.CurrentTrailP2ChangedMessageCommand=cmd(playcommand,"Set");
+	end
+
+	return t;
+end
+
 -- Banner underlay
 -- t[#t+1] = Def.ActorFrame {
     -- InitCommand=cmd(x,SCREEN_CENTER_X-230;draworder,125);
@@ -327,6 +390,10 @@ t[#t+1] = Def.ActorFrame {
 
 t[#t+1] = StandardDecorationFromFileOptional("PaneDisplayTextP1","PaneDisplayTextP1");
 t[#t+1] = StandardDecorationFromFileOptional("PaneDisplayTextP2","PaneDisplayTextP2");	
+
+t[#t+1] = StandardDecorationFromTable("PercentScore"..ToEnumShortString(PLAYER_1), PercentScore(PLAYER_1));
+t[#t+1] = StandardDecorationFromTable("PercentScore"..ToEnumShortString(PLAYER_2), PercentScore(PLAYER_2));
+
 
 end;
 

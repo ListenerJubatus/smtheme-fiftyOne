@@ -1,33 +1,70 @@
 local t = Def.ActorFrame {};
-
-	for i, pn in pairs(PlayerNumber) do
-		if ShowStandardDecoration("LifeMeterBar" ..  ToEnumShortString(pn)) then
-			local life_type = GAMESTATE:GetPlayerState(pn):GetPlayerOptions("ModsLevel_Song"):LifeSetting()
-			t[#t+1] = LoadActor(THEME:GetPathG(Var "LoadingScreen", "lifebar_" .. ToEnumShortString(life_type)), pn) .. {
-				InitCommand=function(self)
-					self:name("LifeMeterBar" .. ToEnumShortString(pn))
-					ActorUtil.LoadAllCommandsAndSetXY(self,Var "LoadingScreen")
-				end
-			}
-		end
-	end
-
-	--P1
+	
 	if GAMESTATE:GetPlayMode() ~= 'PlayMode_Rave' then
-		if GAMESTATE:IsHumanPlayer(PLAYER_1) == true then
-		t[#t+1] = LoadActor("_lifep1") .. {
-			InitCommand=cmd(visible,GAMESTATE:IsHumanPlayer(PLAYER_1);x,SCREEN_LEFT+40;y,SCREEN_CENTER_Y;rotationz,-90;);
-			OnCommand=cmd(addx,-100;sleep,1;decelerate,0.9;addx,100;);
-			OffCommand=cmd(sleep,1;decelerate,0.9;addx,-100;);
-		};
+		for ip, pn in ipairs(GAMESTATE:GetEnabledPlayers()) do
+			if ShowStandardDecoration("LifeMeterBar" ..  ToEnumShortString(pn)) then
+				local life_type = GAMESTATE:GetPlayerState(pn):GetPlayerOptions("ModsLevel_Song"):LifeSetting()
+				t[#t+1] = LoadActor(THEME:GetPathG(Var "LoadingScreen", "lifebar_" .. ToEnumShortString(life_type)), pn) .. {
+					InitCommand=function(self)
+						self:name("LifeMeterBar" .. ToEnumShortString(pn))
+						ActorUtil.LoadAllCommandsAndSetXY(self,Var "LoadingScreen")
+					end
+				}
+			end
 		end;
-
-		if GAMESTATE:IsHumanPlayer(PLAYER_2) == true then
-		t[#t+1] = LoadActor("_lifep2") .. {
-			InitCommand=cmd(visible,GAMESTATE:IsHumanPlayer(PLAYER_2);x,SCREEN_RIGHT-40;y,SCREEN_CENTER_Y;rotationz,-90;);
-			OnCommand=cmd(addx,100;sleep,1;decelerate,0.9;addx,-100;);
-			OffCommand=cmd(sleep,1;decelerate,0.9;addx,100;);
-		};
+		
+		for ip, pn in ipairs(GAMESTATE:GetEnabledPlayers()) do
+				local life_x_position = string.find(pn, "P1") and SCREEN_LEFT+40 or SCREEN_RIGHT-40
+				local life_tween = string.find(pn, "P1") and -1 or 1
+				local second_tween = string.find(pn, "P1") and 1 or -1
+				t[#t+1] = Def.ActorFrame {
+					InitCommand=cmd(x,life_x_position;y,SCREEN_CENTER_Y;rotationz,-90;);
+					OnCommand=cmd(addx,100*life_tween;sleep,1;decelerate,0.9;addx,100*second_tween);
+					OffCommand=cmd(sleep,1;decelerate,0.9;addx,-100;);
+					LoadActor(THEME:GetPathG("LifeMeter", "bar frame")) .. {
+					};
+					Def.ActorFrame {
+						InitCommand=cmd(x,-207;y,0;);
+						LoadActor("_diffdia") .. {
+						OnCommand=cmd(playcommand,"Set";);
+						["CurrentSteps"..ToEnumShortString(pn).."ChangedMessageCommand"]=cmd(playcommand,"Set";);
+						SetCommand=function(self)
+							steps_data = GAMESTATE:GetCurrentSteps(pn)
+							local song = GAMESTATE:GetCurrentSong();
+							if song then
+								if steps_data ~= nil then
+									local st = steps_data:GetStepsType();
+									local diff = steps_data:GetDifficulty();
+									local cd = GetCustomDifficulty(st, diff);
+									self:diffuse(CustomDifficultyToColor(cd));
+								end
+							end
+						end;
+						};
+						LoadFont("StepsDisplay description") .. {
+							  InitCommand=cmd(zoom,0.75;horizalign,center;rotationz,90);
+							  OnCommand=cmd(playcommand,"Set";);
+							  ["CurrentSteps"..ToEnumShortString(pn).."ChangedMessageCommand"]=cmd(playcommand,"Set";);
+							  ChangedLanguageDisplayMessageCommand=cmd(playcommand,"Set");
+							  SetCommand=function(self)
+								steps_data = GAMESTATE:GetCurrentSteps(pn)
+								local song = GAMESTATE:GetCurrentSong();
+								if song then
+									if steps_data ~= nil then
+										local st = steps_data:GetStepsType();
+										local diff = steps_data:GetDifficulty();
+										local cd = GetCustomDifficulty(st, diff);
+										self:settext(steps_data:GetMeter()):diffuse(color("#000000")):diffusealpha(0.8);
+									else
+										self:settext("")
+									end
+								else
+									self:settext("")
+								end
+							  end
+						};
+					};
+				};
 		end;
 	end;
 	
@@ -118,8 +155,6 @@ local t = Def.ActorFrame {};
 		};
 	};
 	end;
-	
 
 	t[#t+1] = StandardDecorationFromFileOptional("StageDisplay","StageDisplay");
-	t[#t+1]= LoadActor(THEME:GetPathG("", "pause_menu"))
 return t
