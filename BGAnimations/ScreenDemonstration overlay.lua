@@ -73,8 +73,4 @@ return Def.ActorFrame{
 			end
 		end
 	},
-	
-	-- Demo-only playaround "gimmick" things, for very bored passerbys.
-	-- todo: enable the ability to disable it?
-	LoadActor(THEME:GetPathB("","_Demo effects"))
 }
