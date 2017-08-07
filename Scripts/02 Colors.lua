@@ -9,6 +9,7 @@ function ScreenColor(screen)
         ["ScreenNestyPlayerOptions"]  = ScreenColors.PlayerOptions,
         ["ScreenOptionsService"]      = ScreenColors.OptionsService,
         ["ScreenEvaluationNormal"]    = ScreenColors.Evaluation, 
+        ["ScreenHighScores"]    = ScreenColors.Evaluation, 
         ["ScreenEvaluationSummary"]   = ScreenColors.Summary, 
         ["ScreenStageInformation"]   = ScreenColors.StageInformation, 
         ["ScreenEditMenu"]			  = ScreenColors.Edit, 

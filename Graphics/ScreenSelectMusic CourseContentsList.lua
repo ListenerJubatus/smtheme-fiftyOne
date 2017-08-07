@@ -90,6 +90,6 @@ return Def.CourseContentsList {
 				self:diffuse(ColorDarkTone(CustomDifficultyToColor(params.Difficulty) ));
 				--(cmd(finishtweening;zoomy,0;sleep,0.125*params.Number;linear,0.125;zoom,1.1;linear,0.05;zoom,1))(self);
 			end
-		}
+		},
 	}
 }

@@ -143,7 +143,7 @@ t[#t+1] = Def.ActorFrame {
     };
 };
 
--- Course type
+-- Course count and type
 t[#t+1] = Def.ActorFrame {
     InitCommand=cmd(x,SCREEN_CENTER_X-200;draworder,126);
     OnCommand=cmd(diffusealpha,0;smooth,0.3;diffusealpha,1;);
@@ -156,6 +156,26 @@ t[#t+1] = Def.ActorFrame {
                local course = GAMESTATE:GetCurrentCourse(); 
                if course then
                     self:settext(course:GetEstimatedNumStages() .. " songs"); 
+                    self:queuecommand("Refresh");
+				else
+					self:settext("");
+					self:queuecommand("Refresh"); 	
+               end 
+          end; 
+		};
+};
+t[#t+1] = Def.ActorFrame {
+    InitCommand=cmd(x,SCREEN_CENTER_X+5;draworder,126);
+    OnCommand=cmd(diffusealpha,0;smooth,0.3;diffusealpha,1;);
+    OffCommand=cmd(smooth,0.2;diffusealpha,0;);
+	LoadFont("Common Condensed") .. { 
+          InitCommand=cmd(horizalign,right;zoom,1.0;y,SCREEN_CENTER_Y-78+2;maxwidth,180;diffuse,color("#DFE2E9");visible,GAMESTATE:IsCourseMode(););
+          CurrentCourseChangedMessageCommand=cmd(queuecommand,"Set"); 
+          ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set"); 
+          SetCommand=function(self) 
+               local course = GAMESTATE:GetCurrentCourse(); 
+               if course then
+                    self:settext(CourseTypeToLocalizedString(course:GetCourseType())); 
                     self:queuecommand("Refresh");
 				else
 					self:settext("");

@@ -1,14 +1,14 @@
 return Def.ActorFrame{
 	-- "header"
 	Def.Quad {
-		InitCommand=cmd(vertalign,top;x,_screen.cx;zoomto,_screen.w,96),
+		InitCommand=cmd(vertalign,top;x,_screen.cx;zoomto,_screen.w,80),
 		OnCommand=function(self)
 			self:diffuse(ScreenColor("Default")):diffusetopedge(ColorDarkTone(ScreenColor("Default"))):diffusealpha(0.8)
 		end
 	},
 	-- The "header's" "shadow"
 	Def.Quad {
-		InitCommand=cmd(vertalign,top;x,_screen.cx;zoomto,SCREEN_WIDTH,8;y,96),
+		InitCommand=cmd(vertalign,top;x,_screen.cx;zoomto,SCREEN_WIDTH,8;y,80),
 		OnCommand=cmd(diffuse,Color("Black");fadebottom,1;diffusealpha,0.6)
 	},
 	-- "footer"
