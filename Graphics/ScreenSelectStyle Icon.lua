@@ -11,15 +11,17 @@ t[#t+1] = Def.ActorFrame {
 	LoseFocusCommand=THEME:GetMetric(Var "LoadingScreen","IconLoseFocusCommand");
 
 	LoadActor(THEME:GetPathG("ScreenSelectPlayMode", "icon/_background base"))..{
+		GainFocusCommand=cmd(diffuse,color("#57213B");diffusetopedge,color("#80385B"););
+		LoseFocusCommand=cmd(diffuse,color("#57213B"));
 	};
 	LoadFont("_overpass 36px")..{
 		Text=string.upper(string_name);
 		InitCommand=cmd(y,-12;maxwidth,232);
-		OnCommand=cmd(diffuse,Color.White);
+		OnCommand=cmd(diffuse,icon_color);
 	};
 	LoadFont("Common Italic Condensed")..{
 		Text=string.upper(string_expl);
-		InitCommand=cmd(y,29.5;maxwidth,222);
+		InitCommand=cmd(y,29.5;maxwidth,128);
 	};
 
 	LoadActor(THEME:GetPathG("ScreenSelectPlayMode", "icon/_background base"))..{
