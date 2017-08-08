@@ -13,6 +13,9 @@ function ScreenColor(screen)
         ["ScreenEvaluationSummary"]   = ScreenColors.Summary, 
         ["ScreenStageInformation"]   = ScreenColors.StageInformation, 
         ["ScreenEditMenu"]			  = ScreenColors.Edit, 
+        ["ScreenSMOnlineLogin"]			  = ScreenColors.Online, 
+        ["ScreenNetRoom"]			  = ScreenColors.Online, 
+        ["ScreenNetSelectMusic"]			  = ScreenColors.Online, 
         ["Default"]                   = ScreenColors.Default,
     }
 
@@ -24,7 +27,8 @@ ScreenColors = {
     Style           = color("#81468B"),
     PlayMode        = color("#478e6f"),
     Music           = color("#1268aa"),
-    Course          = color("#9F0E50"),
+    Online           = color("#1CA6A0"),
+    Course          = color("#6D1646"),
     PlayerOptions   = color("#544abe"),
     OptionsService  = color("#1C1C1B"),
     Evaluation      = color("#806635"),
