@@ -42,8 +42,8 @@ ModeIconColors = {
     Normal      = color("#339FF2"),
     Rave        = color("#6BFF90"), 
     Nonstop     = color("#FF66AB"),
-    Oni         = color("#FFDA6B"),
-    Endless     = color("#D4C7C1"),
+    Oni         = color("#6C58C1"),
+    Endless     = color("#6040A7"),
 }
 
 GameColor = {
@@ -81,19 +81,19 @@ GameColor = {
         Difficulty_Routine  = color("#ff9a00")              -- orange
     },
     Stage = {
-        Stage_1st   = color("#00ffc7"),
-        Stage_2nd   = color("#58ff00"),
-        Stage_3rd   = color("#f400ff"),
-        Stage_4th   = color("#00ffda"),
-        Stage_5th   = color("#ed00ff"),
-        Stage_6th   = color("#73ff00"),
+        Stage_1st   = color("#F6C455"),
+        Stage_2nd   = color("#EDA858"),
+        Stage_3rd   = color("#E69259"),
+        Stage_4th   = color("#DD775B"),
+        Stage_5th   = color("#D55E5D"),
+        Stage_6th   = color("#CD445F"),
         Stage_Next  = color("#73ff00"),
-        Stage_Final = color("#ff0707"),
-        Stage_Extra1    = color("#fafa00"),
-        Stage_Extra2    = color("#ff0707"),
-        Stage_Nonstop   = color("#9d324e"),
-        Stage_Oni   = color("#9d324e"),
-        Stage_Endless   = color("#9d324e"),
+        Stage_Final = color("#4BC6EB"),
+        Stage_Extra1    = color("#B60052"),
+        Stage_Extra2    = color("#FF499B"),
+        Stage_Nonstop   = color("#FFD782"),
+        Stage_Oni   = color("#FF714D"),
+        Stage_Endless   = color("#6040A7"),
         Stage_Event = color("#9d324e"),
         Stage_Demo  = color("#9d324e")
     },

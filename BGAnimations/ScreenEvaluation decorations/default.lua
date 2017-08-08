@@ -174,6 +174,22 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 		end;
 	}
 	
+	eval_parts[#eval_parts+1] = Def.BitmapText {
+		Font = "Common Condensed",
+		InitCommand=cmd(horizalign,center;x,_screen.cx + (grade_parts_offs);y,(_screen.cy-65)+56;diffuse,ColorDarkTone(PlayerColor(p));zoom,0.75;shadowlength,1),
+		OnCommand=function(self)
+			local record = STATSMAN:GetCurStageStats():GetPlayerStageStats(p):GetPersonalHighScoreIndex()
+			local hasPersonalRecord = record ~= -1
+			self:visible(hasPersonalRecord);
+			local text = string.format(THEME:GetString("ScreenEvaluation", "PersonalRecord"), record+1)
+			self:settext(text)
+			self:diffusealpha(0):sleep(0.6):decelerate(0.3):diffusealpha(1)
+		end;
+		OffCommand=function(self)
+			self:sleep(0.1):decelerate(0.3):diffusealpha(0)
+		end;
+	}
+
 	-- Letter grade and associated parts.
 	eval_parts[#eval_parts+1] = Def.ActorFrame{
 		InitCommand=cmd(x,_screen.cx + grade_parts_offs;y,_screen.cy/1.91),
@@ -187,7 +203,7 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 			OffCommand=cmd(decelerate,0.3;diffusealpha,0)
 		},
 		Def.Quad {
-			InitCommand=cmd(y,110;zoomto,190,100;diffuse,color("#fce1a1");),
+			InitCommand=cmd(y,120;zoomto,190,120;diffuse,color("#fce1a1");),
 			OnCommand=function(self)
 			    self:diffusealpha(0):decelerate(0.4):diffusealpha(0.3)
 			end,
@@ -300,6 +316,20 @@ if GAMESTATE:IsHumanPlayer(PLAYER_2) == true then
 	 end; 
 
 end;
+
+t[#t+1] = Def.BitmapText {
+		Font = "Common Italic Condensed",
+		Condition=GAMESTATE:HasEarnedExtraStage();
+		InitCommand=cmd(horizalign,center;x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y-244;zoom,1;diffuse,color("#EC3F99");diffusebottomedge,color("#AB3468");),
+		OnCommand=function(self)
+			local text = string.upper(THEME:GetString("ScreenEvaluation", "ExtraUnlocked"))
+			self:settext(text)
+			self:diffusealpha(0):zoomx(0.7):sleep(1.3):decelerate(0.3):diffusealpha(1):zoomx(1)
+		end;
+		OffCommand=function(self)
+			self:sleep(0.1):decelerate(0.3):diffusealpha(0)
+		end;
+	}
 
 t[#t+1] = StandardDecorationFromFileOptional("LifeDifficulty","LifeDifficulty");
 t[#t+1] = StandardDecorationFromFileOptional("TimingDifficulty","TimingDifficulty");

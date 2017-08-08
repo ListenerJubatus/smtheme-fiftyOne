@@ -14,7 +14,7 @@ Among the technical goals for Lambda are to provide the same level of functional
 
 Progress
 -----------
-I'd say it's about 55% done. Needs a bit more eye-candy, some screens and modes still need to be fixed up/polished, and Edit mode needs to be worked on (especially after 5.1 is modified to support the new edit menu scripting).
+I'd say it's about 96% done now; just needs a bit more fit and finish if needed, and we'll be off to the races!
 
 Feel free to contribute and make pull requests. 
 
