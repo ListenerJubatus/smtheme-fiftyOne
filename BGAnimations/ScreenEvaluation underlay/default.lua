@@ -1,7 +1,9 @@
 -- ...So I realize that I completely ignored almost each and every
 -- metrics-bound element this screen could use, but it's okay, right?
+-- todo: make a more metrics-bound version of this screen anyways for beginner accessibility.
+-- todo: accommodate EvaluationSummary too
 
-local t = LoadFallbackB()
+local t = Def.ActorFrame {};
 
 -- A very useful table...
 local eval_lines = {
@@ -75,12 +77,13 @@ if not GAMESTATE:IsCourseMode() then
 		OnCommand=cmd(x,_screen.cx;y,_screen.cy-98;diffuse,color("#9d324e"))
 	}
 else
+
 	mid_pane[#mid_pane+1] = Def.BitmapText {
 		Font="_roboto condensed Bold italic 24px",
 		InitCommand=function(self)
 			local course = GAMESTATE:GetCurrentCourse()
-			self:settext(ToEnumShortString( course:GetCourseType() ))
-			self:x(_screen.cx):y(_screen.cy-118.5):diffuse(color("#9d324e")):uppercase(true)
+			self:settext(string.upper(ToEnumShortString( course:GetCourseType() )))
+			self:x(_screen.cx):y(_screen.cy-98):diffuse(color("#9d324e"))
 		end,
 		OnCommand=cmd(playcommand,"Set";zoomx,0.8;diffusealpha,0;decelerate,0.4;zoomx,1;diffusealpha,1),
 		OffCommand=cmd(decelerate,0.4;diffusealpha,0)
@@ -94,15 +97,14 @@ for i, v in ipairs(eval_lines) do
 	
 	mid_pane[#mid_pane+1] = Def.ActorFrame{
 		InitCommand=cmd(x,_screen.cx;y,(_screen.cy/1.4)+(spacing)),
-		
+		OffCommand=function(self)			
+			self:sleep(0.06 * i):decelerate(0.1):diffusealpha(0)
+		end;	
 		Def.Quad {
 			InitCommand=cmd(zoomto,400,36;diffuse,JudgmentLineToColor(cur_line);fadeleft,0.5;faderight,0.5;);
 			OnCommand=function(self)			
 				self:diffusealpha(0):sleep(0.1 * i):decelerate(0.9):diffusealpha(1)
-			end;
-			OffCommand=function(self)			
-				self:sleep(0.1 * i):decelerate(0.3):diffusealpha(0)
-			end;			
+			end;		
 		};
 	
 		Def.BitmapText {
@@ -110,9 +112,6 @@ for i, v in ipairs(eval_lines) do
 			InitCommand=cmd(zoom,0.6;diffuse,color("#000000");settext,string.upper(JudgmentLineToLocalizedString(cur_line)));
 			OnCommand=function(self)			
 				self:diffusealpha(0):sleep(0.1 * i):decelerate(0.9):diffusealpha(0.6)
-			end;
-			OffCommand=function(self)			
-				self:sleep(0.1 * i):decelerate(0.3):diffusealpha(0)
 			end;
 		}
 	}
@@ -127,7 +126,7 @@ local eval_parts = Def.ActorFrame {}
 
 for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 	-- Some things to help positioning
-	local step_count_offs = string.find(p, "P1") and -150 or 150
+	local step_count_offs = string.find(p, "P1") and -140 or 140
 	local grade_parts_offs = string.find(p, "P1") and -320 or 320
 	local p_grade = STATSMAN:GetCurStageStats():GetPlayerStageStats(p):GetGrade()
 	
@@ -151,11 +150,58 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 			end;
 		}
 	end
+
+	-- Letter grade and associated parts.
+	eval_parts[#eval_parts+1] = Def.ActorFrame{
+		InitCommand=cmd(x,_screen.cx + grade_parts_offs;y,_screen.cy/1.91),
+		
+		--Containers. todo: replace with, erm... not quads
+		Def.Quad {
+			InitCommand=cmd(zoomto,190,115;diffuse,ColorMidTone(PlayerColor(p))),
+			OnCommand=function(self)
+			    self:diffusealpha(0):decelerate(0.4):diffusealpha(0.5)
+			end,
+			OffCommand=cmd(decelerate,0.3;diffusealpha,0)
+		},
+		Def.Quad {
+			InitCommand=cmd(y,120;zoomto,190,120;diffuse,color("#fce1a1");),
+			OnCommand=function(self)
+			    self:diffusealpha(0):decelerate(0.4):diffusealpha(0.3)
+			end,
+			OffCommand=cmd(decelerate,0.3;diffusealpha,0)
+		},
+		
+		LoadActor(THEME:GetPathG("GradeDisplay", "Grade " .. p_grade)) .. {
+			InitCommand=cmd(zoom,0.75;);
+			OnCommand=function(self)
+			        self:diffusealpha(0):zoom(1):sleep(0.63):decelerate(0.4):zoom(0.75):diffusealpha(1)
+					if STATSMAN:GetCurStageStats():GetPlayerStageStats(p):GetStageAward() then
+					  self:sleep(0.1):decelerate(0.4):addy(-12);
+					else
+					  self:addy(0);
+					end;
+			end;
+			OffCommand=cmd(decelerate,0.3;diffusealpha,0);			
+		},
+		
+		Def.BitmapText {
+			Font = "_roboto condensed 24px",
+			InitCommand=cmd(diffuse,Color.White;zoom,1;addy,38;maxwidth,160;uppercase,true;diffuse,ColorLightTone(PlayerColor(p));strokecolor,ColorDarkTone(PlayerColor(p));diffusetopedge,Color.White;),
+			OnCommand=function(self)
+				if STATSMAN:GetCurStageStats():GetPlayerStageStats(p):GetStageAward() then
+					self:settext(THEME:GetString( "StageAward", ToEnumShortString(STATSMAN:GetCurStageStats():GetPlayerStageStats(p):GetStageAward()) ))
+					self:diffusealpha(0):zoomx(0.5):sleep(1):decelerate(0.4):zoomx(1):diffusealpha(1)
+				end
+			end;
+			OffCommand=cmd(decelerate,0.3;diffusealpha,0);
+		}
+	}
 	
+		
 	-- Primary score.
 	eval_parts[#eval_parts+1] = Def.BitmapText {
 		Font = "_overpass 36px",
-		InitCommand=cmd(horizalign,center;x,_screen.cx + (grade_parts_offs);y,(_screen.cy-65);diffuse,ColorMidTone(PlayerColor(p));zoom,1;shadowlength,1),
+		InitCommand=cmd(horizalign,center;x,_screen.cx + (grade_parts_offs);y,(_screen.cy-65);diffuse,ColorMidTone(PlayerColor(p));zoom,1;shadowlength,1;maxwidth,180),
 		OnCommand=function(self)
 			self:settext(GetPlScore(p, "primary")):diffusealpha(0):sleep(0.5):decelerate(0.3):diffusealpha(1)
 		end;
@@ -175,42 +221,20 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 		end;
 	}
 	
-	-- Letter grade and associated parts.
-	eval_parts[#eval_parts+1] = Def.ActorFrame{
-		InitCommand=cmd(x,_screen.cx + grade_parts_offs;y,_screen.cy/1.91),
-		
-		Def.Quad {
-			InitCommand=cmd(zoomto,190,115;diffuse,color("#fce1a1"););
-			OnCommand=function(self)
-			    self:diffusealpha(0):decelerate(0.4):diffusealpha(0.3)
-			end;
-			OffCommand=cmd(decelerate,0.3;diffusealpha,0);
-		},
-		
-		LoadActor(THEME:GetPathG("GradeDisplay", "Grade " .. p_grade)) .. {
-			InitCommand=cmd(zoom,0.75;);
-			OnCommand=function(self)
-			        self:diffusealpha(0):zoom(1):sleep(0.63):decelerate(0.4):zoom(0.75):diffusealpha(1)
-					if STATSMAN:GetCurStageStats():GetPlayerStageStats(p):GetStageAward() then
-					  self:sleep(0.1):decelerate(0.4):addy(-6);
-					else
-					  self:addy(0);
-					end;
-			end;
-			OffCommand=cmd(decelerate,0.3;diffusealpha,0);			
-		},
-		
-		Def.BitmapText {
-			Font = "_roboto condensed Bold italic 24px",
-			InitCommand=cmd(diffuse,Color.White;zoom,1.0;addy,38;maxwidth,180;uppercase,true;diffuse,color("#4A4038");diffusetopedge,color("#A68844");),
-			OnCommand=function(self)
-				if STATSMAN:GetCurStageStats():GetPlayerStageStats(p):GetStageAward() then
-					self:settext(THEME:GetString( "StageAward", ToEnumShortString(STATSMAN:GetCurStageStats():GetPlayerStageStats(p):GetStageAward()) ))
-					self:diffusealpha(0):zoomx(0.5):sleep(1):decelerate(0.4):zoomx(1):diffusealpha(1)
-				end
-			end;
-			OffCommand=cmd(decelerate,0.3;diffusealpha,0);
-		}
+	eval_parts[#eval_parts+1] = Def.BitmapText {
+		Font = "Common Condensed",
+		InitCommand=cmd(horizalign,center;x,_screen.cx + (grade_parts_offs);y,(_screen.cy-65)+56;diffuse,ColorDarkTone(PlayerColor(p));zoom,0.75;shadowlength,1),
+		OnCommand=function(self)
+			local record = STATSMAN:GetCurStageStats():GetPlayerStageStats(p):GetPersonalHighScoreIndex()
+			local hasPersonalRecord = record ~= -1
+			self:visible(hasPersonalRecord);
+			local text = string.format(THEME:GetString("ScreenEvaluation", "PersonalRecord"), record+1)
+			self:settext(text)
+			self:diffusealpha(0):sleep(0.6):decelerate(0.3):diffusealpha(1)
+		end;
+		OffCommand=function(self)
+			self:sleep(0.1):decelerate(0.3):diffusealpha(0)
+		end;
 	}
 end
 
@@ -239,9 +263,9 @@ if GAMESTATE:IsHumanPlayer(PLAYER_1) == true then
 				  local st = stepsP1:GetStepsType();
 				  local diff = stepsP1:GetDifficulty();
 				  local courseType = GAMESTATE:IsCourseMode() and SongOrCourse:GetCourseType() or nil;
-				  local cd = GetCustomDifficulty(st, diff, courseType);
+				  local cdp1 = GetCustomDifficulty(st, diff, courseType);
 				  self:settext(string.upper(THEME:GetString("CustomDifficulty",ToEnumShortString(diff))) .. "  " .. stepsP1:GetMeter());
-				  self:diffuse(ColorDarkTone(CustomDifficultyToColor(cd)));				  
+				  self:diffuse(ColorDarkTone(CustomDifficultyToColor(cdp1)));				  
 				else
 				  self:settext("")
 				end
@@ -277,9 +301,9 @@ if GAMESTATE:IsHumanPlayer(PLAYER_2) == true then
 				  local st = stepsP2:GetStepsType();
 				  local diff = stepsP2:GetDifficulty();
 				  local courseType = GAMESTATE:IsCourseMode() and SongOrCourse:GetCourseType() or nil;
-				  local cd = GetCustomDifficulty(st, diff, courseType);
-				  self:settext(string.upper(THEME:GetString("CustomDifficulty",ToEnumShortString(diff))) .. "  " .. stepsP1:GetMeter());
-				  self:diffuse(ColorDarkTone(CustomDifficultyToColor(cd)));				  
+				  local cdp2 = GetCustomDifficulty(st, diff, courseType);
+				  self:settext(string.upper(THEME:GetString("CustomDifficulty",ToEnumShortString(diff))) .. "  " .. stepsP2:GetMeter());
+				  self:diffuse(ColorDarkTone(CustomDifficultyToColor(cdp2)));				  
 				else
 				  self:settext("")
 				end
@@ -293,6 +317,20 @@ if GAMESTATE:IsHumanPlayer(PLAYER_2) == true then
 	 end; 
 
 end;
+
+t[#t+1] = Def.BitmapText {
+		Font = "Common Italic Condensed",
+		Condition=GAMESTATE:HasEarnedExtraStage();
+		InitCommand=cmd(horizalign,center;x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y-244;zoom,1;diffuse,color("#EC3F99");diffusebottomedge,color("#AB3468");),
+		OnCommand=function(self)
+			local text = string.upper(THEME:GetString("ScreenEvaluation", "ExtraUnlocked"))
+			self:settext(text)
+			self:diffusealpha(0):zoomx(0.7):sleep(1.3):decelerate(0.3):diffusealpha(1):zoomx(1)
+		end;
+		OffCommand=function(self)
+			self:sleep(0.1):decelerate(0.3):diffusealpha(0)
+		end;
+	}
 
 t[#t+1] = StandardDecorationFromFileOptional("LifeDifficulty","LifeDifficulty");
 t[#t+1] = StandardDecorationFromFileOptional("TimingDifficulty","TimingDifficulty");

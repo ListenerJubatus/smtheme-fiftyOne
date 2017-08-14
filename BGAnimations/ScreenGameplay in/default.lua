@@ -12,4 +12,8 @@ t[#t+1] = Def.Sprite {
 		self:diffusealpha(0)
 	end;
 };
+
+-- Pause menu
+	t[#t+1]= LoadActor(THEME:GetPathG("", "pause_menu"))
+
 return t;

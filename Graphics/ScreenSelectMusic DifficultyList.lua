@@ -20,7 +20,7 @@ return Def.ActorFrame {
 		self:decelerate(0.3):zoomx(0):diffusealpha(0)
 		end;
 		CursorP1 = Def.ActorFrame {
-			InitCommand=cmd(x,-144;player,PLAYER_1);
+			InitCommand=cmd(x,-170;player,PLAYER_1);
 			PlayerJoinedMessageCommand=function(self, params)
 				if params.Player == PLAYER_1 then
 					self:visible(true);
@@ -34,11 +34,11 @@ return Def.ActorFrame {
 				end;
 			end;
 			LoadActor(THEME:GetPathG("_StepsDisplayListRow","Cursor")) .. {
-				InitCommand=cmd(diffuse,PlayerColor(PLAYER_1);x,8;zoom,0.75);
+				InitCommand=cmd(diffuse,ColorLightTone(PlayerColor(PLAYER_1));x,8;zoom,0.75);
 			};
 		};
 		CursorP2 = Def.ActorFrame {
-			InitCommand=cmd(x,144;player,PLAYER_2);
+			InitCommand=cmd(x,170;player,PLAYER_2);
 			PlayerJoinedMessageCommand=function(self, params)
 				if params.Player == PLAYER_2 then
 					self:visible(true);
@@ -52,7 +52,7 @@ return Def.ActorFrame {
 				end;
 			end;
 			LoadActor(THEME:GetPathG("_StepsDisplayListRow","Cursor")) .. {
-				InitCommand=cmd(diffuse,PlayerColor(PLAYER_2);x,-8;zoom,0.75;zoomx,-0.75;);
+				InitCommand=cmd(diffuse,ColorLightTone(PlayerColor(PLAYER_2));x,-8;zoom,0.75;zoomx,-0.75;);
 			};
 		};
 		CursorP1Frame = Def.Actor{
