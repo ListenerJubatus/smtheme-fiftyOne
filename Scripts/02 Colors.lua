@@ -22,32 +22,33 @@ ScreenColors = {
     Style           = color("#81468B"),
     PlayMode        = color("#478e6f"),
     Music           = color("#1268aa"),
-    Course          = color("#9F0E50"),
+    Online           = color("#1CA6A0"),
+    Course          = color("#6D1646"),
     PlayerOptions   = color("#544abe"),
-    OptionsService  = color("#1C1C1B"),
+    OptionsService  = color("#5F2D41"),
     Evaluation      = color("#806635"),
     Summary         = color("#B38D47"),
+    StageInformation  = color("#D05722"),
     Edit         = color("#B34754"),
-    Default         = color("#1C1C1B"),
+    Default         = color("#5F2D41"),
 }
-
 ModeIconColors = {
     Normal      = color("#339FF2"),
     Rave        = color("#6BFF90"), 
     Nonstop     = color("#FF66AB"),
-    Oni         = color("#FFDA6B"),
-    Endless     = color("#D4C7C1"),
+    Oni         = color("#FF714D"),
+    Endless     = color("#6A62CA"),
 }
 
 GameColor = {
     PlayerColors = {
-        [PLAYER_1] = color("#437CE7"),
-        [PLAYER_2] = color("#EB3F8C"),
+        [PLAYER_1] = color("#3982FF"),
+        [PLAYER_2] = color("#FF4596"),
 		both = color("#FFFFFF"),
     },
     PlayerDarkColors = {
         [PLAYER_1] = color("#EB3F8C"),
-        [PLAYER_2] = color("#89385A"),
+        [PLAYER_2] = color("#7F083C"),
 		both = color("#F5E1E1"),
     },
     Difficulty = {
@@ -74,19 +75,19 @@ GameColor = {
         Difficulty_Routine  = color("#ff9a00")              -- orange
     },
     Stage = {
-        Stage_1st   = color("#00ffc7"),
-        Stage_2nd   = color("#58ff00"),
-        Stage_3rd   = color("#f400ff"),
-        Stage_4th   = color("#00ffda"),
-        Stage_5th   = color("#ed00ff"),
-        Stage_6th   = color("#73ff00"),
+        Stage_1st   = color("#F6C455"),
+        Stage_2nd   = color("#EDA858"),
+        Stage_3rd   = color("#E69259"),
+        Stage_4th   = color("#DD775B"),
+        Stage_5th   = color("#D55E5D"),
+        Stage_6th   = color("#CD445F"),
         Stage_Next  = color("#73ff00"),
-        Stage_Final = color("#ff0707"),
-        Stage_Extra1    = color("#fafa00"),
-        Stage_Extra2    = color("#ff0707"),
-        Stage_Nonstop   = color("#9d324e"),
-        Stage_Oni   = color("#9d324e"),
-        Stage_Endless   = color("#9d324e"),
+        Stage_Final = color("#4BC6EB"),
+        Stage_Extra1    = color("#B60052"),
+        Stage_Extra2    = color("#FF499B"),
+        Stage_Nonstop   = color("#FFD782"),
+        Stage_Oni   = color("#FF714D"),
+        Stage_Endless   = color("#6040A7"),
         Stage_Event = color("#9d324e"),
         Stage_Demo  = color("#9d324e")
     },
@@ -97,7 +98,7 @@ GameColor = {
         JudgmentLine_W4     = color("#86ACD6"),
         JudgmentLine_W5     = color("#958CD6"),
         JudgmentLine_Held   = color("#FFFFFF"),
-        JudgmentLine_Miss   = color("#ff3c3c"),
+        JudgmentLine_Miss   = color("#F97E7E"),
         JudgmentLine_MaxCombo   = color("#ffc600")
     },
 }
