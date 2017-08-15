@@ -44,12 +44,12 @@ GameColor = {
     PlayerColors = {
         [PLAYER_1] = color("#3982FF"),
         [PLAYER_2] = color("#FF4596"),
-		both = color("#FFFFFF"),
+		both = color("#B27B96"),
     },
     PlayerDarkColors = {
         [PLAYER_1] = color("#EB3F8C"),
         [PLAYER_2] = color("#7F083C"),
-		both = color("#F5E1E1"),
+		both = color("#5F2D41"),
     },
     Difficulty = {
         --[[ These are for 'Custom' Difficulty Ranks. It can be very  useful
