@@ -50,66 +50,18 @@ local steps_display_x= title_x
 local steps_display_y= title_y + (spacer * 1.2)
 local steps_display_items= (_screen.h - steps_display_y) / steps_type_item_space
 
-local menu_params= {
-	name= "menu", x= _screen.cx*.47, y= 125, width= _screen.cx-100,
-	translation_section= "ScreenEditMenu",
-	menu_sounds= {
-		pop= THEME:GetPathS("Common", "Cancel"),
-		push= THEME:GetPathS("_common", "row"),
-		act= THEME:GetPathS("Common", "value"),
-		move= THEME:GetPathS("Common", "value"),
-		move_up= THEME:GetPathS("Common", "value"),
-		move_down= THEME:GetPathS("Common", "value"),
-		inc= THEME:GetPathS("_switch", "up"),
-		dec= THEME:GetPathS("_switch", "down"),
-	},
-	num_displays= 1, el_height= 32, display_params= {
-		no_status= true,
-		height= _screen.h-170, el_zoom= 1.0,
-		heading_height= 20,
-		on= function(self)
-			self:diffusealpha(0):decelerate(0.2):diffusealpha(1)
-		end,
-		item_mt= cons_option_item_mt, item_params= {
-			text_commands= {
-				Font= "Common Fallback Font", OnCommand= function(self)
-					self:diffuse(color("#452429")):diffusealpha(0):decelerate(0.2):diffusealpha(1):shadowlength(1)
-				end,
-				OffCommand=function(self)
-					self:smooth(0.3):diffusealpha(0)
-				end,
-			},
-			text_width= .7,
-			value_text_commands= {
-				Font= "Common Fallback Font", OnCommand= function(self)
-					self:diffuse(color("#6E2C34")):diffusealpha(0):decelerate(0.2):diffusealpha(1):shadowlength(1)
-				end,
-				OffCommand=function(self)
-					self:smooth(0.3):diffusealpha(0)
-				end,
-			},
-			value_image_commands= {
-				OnCommand= function(self)
-					self:diffusealpha(0):smooth(0.3):diffusealpha(1)
-				end,
-				OffCommand=function(self)
-					self:smooth(0.3):diffusealpha(0)
-				end,
-			},
-			value_width= .25,
-			type_images= {
-				bool= THEME:GetPathG("", "menu_icons/bool"),
-				choice= THEME:GetPathG("", "menu_icons/bool"),
-				menu= THEME:GetPathG("", "menu_icons/chevron"),
-			},
-		},
-	},
-}
+-- Adding color, font, and shadowlength params to generic_menu.lua is left as
+-- an exercise for the reader.  generic_menu.lua is meant to be customized
+-- and different in each theme anyway.
+
+-- Font: "Common Fallback Font"
+-- Name color: color("#452429")
+-- Value color: color("#6E2C34")
 
 local frame= Def.ActorFrame{
 	edit_menu_selection_changedMessageCommand=
 		edit_pick_menu_update_steps_display_info(steps_display),
-	edit_pick_menu_actor(menu_params),
+	edit_pick_menu_actor(LoadActor(THEME:GetPathG("", "generic_menu"), 1, _screen.cx-100, _screen.h-170, 1, 32, 125)),
 	Def.Sprite{
 		Name= "jacket", InitCommand= function(self)
 			self:xy(jacket_x, jacket_y)
