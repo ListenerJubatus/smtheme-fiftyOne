@@ -65,7 +65,7 @@ local life_options= {
 }
 
 local menu_data= {
-	-- Play and back will be inserted later.
+	-- Play and back are inserted lower in this file.
 	notefield_prefs_speed_mod_item(),
 	notefield_prefs_speed_type_item(),
 	{"item", "song_option", "MusicRate"},
@@ -75,7 +75,7 @@ local menu_data= {
 	{"item", notefield_prefs_config, "zoom", "percent"},
 	{"submenu", "chart_mods", chart_mods},
 	noteskin_menu_item(),
-	-- TODO: Noteskin params menu item.
+	noteskin_params_menu_item(),
 	shown_noteskins_menu(),
 	{"item", notefield_prefs_config, "hidden", "bool"},
 	{"item", notefield_prefs_config, "sudden", "bool"},
@@ -98,8 +98,8 @@ local function update_explanation(cursor_item, pn)
 	if cursor_item then
 		local new_expl= cursor_item.info.name
 		local expl_com= "change_explanation"
-		if cursor_item.explanation then
-			new_expl= cursor_item.explanation
+		if cursor_item.info.explanation then
+			new_expl= cursor_item.info.explanation
 			expl_com= "translated_explanation"
 		end
 		if new_expl ~= prev_explanation[pn] then
