@@ -24,52 +24,6 @@ local function item_part_off(self)
 	self:smooth(0.3):diffusealpha(0)
 end
 
--- When the user goes up or down a page, or wraps from top to bottom, "from"
--- or "to" will be far outside the range of 0 to num_items-1.  It looks bad
--- when the item appears at the from position when that's outside the menu
--- area, or moves all the way to the to position before disappearing.
--- So this function takes care of hiding the item when it's outside the menu
--- area.
--- Maybe masking would be better. >_>
-local function one_dimension_scroll(
-		self, dim, spacing, from, to, low, high)
-	if from == to then
-		self[dim](self, from * spacing)
-		self:diffusealpha(1)
-		return
-	end
-	self:finishtweening()
-	local steps= math.abs(to-from)
-	local time_per_step= .1 / steps
-	local dir= from < to and 1 or -1
-	local visible_from= clamp(from, low, high)
-	local steps_before_visible= math.abs(visible_from - from)
-	local steps_before_fade_in= steps_before_visible - 1
-	if steps_before_visible > 0 then
-		local pos_before_vis= visible_from - dir
-		self[dim](self, pos_before_vis * spacing)
-		if steps_before_fade_in > 0 then
-			self:sleep(steps_before_fade_in * time_per_step)
-		end
-		self:linear(time_per_step)
-			:diffusealpha(1)
-		self[dim](self, visible_from * spacing)
-	end
-	local visible_to= clamp(to, low, high)
-	local steps_after_visible= math.abs(visible_to - to)
-	local steps_visible= math.abs(visible_to - visible_from)
-	if steps_visible > 0 then
-		self:linear(steps_visible * time_per_step)
-		self[dim](self, visible_to * spacing)
-	end
-	if steps_after_visible > 0 then
-		local pos_after_vis= visible_to + dir
-		self:linear(time_per_step)
-			:diffusealpha(0)
-		self[dim](self, pos_after_vis * spacing)
-	end
-end
-
 local smw= menu_width / menu_zoom
 local smh= menu_height / menu_zoom
 local display_pad= smw * .01
@@ -209,7 +163,7 @@ local function make_item()
 			self:visible(false)
 		end,
 		ScrollCommand= function(self, params)
-			one_dimension_scroll(self, "y", item_spacing, params.from, params.to, 0, params.num_items-1)
+			one_dimension_scroll(self, "y", "smooth", .3, item_spacing, params.from, params.to, 0, params.num_items-1)
 			if params.scroll_type == "normal" then
 			elseif params.scroll_type == "off" then
 				-- Item will not be visible or interactive afterwards.
@@ -314,7 +268,7 @@ local function make_display(num_items)
 			self:visible(false)
 		end,
 		ScrollCommand= function(self, params)
-			one_dimension_scroll(self, "x", display_width, params.from, params.to, 0, params.num_items-1)
+			one_dimension_scroll(self, "x", "smooth", .3, display_width, params.from, params.to, 0, params.num_items-1)
 			if params.scroll_type == "normal" then
 			elseif params.scroll_type == "off" then
 				-- Item will not be visible or interactive afterwards.
