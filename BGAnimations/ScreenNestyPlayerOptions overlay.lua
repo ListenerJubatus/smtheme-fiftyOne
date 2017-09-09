@@ -1,4 +1,4 @@
-local menu_height= 400
+local menu_height= 410
 local menu_width= 346
 local menu_x= {
 	[PLAYER_1]= _screen.w * .25,
@@ -147,7 +147,7 @@ local menu_actors= {}
 local frame= Def.ActorFrame{}
 
 for i, pn in ipairs(GAMESTATE:GetHumanPlayers()) do
-	menu_actors[pn]= LoadActor(THEME:GetPathG("", "generic_menu.lua"), 1, 352, menu_height, 1, menu_x[pn]-(menu_width/2), 138, 33)
+	menu_actors[pn]= LoadActor(THEME:GetPathG("", "generic_menu.lua"), 1, 352, menu_height, 1, menu_x[pn]-(menu_width/2), 138, 36)
 	frame[#frame+1]= LoadActor(
 		THEME:GetPathG("ScreenOptions", "halfpage")) .. {
 		InitCommand= function(self)
