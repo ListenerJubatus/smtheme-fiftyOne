@@ -19,10 +19,10 @@ local function hide(self) self:visible(false) end
 -- Was going to set these repeatedly for each part of the menu item, then
 -- decided to just put them on the ActorFrame of the item as a whole.
 local function item_part_on(self)
-	self:diffusealpha(0):smooth(0.3):diffusealpha(1)
+	self:diffusealpha(0):smooth(0.2):diffusealpha(1)
 end
 local function item_part_off(self)
-	self:smooth(0.3):diffusealpha(0)
+	self:smooth(0.2):diffusealpha(0)
 end
 
 local smw= menu_width / menu_zoom
@@ -163,7 +163,7 @@ local function make_item()
 			self:visible(false)
 		end,
 		ScrollCommand= function(self, params)
-			one_dimension_scroll(self, "y", "smooth", .3, item_spacing, params.from, params.to, 0, params.num_items-1)
+			one_dimension_scroll(self, "y", "linear", .1, item_spacing, params.from, params.to, 0, params.num_items-1)
 			if params.scroll_type == "normal" then
 			elseif params.scroll_type == "off" then
 				-- Item will not be visible or interactive afterwards.
@@ -268,7 +268,7 @@ local function make_display(num_items)
 			self:visible(false)
 		end,
 		ScrollCommand= function(self, params)
-			one_dimension_scroll(self, "x", "smooth", .3, display_width, params.from, params.to, 0, params.num_items-1)
+			one_dimension_scroll(self, "x", "decelerate", .2, display_width, params.from, params.to, 0, params.num_items-1)
 			if params.scroll_type == "normal" then
 			elseif params.scroll_type == "off" then
 				-- Item will not be visible or interactive afterwards.

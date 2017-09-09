@@ -61,7 +61,7 @@ local steps_display_items= (_screen.h - steps_display_y) / steps_type_item_space
 local frame= Def.ActorFrame{
 	edit_menu_selection_changedMessageCommand=
 		edit_pick_menu_update_steps_display_info(steps_display),
-	edit_pick_menu_actor(LoadActor(THEME:GetPathG("", "generic_menu"), 1, _screen.cx-100, _screen.h-170, 1, 32, 125)),
+	edit_pick_menu_actor(LoadActor(THEME:GetPathG("", "generic_menu"), 1, _screen.cx-50, _screen.h-170, 1, 32, 125, 36)),
 	Def.Sprite{
 		Name= "jacket", InitCommand= function(self)
 			self:xy(jacket_x, jacket_y)
