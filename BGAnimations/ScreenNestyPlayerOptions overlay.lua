@@ -72,8 +72,8 @@ local bg_options= {
 
 local menu_data= {
 	-- Play and back are inserted lower in this file.
-	notefield_prefs_speed_mod_item(),
-	notefield_prefs_speed_type_item(),	
+	notefield_prefs_speed_type_item(),
+	notefield_prefs_speed_mod_item(),	
 	notefield_prefs_perspective_item(),
 	{"item", notefield_prefs_config, "reverse", "toggle_number", {on= -1, off= 1}},
 	{"item", notefield_prefs_config, "zoom", "percent"},

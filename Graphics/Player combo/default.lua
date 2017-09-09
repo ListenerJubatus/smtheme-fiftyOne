@@ -125,23 +125,13 @@ local t = Def.ActorFrame {
 
 		cf.Number:visible(true);
 		cf.Number:settext( string.format("%i", iCombo) );
-        cf.Number:textglowmode("TextGlowMode_Stroke");
 		-- FullCombo Rewards
 		if param.FullComboW1 then
 			cf.Number:diffuse( GameColor.Judgment["JudgmentLine_W1"] );
-			cf.Number:strokecolor( GameColor.Judgment["JudgmentLine_W1"] );
-            cf.Number:textglowmode("TextGlowMode_Stroke");
-			cf.Number:glowshift();
 		elseif param.FullComboW2 then
 			cf.Number:diffuse( GameColor.Judgment["JudgmentLine_W2"] );
-			cf.Number:strokecolor( GameColor.Judgment["JudgmentLine_W2"] );
-            cf.Number:textglowmode("TextGlowMode_Stroke");
-			cf.Number:glowshift();
 		elseif param.FullComboW3 then
 			cf.Number:diffuse( GameColor.Judgment["JudgmentLine_W3"] );
-			cf.Number:strokecolor( GameColor.Judgment["JudgmentLine_W3"] );
-            cf.Number:textglowmode("TextGlowMode_Stroke");
-			cf.Number:glowshift();
 		elseif param.Combo then
 			-- Player 1's color is Red, which conflicts with the miss combo.
 			-- instead, just diffuse to white for now. -aj
