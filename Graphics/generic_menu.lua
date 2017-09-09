@@ -1,10 +1,11 @@
-local num_displays, menu_width, menu_height, menu_zoom, menu_x, menu_y= ...
+local num_displays, menu_width, menu_height, menu_zoom, menu_x, menu_y, item_spacing = ...
 num_displays= num_displays or 1
 menu_width= menu_width or _screen.w * .45
 menu_height= menu_height or _screen.h * .9
 menu_zoom= menu_zoom or 1
 menu_x= menu_x or _screen.w * .05
 menu_y= menu_y or _screen.h * .05
+item_spacing = item_spacing or 24
 
 local function button_click(self)
 	self:stoptweening()
@@ -29,7 +30,6 @@ local smh= menu_height / menu_zoom
 local display_pad= smw * .01
 local display_width= smw / num_displays
 local item_width= display_width - (display_pad * 2)
-local item_spacing= 24
 local num_items= smh / item_spacing
 local adjuster_size= item_spacing * .45
 local adjuster_pad= item_spacing * .05
@@ -311,7 +311,7 @@ local menu_frame= Def.ActorFrame{
 		self:zoom(menu_zoom):xy(menu_x, menu_y)
 	end,
 	PlayerizeCommand= function(self, pn)
-		self:GetChild("cursor"):diffuse(PlayerColor(pn))
+		self:GetChild("cursor"):diffuse(ColorLightTone(PlayerColor(pn)))
 	end,
 	OpenMenuCommand= function(self)
 		self:visible(true)

@@ -1,9 +1,10 @@
 local menu_height= 400
-local menu_width= 250
+local menu_width= 346
 local menu_x= {
 	[PLAYER_1]= _screen.w * .25,
 	[PLAYER_2]= _screen.w * .75,
 }
+
 
 local chart_mod_names= {
 	{"turn", {
@@ -96,7 +97,8 @@ local explanations= {}
 local prev_explanation= {}
 local function update_explanation(cursor_item, pn)
 	if cursor_item then
-		local new_expl= cursor_item.info.name
+		if not cursor_item.info then return end
+		local new_expl= cursor_item.info.name 
 		local expl_com= "change_explanation"
 		if cursor_item.info.explanation then
 			new_expl= cursor_item.info.explanation
@@ -106,6 +108,7 @@ local function update_explanation(cursor_item, pn)
 			prev_explanation[pn]= new_expl
 			explanations[pn]:playcommand(expl_com, {text= new_expl})
 		end
+		if not cursor_item.info then return end
 	end
 end
 
@@ -140,7 +143,7 @@ local menu_actors= {}
 local frame= Def.ActorFrame{}
 
 for i, pn in ipairs(GAMESTATE:GetHumanPlayers()) do
-	menu_actors[pn]= LoadActor(THEME:GetPathG("", "generic_menu.lua"), 1, menu_width, menu_height, 1, menu_x[pn]-(menu_width/2), 120)
+	menu_actors[pn]= LoadActor(THEME:GetPathG("", "generic_menu.lua"), 1, 352, menu_height, 1, menu_x[pn]-(menu_width/2), 138, 33)
 	frame[#frame+1]= LoadActor(
 		THEME:GetPathG("ScreenOptions", "halfpage")) .. {
 		InitCommand= function(self)
@@ -173,7 +176,7 @@ for i, pn in ipairs(GAMESTATE:GetHumanPlayers()) do
 	frame[#frame+1]= Def.BitmapText{
 		Font= "Common Normal", InitCommand= function(self)
 			explanations[pn]= self
-			self:xy(menu_x[pn] - (menu_width / 2), _screen.cy+154)
+			self:xy(menu_x[pn] - (menu_width / 2), _screen.cy+178)
 				:diffuse(ColorDarkTone((PlayerColor(pn)))):horizalign(left):vertalign(top)		
 				:wrapwidthpixels(menu_width / .8):zoom(.75)
 				:horizalign(left)
