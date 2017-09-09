@@ -58,9 +58,6 @@ local t = Def.ActorFrame {
 				local mode_conversion= {maximum= "m", multiple= "x", constant= "C"}
 				local speed= prefs.speed_mod
 				local mode= mode_conversion[prefs.speed_type]
-				if mode == "x" then
-					speed= speed * 100
-				end
 				self:playcommand(
 					"SpeedChoiceChanged", {pn= param.pn, speed= speed, mode= mode})
 			end

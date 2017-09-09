@@ -54,7 +54,7 @@ for tid, info in ipairs(chart_mod_names) do
 end
 
 local gameplay_options= {}
-for i, name in ipairs{"ComboUnderField", "FlashyCombo", "GameplayShowStepsDisplay", "GameplayShowScore", "JudgmentUnderField", "Protiming"} do
+for i, name in ipairs{"ComboUnderField", "FlashyCombo", "GameplayShowScore", "JudgmentUnderField", "Protiming"} do
 	gameplay_options[#gameplay_options+1]= {"item", player_config, name, "bool"}
 end
 
@@ -65,29 +65,33 @@ local life_options= {
 	{"item", "player_option", "BatteryLives"},
 }
 
+local bg_options= {
+	{"item", "song_option", "StaticBackground", "bool"},
+	{"item", "song_option", "RandomBGOnly", "bool"},
+}
+
 local menu_data= {
 	-- Play and back are inserted lower in this file.
 	notefield_prefs_speed_mod_item(),
-	notefield_prefs_speed_type_item(),
-	{"item", "song_option", "MusicRate"},
-	{"item", "song_option", "Haste"},
+	notefield_prefs_speed_type_item(),	
 	notefield_prefs_perspective_item(),
 	{"item", notefield_prefs_config, "reverse", "toggle_number", {on= -1, off= 1}},
 	{"item", notefield_prefs_config, "zoom", "percent"},
 	{"submenu", "chart_mods", chart_mods},
-	noteskin_menu_item(),
-	noteskin_params_menu_item(),
-	shown_noteskins_menu(),
 	{"item", notefield_prefs_config, "hidden", "bool"},
 	{"item", notefield_prefs_config, "sudden", "bool"},
 	adv_notefield_prefs_menu(),
+	noteskin_menu_item(),
+	noteskin_params_menu_item(),
+	shown_noteskins_menu(),
+	{"item", player_config, "ScreenFilter", "percent"},	
 	{"submenu", "gameplay_options", gameplay_options},
 	{"submenu", "life_options", life_options},
 	{"item", "song_option", "AssistClap", "bool"},
 	{"item", "song_option", "AssistMetronome", "bool"},
-	{"item", "song_option", "StaticBackground", "bool"},
-	{"item", "song_option", "RandomBGOnly", "bool"},
-	{"item", player_config, "ScreenFilter", "percent"},
+	{"submenu", "bg_options", bg_options},
+	{"item", "song_option", "MusicRate"},
+	{"item", "song_option", "Haste"},	
 }
 
 local player_ready= {}
