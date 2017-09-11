@@ -42,18 +42,22 @@ local t = Def.ActorFrame {
 		InitCommand=cmd(x,4)
 	},
 	LoadFont("_overpass 36px") .. {
-		Text="100 - 200000";
+		-- default text should tell you that it wasn't initialized right. -Kyz
+		Text="init did nothing";
 		Name="BPMRangeNew",
 		InitCommand= function(self)
 			self:x(68):maxwidth(88/bpm_text_zoom):zoom(bpm_text_zoom)
-			self:playcommand("ConfigValueChanged", {pn= PlayerNumber, field_name= "speed_mod"})
+			self:playcommand("MenuValueChanged", {
+				config_name= notefield_prefs_config.name, pn= PlayerNumber, field_name= "speed_mod"})
 			--local speed, mode= GetSpeedModeAndValueFromPoptions(PlayerNumber)
 			--self:playcommand("SpeedChoiceChanged", {pn= PlayerNumber, mode= mode, speed= speed})
 		end,
 		BPMWillNotChangeCommand=cmd(stopeffect),
 		BPMWillChangeCommand=cmd(diffuseshift;effectcolor1,Color.White;effectcolor2,Color.Orange),
-		ConfigValueChangedMessageCommand= function(self, param)
-			if param.field_name == "speed_mod" or param.field_name == "speed_type" then
+		MenuValueChangedMessageCommand= function(self, param)
+			if param.config_name == notefield_prefs_config.name and
+				(param.field_name == "speed_mod" or param.field_name == "speed_type")
+			then
 				local prefs= notefield_prefs_config:get_data(param.pn)
 				local mode_conversion= {maximum= "m", multiple= "x", constant= "C"}
 				local speed= prefs.speed_mod
