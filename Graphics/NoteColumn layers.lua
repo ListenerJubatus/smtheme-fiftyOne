@@ -29,7 +29,7 @@ return {
 			if hns_states[hns] then
 				self:stoptweening()
 					:setstate(hns_states[hns])
-					:linear(.1):diffusealpha(1)
+					:diffusealpha(0):zoom(1.1):linear(.1):diffusealpha(1):zoom(0.8)
 					:sleep(.5)
 					:linear(.2):diffusealpha(0)
 			elseif hns then

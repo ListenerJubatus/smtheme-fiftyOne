@@ -66,14 +66,7 @@ local function PercentScore(pn)
 	return t;
 end
 
-t[#t+1] = LoadActor(THEME:GetPathG("ScreenSelectMusic", "banner overlay")) .. {
-		 InitCommand=cmd(zoom,1;x,SCREEN_CENTER_X-228;y,SCREEN_CENTER_Y-165-11;draworder,47);
-		 OnCommand=cmd(zoomy,0;decelerate,0.3;zoomy,1;);
-		 OffCommand=cmd(decelerate,0.15;zoomx,0;);
-	};
-
-
--- Genre/Artist data
+-- Info panel
 t[#t+1] = LoadActor(THEME:GetPathG("ScreenSelectMusic", "info pane")) .. {
 		InitCommand=cmd(horizalign,center;x,SCREEN_CENTER_X-228;y,SCREEN_CENTER_Y-75;zoom,1;);
 		OnCommand=function(self)
@@ -174,7 +167,6 @@ t[#t+1] = Def.ActorFrame {
           end; 
 		};
 };
-t[#t+1] = StandardDecorationFromFileOptional("CourseContentsList","CourseContentsList");
 
 
 if not GAMESTATE:IsCourseMode() then
@@ -423,30 +415,5 @@ t[#t+1] = Def.ActorFrame {
     StandardDecorationFromFileOptional("BPMDisplay","BPMDisplay");
 };
 
-t[#t+1] = StandardDecorationFromFileOptional("DifficultyList","DifficultyList");
-t[#t+1] = StandardDecorationFromFileOptional("SongOptions","SongOptionsText") .. {
-	ShowPressStartForOptionsCommand=THEME:GetMetric(Var "LoadingScreen","SongOptionsShowCommand");
-	ShowEnteringOptionsCommand=THEME:GetMetric(Var "LoadingScreen","SongOptionsEnterCommand");
-	HidePressStartForOptionsCommand=THEME:GetMetric(Var "LoadingScreen","SongOptionsHideCommand");
-};
-
-t[#t+1] = Def.ActorFrame{
-	Def.Quad{
-		InitCommand=cmd(draworder,160;FullScreen;diffuse,color("0,0,0,1");diffusealpha,0);
-		ShowPressStartForOptionsCommand=cmd(sleep,0.2;decelerate,0.5;diffusealpha,1);
-	};
-};
-
-t[#t+1] = StandardDecorationFromFileOptional("AlternateHelpDisplay","AlternateHelpDisplay");
-
-
-t[#t+1] = Def.ActorFrame {
-    OffCommand=cmd(sleep,0.1;linear,0.2;diffusealpha,0;);
-    InitCommand=cmd(x,SCREEN_CENTER_X-84;visible,not GAMESTATE:IsCourseMode(););
-
-	StandardDecorationFromFileOptional("StageDisplay","StageDisplay") .. {
-		InitCommand=cmd(zoom,1);
-	};
-};
 
 return t;
