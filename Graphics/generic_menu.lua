@@ -40,7 +40,7 @@ local name_value_pad= 4
 local name_width= item_width - adjuster_size - value_adjuster_pad - value_width - name_value_pad
 local name_x= item_width * -.5
 local value_x= name_width + name_value_pad + value_width
-local adjuster_x= value_x + value_adjuster_pad + (adjuster_size * .5)
+local adjuster_x= value_x + value_adjuster_pad + (adjuster_size * .5) + 8
 
 local function make_adjuster(name, bzy)
 	return Def.Sprite{
