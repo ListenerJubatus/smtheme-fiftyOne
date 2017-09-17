@@ -65,9 +65,13 @@ local life_options= {
 	{"item", "player_option", "BatteryLives"},
 }
 
-local bg_options= {
+local song_options= {
 	{"item", "song_option", "StaticBackground", "bool"},
-	{"item", "song_option", "RandomBGOnly", "bool"},
+	{"item", "song_option", "RandomBGOnly", "bool"},	
+	{"item", "song_option", "AssistClap", "bool"},
+	{"item", "song_option", "AssistMetronome", "bool"},
+	{"item", "song_option", "MusicRate"},
+	{"item", "song_option", "Haste"},	
 }
 
 local menu_data= {
@@ -86,12 +90,8 @@ local menu_data= {
 	shown_noteskins_menu(),
 	{"item", player_config, "ScreenFilter", "percent"},	
 	{"submenu", "gameplay_options", gameplay_options},
+	{"submenu", "song_options", song_options},
 	{"submenu", "life_options", life_options},
-	{"item", "song_option", "AssistClap", "bool"},
-	{"item", "song_option", "AssistMetronome", "bool"},
-	{"submenu", "bg_options", bg_options},
-	{"item", "song_option", "MusicRate"},
-	{"item", "song_option", "Haste"},	
 }
 
 local player_ready= {}

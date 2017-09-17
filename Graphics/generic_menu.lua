@@ -9,8 +9,8 @@ item_spacing = item_spacing or 24
 
 local function button_click(self)
 	self:stoptweening()
-		:linear(.1):rotationz(20)
-		:linear(.1):rotationz(0)
+		:linear(.1):diffusealpha(0.7):zoomx(0.95)
+		:linear(.1):zoomx(1):diffusealpha(1)
 end
 
 local function show(self) self:visible(true) end
