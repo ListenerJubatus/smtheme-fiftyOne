@@ -1,8 +1,10 @@
-WARNING
+Note
 -----------
 This is the StepMania 5.2 version of Lambda. It was, in fact, the original version, but following the rebasing of 5.1 off 5.0, this branch was ported to create a 5.0-compatible version that is the basis of the version shipped in the StepMania 5.1 repository.
 
 This theme _requires_ a nightly build of StepMania 5.2, because it reflects changes that make it incompatible with the previous "5.1 -3" milestone. You can get them (Windows only) from the [nightly builds](http://smnightly.katzepower.com/) or compile SM from source on the Master branch.
+
+As the source code is now in the master repository, most future commits will be directed towards that instead.
 
 Introduction
 -----------
