@@ -1,8 +1,3 @@
--- ...So I realize that I completely ignored almost each and every
--- metrics-bound element this screen could use, but it's okay, right?
--- todo: make a more metrics-bound version of this screen anyways for beginner accessibility.
--- todo: accommodate EvaluationSummary too
-
 local t = Def.ActorFrame {};
 
 -- A very useful table...
@@ -169,6 +164,7 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 			end,
 			OffCommand=cmd(decelerate,0.3;diffusealpha,0)
 		},
+		
 		Def.Quad {
 			InitCommand=cmd(vertalign,top;y,60+grade_area_offset;zoomto,190,136;diffuse,color("#fce1a1");),
 			OnCommand=function(self)
