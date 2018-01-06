@@ -3,6 +3,7 @@ local raveChildren
 local bg = Def.ActorFrame{
 	Def.Quad{
 		InitCommand=cmd(FullScreen;diffuse,color("0,0,0,0"));
+		StartTransitioningCommand=cmd(linear,4;diffusealpha,1);
 	};
 
 	Def.ActorFrame{
