@@ -25,15 +25,15 @@ function ScreenColor(screen)
 end;
 
 ScreenColors = {
-    Style           = color("#81468B"),
-    PlayMode        = color("#b2350c"),
-    Music           = color("#1268aa"),
+    Style           = color("#5F2D41"),
+    PlayMode        = color("#5F2D41"),
+    Music           = color("#5F2D41"),
     Online           = color("#1CA6A0"),
     Course          = color("#6D1646"),
-    PlayerOptions   = color("#544abe"),
+    PlayerOptions   = color("#5F2D41"),
     OptionsService  = color("#5F2D41"),
     Evaluation      = color("#806635"),
-    Summary         = color("#B38D47"),
+    Summary         = color("#5F2D41"),
     StageInformation  = color("#D05722"),
     Edit         = color("#B34754"),
     Default         = color("#5F2D41"),

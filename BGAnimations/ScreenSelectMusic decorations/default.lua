@@ -77,9 +77,12 @@ end
 -- Banner 
 
 t[#t+1] = LoadActor(THEME:GetPathG("ScreenSelectMusic", "banner overlay")) .. {
-		 InitCommand=cmd(zoom,1;x,SCREEN_CENTER_X-228;y,SCREEN_CENTER_Y-165-11;draworder,47);
-		 OnCommand=cmd(zoomy,0;decelerate,0.3;zoomy,1;);
-		 OffCommand=cmd(decelerate,0.15;zoomx,0;);
+		InitCommand=cmd(zoom,1;x,SCREEN_CENTER_X-228;y,SCREEN_CENTER_Y-165-11;draworder,47);
+		OnCommand=function(self)
+			self:diffuse(StageToColor(curStage));
+			self:zoomy(0):decelerate(0.3):zoomy(1);
+		end;
+		OffCommand=cmd(decelerate,0.15;zoomx,0;);
 	};
 
 
