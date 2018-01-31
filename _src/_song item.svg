@@ -10,7 +10,7 @@
         </g>
     </g>
     <defs>
-        <linearGradient id="_Linear1" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(574.482,0,0,574.482,23.3146,42.9432)"><stop offset="0" style="stop-color:rgb(128,39,64);stop-opacity:1"/><stop offset="0.45" style="stop-color:rgb(138,32,47);stop-opacity:0.803922"/><stop offset="0.9" style="stop-color:rgb(152,27,27);stop-opacity:0.611765"/><stop offset="1" style="stop-color:rgb(215,61,52);stop-opacity:0"/></linearGradient>
+        <linearGradient id="_Linear1" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(587.315,0,0,587.314,10.482,42.9996)"><stop offset="0" style="stop-color:rgb(128,39,64);stop-opacity:1"/><stop offset="0.39" style="stop-color:rgb(136,46,68);stop-opacity:0.917647"/><stop offset="0.8" style="stop-color:rgb(159,67,80);stop-opacity:0.690196"/><stop offset="0.91" style="stop-color:rgb(159,67,80);stop-opacity:0.552941"/><stop offset="0.96" style="stop-color:rgb(159,67,80);stop-opacity:0.266667"/><stop offset="1" style="stop-color:rgb(159,67,80);stop-opacity:0"/></linearGradient>
         <linearGradient id="_Linear2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(58.4766,0,0,58.4766,-1038.04,89.02)"><stop offset="0" style="stop-color:rgb(251,191,182);stop-opacity:0"/><stop offset="0.5" style="stop-color:rgb(253,223,218);stop-opacity:0.521569"/><stop offset="1" style="stop-color:white;stop-opacity:0"/></linearGradient>
     </defs>
 </svg>

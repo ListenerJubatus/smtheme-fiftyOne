@@ -10,13 +10,13 @@ t[#t+1] = Def.ActorFrame {
 	Def.Quad {
 		InitCommand=cmd(vertalign,top;zoomto,SCREEN_WIDTH,96),
 		OnCommand=function(self)
-			self:diffuse(ScreenColor(SCREENMAN:GetTopScreen():GetName())):diffuseleftedge(ColorDarkTone(ScreenColor(SCREENMAN:GetTopScreen():GetName()))):diffusealpha(1)
+			self:diffuse(ScreenColor(SCREENMAN:GetTopScreen():GetName())):diffusebottomedge(ColorDarkTone(ScreenColor(SCREENMAN:GetTopScreen():GetName()))):diffusealpha(1)
 		end
 	},
 	LoadActor("_shade") .. {
 		InitCommand=cmd(vertalign,top;zoomto,SCREEN_WIDTH,96),
 		OnCommand=function(self)
-			self:diffuse(ScreenColor(SCREENMAN:GetTopScreen():GetName())):diffuseleftedge(ColorDarkTone(ScreenColor(SCREENMAN:GetTopScreen():GetName()))):diffusealpha(0.8):faderight(1)
+			self:diffuse(ScreenColor(SCREENMAN:GetTopScreen():GetName())):diffusebottomedge(ColorDarkTone(ScreenColor(SCREENMAN:GetTopScreen():GetName()))):diffusealpha(0.8):faderight(1)
 		end
 	},
 	-- Shadow
