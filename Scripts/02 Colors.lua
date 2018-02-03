@@ -49,34 +49,34 @@ ModeIconColors = {
 
 GameColor = {
     PlayerColors = {
-        PLAYER_1 = color("#3982FF"),
-        PLAYER_2 = color("#FF4596"),
+        PLAYER_1 = color("#4B82DC"),
+        PLAYER_2 = color("#DF4C47"),
 		both = color("#FFFFFF"),
     },
     PlayerDarkColors = {
-        PLAYER_1 = color("#023C9F"),
-        PLAYER_2 = color("#7F083C"),
+        PLAYER_1 = color("#1538E9"),
+        PLAYER_2 = color("#2356A8"),
 		both = color("#F5E1E1"),
     },
     Difficulty = {
         --[[ These are for 'Custom' Difficulty Ranks. It can be very  useful
         in some cases, especially to apply new colors for stuff you
         couldn't before. (huh? -aj) ]]
-        Beginner    = color("#A165CE"),         --  purple
-        Easy        = color("#50DA1A"),         -- green
-        Medium      = color("#FFE53E"),         -- yellow
-        Hard        = color("#FE4F49"),         -- orange
-        Challenge   = color("#2DDBFF"),         -- light blue
-        Edit        = color("0.8,0.8,0.8,1"),   -- gray
+        Beginner    = color("#1AE0E4"),         -- Mint
+        Easy        = color("#3ACF2A"),         -- Green
+        Medium      = color("#CFC42A"),         -- Yellow
+        Hard        = color("#CF502A"),         -- Orange
+        Challenge   = color("#981F41"),         -- Plum
+        Edit        = color("0.8,0.8,0.8,1"),   -- Gray
         Couple      = color("#ed0972"),         -- hot pink
         Routine     = color("#ff9a00"),         -- orange
         --[[ These are for courses, so let's slap them here in case someone
         wanted to use Difficulty in Course and Step regions. ]]
-        Difficulty_Beginner = color("#A165CE"),     -- purple
-        Difficulty_Easy     = color("#50DA1A"),     -- green
-        Difficulty_Medium   = color("#FFE53E"),     -- yellow
-        Difficulty_Hard     = color("#FE4F49"),     -- orange
-        Difficulty_Challenge    = color("#2DDBFF"), -- light blue
+        Difficulty_Beginner = color("#1AE0E4"),     -- Mint
+        Difficulty_Easy     = color("#2FA74D"),     -- Green
+        Difficulty_Medium   = color("#CFC42A"),     -- Yellow
+        Difficulty_Hard     = color("#CF502A"),     -- Orange
+        Difficulty_Challenge    = color("#981F41"), -- Plum
         Difficulty_Edit     = color("0.8,0.8,0.8,1"),       -- gray
         Difficulty_Couple   = color("#ed0972"),             -- hot pink
         Difficulty_Routine  = color("#ff9a00")              -- orange
