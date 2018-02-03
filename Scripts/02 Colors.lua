@@ -40,11 +40,11 @@ ScreenColors = {
 }
 
 ModeIconColors = {
-    Normal      = color("#339FF2"),
-    Rave        = color("#6BFF90"), 
-    Nonstop     = color("#FF66AB"),
-    Oni         = color("#FF714D"),
-    Endless     = color("#6A62CA"),
+    Normal      = color("#1AE0E4"),
+    Rave        = color("#3ACF2A"), 
+    Nonstop     = color("#CFC42A"),
+    Oni         = color("#CF502A"),
+    Endless     = color("#981F41"),
 }
 
 GameColor = {
@@ -54,8 +54,8 @@ GameColor = {
 		both = color("#FFFFFF"),
     },
     PlayerDarkColors = {
-        PLAYER_1 = color("#1538E9"),
-        PLAYER_2 = color("#2356A8"),
+        PLAYER_1 = color("#16386E"),
+        PLAYER_2 = color("#65110F"),
 		both = color("#F5E1E1"),
     },
     Difficulty = {
