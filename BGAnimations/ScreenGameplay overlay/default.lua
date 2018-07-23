@@ -59,7 +59,7 @@ t.InitCommand=cmd(SetUpdateFunction,UpdateTime);
 				local second_tween = string.find(pn, "P1") and 1 or -1
 				t[#t+1] = Def.ActorFrame {
 					InitCommand=cmd(x,life_x_position;y,SCREEN_CENTER_Y;rotationz,-90;);
-					OnCommand=cmd(addx,100*life_tween;sleep,1;decelerate,0.9;addx,100*second_tween);
+					OnCommand=cmd(addx,100*life_tween;sleep,0.25;decelerate,0.9;addx,100*second_tween);
 					OffCommand=cmd(sleep,1;decelerate,0.9;addx,100*life_tween;);
 					LoadActor(THEME:GetPathG("LifeMeter", "bar frame")) .. {
 					};
@@ -199,7 +199,7 @@ t.InitCommand=cmd(SetUpdateFunction,UpdateTime);
 	t[#t+1] = StandardDecorationFromFileOptional("StageDisplay","StageDisplay");
 	t[#t+1] = Def.ActorFrame {
 		InitCommand=cmd(x,SCREEN_CENTER_X+103;y,SCREEN_BOTTOM-25;);
-		OnCommand=cmd(draworder,DrawOrder.Screen;addy,100;sleep,0.5;decelerate,0.7;addy,-100;);
+		OnCommand=cmd(draworder,DrawOrder.Screen;addy,100;sleep,0.25;decelerate,0.7;addy,-100;);
 		OffCommand=cmd(sleep,1;decelerate,0.9;addy,100;);
 		Def.Quad {
 			InitCommand=cmd(zoomto,264,12);
