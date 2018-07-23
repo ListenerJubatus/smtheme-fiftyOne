@@ -199,7 +199,7 @@ t.InitCommand=cmd(SetUpdateFunction,UpdateTime);
 	t[#t+1] = StandardDecorationFromFileOptional("StageDisplay","StageDisplay");
 	t[#t+1] = Def.ActorFrame {
 		InitCommand=cmd(x,SCREEN_CENTER_X+103;y,SCREEN_BOTTOM-25;);
-		OnCommand=cmd(draworder,DrawOrder.Screen;addy,100;sleep,0.25;decelerate,0.7;addy,-100;);
+		OnCommand=cmd(draworder,DrawOrder.Screen;addy,100;sleep,0.5;decelerate,0.7;addy,-100;);
 		OffCommand=cmd(sleep,1;decelerate,0.9;addy,100;);
 		Def.Quad {
 			InitCommand=cmd(zoomto,264,12);
