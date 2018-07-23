@@ -3,7 +3,7 @@ if not GAMESTATE:IsCourseMode() then
 	t[#t+1] = Def.ActorFrame {
 		LoadActor(THEME:GetPathG("ScreenEvaluation", "StageDisplay")) .. {
 			InitCommand=cmd(x,SCREEN_RIGHT-290;y,SCREEN_TOP+49;);
-			OffCommand=cmd(linear,0.3;diffusealpha,0;);
+			OffCommand=cmd(sleep,0.175;decelerate,0.4;addy,-105),
 		}
 	}
 else
