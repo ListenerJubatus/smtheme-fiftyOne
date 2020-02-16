@@ -4,7 +4,7 @@ Lambda (formerly FiftyOne) is a modern, high-definition theme for StepMania 5.x.
 
 Progress
 -----------
-As of August 8, 2017, Lambda has been declared feature complete, and has been added to the StepMania source tree in its 5_1-new branch. Our priority right now is finding any possible bugs, performing final fit and finish tweaks, and possibly adding new sounds and music. This repository will continue to be updated with changes made to the "official" version in the StepMania source tree, and vice versa, so feel free to contribute on either repository.
+This requires 5.3
 
 
 Source code
@@ -17,9 +17,3 @@ The main fonts are the current version of Roboto and Noto Sans <https://www.goog
 License
 -----------
 As it incorporates existing code from StepMania, and is intended to possibly be part of the main distribution, Lambda is licensed under the terms of the MIT License. 
-
-Notice about branches
------------
-The master branch, as of April 10, 2017, is now the 5.0 branch that was created by Riakodoadm, and the previous version has been moved to a new "5.2" branch. This mirrors the similar rollback that StepMania itself performed.
-
-Since the new 5.1 is meant to be more compatible with 5.0.x, you no longer need a nightly build to run this theme.
