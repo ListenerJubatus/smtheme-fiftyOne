@@ -4,8 +4,8 @@ local curStageIndex = GAMESTATE:GetCurrentStageIndex();
 local t = Def.ActorFrame {};
 
 t[#t+1] = Def.ActorFrame {
-	LoadFont("Common Italic Condensed") .. {
-		InitCommand=cmd(y,-1;zoom,1.2;maxwidth,130);
+	LoadFont("_open sans condensed 24px") .. {
+		InitCommand=function(self) self:y(-1):zoom(1.2):maxwidth(130):skewx(-0.1) end;
 		BeginCommand=function(self)
 			local top = SCREENMAN:GetTopScreen()
 			if top then
@@ -30,7 +30,7 @@ t[#t+1] = Def.ActorFrame {
 				end;
 			end;
 			-- StepMania is being stupid so we have to do this here;
-			self:diffuse(StageToColor(curStage)):diffusetopedge(ColorLightTone(StageToColor(curStage)));
+			self:diffuse(color("#FFFFFF")):diffusetopedge(ColorLightTone(StageToColor(curStage)));
 			self:diffusealpha(0):smooth(0.3):diffusealpha(1);
 		end;
 	};

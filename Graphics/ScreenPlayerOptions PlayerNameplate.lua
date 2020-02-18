@@ -1,7 +1,7 @@
 local PlayerNumber = ...
 assert( PlayerNumber )
 
-local bpm_text_zoom = 0.6
+local bpm_text_zoom = 1
 
 local song_bpms= {}
 local bpm_text= "??? - ???"
@@ -21,28 +21,28 @@ if GAMESTATE:GetCurrentSong() then
 	end
 end
 
-local t = Def.ActorFrame {
+return Def.ActorFrame {
 	LoadActor(THEME:GetPathB("_frame","3x1"),"rounded light", 250-16) .. {
-		OnCommand=cmd(diffuse,ColorLightTone(PlayerColor(PlayerNumber));diffusealpha,0.8);
+		OnCommand=function(self) self:diffuse(PlayerColor(PlayerNumber)):diffusealpha(1) end;
 	};
-	LoadFont("Common Condensed") .. {
+	LoadFont("_open sans condensed 24px") .. {
 		Text=ToEnumShortString(PlayerNumber);
 		Name="PlayerShortName",
-		InitCommand=cmd(x,-127;maxwidth,32;zoom,0.75),
-		OnCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PlayerNumber)))
+		InitCommand=function(self) self:x(-127):maxwidth(32):zoom(0.75) end;
+		OnCommand=function(self) self:diffuse(ColorDarkTone(PlayerColor(PlayerNumber))) end;
 	},
-	LoadFont("_overpass 36px") .. {
+	LoadFont("_open sans condensed 24px") .. {
 		Text=bpm_text;
 		Name="BPMRangeOld",
-		InitCommand=cmd(x,-60;maxwidth,88/bpm_text_zoom),
-		OnCommand=cmd(zoom,bpm_text_zoom;diffuse,ColorDarkTone(PlayerColor(PlayerNumber)))
+		InitCommand=function(self) self:x(-60):maxwidth(88/bpm_text_zoom) end;
+		OnCommand=function(self) self:zoom(bpm_text_zoom):diffuse(ColorDarkTone(PlayerColor(PlayerNumber))) end;
 	},
 	LoadActor(THEME:GetPathG("_StepsDisplayListRow","arrow")) .. {
 		Name="Seperator",
-		InitCommand=cmd(x,4);
-		OnCommand=cmd(diffuse,ColorDarkTone(PlayerColor(PlayerNumber)))
+		InitCommand=function(self) self:x(4) end;
+		OnCommand=function(self) self:diffuse(ColorDarkTone(PlayerColor(PlayerNumber))) end;
 	},
-	LoadFont("_overpass 36px") .. {
+	LoadFont("_open sans condensed 24px") .. {
 		Text="100 - 200000";
 		Text="100 - 200000";
 		Name="BPMRangeNew",
@@ -51,8 +51,8 @@ local t = Def.ActorFrame {
 			local speed, mode= GetSpeedModeAndValueFromPoptions(PlayerNumber)
 			self:playcommand("SpeedChoiceChanged", {pn= PlayerNumber, mode= mode, speed= speed})
 		end,
-		BPMWillNotChangeCommand=cmd(stopeffect;diffuse,ColorDarkTone(PlayerColor(PlayerNumber))),
-		BPMWillChangeCommand=cmd(diffuseshift;effectcolor1,Color.Black;effectcolor2,ColorMidTone(PlayerColor(PlayerNumber))),
+		BPMWillNotChangeCommand=function(self) self:stopeffect():diffuse(ColorDarkTone(PlayerColor(PlayerNumber))) end;
+		BPMWillChangeCommand=function(self) self:diffuseshift():effectcolor1(Color.White):effectcolor2(ColorDarkTone(PlayerColor(PlayerNumber))) end;
 		SpeedChoiceChangedMessageCommand= function(self, param)
 			if param.pn ~= PlayerNumber then return end
 			local text= ""
@@ -67,7 +67,7 @@ local t = Def.ActorFrame {
 						format_bpm(song_bpms[2] * param.speed*.01)
 				end
 				no_change= param.speed == 100
-			elseif param.mode == "C" then
+			elseif param.mode == "C" or param.mode == "m" or param.mode == "a" then
 				text= param.mode .. param.speed
 				no_change= param.speed == song_bpms[2] and song_bpms[1] == song_bpms[2]
 			else
@@ -89,5 +89,3 @@ local t = Def.ActorFrame {
 		end
 	}
 }
-
-return t

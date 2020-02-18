@@ -1,15 +1,14 @@
 local t = Def.ActorFrame {
 	FOV=90;
-	InitCommand=cmd(runcommandsonleaves,cmd(ztest,true));
 };
 
 t[#t+1] = LoadActor("frame") .. {
-	InitCommand=cmd(diffusealpha,0.8);
+	InitCommand=function(self) self:diffusealpha(0.8) end;
 };
 
 
 t[#t+1] = Def.TextBanner {
-	InitCommand=cmd(x,-230;Load,"TextBannerHighScores");
+	InitCommand=function(self) self:x(-230):Load("TextBannerHighScores") end;
 	SetCommand=function(self, params)
 		if params.Song then
 			self:SetFromSong( params.Song );
@@ -35,18 +34,18 @@ for idx=1,NumColumns do
 	local x_pos = 35 + 83 * (idx-1);
 	Scores[#Scores+1] = LoadFont(Var "LoadingScreen","Name") .. {
 		Name = idx .. "Name";
-		InitCommand=cmd(x,x_pos;y,8;shadowlength,1;maxwidth,68);
-		OnCommand=cmd(zoom,0.75);
+		InitCommand=function(self) self:x(x_pos):y(8):shadowlength(1):maxwidth(68) end;
+		OnCommand=function(self) self:zoom(0.75) end;
 	};
 	Scores[#Scores+1] = LoadFont(Var "LoadingScreen","Score") .. {
 		Name = idx .. "Score";
-		InitCommand=cmd(x,x_pos;y,-9;shadowlength,1;maxwidth,68);
-		OnCommand=cmd(zoom,0.75);
+		InitCommand=function(self) self:x(x_pos):y(-9):shadowlength(1):maxwidth(68) end;
+		OnCommand=function(self) self:zoom(0.75) end;
 	};
 	Scores[#Scores+1] = LoadActor("empty") .. {
 		Name = idx .. "Empty";
-		InitCommand=cmd(x,x_pos);
-		OnCommand=cmd(zoom,0.75);
+		InitCommand=function(self) self:x(x_pos) end;
+		OnCommand=function(self) self:zoom(0.75) end;
 	};
 	
 end

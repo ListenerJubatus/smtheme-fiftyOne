@@ -17,8 +17,8 @@ end
 return Def.CourseContentsList {
 	MaxSongs = 999,
     NumItemsToDraw = 12,
-	ShowCommand=cmd(bouncebegin,0.3;zoomy,1),
-	HideCommand=cmd(linear,0.3;zoomy,0),
+	ShowCommand=function(self) self:bouncebegin(0.3):zoomy(1) end;
+	HideCommand=function(self) self:bounceend(0.3):zoomy(0) end;
 	SetCommand=function(self)
 		self:SetFromGameState()
 		self:SetCurrentAndDestinationItem(0)
@@ -30,11 +30,11 @@ return Def.CourseContentsList {
 		self:SetLoop(false)
 		self:SetMask(0,0)
 	end,
-	CurrentTrailP1ChangedMessageCommand=cmd(playcommand,"Set"),
-	CurrentTrailP2ChangedMessageCommand=cmd(playcommand,"Set"),
+	CurrentTrailP1ChangedMessageCommand=function(self) self:playcommand("Set") end;
+	CurrentTrailP2ChangedMessageCommand=function(self) self:playcommand("Set") end;
 
 	Display = Def.ActorFrame { 
-		InitCommand=cmd(setsize,290,64),
+		InitCommand=function(self) self:setsize(290,64) end;
 
 		LoadActor(THEME:GetPathG("CourseEntryDisplay","bar")) .. {
 			SetSongCommand=function(self, params)
@@ -43,13 +43,11 @@ return Def.CourseContentsList {
 				else
 					self:diffuse( color("#FFFFFF") );
 				end
-				-- These tweens were actually messing up the visibility of the scroller objects, so...
-				--(cmd(finishtweening;diffusealpha,0;sleep,0.125*params.Number;smooth,0.2;diffusealpha,1))(self);
 			end
 		},
 
 		Def.TextBanner {
-			InitCommand=cmd(x,-10;y,-1;Load,"TextBannerCourse";SetFromString,"", "", "", "", "", ""),
+			InitCommand=function(self) self:xy(-10,-1):Load("TextBannerCourse"):SetFromString("", "", "", "", "", "") end;
 			SetSongCommand=function(self, params)
 				if params.Song then
 					if GAMESTATE:GetCurrentCourse():GetDisplayFullTitle() == "Abomination" then
@@ -76,19 +74,16 @@ return Def.CourseContentsList {
 					self:diffuse( color("#FFFFFF") );
 -- 					self:glow("1,1,1,0");
 				end
-				
-				--(cmd(finishtweening;diffusealpha,0;sleep,0.125*params.Number;smooth,0.2;diffusealpha,1))(self);
 			end
 		},
 
  		LoadFont("CourseEntryDisplay","difficulty") .. {
 			Text="0",
-			InitCommand=cmd(x,210;y,0;zoom,0.75),
+			InitCommand=function(self) self:xy(210,0):zoom(0.75) end;
 			SetSongCommand=function(self, params)
 				if params.PlayerNumber ~= GAMESTATE:GetMasterPlayerNumber() then return end
 				self:settext( params.Meter );
 				self:diffuse(ColorDarkTone(CustomDifficultyToColor(params.Difficulty) ));
-				--(cmd(finishtweening;zoomy,0;sleep,0.125*params.Number;linear,0.125;zoom,1.1;linear,0.05;zoom,1))(self);
 			end
 		},
 	}

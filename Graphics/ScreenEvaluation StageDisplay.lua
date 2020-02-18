@@ -4,7 +4,7 @@ local t = Def.ActorFrame {};
 
 t[#t+1] = Def.ActorFrame {
 	LoadActor(THEME:GetPathG("", "_sortFrame"))  .. {
-	    InitCommand=cmd(diffusealpha,0.9;zoom,1.5);
+	    InitCommand=function(self) self:diffusealpha(0.9):zoom(1.5) end;
 		BeginCommand=function(self)
 			local top = SCREENMAN:GetTopScreen()
 			if top then
@@ -19,8 +19,8 @@ t[#t+1] = Def.ActorFrame {
 			self:diffuse(StageToColor(curStage));
 		end
 	};
-	LoadFont("Common Italic Condensed") .. {
-		InitCommand=cmd(y,-1;zoom,1;shadowlength,1;uppercase,true);
+	LoadFont("_open sans condensed 24px") .. {
+		InitCommand=function(self) self:y(-1):zoom(1):shadowlength(1):skewx(-0.1):uppercase(true) end;
 		BeginCommand=function(self)
 			local top = SCREENMAN:GetTopScreen()
 			if top then
@@ -30,7 +30,7 @@ t[#t+1] = Def.ActorFrame {
 			end
 			self:playcommand("Set")
 		end;
-		CurrentSongChangedMessageCommand= cmd(playcommand,"Set"),
+		CurrentSongChangedMessageCommand=function(self) self:playcommand("Set") end;
 		SetCommand=function(self)
 			local curStage = GAMESTATE:GetCurrentStage();
 			if GAMESTATE:GetCurrentCourse() then
@@ -48,7 +48,7 @@ t[#t+1] = Def.ActorFrame {
 				end;
 			end;
 			-- StepMania is being stupid so we have to do this here;
-			self:diffuse(StageToColor(curStage)):diffusetopedge(ColorLightTone(StageToColor(curStage)));
+			self:diffuse(color("#FFFFFF")):diffusetopedge(ColorLightTone(StageToColor(curStage)));
 			self:diffusealpha(0):smooth(0.3):diffusealpha(1);
 		end;
 	};

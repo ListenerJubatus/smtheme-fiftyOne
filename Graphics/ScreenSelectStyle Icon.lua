@@ -2,8 +2,9 @@ local gc = Var("GameCommand");
 
 local string_name = gc:GetText();
 local string_expl = THEME:GetString("StyleType", gc:GetStyle():GetStyleType());
-local icon_color = color("#FFCB05");
-local icon_color2 = color("#F0BA00");
+local text_color = color("#FFCB05");
+local unfocus_color = color("#172777");
+local focus_color = color("#112aaa");
 
 local t = Def.ActorFrame {};
 t[#t+1] = Def.ActorFrame { 
@@ -11,22 +12,22 @@ t[#t+1] = Def.ActorFrame {
 	LoseFocusCommand=THEME:GetMetric(Var "LoadingScreen","IconLoseFocusCommand");
 
 	LoadActor(THEME:GetPathG("ScreenSelectPlayMode", "icon/_background base"))..{
-		GainFocusCommand=cmd(diffuse,color("#981F41"));
-		LoseFocusCommand=cmd(diffuse,color("#740A27"));
+		GainFocusCommand=function(self) self:diffuse(focus_color) end;
+		LoseFocusCommand=function(self) self:diffuse(unfocus_color) end;
 	};
-	LoadFont("_overpass 36px")..{
+	LoadFont("_noto sans 36px")..{
 		Text=string.upper(string_name);
-		InitCommand=cmd(y,-12;maxwidth,232);
-		OnCommand=cmd(diffuse,icon_color);
+		InitCommand=function(self) self:y(-12):maxwidth(232) end;
+		OnCommand=function(self) self:diffuse(text_color) end;
 	};
-	LoadFont("Common Italic Condensed")..{
+	LoadFont("_open sans condensed 24px")..{
 		Text=string.upper(string_expl);
-		InitCommand=cmd(y,29.5;maxwidth,128);
+		InitCommand=function(self) self:y(29.5):maxwidth(128):skewx(-0.1) end;
 	};
 
 	LoadActor(THEME:GetPathG("ScreenSelectPlayMode", "icon/_background base"))..{
-		DisabledCommand=cmd(diffuse,color("0,0,0,0.5"));
-		EnabledCommand=cmd(diffuse,color("1,1,1,0"));
+		DisabledCommand=function(self) self:diffuse(color("0,0,0,0.5")) end;
+		EnabledCommand=function(self) self:diffuse(color("1,1,1,0")) end;
 	};
 };
 return t

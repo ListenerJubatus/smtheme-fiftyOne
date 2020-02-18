@@ -23,7 +23,7 @@ local filterWidth = (arrowWidth * cols) + padding
 
 -- Ripple 
 t[#t+1] = Def.ActorFrame {
-	InitCommand=cmd(visible,false);
+	InitCommand=function(self) self:visible(false) end;
 	OffCommand=function(self)		
 			if pStats:FullCombo() then
 				self:visible(true);
@@ -49,40 +49,38 @@ t[#t+1] = Def.ActorFrame {
 };
 
 -- Milestone ripple
-t[#t+1] = Def.ActorFrame {
-	InitCommand=cmd(visible,false);
+t[#t+1] = Def.Sprite {
+	Texture="_splash";
+	InitCommand=function(self)
+		self:diffusealpha(0):x( GetPosition(pn) ):y(SCREEN_CENTER_Y):blend('add')
+		:visible(false) 
+	end;
 	OffCommand=function(self)		
-			if pStats:FullCombo() then
-				self:visible(true);
-			end;
-		end;	
-	LoadActor("_splash") .. {
-		InitCommand=function(self)
-			self:diffusealpha(0):x( GetPosition(pn) ):y(SCREEN_CENTER_Y):blend('add');
-		end;	
-		OffCommand=function(self)		
-			if pStats:FullCombo() then
-				if pStats:FullComboOfScore('TapNoteScore_W1') == true then
-						self:diffuse(color("#A0DBF1"))
-					elseif pStats:FullComboOfScore('TapNoteScore_W2') == true then
-						self:diffuse(color("#F1E4A2"))
-					elseif pStats:FullComboOfScore('TapNoteScore_W3') == true then
-						self:diffuse(color("#ABE39B"))
-				end	
-				self:zoom(0.5):diffusealpha(0.5):decelerate(1):zoom(1):diffusealpha(0)
-			end;
-		end;	
-	};
+		if pStats:FullCombo() then
+			if pStats:FullComboOfScore('TapNoteScore_W1') == true then
+					self:diffuse(color("#A0DBF1"))
+				elseif pStats:FullComboOfScore('TapNoteScore_W2') == true then
+					self:diffuse(color("#F1E4A2"))
+				elseif pStats:FullComboOfScore('TapNoteScore_W3') == true then
+					self:diffuse(color("#ABE39B"))
+			end	
+			self:visible(true);
+			self:zoom(0.5):diffusealpha(0.5):decelerate(1):zoom(1):diffusealpha(0)
+		end;
+	end;	
 };
 
+
+
 --W1
-t[#t+1] = LoadActor(THEME:GetPathG("FullCombo", "W1 text")) .. {
-	InitCommand=cmd(diffusealpha,0;x,GetPosition(pn);y,SCREEN_CENTER_Y);	
+t[#t+1] =Def.Sprite {
+	Texture=THEME:GetPathG("FullCombo", "W1 text");
+	InitCommand=function(self) self:diffusealpha(0):xy(GetPosition(pn),SCREEN_CENTER_Y) end;	
 	OffCommand=function(self)
 		local fct = STATSMAN:GetCurStageStats():GetPlayerStageStats(pn);
 		if fct:FullComboOfScore('TapNoteScore_W1') == true then
-				self:glowblink():effectperiod(0.05):effectcolor1(color("1,1,1,0")):effectcolor2(color("1,1,1,0.25"))
-				self:zoomy(0.75):zoomx(1.4):diffusealpha(0):decelerate(0.4):zoomx(0.75):diffusealpha(1):sleep(0.75):decelerate(0.5):zoom(1.1):diffusealpha(0)
+			self:glowblink():effectperiod(0.05):effectcolor1(color("1,1,1,0")):effectcolor2(color("1,1,1,0.25"))
+			self:zoomy(0.75):zoomx(1.4):diffusealpha(0):decelerate(0.4):zoomx(0.75):diffusealpha(1):sleep(0.75):decelerate(0.5):zoom(1.1):diffusealpha(0)
 		elseif fct:FullComboOfScore('TapNoteScore_W2') == true then
 			self:visible(false);
 		elseif fct:FullComboOfScore('TapNoteScore_W3') == true then
@@ -94,14 +92,15 @@ t[#t+1] = LoadActor(THEME:GetPathG("FullCombo", "W1 text")) .. {
 };
 
 --W1
-t[#t+1] = LoadActor(THEME:GetPathG("FullCombo", "W2 text")) .. {
-	InitCommand=cmd(diffusealpha,0;x,GetPosition(pn);y,SCREEN_CENTER_Y);	
+t[#t+1] =Def.Sprite {
+	Texture=THEME:GetPathG("FullCombo", "W2 text");
+	InitCommand=function(self) self:diffusealpha(0):xy(GetPosition(pn),SCREEN_CENTER_Y) end;	
 	OffCommand=function(self)
 		local fct = STATSMAN:GetCurStageStats():GetPlayerStageStats(pn);
 		if fct:FullComboOfScore('TapNoteScore_W1') == true then
 			self:visible(false);
 		elseif fct:FullComboOfScore('TapNoteScore_W2') == true then
-				self:zoomy(0.75):zoomx(1.4):diffusealpha(0):decelerate(0.4):zoomx(0.75):diffusealpha(1):sleep(0.5):decelerate(0.3):zoom(1.1):diffusealpha(0)
+			self:zoomy(0.75):zoomx(1.4):diffusealpha(0):decelerate(0.4):zoomx(0.75):diffusealpha(1):sleep(0.5):decelerate(0.3):zoom(1.1):diffusealpha(0)
 		elseif fct:FullComboOfScore('TapNoteScore_W3') == true then
 			self:visible(false);
 		else
@@ -111,8 +110,9 @@ t[#t+1] = LoadActor(THEME:GetPathG("FullCombo", "W2 text")) .. {
 };
 
 --W3
-t[#t+1] = LoadActor(THEME:GetPathG("FullCombo", "W3 text")) .. {
-	InitCommand=cmd(diffusealpha,0;x,GetPosition(pn);y,SCREEN_CENTER_Y);	
+t[#t+1] = Def.Sprite {
+	Texture=THEME:GetPathG("FullCombo", "W3 text");
+	InitCommand=function(self) self:diffusealpha(0):xy(GetPosition(pn),SCREEN_CENTER_Y) end;	
 	OffCommand=function(self)
 		local fct = STATSMAN:GetCurStageStats():GetPlayerStageStats(pn);
 		if fct:FullComboOfScore('TapNoteScore_W1') == true then

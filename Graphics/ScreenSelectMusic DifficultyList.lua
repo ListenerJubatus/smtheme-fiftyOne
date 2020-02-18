@@ -34,23 +34,20 @@ return Def.ActorFrame {
 			end,
 			PlayerJoinedMessageCommand=function(self, params)
 				if params.Player == PLAYER_1 then
-					self:visible(true);
-					(cmd(zoom,0;bounceend,1;zoom,1))(self);
+					self:visible(true):zoom(0):bounceend(1):zoom(1)
 				end;
 			end;
 			PlayerUnjoinedMessageCommand=function(self, params)
-				if params.Player == PLAYER_1 then
-					self:visible(true);
-					(cmd(bouncebegin,1;zoom,0))(self);
+				if params.Player == PLAYER_1 then					
+					self:visible(true):bouncebegin(1):zoom(0)
 				end;
 			end;
 			LoadActor(THEME:GetPathG("_StepsDisplayListRow","Cursor")) .. {
-				InitCommand=cmd(diffuse,ColorLightTone(PlayerColor(PLAYER_1));x,8;zoom,0.75);
+				InitCommand=function(self) self:diffuse(ColorLightTone(PlayerColor(PLAYER_1))):diffusetopedge(ColorMidTone(PlayerColor(PLAYER_1))):x(8):zoom(0.75) end;
 			};
-			LoadFont("_roboto condensed Bold 48px") .. {
+			LoadFont("_open sans condensed 24px") .. {
 				Text="P1";
-				InitCommand=cmd(horizalign,center;x,8;diffuse,ColorDarkTone(PlayerColor(PLAYER_1)));
-				OnCommand=cmd(zoom,0.5);
+				InitCommand=function(self) self:horizalign(center):x(8):diffuse(ColorDarkTone(PlayerColor(PLAYER_1))):zoom(1) end;
 			};
 		};
 		CursorP2 = Def.ActorFrame {
@@ -61,30 +58,27 @@ return Def.ActorFrame {
 			end,
 			PlayerJoinedMessageCommand=function(self, params)
 				if params.Player == PLAYER_2 then
-					self:visible(true);
-					(cmd(zoom,0;bounceend,1;zoom,1))(self);
+					self:visible(true):zoom(0):bounceend(1):zoom(1)
 				end;
 			end;
 			PlayerUnjoinedMessageCommand=function(self, params)
 				if params.Player == PLAYER_2 then
-					self:visible(true);
-					(cmd(bouncebegin,1;zoom,0))(self);
+					self:visible(true):bouncebegin(1):zoom(0)
 				end;
 			end;
 			LoadActor(THEME:GetPathG("_StepsDisplayListRow","Cursor")) .. {
-				InitCommand=cmd(diffuse,ColorLightTone(PlayerColor(PLAYER_2));x,-8;zoom,0.75;zoomx,-0.75);
+				InitCommand=function(self) self:diffuse(ColorLightTone(PlayerColor(PLAYER_2))):diffusetopedge(ColorMidTone(PlayerColor(PLAYER_2))):x(-8):zoom(0.75):zoomx(-0.75) end;
 			};
-			LoadFont("_roboto condensed Bold 48px") .. {
+			LoadFont("_open sans condensed 24px") .. {
 				Text="P2";
-				InitCommand=cmd(horizalign,center;x,-8;diffuse,ColorDarkTone(PlayerColor(PLAYER_2)));
-				OnCommand=cmd(zoom,0.5);
+				InitCommand=function(self) self:horizalign(center):x(-8):diffuse(ColorDarkTone(PlayerColor(PLAYER_2))):zoom(1) end;
 			};
 		};
 		CursorP1Frame = Def.Actor{
-			ChangeCommand=cmd(stoptweening;decelerate,0.05);
+			ChangeCommand=function(self) self:stoptweening():decelerate(0.05) end;
 		};
 		CursorP2Frame = Def.Actor{
-			ChangeCommand=cmd(stoptweening;decelerate,0.05);
+			ChangeCommand=function(self) self:stoptweening():decelerate(0.05) end;
 		};
 	};
 };

@@ -22,7 +22,7 @@ local grades = {
 };
 
 return LoadActor("grades")..{
-	InitCommand=cmd(pause);
+	InitCommand=function(self) self:pause() end;
 	SetGradeCommand=function(self, params)
 		if GAMESTATE:IsCourseMode() then
 			self:visible(false);

@@ -1,7 +1,7 @@
 return Def.ActorFrame {
-	StartTransitioningCommand=cmd(sleep,0.15);
+	StartTransitioningCommand=function(self) self:sleep(0.15) end;
 	Def.Quad {
-		InitCommand=cmd(Center;zoomto,SCREEN_WIDTH+1,SCREEN_HEIGHT;draworder,10000);
-		StartTransitioningCommand=cmd(diffusealpha,0;diffuse,color("0,0,0,0");linear,0.3;diffusealpha,1);
+		InitCommand=function(self) self:Center():zoomto(SCREEN_WIDTH+1,SCREEN_HEIGHT):draworder(10000) end;
+		StartTransitioningCommand=function(self) self:diffuse(color("0,0,0,0")):diffusealpha(0):linear(0.3):diffusealpha(1) end;
 	};
 };

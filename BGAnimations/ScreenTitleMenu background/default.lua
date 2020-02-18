@@ -1,40 +1,28 @@
--- You know what, I guess the "fancy UI background" theme option can be put to use.
-if ThemePrefs.Get("FancyUIBG") then
-	return Def.ActorFrame {
-	LoadActor(THEME:GetPathG("common bg", "base")) .. {
-		InitCommand=cmd(Center;zoomto,SCREEN_WIDTH,SCREEN_HEIGHT)
+return Def.ActorFrame {
+	Def.Quad {
+		InitCommand=function(self)
+			self:zoomto(SCREEN_WIDTH,SCREEN_HEIGHT):Center():diffuse(color("#DF9515")):diffusetopedge(color("#B55316"))
+		end;	
 	};
 	
-	LoadActor("_particleLoader") .. {
-	};
-	
-	LoadActor("_maze") .. {
-		OnCommand=cmd(Center;diffuse,color("#f6784922");effectperiod,10;spin;effectmagnitude,0,0,2.2)
+	Def.Sprite {
+		Condition = LoadModule("Config.Load.lua")("FancyUIBG","Save/OutFoxPrefs.ini");
+		Texture = THEME:GetPathG("_bg", "hex2 grid");
+		InitCommand=function(self)
+			self:diffusealpha(0.04):blend('add'):zoomto(SCREEN_WIDTH+100,SCREEN_HEIGHT+190):customtexturerect(0,0,SCREEN_WIDTH*4/512,SCREEN_HEIGHT*4/512):xy(SCREEN_CENTER_X,SCREEN_CENTER_Y)
+		end;
+		OnCommand=function(self)
+			self:texcoordvelocity(0,0.16)
+		end;
 	};
 	
 	Def.ActorFrame {
-		OnCommand=cmd(diffusealpha,0;decelerate,1.8;diffusealpha,1);
-			LoadActor("_tunnel1") .. {
-				InitCommand=cmd(Center;blend,'BlendMode_Add';rotationz,-20),
-				OnCommand=cmd(zoom,1.75;diffusealpha,0.12;spin;effectmagnitude,0,0,16.5)
-			};	
-			LoadActor("_tunnel1") .. {
-				InitCommand=cmd(Center;blend,'BlendMode_Add';rotationz,-10),
-				OnCommand=cmd(zoom,1.0;diffusealpha,0.09;spin;effectmagnitude,0,0,-11)
-			};
-			LoadActor("_tunnel1") .. {
-				InitCommand=cmd(Center;blend,'BlendMode_Add';rotationz,0),
-				OnCommand=cmd(zoom,0.5;diffusealpha,0.06;spin;effectmagnitude,0,0,5.5)
-			};		
-			LoadActor("_tunnel1") .. {
-				InitCommand=cmd(Center;blend,'BlendMode_Add';rotationz,-10),
-				OnCommand=cmd(zoom,0.2;diffusealpha,0.03;spin;effectmagnitude,0,0,-2.2)
-			};
+		InitCommand=function(self) self:diffusealpha(0.1) end;
+		Def.Sprite {
+			Texture="_tunnel1";
+			Condition=LoadModule("Config.Load.lua")("FancyUIBG","Save/OutFoxPrefs.ini");		
+			InitCommand=function(self) self:xy(SCREEN_CENTER_X,SCREEN_CENTER_Y):rotationz(-10):blend("Add") end;
+			OnCommand=function(self) self:zoom(1):spin():effectmagnitude(0,0,-11) end;
+		};
 	};
-	
-	}
-else
-	return LoadActor(THEME:GetPathG("common bg", "base")) .. {
-		InitCommand=cmd(Center;zoomto,SCREEN_WIDTH,SCREEN_HEIGHT)
-	}
-end
+};

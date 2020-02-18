@@ -4,8 +4,8 @@ local t = LoadFallbackB();
 
 local function PercentScore(pn)
 	local t = LoadFont("_overpass Score")..{
-		InitCommand=cmd(zoom,1;diffuse,Color("Black");diffusealpha,0.75);
-		BeginCommand=cmd(playcommand,"Set");
+		InitCommand=function(self) self:zoom(1):diffuse(Color("Black")):diffusealpha(0.75) end;
+		BeginCommand=function(self) self:playcommand("Set") end;
 		SetCommand=function(self)
 			local SongOrCourse, StepsOrTrail;
 			if GAMESTATE:IsCourseMode() then
@@ -50,16 +50,16 @@ local function PercentScore(pn)
 			end;
 			self:settext(text);
 		end;
-		CurrentSongChangedMessageCommand=cmd(playcommand,"Set");
-		CurrentCourseChangedMessageCommand=cmd(playcommand,"Set");
+		CurrentSongChangedMessageCommand=function(self) self:playcommand("Set") end;
+		CurrentCourseChangedMessageCommand=function(self) self:playcommand("Set") end;
 	};
 
 	if pn == PLAYER_1 then
-		t.CurrentStepsP1ChangedMessageCommand=cmd(playcommand,"Set");
-		t.CurrentTrailP1ChangedMessageCommand=cmd(playcommand,"Set");
+		t.CurrentStepsP1ChangedMessageCommand=function(self) self:playcommand("Set") end;
+		t.CurrentTrailP1ChangedMessageCommand=function(self) self:playcommand("Set") end;
 	else
-		t.CurrentStepsP2ChangedMessageCommand=cmd(playcommand,"Set");
-		t.CurrentTrailP2ChangedMessageCommand=cmd(playcommand,"Set");
+		t.CurrentStepsP2ChangedMessageCommand=function(self) self:playcommand("Set") end;
+		t.CurrentTrailP2ChangedMessageCommand=function(self) self:playcommand("Set") end;
 	end
 
 	return t;
@@ -67,7 +67,7 @@ end
 
 -- Genre/Artist data
 t[#t+1] = LoadActor(THEME:GetPathG("ScreenSelectMusic", "info pane")) .. {
-		InitCommand=cmd(horizalign,center;x,SCREEN_CENTER_X-228;y,SCREEN_CENTER_Y-75;zoom,1);
+		InitCommand=function(self) self:horizalign(center):xy(SCREEN_CENTER_X-228,SCREEN_CENTER_Y-75-6):zoom(1) end;
 		OnCommand=function(self)
 			self:diffuse(ColorMidTone(StageToColor(curStage)));
 			self:zoomx(0):diffusealpha(0):decelerate(0.3):zoomx(1):diffusealpha(1);
@@ -78,9 +78,9 @@ t[#t+1] = LoadActor(THEME:GetPathG("ScreenSelectMusic", "info pane")) .. {
 		};
 
 t[#t+1] = Def.ActorFrame {
-    InitCommand=cmd(x,SCREEN_CENTER_X-330+6-138;draworder,126);
-    OnCommand=cmd(diffusealpha,0;smooth,0.3;diffusealpha,1);
-    OffCommand=cmd(smooth,0.3;diffusealpha,0);
+	InitCommand=function(self) self:x(SCREEN_CENTER_X-330+6-138):draworder(126) end;
+	OnCommand=function(self) self:diffusealpha(0):smooth(0.3):diffusealpha(1) end;
+	OffCommand=function(self) self:smooth(0.3):diffusealpha(0) end;
     -- Length
 	StandardDecorationFromFileOptional("SongTime","SongTime") .. {
 	SetCommand=function(self)
@@ -118,22 +118,22 @@ t[#t+1] = Def.ActorFrame {
 		end;
 		self:settext( SecondsToMSS(length) );
 	end;
-    	CurrentSongChangedMessageCommand=cmd(queuecommand,"Set");
-    	CurrentCourseChangedMessageCommand=cmd(queuecommand,"Set");
-    	CurrentTrailP1ChangedMessageCommand=cmd(queuecommand,"Set");
-    	CurrentTrailP2ChangedMessageCommand=cmd(queuecommand,"Set");
+    	CurrentSongChangedMessageCommand=function(self) self:queuecommand("Set") end;
+    	CurrentCourseChangedMessageCommand=function(self) self:queuecommand("Set") end;
+    	CurrentTrailP1ChangedMessageCommand=function(self) self:queuecommand("Set") end;
+    	CurrentTrailP2ChangedMessageCommand=function(self) self:queuecommand("Set") end;
     };
 };
 
 -- Course count and type
 t[#t+1] = Def.ActorFrame {
-    InitCommand=cmd(x,SCREEN_CENTER_X-200;draworder,126);
-    OnCommand=cmd(diffusealpha,0;smooth,0.3;diffusealpha,1);
-    OffCommand=cmd(smooth,0.2;diffusealpha,0);
+	InitCommand=function(self) self:x(SCREEN_CENTER_X-200):draworder(126) end;
+	OnCommand=function(self) self:diffusealpha(0):smooth(0.3):diffusealpha(1) end;
+	OffCommand=function(self) self:smooth(0.3):diffusealpha(0) end;
 	LoadFont("Common Condensed") .. { 
-          InitCommand=cmd(horizalign,right;zoom,1.0;y,SCREEN_CENTER_Y-78+2;maxwidth,180;diffuse,color("#DFE2E9");visible,GAMESTATE:IsCourseMode());
-          CurrentCourseChangedMessageCommand=cmd(queuecommand,"Set"); 
-          ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set"); 
+          InitCommand=function(self) self:horizalign(right):zoom(1):y(SCREEN_CENTER_Y-78+2-6):maxwidth(180):diffuse(color("#DFE2E9")):visible(GAMESTATE:IsCourseMode()) end;
+          CurrentCourseChangedMessageCommand=function(self) self:queuecommand("Set") end; 
+          ChangedLanguageDisplayMessageCommand=function(self) self:queuecommand("Set") end; 
           SetCommand=function(self) 
                local course = GAMESTATE:GetCurrentCourse(); 
                if course then
@@ -147,45 +147,45 @@ t[#t+1] = Def.ActorFrame {
 		};
 };
 t[#t+1] = Def.ActorFrame {
-    InitCommand=cmd(x,SCREEN_CENTER_X+5;draworder,126);
-    OnCommand=cmd(diffusealpha,0;smooth,0.3;diffusealpha,1);
-    OffCommand=cmd(smooth,0.2;diffusealpha,0);
+	InitCommand=function(self) self:x(SCREEN_CENTER_X+5):draworder(126) end;
+	OnCommand=function(self) self:diffusealpha(0):smooth(0.3):diffusealpha(1) end;
+	OffCommand=function(self) self:smooth(0.3):diffusealpha(0) end;
 	LoadFont("Common Condensed") .. { 
-          InitCommand=cmd(horizalign,right;zoom,1.0;y,SCREEN_CENTER_Y-78+2;maxwidth,180;diffuse,color("#DFE2E9");visible,GAMESTATE:IsCourseMode());
-          CurrentCourseChangedMessageCommand=cmd(queuecommand,"Set"); 
-          ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set"); 
-          SetCommand=function(self) 
-               local course = GAMESTATE:GetCurrentCourse(); 
-               if course then
-                    self:settext(CourseTypeToLocalizedString(course:GetCourseType())); 
-                    self:queuecommand("Refresh");
-				else
-					self:settext("");
-					self:queuecommand("Refresh"); 	
-               end 
-          end; 
-		};
+	  InitCommand=function(self) self:horizalign(right):zoom(1):y(SCREEN_CENTER_Y-76-6):maxwidth(180):diffuse(color("#DFE2E9")):visible(GAMESTATE:IsCourseMode()) end;
+	  CurrentCourseChangedMessageCommand=function(self) self:queuecommand("Set") end; 
+	  ChangedLanguageDisplayMessageCommand=function(self) self:queuecommand("Set") end; 
+	  SetCommand=function(self) 
+		   local course = GAMESTATE:GetCurrentCourse(); 
+		   if course then
+				self:settext(CourseTypeToLocalizedString(course:GetCourseType())); 
+				self:queuecommand("Refresh");
+			else
+				self:settext("");
+				self:queuecommand("Refresh"); 	
+		   end 
+	  end; 
+	};
 };
-
 
 if not GAMESTATE:IsCourseMode() then
 
 -- P1 Difficulty Pane
 t[#t+1] = Def.ActorFrame {
-		InitCommand=cmd(visible,GAMESTATE:IsHumanPlayer(PLAYER_1);horizalign,center;x,SCREEN_CENTER_X-210-32;y,SCREEN_CENTER_Y+230+8);
-		OnCommand=cmd(zoomy,0.8;diffusealpha,0;smooth,0.4;diffusealpha,1;zoomy,1);
+		InitCommand=function(self) self:visible(GAMESTATE:IsHumanPlayer(PLAYER_1)):horizalign(center):xy(SCREEN_CENTER_X-210-32,SCREEN_CENTER_Y+230+10) end;
+		OnCommand=function(self) self:zoomy(0.8):diffusealpha(0):smooth(0.4):diffusealpha(1):zoomy(1) end;
+
 		PlayerJoinedMessageCommand=function(self,param)
 			if param.Player == PLAYER_1 then
-				(cmd(visible,true;diffusealpha,0;linear,0.3;diffusealpha,1))(self);
+				self:visible(true):diffusealpha(0):linear(0.3):diffusealpha(1)
 			end;
 		end;
-		OffCommand=cmd(decelerate,0.3;zoomy,0.8;diffusealpha,0);
+		OffCommand=function(self) self:decelerate(0.3):diffusealpha(0) end;
 		LoadActor(THEME:GetPathG("ScreenSelectMusic", "pane background")) .. {
-			CurrentStepsP1ChangedMessageCommand=cmd(queuecommand,"Set"); 
-			PlayerJoinedMessageCommand=cmd(queuecommand,"Set";diffusealpha,0;decelerate,0.3;diffusealpha,1);
-			ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set");
+			CurrentStepsP1ChangedMessageCommand=function(self) self:queuecommand("Set") end; 
+			PlayerJoinedMessageCommand=function(self) self:queuecommand("Set"):diffusealpha(0):decelerate(0.3):diffusealpha(1) end;
+			ChangedLanguageDisplayMessageCommand=function(self) self:queuecommand("Set") end;
 			SetCommand=function(self)
-					stepsP1 = GAMESTATE:GetCurrentSteps(PLAYER_1)
+					local stepsP1 = GAMESTATE:GetCurrentSteps(PLAYER_1)
 					local song = GAMESTATE:GetCurrentSong();
 					if song then 
 						if stepsP1 ~= nil then
@@ -203,14 +203,14 @@ t[#t+1] = Def.ActorFrame {
 				  end
 		};
 		LoadFont("StepsDisplay meter") .. { 
-			  InitCommand=cmd(zoom,1.25;diffuse,color("#000000");addx,-143;addy,13);
-			  OnCommand=cmd(diffusealpha,0;smooth,0.2;diffusealpha,0.75);
-			  OffCommand=cmd(linear,0.3;diffusealpha,0);
-			  CurrentStepsP1ChangedMessageCommand=cmd(queuecommand,"Set"); 
-			  PlayerJoinedMessageCommand=cmd(queuecommand,"Set";diffusealpha,0;linear,0.3;diffusealpha,0.75);
-			  ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set");
+			  InitCommand=function(self) self:zoom(1.25):diffuse(color("#000000")):addx(-143):addy(13) end;
+			  OnCommand=function(self) self:diffusealpha(0):smooth(0.2):diffusealpha(0.75) end;
+			  OffCommand=function(self) self:linear(0.3):diffusealpha(0) end;
+			  CurrentStepsP1ChangedMessageCommand=function(self) self:queuecommand("Set") end; 
+			  PlayerJoinedMessageCommand=function(self) self:queuecommand("Set"):diffusealpha(0):linear(0.3):diffusealpha(0.75) end;
+			  ChangedLanguageDisplayMessageCommand=function(self) self:queuecommand("Set") end;
 			  SetCommand=function(self)
-				stepsP1 = GAMESTATE:GetCurrentSteps(PLAYER_1)
+				local stepsP1 = GAMESTATE:GetCurrentSteps(PLAYER_1)
 				local song = GAMESTATE:GetCurrentSong();
 				if song then 
 					if stepsP1 ~= nil then
@@ -227,15 +227,15 @@ t[#t+1] = Def.ActorFrame {
 				end
 			  end
 		};
-		LoadFont("Common Italic Condensed") .. { 
-			  InitCommand=cmd(uppercase,true;zoom,1;addy,-40;addx,-143;diffuse,color("#000000");maxwidth,115);
-			  OnCommand=cmd(diffusealpha,0;smooth,0.2;diffusealpha,0.75);
-			  OffCommand=cmd(linear,0.3;diffusealpha,0);
-			  CurrentStepsP1ChangedMessageCommand=cmd(queuecommand,"Set"); 
-			  PlayerJoinedMessageCommand=cmd(queuecommand,"Set";diffusealpha,0;linear,0.3;diffusealpha,0.75);
-			  ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set");
+		LoadFont("_open sans condensed 24px") .. { 
+			  InitCommand=function(self) self:uppercase(true):zoom(1):skewx(-0.1):addy(-40):addx(-143):diffuse(Color.Black):maxwidth(115) end;
+			  OnCommand=function(self) self:diffusealpha(0):smooth(0.2):diffusealpha(0.75) end;
+			  OffCommand=function(self) self:linear(0.3):diffusealpha(0) end;
+			  CurrentStepsP1ChangedMessageCommand=function(self) self:queuecommand("Set") end; 
+			  PlayerJoinedMessageCommand=function(self) self:queuecommand("Set"):diffusealpha(0):linear(0.3):diffusealpha(0.75) end; 
+			  ChangedLanguageDisplayMessageCommand=function(self) self:queuecommand("Set") end;
 			  SetCommand=function(self)
-				stepsP1 = GAMESTATE:GetCurrentSteps(PLAYER_1)
+				local stepsP1 = GAMESTATE:GetCurrentSteps(PLAYER_1)
 				local song = GAMESTATE:GetCurrentSong();
 				if song then 
 					if stepsP1 ~= nil then
@@ -252,15 +252,15 @@ t[#t+1] = Def.ActorFrame {
 				end
 			  end
 		};
-		LoadFont("Common Normal") .. { 
-			  InitCommand=cmd(uppercase,true;zoom,0.75;addy,-20;addx,-143;diffuse,color("#000000");maxwidth,130);
-			  OnCommand=cmd(diffusealpha,0;smooth,0.2;diffusealpha,0.75);
-			  OffCommand=cmd(linear,0.3;diffusealpha,0);
-			  CurrentStepsP1ChangedMessageCommand=cmd(queuecommand,"Set"); 
-			  PlayerJoinedMessageCommand=cmd(queuecommand,"Set";diffusealpha,0;linear,0.3;diffusealpha,0.75);
-			  ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set");
+		LoadFont("_open sans semibold 24px") .. { 
+			  InitCommand=function(self) self:uppercase(true):zoom(0.75):addy(-20):addx(-143):diffuse(color("#000000")):maxwidth(130) end;
+			  OnCommand=function(self) self:diffusealpha(0):smooth(0.2):diffusealpha(0.75) end;
+			  OffCommand=function(self) self:linear(0.3):diffusealpha(0) end;
+			  CurrentStepsP1ChangedMessageCommand=function(self) self:queuecommand("Set") end; 
+			  PlayerJoinedMessageCommand=function(self) self:queuecommand("Set"):diffusealpha(0):linear(0.3):diffusealpha(0.75) end; 
+			  ChangedLanguageDisplayMessageCommand=function(self) self:queuecommand("Set") end;
 			  SetCommand=function(self)
-				stepsP1 = GAMESTATE:GetCurrentSteps(PLAYER_1)
+				local stepsP1 = GAMESTATE:GetCurrentSteps(PLAYER_1)
 				local song = GAMESTATE:GetCurrentSong();
 				if song then 
 					if stepsP1 ~= nil then
@@ -281,21 +281,21 @@ t[#t+1] = Def.ActorFrame {
 	
 -- P2 Difficulty Pane	
 t[#t+1] = Def.ActorFrame {
-		InitCommand=cmd(visible,GAMESTATE:IsHumanPlayer(PLAYER_2);horizalign,center;x,SCREEN_CENTER_X+210+32;y,SCREEN_CENTER_Y+230+8);
-		OnCommand=cmd(zoomy,0.8;diffusealpha,0;smooth,0.4;diffusealpha,1;zoomy,1);
+		InitCommand=function(self) self:visible(GAMESTATE:IsHumanPlayer(PLAYER_2)):horizalign(center):xy(SCREEN_CENTER_X+210+32,SCREEN_CENTER_Y+230+10) end;
+		OnCommand=function(self) self:zoomy(0.8):diffusealpha(0):smooth(0.4):diffusealpha(1):zoomy(1) end;
 		PlayerJoinedMessageCommand=function(self,param)
 			if param.Player == PLAYER_2 then
-				(cmd(visible,true;diffusealpha,0;linear,0.3;diffusealpha,1))(self);
+				self:visible(true):diffusealpha(0):linear(0.3):diffusealpha(1)
 			end;
 		end;
-		OffCommand=cmd(decelerate,0.3;zoomy,0.8;diffusealpha,0);
+		OffCommand=function(self) self:decelerate(0.3):diffusealpha(0) end;
 		LoadActor(THEME:GetPathG("ScreenSelectMusic", "pane background")) .. {
-			InitCommand=cmd(zoomx,-1);
-			CurrentStepsP2ChangedMessageCommand=cmd(queuecommand,"Set"); 
-			PlayerJoinedMessageCommand=cmd(queuecommand,"Set";diffusealpha,0;decelerate,0.3;diffusealpha,1);
-			ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set");
+			InitCommand=function(self) self:zoomx(-1) end;
+			CurrentStepsP2ChangedMessageCommand=function(self) self:queuecommand("Set") end; 
+			PlayerJoinedMessageCommand=function(self) self:queuecommand("Set"):diffusealpha(0):decelerate(0.3):diffusealpha(1) end;
+			ChangedLanguageDisplayMessageCommand=function(self) self:queuecommand("Set") end;
 			SetCommand=function(self)
-					stepsP2 = GAMESTATE:GetCurrentSteps(PLAYER_2)
+					local stepsP2 = GAMESTATE:GetCurrentSteps(PLAYER_2)
 					local song = GAMESTATE:GetCurrentSong();
 					if song then 
 						if stepsP2 ~= nil then
@@ -313,14 +313,14 @@ t[#t+1] = Def.ActorFrame {
 				  end
 		};
 		LoadFont("StepsDisplay meter") .. { 
-			  InitCommand=cmd(zoom,1.25;diffuse,color("#000000");addx,143;addy,13);
-			  OnCommand=cmd(diffusealpha,0;smooth,0.2;diffusealpha,0.75);
-			  OffCommand=cmd(linear,0.3;diffusealpha,0);
-			  CurrentStepsP2ChangedMessageCommand=cmd(queuecommand,"Set"); 
-			  PlayerJoinedMessageCommand=cmd(queuecommand,"Set";diffusealpha,0;linear,0.3;diffusealpha,0.75);
-			  ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set");
+			  InitCommand=function(self) self:zoom(1.25):diffuse(color("#000000")):addx(143):addy(13) end;
+			  OnCommand=function(self) self:diffusealpha(0):smooth(0.2):diffusealpha(0.75) end;
+			  OffCommand=function(self) self:linear(0.3):diffusealpha(0) end;
+			  CurrentStepsP2ChangedMessageCommand=function(self) self:queuecommand("Set") end; 
+			  PlayerJoinedMessageCommand=function(self) self:queuecommand("Set"):diffusealpha(0):linear(0.3):diffusealpha(0.75) end; 
+			  ChangedLanguageDisplayMessageCommand=function(self) self:queuecommand("Set") end;
 			  SetCommand=function(self)
-				stepsP2 = GAMESTATE:GetCurrentSteps(PLAYER_2)
+				local stepsP2 = GAMESTATE:GetCurrentSteps(PLAYER_2)
 				local song = GAMESTATE:GetCurrentSong();
 				if song then 
 					if stepsP2 ~= nil then
@@ -337,15 +337,15 @@ t[#t+1] = Def.ActorFrame {
 				end
 			  end
 		};
-		LoadFont("Common Italic Condensed") .. { 
-			  InitCommand=cmd(uppercase,true;zoom,1;addy,-40;addx,143;diffuse,color("#000000");maxwidth,115);
-			  OnCommand=cmd(diffusealpha,0;smooth,0.2;diffusealpha,0.75);
-			  OffCommand=cmd(linear,0.3;diffusealpha,0);
-			  CurrentStepsP2ChangedMessageCommand=cmd(queuecommand,"Set"); 
-			  PlayerJoinedMessageCommand=cmd(queuecommand,"Set";diffusealpha,0;linear,0.3;diffusealpha,0.75);
-			  ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set");
+		LoadFont("_open sans condensed 24px") .. { 
+			  InitCommand=function(self) self:uppercase(true):zoom(1):skewx(-0.1):addy(-40):addx(143):diffuse(Color.Black):maxwidth(115) end;
+			  OnCommand=function(self) self:diffusealpha(0):smooth(0.2):diffusealpha(0.75) end;
+			  OffCommand=function(self) self:linear(0.3):diffusealpha(0) end;
+			  CurrentStepsP2ChangedMessageCommand=function(self) self:queuecommand("Set") end; 
+			  PlayerJoinedMessageCommand=function(self) self:queuecommand("Set"):diffusealpha(0):linear(0.3):diffusealpha(0.75) end; 
+			  ChangedLanguageDisplayMessageCommand=function(self) self:queuecommand("Set") end;
 			  SetCommand=function(self)
-				stepsP2 = GAMESTATE:GetCurrentSteps(PLAYER_2)
+				local stepsP2 = GAMESTATE:GetCurrentSteps(PLAYER_2)
 				local song = GAMESTATE:GetCurrentSong();
 				if song then 
 					if stepsP2 ~= nil then
@@ -362,15 +362,15 @@ t[#t+1] = Def.ActorFrame {
 				end
 			  end
 		};
-		LoadFont("Common Normal") .. { 
-			  InitCommand=cmd(uppercase,true;zoom,0.75;addy,-20;addx,143;diffuse,color("#000000");maxwidth,130);
-			  OnCommand=cmd(diffusealpha,0;smooth,0.2;diffusealpha,0.75);
-			  OffCommand=cmd(linear,0.3;diffusealpha,0);
-			  CurrentStepsP2ChangedMessageCommand=cmd(queuecommand,"Set"); 
-			  PlayerJoinedMessageCommand=cmd(queuecommand,"Set";diffusealpha,0;linear,0.3;diffusealpha,0.75);
-			  ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set");
+		LoadFont("_open sans semibold 24px") .. { 
+			  InitCommand=function(self) self:uppercase(true):zoom(0.75):diffuse(color("#000000")):addx(143):addy(-20):maxwidth(130) end;
+			  OnCommand=function(self) self:diffusealpha(0):smooth(0.2):diffusealpha(0.75) end;
+			  OffCommand=function(self) self:linear(0.3):diffusealpha(0) end;
+			  CurrentStepsP2ChangedMessageCommand=function(self) self:queuecommand("Set") end; 
+			  PlayerJoinedMessageCommand=function(self) self:queuecommand("Set"):diffusealpha(0):decelerate(0.3):diffusealpha(0.75) end;
+			  ChangedLanguageDisplayMessageCommand=function(self) self:queuecommand("Set") end;
 			  SetCommand=function(self)
-				stepsP2 = GAMESTATE:GetCurrentSteps(PLAYER_2)
+				local stepsP2 = GAMESTATE:GetCurrentSteps(PLAYER_2)
 				local song = GAMESTATE:GetCurrentSong();
 				if song then 
 					if stepsP2 ~= nil then
@@ -400,13 +400,13 @@ end;
 
 -- BPMDisplay
 t[#t+1] = Def.ActorFrame {
-    InitCommand=cmd(draworder,126;visible,not GAMESTATE:IsCourseMode());
-    OnCommand=cmd(diffusealpha,0;smooth,0.3;diffusealpha,1);
-    OffCommand=cmd(linear,0.3;diffusealpha,0);
+    InitCommand=function(self) self:draworder(126):visible(not GAMESTATE:IsCourseMode()) end;
+    OnCommand=function(self) self:diffusealpha(0):smooth(0.3):diffusealpha(1) end;
+    OffCommand=function(self) self:linear(0.3):diffusealpha(0) end;
     LoadFont("Common Condensed") .. {
-          InitCommand=cmd(horizalign,right;x,SCREEN_CENTER_X-198+69-66;y,SCREEN_CENTER_Y-78+2;diffuse,color("#512232");horizalign,right;visible,not GAMESTATE:IsCourseMode());
-          OnCommand=cmd(queuecommand,"Set");
-          ChangedLanguageDisplayMessageCommand=cmd(queuecommand,"Set");
+          InitCommand=function(self) self:horizalign(right):x(SCREEN_CENTER_X-198+69-66):y(SCREEN_CENTER_Y-76-6):diffuse(color("#512232")):horizalign(right):visible(not GAMESTATE:IsCourseMode()) end;
+          OnCommand=function(self) self:queuecommand("Set") end;
+          ChangedLanguageDisplayMessageCommand=function(self) self:queuecommand("Set") end;
           SetCommand=function(self)
               self:settext("BPM"):diffuse(ColorLightTone(StageToColor(curStage)));
               end;

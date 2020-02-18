@@ -1,9 +1,9 @@
-return LoadFont("_roboto condensed 24px") .. {
+return LoadFont("_open sans condensed 24px") .. {
 	Text=GetLifeDifficulty();
 	AltText="";
 	BeginCommand=function(self)
 		self:settextf( Screen.String("LifeDifficulty"), GetLifeDifficulty() );
-		self:diffuse(color("#512232")):zoom(0.8);
+		self:diffuse(color("#882D47")):zoom(0.8);
 		self:diffusealpha(0):sleep(0.5):smooth(0.3):diffusealpha(1);
 	end
 };

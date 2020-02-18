@@ -1,17 +1,20 @@
 return Def.ActorFrame {
+Def.ActorFrame {
+	InitCommand=function(self) self:Center() end;
 	Def.Quad {
-		InitCommand=cmd(zoomto,SCREEN_WIDTH,SCREEN_HEIGHT;Center);
-		OnCommand=cmd(diffuse,Color.Black;diffusealpha,0;decelerate,0.3;diffusealpha,0.7);
-		OffCommand=cmd(stoptweening;decelerate,0.2;diffusealpha,0);
+		InitCommand=function(self) self:scaletoclipped(SCREEN_WIDTH,SCREEN_HEIGHT) end;
+		OnCommand=function(self) self:diffuse(Color.Black):diffusealpha(0.6) end;
 	};
+};
+
 	Def.DeviceList {
-		Font="Common Italic Condensed",
-		InitCommand=cmd(x,SCREEN_LEFT+20;y,SCREEN_TOP+130;zoom,0.8;halign,0;diffuse,color("#FFFFFF"));
-		OffCommand=cmd(stoptweening;decelerate,0.2;diffusealpha,0);
+		Font="_open sans condensed 24px",
+		InitCommand=function(self) self:xy(SCREEN_LEFT+20,SCREEN_TOP+130):zoom(0.8):halign(0):skewx(-0.1):diffuse(color("#FFFFFF")) end;
+		OffCommand=function(self) self:stoptweening():decelerate(0.2):diffusealpha(0) end;
 	};
 
 	Def.InputList {
 		Font="Common Condensed",
-		InitCommand=cmd(x,SCREEN_CENTER_X-250;y,SCREEN_CENTER_Y;zoom,1;halign,0;vertspacing,8;strokecolor,color("#000000"));
+		InitCommand=function(self) self:xy(SCREEN_CENTER_X-250,SCREEN_CENTER_Y):zoom(1):halign(0):vertspacing(8):strokecolor(color("#000000")) end;
 	};
 };

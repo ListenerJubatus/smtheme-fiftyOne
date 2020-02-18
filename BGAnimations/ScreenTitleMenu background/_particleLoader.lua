@@ -36,7 +36,7 @@ for i=1,Params.NumParticles do
 		self:y(math.random(SCREEN_TOP+(self:GetHeight()/2),SCREEN_BOTTOM-(self:GetHeight()/2)));
 		--self:z(math.random(-64,0));
 	end;
-		OnCommand=cmd(diffusealpha,1);
+		OnCommand=function(self) self:diffusealpha(1) end;
 	};
 end
 
@@ -67,6 +67,6 @@ local function UpdateParticles(self,DeltaTime)
 	end;
 end;
 
-t.InitCommand = cmd(fov,90;SetUpdateFunction,UpdateParticles);
+t.InitCommand = function(self) self:fov(90):SetUpdateFunction(UpdateParticles) end;
 
 return t;

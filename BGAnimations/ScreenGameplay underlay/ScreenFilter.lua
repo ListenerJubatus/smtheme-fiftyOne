@@ -23,7 +23,7 @@ local stepsType = style:GetStepsType()
 if numPlayers == 1 then
 	local player = GAMESTATE:GetMasterPlayerNumber()
 	local pNum = (player == PLAYER_1) and 1 or 2
-	filterAlphas[player] = tonumber(getenv("ScreenFilterP"..pNum)) or 0;
+	filterAlphas[player] = tonumber(LoadModule("Config.Load.lua")("ScreenFilter",CheckIfUserOrMachineProfile(pNum-1).."/OutFoxPrefs.ini")) or 0;
 
 	local pos;
 	-- [ScreenGameplay] PlayerP#Player*Side(s)X
@@ -37,7 +37,9 @@ if numPlayers == 1 then
 	end
 	t[#t+1] = Def.Quad{
 		Name="SinglePlayerFilter";
-		InitCommand=cmd(x,pos;CenterY;zoomto,filterWidth,SCREEN_HEIGHT;diffusecolor,filterColor;diffusealpha,filterAlphas[player]);
+		InitCommand=function(self)
+			self:x(pos):CenterY():zoomto(filterWidth,SCREEN_HEIGHT):diffusecolor(filterColor):diffusebottomedge(ColorDarkTone(PlayerDarkColor(player))):diffusealpha(filterAlphas[player]) 
+		end;
 	};
 else
 	-- two players... a bit more complex.
@@ -48,18 +50,22 @@ else
 		local metricName = "PlayerP".. pNum .."TwoPlayersSharedSidesX"
 		t[#t+1] = Def.Quad{
 			Name="RoutineFilter";
-			InitCommand=cmd(x,THEME:GetMetric("ScreenGameplay",metricName);CenterY;zoomto,filterWidth,SCREEN_HEIGHT;diffusecolor,filterColor;diffusealpha,filterAlphas[player]);
+			InitCommand=function(self) 
+				self:x(THEME:GetMetric("ScreenGameplay",metricName)):CenterY():zoomto(filterWidth,SCREEN_HEIGHT):diffusecolor(filterColor):diffusealpha(filterAlphas[player])
+			end;
 		};
 	else
 		-- otherwise we need two separate ones. to the pairsmobile!
 		for i, player in ipairs(PlayerNumber) do
 			local pNum = (player == PLAYER_1) and 1 or 2
-			filterAlphas[player] = tonumber(getenv("ScreenFilterP"..pNum)) or 0;
+			filterAlphas[player] = tonumber(LoadModule("Config.Load.lua")("ScreenFilter",CheckIfUserOrMachineProfile(pNum-1).."/OutFoxPrefs.ini")) or 0;
 			local metricName = string.format("PlayerP%i%sX",pNum,styleType)
 			local pos = THEME:GetMetric("ScreenGameplay",metricName)
 			t[#t+1] = Def.Quad{
 				Name="Player"..pNum.."Filter";
-				InitCommand=cmd(x,pos;CenterY;zoomto,filterWidth,SCREEN_HEIGHT;diffusecolor,filterColor;diffusealpha,filterAlphas[player]);
+				InitCommand=function(self)
+					self:x(pos):CenterY():zoomto(filterWidth,SCREEN_HEIGHT):diffusecolor(filterColor):diffusebottomedge(ColorDarkTone(PlayerDarkColor(player))):diffusealpha(filterAlphas[player])
+				end;
 			};
 		end
 	end

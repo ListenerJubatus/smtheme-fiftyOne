@@ -4,26 +4,26 @@ local playMode = GAMESTATE:GetPlayMode();
 
 local t = Def.ActorFrame {
 	LoadActor(		THEME:GetPathG("ScreenGameplay", "progress"))  .. {
-		OnCommand=cmd(playcommand,"Set");
-		CurrentSongChangedMessageCommand=cmd(playcommand,"Set");
-		CurrentCourseChangedMessageCommand=cmd(playcommand,"Set");
-		CurrentStepsP1ChangedMessageCommand=cmd(playcommand,"Set");
-		CurrentStepsP2ChangedMessageCommand=cmd(playcommand,"Set");
-		CurrentTraiP1ChangedMessageCommand=cmd(playcommand,"Set");
-		CurrentTraiP2ChangedMessageCommand=cmd(playcommand,"Set");
+		OnCommand=function(self) self:playcommand("Set") end;
+		CurrentSongChangedMessageCommand=function(self) self:playcommand("Set") end;
+		CurrentCourseChangedMessageCommand=function(self) self:playcommand("Set") end;
+		CurrentStepsP1ChangedMessageCommand=function(self) self:playcommand("Set") end;
+		CurrentStepsP2ChangedMessageCommand=function(self) self:playcommand("Set") end;
+		CurrentTraiP1ChangedMessageCommand=function(self) self:playcommand("Set") end;
+		CurrentTraiP2ChangedMessageCommand=function(self) self:playcommand("Set") end;
 		SetCommand=function(self)
 		local curStage = GAMESTATE:GetCurrentStage();
 			self:diffuse(ColorMidTone(StageToColor(curStage)))
 		end
 	};
-	LoadFont("Common Italic Condensed") .. {
-		InitCommand=cmd(y,-1;x,-143;uppercase,true;horizalign,center;maxwidth,170;playcommand,"Set");
-		CurrentSongChangedMessageCommand=cmd(playcommand,"Set");
-		CurrentCourseChangedMessageCommand=cmd(playcommand,"Set");
-		CurrentStepsP1ChangedMessageCommand=cmd(playcommand,"Set");
-		CurrentStepsP2ChangedMessageCommand=cmd(playcommand,"Set");
-		CurrentTraiP1ChangedMessageCommand=cmd(playcommand,"Set");
-		CurrentTraiP2ChangedMessageCommand=cmd(playcommand,"Set");
+	LoadFont("_open sans condensed 24px") .. {
+		InitCommand=function(self) self:xy(-143,-1):uppercase(true):horizalign(center):maxwidth(170):skewx(-0.1):playcommand("Set") end;
+		CurrentSongChangedMessageCommand=function(self) self:playcommand("Set") end;
+		CurrentCourseChangedMessageCommand=function(self) self:playcommand("Set") end;
+		CurrentStepsP1ChangedMessageCommand=function(self) self:playcommand("Set") end;
+		CurrentStepsP2ChangedMessageCommand=function(self) self:playcommand("Set") end;
+		CurrentTraiP1ChangedMessageCommand=function(self) self:playcommand("Set") end;
+		CurrentTraiP2ChangedMessageCommand=function(self) self:playcommand("Set") end;
 		SetCommand=function(self)
 			local curStage = GAMESTATE:GetCurrentStage();
 			if GAMESTATE:IsCourseMode() then
@@ -47,8 +47,7 @@ local t = Def.ActorFrame {
 				end
 			end;
 			self:zoom(1);
-			self:diffuse(StageToColor(curStage));
-			self:diffusetopedge(ColorLightTone(StageToColor(curStage)));
+			self:diffuse(color("#FFFFFF")):diffusetopedge(ColorLightTone(StageToColor(curStage)));
 		end;
 	};
 };

@@ -7,7 +7,7 @@ local course = GAMESTATE:GetCurrentCourse()
 local t = Def.ActorFrame{
 	-- background
 	Def.Sprite{
-		InitCommand=cmd(Center);
+		InitCommand=function(self) self:Center() end;
 		BeginCommand=function(self)
 			if course:GetBackgroundPath() then
 				self:Load( course:GetBackgroundPath() )
@@ -20,12 +20,12 @@ local t = Def.ActorFrame{
 			self:scale_or_crop_background()
 			self:addy(SCREEN_HEIGHT):sleep(slideWait):smooth(slideTime):addy(-SCREEN_HEIGHT);
 		end;	
-		};
+	};
 	-- alternate background
 	Def.Sprite{
-		InitCommand=cmd(Center);
-		BeginCommand=cmd(LoadFromCurrentSongBackground;scale_or_crop_background;diffusealpha,0);
-		OnCommand=cmd(playcommand,"Show");
+		InitCommand=function(self) self:Center() end;
+		BeginCommand=function(self) self:LoadFromSongBackground():scale_or_crop_background():diffusealpha(0) end;
+		OnCommand=function(self) playcommand("Show") end;
 		ShowCommand=function(self)
 			if course:HasBackground() then
 				self:addy(SCREEN_HEIGHT):sleep(slideWait):smooth(slideTime):addy(-SCREEN_HEIGHT);

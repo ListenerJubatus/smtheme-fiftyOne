@@ -1,5 +1,5 @@
 local transition_params = {
-	color = color("#914D56"),
+	color = color("#882D47"),
 	transition_type = "in"
 }
 

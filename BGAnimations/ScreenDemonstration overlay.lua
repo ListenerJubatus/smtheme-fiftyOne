@@ -1,37 +1,39 @@
 return Def.ActorFrame{
 	-- "header"
 	Def.Quad {
-		InitCommand=cmd(vertalign,top;x,_screen.cx;zoomto,_screen.w,80),
+		InitCommand=function(self) self:vertalign(top):x(_screen.cx):zoomto(_screen.w,80) end;
 		OnCommand=function(self)
-			self:diffuse(ScreenColor("Default")):diffusetopedge(ColorDarkTone(ScreenColor("Default"))):diffusealpha(0.8)
-		end
+			self:diffuse(color("#000000")):diffusetopedge(ColorDarkTone(ScreenColor("Default"))):diffusealpha(0.9)
+		end;
 	},
 	-- The "header's" "shadow"
 	Def.Quad {
-		InitCommand=cmd(vertalign,top;x,_screen.cx;zoomto,SCREEN_WIDTH,8;y,80),
-		OnCommand=cmd(diffuse,Color("Black");fadebottom,1;diffusealpha,0.6)
+		InitCommand=function(self) self:vertalign(top):xy(_screen.cx,80):zoomto(_screen.w,80) end;
+		OnCommand=function(self) self:diffuse(color("#000000")):fadebottom(1):diffusealpha(0.6) end;
 	},
 	-- "footer"
 	Def.Quad {
-		InitCommand=cmd(vertalign,bottom;x,_screen.cx;y,_screen.h;zoomto,_screen.w,96),
+		InitCommand=function(self) self:vertalign(bottom):xy(_screen.cx,_screen.h):zoomto(_screen.w,96) end;
 		OnCommand=function(self)
-			self:diffuse(ScreenColor("Default")):diffusebottomedge(ColorDarkTone(ScreenColor("Default"))):diffusealpha(0.8)
-		end
+			self:diffuse(color("#000000")):diffusebottomedge(ColorDarkTone(ScreenColor("Default"))):diffusealpha(0.9)
+		end;
 	},
 	-- The "footer's" "shadow"
 	Def.Quad {
-		InitCommand=cmd(vertalign,bottom;x,_screen.cx;y,_screen.h-96;zoomto,_screen.w,8),
-		OnCommand=cmd(diffuse,Color("Black");fadetop,1;diffusealpha,0.6)
+		InitCommand=function(self) self:vertalign(bottom):xy(_screen.cx,_screen.h-96):zoomto(_screen.w,8) end;
+		OnCommand=function(self) self:diffuse(color("#000000")):fadetop(1):diffusealpha(0.6) end;
 	},
 	
 	-- A temporary frame for the jacket.
 	Def.Quad {
-		InitCommand=cmd(horizalign,right;vertalign,bottom;x,_screen.w-39;y,_screen.h-14;zoomto,192,192;diffuse,ColorDarkTone(ScreenColor("Default"));diffusealpha,0.9)
+		InitCommand=function(self) 
+			self:horizalign(right):vertalign(bottom):xy(_screen.w-39,_screen.h-14):zoomto(192,192):diffuse(ColorDarkTone(ScreenColor("Default"))):diffusealpha(0.9) 
+		end;
 	},
 	-- Jacket (real or not) of the currently playing song.
 	-- todo: make getting the jacket a bit more of a... global function?
 	Def.Sprite {
-		InitCommand=cmd(horizalign,right;vertalign,bottom;x,_screen.w-49;y,_screen.h-24),
+		InitCommand=function(self) self:horizalign(right):vertalign(bottom):xy(_screen.w-49,_screen.h-24) end;
 		OnCommand=function(self)
 			local song = GAMESTATE:GetCurrentSong()
 			if song and song:HasJacket() then
@@ -49,7 +51,7 @@ return Def.ActorFrame{
 	-- Song title.
 	Def.BitmapText {
 		Font = "Common Fallback Font",
-		InitCommand=cmd(horizalign,right;x,_screen.w-250;y,_screen.h-64;strokecolor,color("#42292E")),
+		InitCommand=function(self) self:horizalign(right):xy(_screen.w-250,_screen.h-64):strokecolor(color("#42292E")) end;
 		OnCommand=function(self)
 			local song = GAMESTATE:GetCurrentSong()
 			if song then
@@ -62,7 +64,7 @@ return Def.ActorFrame{
 	-- Song artist.
 	Def.BitmapText {
 		Font = "Common Fallback Font",
-		InitCommand=cmd(horizalign,right;x,_screen.w-250;y,_screen.h-40;zoom,0.7;strokecolor,color("#42292E")),
+		InitCommand=function(self) self:horizalign(right):xy(_screen.w-250,_screen.h-40):zoom(0.7):strokecolor(color("#42292E")) end;
 		OnCommand=function(self)
 			local song = GAMESTATE:GetCurrentSong()
 			if song then

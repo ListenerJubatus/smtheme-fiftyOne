@@ -216,7 +216,7 @@ local frame= Def.ActorFrame{
 	end,
 	pause_controller_actor(),
 	Def.BitmapText{
-		Font= "Common Normal", InitCommand= function(self)
+		Font= "_open sans semibold 24px", InitCommand= function(self)
 			prompt_actor= self
 			self:xy(_screen.cx, _screen.h*.75):zoom(.75):diffusealpha(0)
 		end,

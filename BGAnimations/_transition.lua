@@ -11,14 +11,14 @@ local endAlpha = math.abs(startAlpha-1)
 for i=1, 6 do
 	local sleep_time = 0.1 * i
 	t[#t+1] = LoadActor(THEME:GetPathG("", "_pt" .. i)) .. {
-		InitCommand=cmd(zoomto,SCREEN_WIDTH,SCREEN_HEIGHT;Center;diffuse,params.color),
-		OnCommand=cmd(diffusealpha,startAlpha;sleep,sleep_time;linear,0.10;diffusealpha,endAlpha)
+		InitCommand=function(self) self:zoomto(SCREEN_WIDTH,SCREEN_HEIGHT):Center():diffuse(params.color) end;
+		OnCommand=function(self) self:diffusealpha(startAlpha):sleep(sleep_time):linear(0.10):diffusealpha(endAlpha) end;
 	}
 end
 
 t[#t+1] = Def.Quad {
-	InitCommand=cmd(zoomto,SCREEN_WIDTH,SCREEN_HEIGHT;Center;diffuse,params.color),
-	OnCommand=cmd(diffusealpha,startAlpha;linear,0.5;diffusealpha,endAlpha)
+	InitCommand=function(self) self:zoomto(SCREEN_WIDTH,SCREEN_HEIGHT):Center():diffuse(params.color) end;
+	OnCommand=function(self) self:diffusealpha(startAlpha):linear(0.5):diffusealpha(endAlpha) end;
 }
 	
 return t

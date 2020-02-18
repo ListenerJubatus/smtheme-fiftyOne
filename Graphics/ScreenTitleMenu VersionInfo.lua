@@ -2,13 +2,11 @@ return Def.ActorFrame {
 	LoadFont("Common Condensed") .. {
 		Text=string.format("%s %s", ProductFamily(), ProductVersion());
 		AltText="StepMania";
-		InitCommand=cmd(zoom,1);
-		OnCommand=cmd(horizalign,right;diffusealpha,0.9);
+		InitCommand=function(self) self:zoom(1):horizalign(right):diffuse(color("#FFFFFF")):strokecolor(color("0,0,0,0.75")) end;
 	};
-	LoadFont("Common Normal") .. {
+	LoadFont("_noto sans 36px") .. {
 		Text=string.format("%s", VersionDate());
 		AltText="Unknown Version";
-		InitCommand=cmd(y,19;zoom,0.75);
-		OnCommand=cmd(horizalign,right;diffusealpha,0.7);
+		InitCommand=function(self) self:zoom(0.5):y(21):horizalign(right):diffuse(color("#FFFFFF")):strokecolor(color("0,0,0,0.75")) end;
 	};
 };

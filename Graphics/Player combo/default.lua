@@ -14,19 +14,20 @@ local LabelMaxZoom = THEME:GetMetric("Combo", "LabelMaxZoom");
 local t = Def.ActorFrame {
  	LoadActor(THEME:GetPathG("Combo","100Milestone")) .. {
 		Name="OneHundredMilestone";
-		FiftyMilestoneCommand=cmd(playcommand,"Milestone");
+		FiftyMilestoneCommand=function(self) self:playcommand("Milestone") end;
 	};
 	LoadActor(THEME:GetPathG("Combo","1000Milestone")) .. {
 		Name="OneThousandMilestone";
-		ToastyAchievedMessageCommand=cmd(playcommand,"Milestone");
+		ToastyAchievedMessageCommand=function(self) self:playcommand("Milestone") end;
 	};
-	InitCommand=cmd(vertalign,bottom);
+	InitCommand=function(self) self:vertalign(bottom) end;
 	LoadFont( "Combo", "numbers" ) .. {
 		Name="Number";
 		OnCommand = THEME:GetMetric("Combo", "NumberOnCommand");
 	};
-	LoadFont("_roboto condensed Bold italic 24px") .. {
+	LoadFont("_open sans condensed 24px") .. {
 		Name="Label";
+		InitCommand = function(self) self:skewx(-0.1) end;
 		OnCommand = THEME:GetMetric("Combo", "LabelOnCommand");
 	};
 
@@ -49,17 +50,17 @@ local t = Def.ActorFrame {
 			return
 		end; --]]
 	TwentyFiveMilestoneCommand=function(self,parent)
-		(cmd(skewy,-0.125;decelerate,0.325;skewy,0))(self);
+		self:skewy(-0.125):decelerate(0.325):skewy(0)
 	end;
 	ToastyAchievedMessageCommand=function(self,params)
 		if params.PlayerNumber == player then
-			(cmd(thump,2;effectclock,'beat'))(self);
+			self:thump(2):effectclock('beat')
 		end;
 	end;
 	ComboCommand=function(self, param)
 		local iCombo = param.Misses or param.Combo;
 		if not iCombo or iCombo < ShowComboAt then
-			c.Number:visible(false);
+			c.Number:settext(""):visible(false);
 			c.Label:visible(false);
 			return;
 		end
@@ -88,39 +89,30 @@ local t = Def.ActorFrame {
 		if param.FullComboW1 then
 			c.Number:diffuse(color("#00aeef"));
 			c.Number:glowshift();
-			(cmd(diffuse,color("#C7E5F0");diffusebottomedge,color("#00aeef");strokecolor,color("#0E3D53")))(c.Label);
+			c.Label:diffuse(color("#C7E5F0")):diffusebottomedge(color("#00aeef")):strokecolor(color("#0E3D53"));
 		elseif param.FullComboW2 then
 			c.Number:diffuse(color("#F3D58D"));
 			c.Number:glowshift();
-			(cmd(diffuse,color("#FAFAFA");diffusebottomedge,color("#F3D58D");strokecolor,color("#53450E")))(c.Label);
+			c.Label:diffuse(color("#FAFAFA")):diffusebottomedge(color("#F3D58D")):strokecolor(color("#53450E"));
 		elseif param.FullComboW3 then
 			c.Number:diffuse(color("#94D658"));
 			c.Number:stopeffect();
-			(cmd(diffuse,color("#CFE5BC");diffusebottomedge,color("#94D658");strokecolor,color("#12530E")))(c.Label);
+			c.Label:diffuse(color("#CFE5BC")):diffusebottomedge(color("#94D658")):strokecolor(color("#12530E"));
 		elseif param.Combo then
-			c.Number:diffuse(color("#FBE9DD"));
+			c.Number:diffuse(color("#FFFFFF"));
 -- 			c.Number:diffuse(PlayerColor(player));
 			c.Number:stopeffect();
-			(cmd(diffuse,color("#F5CB92");diffusebottomedge,color("#EFA97A");strokecolor,color("#602C1B")))(c.Label);
+			c.Label:diffuse(color("#FFFFFF")):diffusebottomedge(color("#F5F4F4")):strokecolor(color("#463939"));
 		else
-			c.Number:diffuse(color("#FBE9DD"));
+			c.Number:diffuse(color("#f7d8d8"));
 			c.Number:stopeffect();
-			(cmd(diffuse,color("#F5CB92");diffusebottomedge,color("#EFA97A");strokecolor,color("#602C1B")))(c.Label);
+			c.Label:diffuse(color("#f7d8d8")):diffusebottomedge(color("#db7d7d")):strokecolor(color("#4b1010"));
 		end
 		-- Pulse
 		Pulse( c.Number, param );
 		PulseLabel( c.Label, param );
 		-- Milestone Logic
 	end;
---[[ 	ScoreChangedMessageCommand=function(self,param)
-		local iToastyCombo = param.ToastyCombo;
-		if iToastyCombo and (iToastyCombo > 0) then
--- 			(cmd(thump;effectmagnitude,1,1.2,1;effectclock,'beat'))(c.Number)
--- 			(cmd(thump;effectmagnitude,1,1.2,1;effectclock,'beat'))(c.Number)
-		else
--- 			c.Number:stopeffect();
-		end;
-	end; --]]
 };
 
 return t;

@@ -1,17 +1,16 @@
--- I have to do it like this because I think the Set command in the metrics is screwing me over
 local t = Def.ActorFrame{
-	-- todo: make this less stupid
-	Def.Sprite{
-		InitCommand=cmd(x,8;horizalign,right),
+	LoadFont("_open sans condensed 24px")..{
+		InitCommand=function(self) self:horizalign(right):zoom(0.8):skewx(-0.1) end;
 		SetMessageCommand=function(self,param)
-			local path = "Themes/"..THEME:GetCurThemeName().."/Graphics/_StepsType/" .. ToEnumShortString(param.StepsType) .. ".png"
-			if FILEMAN:DoesFileExist(path) then
-				self:Load( path )
+			local sString = THEME:GetString("StepsListDisplayRow StepsType",ToEnumShortString(param.StepsType));
+			if param.Steps and param.Steps:IsAutogen() then
+				self:diffusebottomedge(color("0.75,0.75,0.75,1"));
 			else
-				self:Load( THEME:GetPathG("","_StepsType/missing") )
-			end
-		end
-	}
-}
+				self:diffuse(Color("White"));
+			end;
+			self:settext( sString );
+		end;
+	};
+};
 
 return t;

@@ -28,12 +28,12 @@ local function MakeSeperators()
 		return (-life_meter_width/2) + (i/life_meter_num_segments)* life_meter_width
 	end
 	local a = Def.Quad {
-		InitCommand=cmd(zoomto,2,life_meter_height),
-		OnCommand=cmd(diffuse,Color.Black;diffusealpha,0.15)
+		InitCommand=function(self) self:zoomto(2,life_meter_height) end;
+		OnCommand=function(self) self:diffuse(Color.Black):diffusealpha(0.15) end;
 	}
 	local t = Def.ActorFrame {}
 	for i=1, life_meter_num_segments do
-		t[#t+1] = Def.ActorFrame { InitCommand=cmd(x,x_pos(i)); a }
+		t[#t+1] = Def.ActorFrame { InitCommand=function(self) self:x(x_pos(i)) end; a }
 	end
 	return t
 end
@@ -58,7 +58,7 @@ t[#t+1] = Def.ActorFrame {
 		self:SetUpdateFunction(updateFunc)
 		self.life = 0
 	end,
-	OnCommand=cmd(spin;effectclock,'beat';effectperiod,1;effectmagnitude,0,0,0),
+	OnCommand=function(self) self:spin():effectclock('beat'):effectperiod(1):effectmagnitude(0,0,0) end,
 	HealthStateChangedMessageCommand=function(self,param)
 		local c = self:GetChildren()
 
@@ -79,39 +79,40 @@ t[#t+1] = Def.ActorFrame {
 	-- Outline
 	Def.Quad {
 		Name="Outline",
-		InitCommand=cmd(zoomto,life_meter_width+life_meter_outline,life_meter_height+life_meter_outline),
-		OnCommand=cmd()
+		InitCommand=function(self) self:zoomto(life_meter_width+life_meter_outline,life_meter_height+life_meter_outline) end;
 	},
 	-- Background
 	Def.Quad {
 		Name="Background",
-		InitCommand=cmd(zoomto,life_meter_width,life_meter_height),
-		OnCommand=cmd(diffuse,color("#32373E")),
-		AliveCommand=cmd(stopeffect;diffuse,color("#32373E")),
-		DangerCommand=cmd(diffuseshift;effectcolor2,ColorMidTone(Color.Red);effectcolor1,ColorDarkTone(Color.Red)),
-		DeadCommand=cmd(stopeffect;diffuse,color("#000000")),
+		InitCommand=function(self) self:zoomto(life_meter_width,life_meter_height) end;
+		OnCommand=function(self) self:diffuse(color("#32373E")) end;
+		AliveCommand=function(self) self:stopeffect():diffuse(color("#32373E")) end;
+		DangerCommand=function(self) self:diffuseshift():effectcolor2(ColorMidTone(Color.Red)):effectcolor1(ColorDarkTone(Color.Red)) end;
+		DeadCommand=function(self) self:stopeffect():diffuse(Color.Black) end;
 	},
 	Def.Quad {
 		Name="Fill",
-		InitCommand=cmd(x,-life_meter_width/2;zoomto,life_meter_width,life_meter_height;horizalign,left),
-		OnCommand=cmd(diffuse,PlayerColor(pn)),
+		InitCommand=function(self) 
+			self:x(-life_meter_width/2):zoomto(life_meter_width,life_meter_height):horizalign(left) 
+		end;
+		OnCommand=function(self) self:diffuse(PlayerColor(pn)) end;
 		--
-		HotCommand=cmd(diffuse,color("#ff9232");diffuseshift;effectclock,'beat';effectcolor1,color("#ff9232");effectcolor2,color("#ffe263")),
-		AliveCommand=cmd(diffuse,PlayerColor(pn);stopeffect),
-		DangerCommand=cmd(diffuse,Color.Red;diffuseshift;effectclock,'beat';effectcolor1,Color.Red;effectcolor2,color("#FF797C")),
-		DeadCommand=cmd(diffuse,Color.Red;stopeffect)
+		HotCommand=function(self) self:diffuse(color("#ff9232")):diffuseshift(effectclock,'beat'):effectcolor1(color("#ff9232")):effectcolor2(color("#ffe263")) end;
+		AliveCommand=function(self) self:diffuse(PlayerColor(pn)):stopeffect() end;
+		DangerCommand=function(self) self:diffuse(Color.Red):diffuseshift(effectclock,'beat'):effectcolor1(Color.Red):effectcolor2(color("#FF797C")) end;
+		DeadCommand=function(self) self:diffuse(Color.Red):stopeffect() end;
 	},
 	MakeSeperators(),
 	Def.Quad {
 		Name="Tip",
-		InitCommand=cmd(basezoomx,life_meter_tip_width;basezoomy,life_meter_height),
+		InitCommand=function(self) self:basezoomx(life_meter_tip_width):basezoomy(life_meter_height) end;
 		--
-		OnCommand=cmd(diffuse,ColorLightTone(PlayerColor(pn))),
+		OnCommand=function(self) self:diffuse(ColorLightTone(PlayerColor(pn))) end;
 		--
-		HotCommand=cmd(diffuse,color("#FFED31");glowshift;effectclock,'beat'),
-		AliveCommand=cmd(diffuse,ColorLightTone(PlayerColor(pn));stopeffect),
-		DangerCommand=cmd(diffuse,Color.Red;diffuseshift;effectclock,'beat';effectcolor1,color("#000000");effectcolor2,Color.Red),
-		DeadCommand=cmd(diffuse,Color.Red;stopeffect)
+		HotCommand=function(self) self:diffuse(color("#FFED31")):glowshift(effectclock,'beat') end;
+		AliveCommand=function(self) self:diffuse(ColorLightTone(PlayerColor(pn))):stopeffect() end;
+		DangerCommand=function(self) self:diffuse(Color.Red):diffuseshift(effectclock,'beat'):effectcolor1(Color.Black):effectcolor2(Color.Red) end;
+		DeadCommand=function(self) self:diffuse(Color.Red):stopeffect() end;
 	}
 }
 

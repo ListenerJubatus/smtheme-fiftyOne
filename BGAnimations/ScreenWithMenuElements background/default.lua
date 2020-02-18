@@ -1,45 +1,28 @@
-if ThemePrefs.Get("FancyUIBG") then
-	return Def.ActorFrame {
-		
-		LoadActor(THEME:GetPathG("common bg", "base")) .. {
-			InitCommand=cmd(Center;zoomto,SCREEN_WIDTH,SCREEN_HEIGHT)
-		},
-		
-		LoadActor("_maze") .. {
-			OnCommand=cmd(Center;diffuse,color("#f6784922");effectperiod,10;spin;effectmagnitude,0,0,2.2)
-		},
-		
-		LoadActor("_barcode") .. {
-			InitCommand=cmd(zoomto,36,1024;blend,'BlendMode_Add';x,SCREEN_LEFT+6;y,SCREEN_CENTER_Y;diffusealpha,0.08);
-			OnCommand=cmd(customtexturerect,0,0,1,1;texcoordvelocity,0,-0.1);
+return Def.ActorFrame {
+	Def.Quad {
+		InitCommand=function(self)
+			self:zoomto(SCREEN_WIDTH,SCREEN_HEIGHT):Center():diffuse(color("#DF9515")):diffusebottomedge(color("#EDC039"))
+		end;	
+	};
+	
+	Def.Sprite {
+		Condition = LoadModule("Config.Load.lua")("FancyUIBG","Save/OutFoxPrefs.ini");
+		Texture = THEME:GetPathG("_bg", "hex2 grid");
+		InitCommand=function(self)
+			self:diffusealpha(0.085):blend('add'):zoomto(SCREEN_WIDTH+100,SCREEN_HEIGHT+190):customtexturerect(0,0,SCREEN_WIDTH*4/512,SCREEN_HEIGHT*4/512):xy(SCREEN_CENTER_X,SCREEN_CENTER_Y)
+		end;
+		OnCommand=function(self)
+			self:texcoordvelocity(0,0.26)
+		end;
+	};
+	
+	Def.ActorFrame {
+		InitCommand=function(self) self:diffusealpha(0.1) end;
+		Def.Sprite {
+			Texture="_tunnel1";
+			Condition=LoadModule("Config.Load.lua")("FancyUIBG","Save/OutFoxPrefs.ini");		
+			InitCommand=function(self) self:xy(SCREEN_LEFT+160,SCREEN_CENTER_Y):rotationz(-10):blend("Add") end;
+			OnCommand=function(self) self:zoom(1):spin():effectmagnitude(0,0,-11) end;
 		};
-		LoadActor("_barcode") .. {
-			InitCommand=cmd(zoomto,36,1024;blend,'BlendMode_Add';x,SCREEN_RIGHT-6;y,SCREEN_CENTER_Y;diffusealpha,0.08);
-			OnCommand=cmd(customtexturerect,0,0,1,1;texcoordvelocity,0,0.1);
-		};
-		
-		Def.ActorFrame {
-			OnCommand=cmd(diffusealpha,0;decelerate,1.8;diffusealpha,1);
-			LoadActor("_tunnel1") .. {
-				InitCommand=cmd(x,SCREEN_LEFT+160;y,SCREEN_CENTER_Y;blend,'BlendMode_Add';rotationz,-20),
-				OnCommand=cmd(zoom,1.75;diffusealpha,0.14;spin;effectmagnitude,0,0,16.5)
-			};	
-			LoadActor("_tunnel1") .. {
-				InitCommand=cmd(x,SCREEN_LEFT+160;y,SCREEN_CENTER_Y;blend,'BlendMode_Add';rotationz,-10),
-				OnCommand=cmd(zoom,1.0;diffusealpha,0.12;spin;effectmagnitude,0,0,-11)
-			};
-			LoadActor("_tunnel1") .. {
-				InitCommand=cmd(x,SCREEN_LEFT+160;y,SCREEN_CENTER_Y;blend,'BlendMode_Add';rotationz,0),
-				OnCommand=cmd(zoom,0.5;diffusealpha,0.10;spin;effectmagnitude,0,0,5.5)
-			};		
-			LoadActor("_tunnel1") .. {
-				InitCommand=cmd(x,SCREEN_LEFT+160;y,SCREEN_CENTER_Y;blend,'BlendMode_Add';rotationz,-10),
-				OnCommand=cmd(zoom,0.2;diffusealpha,0.08;spin;effectmagnitude,0,0,-2.2)
-			};
-		};
-	}
-else
-	return 	LoadActor(THEME:GetPathG("common bg", "base")) .. {
-		InitCommand=cmd(Center;zoomto,SCREEN_WIDTH,SCREEN_HEIGHT)
-	}
-end
+	};
+};

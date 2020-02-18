@@ -19,11 +19,11 @@ local function CreateSeperators()
 				self:x(position(i))
 				self:visible(i < num_items)
 			end,
-			OnCommand=cmd(playcommand,"Set"),
+			OnCommand=function(self) self:playcommand("Set") end;
 			--
 			Def.Quad {
-				InitCommand=cmd(zoomto,2,life_meter_height),
-				OnCommand=cmd(diffuse,Color.Black)
+				InitCommand=function(self) self:zoomto(2,life_meter_height) end;
+				OnCommand=function(self) self:diffuse(Color.Black) end;
 			}
 		}
 	end
@@ -54,31 +54,32 @@ t[#t+1] = Def.ActorFrame {
 	-- Outline
 	Def.Quad {
 		Name="Outline",
-		InitCommand=cmd(zoomto,life_meter_width+life_meter_outline,life_meter_height+life_meter_outline),
-		OnCommand=cmd()
+		InitCommand=function(self) self:zoomto(life_meter_width+life_meter_outline,life_meter_height+life_meter_outline) end;
 	},
 	-- Background 
 	Def.Quad {
 		Name="Background",
-		InitCommand=cmd(zoomto,life_meter_width,life_meter_height),
-		OnCommand=cmd(diffuse,color("#32373E")),
-		AliveCommand=cmd(stopeffect;diffuse,color("#32373E")),
-		DangerCommand=cmd(diffuseshift;effectcolor2,ColorMidTone(Color.Red);effectcolor1,ColorDarkTone(Color.Red)),
-		DeadCommand=cmd(stopeffect;diffuse,color("#000000")),
+		InitCommand=function(self) self:zoomto(life_meter_width,life_meter_height) end;
+		OnCommand=function(self) self:diffuse(color("#32373E")) end;
+		AliveCommand=function(self) self:stopeffect():diffuse(color("#32373E")) end;
+		DangerCommand=function(self) self:diffuseshift():effectcolor2(ColorMidTone(Color.Red)):effectcolor1(ColorDarkTone(Color.Red)) end;
+		DeadCommand=function(self) self:stopeffect():diffuse(Color.Black) end;
 	},
 	Def.Quad {
 		Name="Fill",
-		InitCommand=cmd(x,-life_meter_width/2;zoomto,life_meter_width,life_meter_height;horizalign,left),
-		OnCommand=cmd(diffuse,PlayerColor(pn)),
+		InitCommand=function(self) 
+			self:x(-life_meter_width/2):zoomto(life_meter_width,life_meter_height):horizalign(left) 
+		end;
+		OnCommand=function(self) self:diffuse(PlayerColor(pn)) end;
 		--
-		HotCommand=cmd(glowshift;effectclock,'beat'),
-		AliveCommand=cmd(stopeffect),
-		DangerCommand=cmd(diffuseshift;effectclock,'beat';effectcolor1,PlayerColor(pn);effectcolor2,PlayerDarkColor(pn)),
-		DeadCommand=cmd(stopeffect)
+		HotCommand=function(self) self:glowshift():effectclock('beat') end;
+		AliveCommand=function(self) self:diffuse(PlayerColor(pn)):stopeffect() end;
+		DangerCommand=function(self) self:diffuse(Color.Red):diffuseshift(effectclock,'beat'):effectcolor1(Color.Red):effectcolor2(color("#FF797C")) end;
+		DeadCommand=function(self) self:diffuse(Color.Red):stopeffect() end;
 	},
-	LoadFont("Common Normal") .. {
+	LoadFont("_open sans semibold 24px") .. {
 		Text="",
-		OnCommand=cmd(diffuse,Color.Black)
+		OnCommand=function(self) self:diffuse(Color.Black) end;
 	},
 	CreateSeperators()
 }
