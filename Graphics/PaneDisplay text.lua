@@ -21,7 +21,7 @@ end;
 local function CreatePaneDisplayItem( _pnPlayer, _sLabel, _rcRadarCategory )
 	return Def.ActorFrame {
 		LoadFont("_open sans condensed 24px") .. {
-			Text=string.upper( THEME:GetString("PaneDisplay",_sLabel) );
+			Text=ToUpper( THEME:GetString("PaneDisplay",_sLabel) );
 			InitCommand=function(self) self:horizalign(left) end;
 			OnCommand=function(self) self:zoom(0.8):diffuse(color("0.9,0.9,0.9")):skewx(-0.1):shadowlength(1) end;
 		};
