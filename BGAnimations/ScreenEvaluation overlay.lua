@@ -31,7 +31,7 @@ else
 				SetCommand=function(self)
 					local curStage = GAMESTATE:GetCurrentStage();
 					local course = GAMESTATE:GetCurrentCourse()
-					self:settext(string.upper(ToEnumShortString( course:GetCourseType() )))
+					self:settext(ToUpper(ToEnumShortString( course:GetCourseType() )))
 					-- StepMania is being stupid so we have to do this here;
 					self:diffuse(StageToColor(curStage)):diffusetopedge(ColorLightTone(StageToColor(curStage)));
 					self:diffusealpha(0):smooth(0.3):diffusealpha(1);
@@ -65,7 +65,7 @@ if GAMESTATE:HasEarnedExtraStage() then
 				end;
 				SetCommand=function(self)
 					local curStage = GAMESTATE:GetCurrentStage();
-					local text = string.upper(THEME:GetString("ScreenEvaluation", "ExtraUnlocked"))
+					local text = ToUpper(THEME:GetString("ScreenEvaluation", "ExtraUnlocked"))
 					self:settext(text)
 					-- StepMania is being stupid so we have to do this here;
 					self:diffuse(StageToColor(curStage)):diffusetopedge(ColorLightTone(StageToColor(curStage)));

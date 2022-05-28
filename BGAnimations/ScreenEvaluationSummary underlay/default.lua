@@ -78,7 +78,7 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 			-- Item name
 			Def.BitmapText {
 				Font = "_open sans condensed 24px",
-				InitCommand=function(self) self:x(-104):zoom(1):skewx(-0.1):diffuse(ColorLightTone(JudgmentLineToColor(cur_line))):settext(string.upper(JudgmentLineToLocalizedString(cur_line))):horizalign(left) end;
+				InitCommand=function(self) self:x(-104):zoom(1):skewx(-0.1):diffuse(ColorLightTone(JudgmentLineToColor(cur_line))):settext(ToUpper(JudgmentLineToLocalizedString(cur_line))):horizalign(left) end;
 				OnCommand=function(self)
 					self:diffusealpha(0):sleep(0.1 * i):decelerate(0.6):diffusealpha(0.86)
 				end;

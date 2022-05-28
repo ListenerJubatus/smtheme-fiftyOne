@@ -105,7 +105,7 @@ for pn in ivalues(PlayerNumber) do
 			local song = GAMESTATE:GetCurrentSong();
 			self:settext("")
 			if song and steps:GetAuthorCredit() ~= "" then			
-				self:settext(string.upper(THEME:GetString("OptionTitles","Step Author")) .. ":");
+				self:settext(ToUpper(THEME:GetString("OptionTitles","Step Author")) .. ":");
 			end
          end
 		};
