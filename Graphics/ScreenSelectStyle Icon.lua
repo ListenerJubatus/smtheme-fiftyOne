@@ -16,12 +16,12 @@ t[#t+1] = Def.ActorFrame {
 		LoseFocusCommand=function(self) self:diffuse(unfocus_color) end;
 	};
 	LoadFont("_noto sans 36px")..{
-		Text=string.upper(string_name);
+		Text=ToUpper(string_name);
 		InitCommand=function(self) self:y(-12):maxwidth(232) end;
 		OnCommand=function(self) self:diffuse(text_color) end;
 	};
 	LoadFont("_open sans condensed 24px")..{
-		Text=string.upper(string_expl);
+		Text=ToUpper(string_expl);
 		InitCommand=function(self) self:y(29.5):maxwidth(128):skewx(-0.1) end;
 	};
 

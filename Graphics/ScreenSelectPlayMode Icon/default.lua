@@ -24,7 +24,7 @@ t[#t+1] = Def.ActorFrame {
 
 	-- todo: generate a better font for these.
 	LoadFont("_open sans condensed 24px")..{
-		Text=string.upper(gc:GetText()),
+		Text=ToUpper(gc:GetText()),
 		InitCommand=function(self) self:horizalign(center):y(icon_size/3.4):maxwidth(icon_size*1.3):diffuse(Color.Black) end;
 		LoseFocusCommand=function(self) self:diffusealpha(0.5) end;
 		GainFocusCommand=function(self) self:diffusealpha(1) end;

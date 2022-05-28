@@ -167,7 +167,7 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 			Def.BitmapText {
 				Font = "_open sans condensed 24px",
 				InitCommand=function(self) self:x(-104):zoom(0.8):skewx(-0.1):diffuse(ColorDarkTone(PlayerColor(p))):horizalign(left) end;
-				Text=string.upper(THEME:GetString( CurPrefTiming or "Original" , "Judgment"..v )),
+				Text=ToUpper(THEME:GetString( CurPrefTiming or "Original" , "Judgment"..v )),
 				OnCommand=function(self)
 					self:diffusealpha(0):sleep(0.1 * i):decelerate(0.6):diffusealpha(1)
 				end;
@@ -414,7 +414,7 @@ t[#t+1] = eval_parts;
 						  local diff = steps_data:GetDifficulty();
 						  local courseType = GAMESTATE:IsCourseMode() and SongOrCourse:GetCourseType() or nil;
 						  local cd = GetCustomDifficulty(st, diff, courseType);
-						  self:settext(string.upper(THEME:GetString("CustomDifficulty",ToEnumShortString(diff))) .. "  " .. steps_data:GetMeter());
+						  self:settext(ToUpper(THEME:GetString("CustomDifficulty",ToEnumShortString(diff))) .. "  " .. steps_data:GetMeter());
 						  self:diffuse(ColorLightTone(CustomDifficultyToColor(cd)));
 						else
 						  self:settext("")
